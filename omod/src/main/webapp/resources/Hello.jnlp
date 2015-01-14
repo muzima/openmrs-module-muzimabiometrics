@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="" href="">
+    <information>
+        <title>Hello Applet</title>
+        <vendor>Self</vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
+        <jar href="Hello.jar" main="true" />
+
+    </resources>
+    <applet-desc
+            name="Hello Applet"
+            main-class="HelloWorld"
+            width="300"
+            height="300">
+    </applet-desc>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>

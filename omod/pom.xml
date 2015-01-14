@@ -84,7 +84,6 @@
             <scope>test</scope>
         </dependency>
 		<!-- End OpenMRS core -->
-
 	</dependencies>
 
 	<build>
