@@ -7,16 +7,16 @@
     <resources>
         <!-- Application Resources -->
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
-        <jar href="Hello.jar" main="true" />
-
+        <jar href="simple-fingers-sample-5.0.0.0.jar" main="true" />
     </resources>
-    <applet-desc
-            name="Hello Applet"
-            main-class="HelloWorld"
-            width="300"
-            height="300">
-    </applet-desc>
     <security>
         <all-permissions/>
     </security>
+
+    <applet-desc
+            name="Hello Applet"
+            main-class="com.neurotec.samples.SimpleFingersApplication"
+            width="300"
+            height="300">
+    </applet-desc>
 </jnlp>

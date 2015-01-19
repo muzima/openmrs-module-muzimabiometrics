@@ -6,4 +6,32 @@
 
 	<!-- Add here beans related to the API context -->
 
+    <bean id="patientDAO" class="org.openmrs.api.db.hibernate.HibernatePatientDAO">
+    </bean>
+
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService</value>
+                <bean
+                        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                    <property name="transactionManager">
+                        <ref bean="transactionManager"/>
+                    </property>
+                    <property name="target">
+                        <bean class="org.openmrs.module.muzimafingerPrint.api.impl.MuzimafingerPrintServiceImpl">
+                            <constructor-arg name="dao" ref="patientDAO"/>
+                        </bean>
+                    </property>
+                    <property name="preInterceptors">
+                        <ref bean="serviceInterceptors"/>
+                    </property>
+                    <property name="transactionAttributeSource">
+                        <ref bean="transactionAttributeSource"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 </beans>

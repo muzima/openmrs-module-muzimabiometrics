@@ -8,6 +8,3 @@ muzimafingerPrintModule.
             otherwise({redirectTo: '/list/patients'});
     }]);
 
-
-
-

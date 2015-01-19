@@ -4,7 +4,8 @@
 
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/animate/animate.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/bootstrap/css/bootstrap.min.css"/>
-
+<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/openmrs2.0/index.css"/>
+<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/openmrs2.0/openmrs.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/custom/custom.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/font-awesome/css/font-awesome.min.css"/>
 
@@ -18,10 +19,44 @@
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/angular/angular-strap.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/custom/app.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/custom/deployJava.js"/>
+<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/custom/fingerprintController.js"/>
 
 <script>
-    var attributes = {code:'HelloWorld',  width:300, height:300} ;
-    var parameters = {jnlp_href: '/openmrs-standalone/moduleResources/muzimafingerPrint/Hello.jnlp'} ;
+
+    function showMessage() {
+        return "This is from javascript";
+    };
+
+    function GetAllPatient(){
+
+        var xmlhttp;
+        var data = 'no data found';
+        if (window.XMLHttpRequest){
+
+             xmlhttp=new XMLHttpRequest();
+          }
+        else{
+
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        xmlhttp.onreadystatechange=function(){
+
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                     data = xmlhttp.responseText;
+                }
+         }
+            xmlhttp.open("POST","fingerprint/identify.form",false);
+            xmlhttp.send();
+            return data;
+        };
+
+    function SendIdentifiedPatientID(){
+
+    };
+
+    var attributes = {code:'HelloWorld',  width:0, height:0} ;
+    var parameters = {jnlp_href: '/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp'} ;
     deployJava.runApplet(attributes, parameters, '1.6');
 </script>
 
