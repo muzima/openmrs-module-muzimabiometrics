@@ -33,14 +33,9 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         for (Patient patient : allPatients) {
             String fingerPrint = extractFingerPrintForPatient(patient);
             if(fingerPrint != null)
-                patients.add(new PatientFingerPrintModel(patient.getUuid(), fingerPrint));
+                patients.add(new PatientFingerPrintModel(patient, fingerPrint));
         }
         return patients;
-    }
-
-    @Override
-    public Patient getPatientByUUID(String uuid) {
-        return null;
     }
 
     private String extractFingerPrintForPatient(Patient patient) {

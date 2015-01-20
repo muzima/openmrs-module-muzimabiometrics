@@ -28,7 +28,6 @@
     };
 
     function GetAllPatient(){
-
         var xmlhttp;
         var data = 'no data found';
         if (window.XMLHttpRequest){
@@ -51,13 +50,23 @@
             return data;
         };
 
-    function SendIdentifiedPatientID(){
+    function updatePatientList(id, GivenName, FamilyName, Gender){
 
+         var tdID = document.getElementById("paitentId");
+         tdID.innerHTML = id;
+         var tdGName = document.getElementById("GivenN");
+         tdGName.innerHTML = GivenName;
+         var tdFName = document.getElementById("FamilyN");
+         tdFName.innerHTML = FamilyName;
+         var tdGender = document.getElementById("Gender");
+         tdGender.innerHTML = Gender;
+         return;
     };
 
     var attributes = {code:'HelloWorld',  width:0, height:0} ;
     var parameters = {jnlp_href: '/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp'} ;
     deployJava.runApplet(attributes, parameters, '1.6');
+
 </script>
 
 <div ng-app="muzimafingerPrint">

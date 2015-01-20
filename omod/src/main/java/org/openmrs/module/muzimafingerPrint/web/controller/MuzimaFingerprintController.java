@@ -3,7 +3,6 @@ package org.openmrs.module.muzimafingerPrint.web.controller;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.muzimafingerPrint.PatientFingerPrintModel;
-import org.openmrs.module.muzimafingerPrint.PatientModel;
 import org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,20 +29,6 @@ public class MuzimaFingerprintController {
            MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
            List<PatientFingerPrintModel> patients = service.getAllPatientsWithFingerPrint();
            return patients;
-        }
-        catch (Exception e){
-            return null;
-        }
-
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "fingerprint/getPatient.form", method = RequestMethod.POST)
-    public PatientModel GetPatient(@RequestParam String uuid) throws Exception {
-        try {
-            MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-            PatientModel patient = service.getPatientByUUID(uuid);
-            return patient;
         }
         catch (Exception e){
             return null;
