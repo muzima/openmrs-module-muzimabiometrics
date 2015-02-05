@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.module.muzimafingerPrint">
+    <class name="MuzimaFingerprint" table="muzimafingerprint_fingerprint">
+        <id name="id" type="java.lang.Integer" column="fingerprint_id">
+            <generator class="increment"/>
+        </id>
+        <property name="uuid" type="java.lang.String"
+                  column="uuid" length="38" unique="true"/>
+        <property name="patientId" type="java.lang.String"/>
+        <property name="fingerprint" type="java.lang.String"/>
+
+        <property name="dateCreated" type="java.util.Date" column="date_created" length="19" />
+        <property name="voided" type="java.lang.Boolean" column="retired" length="1"/>
+        <property name="dateVoided" type="java.util.Date" column="date_retired" length="19" />
+        <property name="voidReason" type="java.lang.String" column="retire_reason" length="255" />
+        <property name="dateChanged" type="java.util.Date" column="date_changed" length="19" />
+
+        <many-to-one name="creator" class="org.openmrs.User"/>
+        <many-to-one name="voidedBy" class="org.openmrs.User" column="retired_by" />
+        <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by" />
+    </class>
+</hibernate-mapping>

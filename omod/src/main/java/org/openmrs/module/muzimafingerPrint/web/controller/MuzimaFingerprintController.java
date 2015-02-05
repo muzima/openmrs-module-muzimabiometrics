@@ -7,10 +7,7 @@ import org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
@@ -33,6 +30,18 @@ public class MuzimaFingerprintController {
         catch (Exception e){
             return null;
         }
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/register.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public PatientFingerPrintModel registerPatient(@RequestBody String jsonPayload) throws Exception {
+        try {
+            MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+            PatientFingerPrintModel patients = service.savePatient(jsonPayload);
+            return patients;
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 }

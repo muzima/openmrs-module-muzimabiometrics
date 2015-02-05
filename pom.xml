@@ -30,7 +30,7 @@
 	<modules>
 		<module>api</module>
 		<module>omod</module>
-	</modules>
+    </modules>
 	
 	<properties>
 		<openMRSVersion>1.8.2</openMRSVersion>
@@ -203,6 +203,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+
 	</pluginRepositories>
     <profiles>
         <profile>

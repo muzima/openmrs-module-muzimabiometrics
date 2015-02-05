@@ -18,8 +18,12 @@
 	
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.muzimafingerPrintActivator</activator>
-	
-	
+
+
+    <mappingFiles>
+        MuzimaFingerprint.hbm.xml
+    </mappingFiles>
+
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>

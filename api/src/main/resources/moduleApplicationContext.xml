@@ -6,9 +6,6 @@
 
 	<!-- Add here beans related to the API context -->
 
-    <bean id="patientDAO" class="org.openmrs.api.db.hibernate.HibernatePatientDAO">
-    </bean>
-
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
@@ -20,7 +17,11 @@
                     </property>
                     <property name="target">
                         <bean class="org.openmrs.module.muzimafingerPrint.api.impl.MuzimafingerPrintServiceImpl">
-                            <constructor-arg name="dao" ref="patientDAO"/>
+                            <constructor-arg>
+                                <bean class="org.openmrs.module.muzimafingerPrint.api.db.hibernet.impl.MuzimaFingerprintDAOImpl">
+                                    <constructor-arg ref="sessionFactory"/>
+                                </bean>
+                            </constructor-arg>
                         </bean>
                     </property>
                     <property name="preInterceptors">

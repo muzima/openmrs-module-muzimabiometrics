@@ -1,0 +1,14 @@
+<h:html xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.w3.org/2002/xforms"
+        >
+    <h:head>
+        <model>
+            <instance>
+                <patient>
+                    <name></name>
+                </patient>
+            </instance>
+            <bind nodeset="name" required=""/>
+        </model>
+    </h:head>
+</h:html>

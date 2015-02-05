@@ -1,0 +1,15 @@
+<h:html xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.w3.org/2002/xforms"
+        >
+    <h:head>
+        <model>
+            <instance>
+                <person>
+                    <name></name>
+                </person>
+            </instance>
+            <bind nodeset="name"/>
+        </model>
+        <input bind=""/>
+    </h:head>
+</h:html>

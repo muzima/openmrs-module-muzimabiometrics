@@ -1,0 +1,16 @@
+<h:html xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.w3.org/2002/xforms"
+        >
+    <h:head>
+        <model>
+            <itext>
+                <translation lang="english" default="true">
+                    <text id="q1">
+                        <value>Last Name</value>
+                        <value>Invalid</value>
+                    </text>
+                </translation>
+            </itext>
+        </model>
+    </h:head>
+</h:html>
