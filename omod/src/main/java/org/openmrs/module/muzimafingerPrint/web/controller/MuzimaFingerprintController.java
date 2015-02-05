@@ -22,26 +22,17 @@ public class MuzimaFingerprintController {
     @ResponseBody
     @RequestMapping(value = "fingerprint/identify.form", method = RequestMethod.POST)
     public List<PatientFingerPrintModel> GetAllPatient() throws Exception {
-        try {
+
            MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
            List<PatientFingerPrintModel> patients = service.getAllPatientsWithFingerPrint();
            return patients;
-        }
-        catch (Exception e){
-            return null;
-        }
     }
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/register.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public PatientFingerPrintModel registerPatient(@RequestBody String jsonPayload) throws Exception {
-        try {
             MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
             PatientFingerPrintModel patients = service.savePatient(jsonPayload);
             return patients;
-        }
-        catch (Exception e){
-            return null;
-        }
     }
 }

@@ -67,23 +67,20 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             jsonObject = jsonObject.getJSONObject("patient");
 
-            //need to find out the encounter id from json data
-            int encounterTypeId = NumberUtils.toInt("2", -999);
+            int encounterTypeId = NumberUtils.toInt("1", -999);
             EncounterType encounterType = Context.getEncounterService().getEncounterType(encounterTypeId);
             encounter.setEncounterType(encounterType);
 
-            String providerString = jsonObject.getString("patient.provider_id");
-            User user = Context.getUserService().getUserByUsername(providerString);
+            String providerString = jsonObject.getString("provider_id");
+            User user = Context.getUserService().getUserByUuid(providerString);
             encounter.setCreator(user);
 
-            String locationString = jsonObject.getString("patient.location_id");
-            int locationId = NumberUtils.toInt(locationString, -999);
-            Location location = Context.getLocationService().getLocation(locationId);
+            String locationString = jsonObject.getString("location_id");
+            Location location = Context.getLocationService().getLocationByUuid(locationString);
             encounter.setLocation(location);
 
-            //need to get data from json
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-            Date encounterDatetime = new Date();//formatter.parse(jsonObject.getString("patient.encounter_datetime"));
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date encounterDatetime = formatter.parse(jsonObject.getString("encounter_datetime"));
             encounter.setEncounterDatetime(encounterDatetime);
         }
         return  encounter;
@@ -105,12 +102,12 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             jsonObject = jsonObject.getJSONObject("patient");
-            return jsonObject.getString("patient.fingerprint");
+            return jsonObject.getString("fingerprint");
         }
         return "";
     }
 
-    private Patient CreatePatient(final Encounter encounter, String patientData) throws JSONException {
+    private Patient CreatePatient(final Encounter encounter, String patientData) throws JSONException, ParseException {
         Patient patient = new Patient();
         JSONArray jsonArray = new JSONArray("["+patientData+"]");
         for(int i = 0; i < jsonArray.length(); i++){
@@ -119,26 +116,25 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
 
             //setting names
             PersonName personName = new PersonName();
-            personName.setFamilyName(jsonObject.getString("patient.family_name"));
-            personName.setGivenName(jsonObject.getString("patient.given_name"));
-            personName.setMiddleName((jsonObject.getString("patient.middle_name")));
+            personName.setFamilyName(jsonObject.getString("family_name"));
+            personName.setGivenName(jsonObject.getString("given_name"));
+            personName.setMiddleName((jsonObject.getString("middle_name")));
             patient.addName(personName);
 
             //setting identifiers
             Set<PatientIdentifier> patientIdentifiers = new HashSet<PatientIdentifier>();
             PatientIdentifier patientIdentifier = new PatientIdentifier();
 
-            //need to find out the name from json data
             PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByName("OpenMRS Identification Number");
             patientIdentifier.setIdentifierType(identifierType);
-            patientIdentifier.setIdentifier(jsonObject.getString("patient.amrs_id"));
+            patientIdentifier.setIdentifier(jsonObject.getString("amrs_id"));
             patientIdentifier.setLocation(encounter.getLocation());
             patientIdentifier.setPreferred(true);
 
             patientIdentifiers.add(patientIdentifier);
             patient.setIdentifiers(patientIdentifiers);
 
-            patient.setGender((jsonObject.getString("patient.sex")));
+            patient.setGender((jsonObject.getString("sex")));
         }
         encounter.setPatient(patient);
         return patient;
