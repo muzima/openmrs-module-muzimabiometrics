@@ -13,7 +13,7 @@ function GetAllPatient(){
                     return msg;
                 },
                 error: function(msg){
-                    alert(msg);
+                    alert("Internal server error");
                 }
             }
         );
@@ -109,13 +109,12 @@ $(function(){
             success: function(result) {
 
                 var options = $("#LocationOptions");
-                alert(options);
                 $.each(result.results, function(val, text) {
                     options.append($("<option />").val(text.uuid).text(text.display));
                 });
             },
             error: function(msg){
-                    alert(msg);
+                    alert("Internal server error : while getting location list ");
                 }
             }
         );
@@ -130,7 +129,7 @@ $(function(){
                });
             },
             error: function(msg){
-                    alert(msg);
+                    alert("Internal server error : while getting provider list ");
                 }
             }
         );
@@ -227,7 +226,7 @@ $(function(){
                             showRegistration('false');
                         },
                         error: function(msg){
-                        alert(msg);
+                            alert("Internal server error");
                         }
                     }
                 );
