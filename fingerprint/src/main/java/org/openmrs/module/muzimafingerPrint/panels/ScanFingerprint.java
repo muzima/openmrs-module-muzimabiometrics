@@ -1,6 +1,7 @@
 package org.openmrs.module.muzimafingerPrint.panels;
 
 import com.neurotec.biometrics.*;
+import com.neurotec.devices.NDevice;
 import com.neurotec.devices.NDeviceManager;
 import com.neurotec.devices.NDeviceType;
 import com.neurotec.devices.NFingerScanner;
@@ -11,6 +12,8 @@ import org.openmrs.module.muzimafingerPrint.services.JavaScriptCallerService;
 import org.openmrs.module.muzimafingerPrint.settings.FingersTools;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.xml.bind.DatatypeConverter;
 import java.applet.Applet;
 import java.awt.*;
@@ -123,6 +126,11 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         scannerList = new JList();
 
+        scannerList.setModel(new DefaultListModel());
+        scannerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        scannerList.addListSelectionListener(new ScannerSelectionListener());
+
         RunFingerprintScanProcess();
     }
 
@@ -134,13 +142,6 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
             if (SearchDevice()) {
                 lblProgressMessage.setText(SCANNING_FINGERPRINT_PROGRESS);
                 if (ScanFingerPrint()) {
-                    lblProgressMessage.setText(IDENTIFYING_PATIENT);
-                    if (IdentifyPatient()) {
-                        lblProgressMessage.setText("Found");
-                    } else {
-                        lblProgressMessage.setText(NO_PATIENT_FOUND);
-                        btnRegisterPatient.setVisible(true);
-                    }
                 } else {
                     lblProgressMessage.setText(SCANNING_FAILED);
                     btnTryAgain.setVisible(true);
@@ -157,7 +158,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     }
 
     private boolean IdentifyPatient() throws JSONException {
-        service = new JavaScriptCallerService((Applet) this.getParent().getParent().getParent().getParent().getParent().getParent().getParent());
+        service = new JavaScriptCallerService((Applet) this.getParent().getParent());
         String fingerprint = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
         PatientFingerPrintModel patient = service.identifyPatient(fingerprint);
         if (patient != null) {
@@ -170,27 +171,34 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private boolean ScanFingerPrint() {
 
         NFinger finger = new NFinger();
-        finger.setCaptureOptions(EnumSet.of(NBiometricCaptureOption.MANUAL));
         subject = new NSubject();
         subject.getFingers().add(finger);
-        NBiometricStatus status = FingersTools.getInstance().getClient().capture(subject);
-        if (status == NBiometricStatus.OK) {
+        NBiometricTask task = FingersTools.getInstance().getClient().createTask(EnumSet.of(NBiometricOperation.CAPTURE, NBiometricOperation.CREATE_TEMPLATE), subject);
+        FingersTools.getInstance().getClient().performTask(task, null, captureCompletionHandler);
+        return true;
+
+    }
+
+    private boolean SearchDevice() {
+        DefaultListModel model = (DefaultListModel) scannerList.getModel();
+        model.clear();
+        for (NDevice device : deviceManager.getDevices()) {
+            model.addElement(device);
+        }
+        NFingerScanner scanner = (NFingerScanner) FingersTools.getInstance().getClient().getFingerScanner();
+        if ((scanner == null) && (model.getSize() > 0)) {
+            scannerList.setSelectedIndex(0);
+            return true;
+        } else if (scanner != null) {
+            scannerList.setSelectedValue(scanner, true);
             return true;
         }
         return false;
     }
 
-    private boolean SearchDevice() {
-
-        NFingerScanner scanner = (NFingerScanner) FingersTools.getInstance().getClient().getFingerScanner();
-        if (scanner != null) {
-            FingersTools.getInstance().getClient().setFingerScanner(scanner);
-            return true;
-        } else {
-            return false;
-        }
+    private NFingerScanner getSelectedScanner() {
+        return (NFingerScanner) scannerList.getSelectedValue();
     }
-
 
     @Override
     protected void setDefaultValues() {
@@ -223,16 +231,54 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         }
     }
 
+    private class ScannerSelectionListener implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            FingersTools.getInstance().getClient().setFingerScanner(getSelectedScanner());
+        }
+
+    }
+
     private class CaptureCompletionHandler implements CompletionHandler<NBiometricTask, Object> {
 
         @Override
         public void completed(final NBiometricTask result, final Object attachment) {
+            if(result != null) {
+                SwingUtilities.invokeLater(new Runnable() {
 
+                    @Override
+                    public void run() {
+                        if (result.getStatus() == NBiometricStatus.OK) {
+                            lblProgressMessage.setText(IDENTIFYING_PATIENT);
+                            try {
+                                if (IdentifyPatient()) {
+                                    lblProgressMessage.setText("Found");
+                                } else {
+                                    lblProgressMessage.setText(NO_PATIENT_FOUND);
+                                    btnRegisterPatient.setVisible(true);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                        }
+                    }
+
+                });
+            }
         }
 
         @Override
         public void failed(final Throwable th, final Object attachment) {
+            SwingUtilities.invokeLater(new Runnable() {
 
+                @Override
+                public void run() {
+                    th.printStackTrace();
+                }
+
+            });
         }
 
     }

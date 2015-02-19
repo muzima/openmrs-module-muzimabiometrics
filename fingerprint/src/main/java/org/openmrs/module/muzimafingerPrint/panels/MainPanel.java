@@ -97,9 +97,9 @@ public final class MainPanel extends JPanel implements ActionListener {
         try {
             btnLaunchApplet.setVisible(false);
             scanFingerprint = new ScanFingerprint();
+            add(scanFingerprint);
             scanFingerprint.init();
             scanFingerprint.updateFingersTools();
-            add(scanFingerprint);
 
         } catch (IOException e) {
             e.printStackTrace();
