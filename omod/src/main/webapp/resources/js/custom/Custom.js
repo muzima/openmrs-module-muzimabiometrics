@@ -5,21 +5,6 @@ function showMessage() {
 
 function identifyPatient(fingerprintData){
 
-//     $.ajax({
-//                url: "fingerprint/identifyPatient.form",
-//                type: "POST",
-//                data: fingerprintData,
-//                contentType: 'application/json',
-//                dataType: 'json',
-//                async: false,
-//                success: function(msg) {
-//                    console.log(msg);
-//                    return msg;
-//                },
-//                error: function(msg){
-//                    alert("Internal server error");
-//                }
-//            });
          var xmlhttp;
          var data = 'no data found';
         if (window.XMLHttpRequest) {
@@ -120,6 +105,7 @@ var pushIntoArray = function (object, key, value) {
          });
          return completeObject;
      };
+
 
 $(function(){
         $.ajax({

@@ -1,7 +1,9 @@
 package org.openmrs.module.muzimafingerPrint.panels;
 
 import com.neurotec.util.concurrent.AggregateExecutionException;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -28,7 +30,7 @@ public abstract class BasePanel extends JPanel {
 	// Public methods
 	// ===========================================================
 
-	public void init() {
+	public void init() throws IOException, JSONException {
 		initGUI();
 		setDefaultValues();
 		updateControls();
@@ -72,7 +74,7 @@ public abstract class BasePanel extends JPanel {
 	// Abstract methods
 	// ===========================================================
 
-	protected abstract void initGUI();
+	protected abstract void initGUI() throws IOException, JSONException;
 	protected abstract void setDefaultValues();
 	protected abstract void updateControls();
 	protected abstract void updateFingersTools();
