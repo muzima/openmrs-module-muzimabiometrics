@@ -7,7 +7,7 @@
     <resources>
         <!-- Application Resources -->
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
-        <jar href="simple-fingers-sample-5.0.0.0.jar" main="true" />
+        <jar href="muzimafingerPrint-fingerprint-1.0-SNAPSHOT-jar-with-dependencies.jar" main="true" />
     </resources>
     <security>
         <all-permissions/>
@@ -15,7 +15,7 @@
 
     <applet-desc
             name="Hello Applet"
-            main-class="com.neurotec.samples.SimpleFingersApplication"
+            main-class="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"
             width="300"
             height="300">
     </applet-desc>

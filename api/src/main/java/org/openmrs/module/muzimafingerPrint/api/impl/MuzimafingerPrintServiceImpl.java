@@ -1,5 +1,9 @@
 package org.openmrs.module.muzimafingerPrint.api.impl;
 
+
+import com.neurotec.biometrics.*;
+import com.neurotec.io.NBuffer;
+import com.neurotec.util.concurrent.CompletionHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.json.JSONArray;
@@ -11,11 +15,17 @@ import org.openmrs.api.context.Context;
 import org.openmrs.api.db.PatientDAO;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.muzimafingerPrint.MuzimaFingerprint;
-import org.openmrs.module.muzimafingerPrint.PatientFingerPrintModel;
+import org.openmrs.module.muzimafingerPrint.PatientJsonParser;
 import org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService;
 import org.openmrs.module.muzimafingerPrint.api.db.hibernet.MuzimaFingerprintDAO;
+import org.openmrs.module.muzimafingerPrint.model.PatientFingerPrintModel;
+import org.openmrs.module.muzimafingerPrint.panels.EnrollFromScanner;
+import org.openmrs.module.muzimafingerPrint.settings.FingersTools;
 import org.springframework.stereotype.Service;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -27,6 +37,7 @@ import java.util.*;
 public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements MuzimafingerPrintService {
 
     private MuzimaFingerprintDAO muzimaFingerprintDAO;
+    private final EnrollCompletionHandler enrollCompletionHandler = new EnrollCompletionHandler();
 
     public MuzimafingerPrintServiceImpl(MuzimaFingerprintDAO fingerprintDAO) {
         this.muzimaFingerprintDAO = fingerprintDAO;
@@ -42,7 +53,7 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         for (MuzimaFingerprint fingerprint : fingerprints) {
             if(fingerprint.getFingerprint() != null) {
                 Patient patient = Context.getPatientService().getPatient(Integer.parseInt(fingerprint.getPatientId()));
-                patients.add(new PatientFingerPrintModel(patient, fingerprint.getFingerprint()));
+                patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()));
             }
         }
         return patients;
@@ -51,98 +62,93 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     @Override
     public PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException {
 
-        Encounter encounter = CreateEncounter(patientData);
-        Patient patient = CreatePatient(encounter, patientData);
+        PatientJsonParser patientJsonParser = new PatientJsonParser();
+        Encounter encounter = patientJsonParser.CreateEncounter(patientData);
+        Patient patient = patientJsonParser.CreatePatient(encounter, patientData);
         Context.getPatientService().savePatient(patient);
         Context.getEncounterService().saveEncounter(encounter);
-        MuzimaFingerprint muzimaFingerprint = CreatePatientFingerPrint(patient, patientData);
+        MuzimaFingerprint muzimaFingerprint = patientJsonParser.CreatePatientFingerPrint(patient, patientData);
+        muzimaFingerprintDAO.saveMuzimaFingerprint(muzimaFingerprint);
 
-        return new PatientFingerPrintModel(patient,muzimaFingerprint.getFingerprint());
+        return new PatientFingerPrintModel(patient.getUuid(),muzimaFingerprint.getFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
 
-    private Encounter CreateEncounter(String patientData) throws JSONException, ParseException {
-        Encounter encounter = new Encounter();
-        JSONArray jsonArray = new JSONArray("["+patientData+"]");
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject = jsonObject.getJSONObject("patient");
+    @Override
+    public PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException {
+        Patient patient = null;
+        List<String> requiredLicenses = new ArrayList<String>();
+        requiredLicenses.add("Biometrics.FingerExtraction");
+        requiredLicenses.add("Biometrics.FingerMatchingFast");
+        requiredLicenses.add("Biometrics.FingerMatching");
+        requiredLicenses.add("Biometrics.FingerQualityAssessment");
+        requiredLicenses.add("Biometrics.FingerSegmentation");
+        requiredLicenses.add("Biometrics.FingerSegmentsDetection");
+        requiredLicenses.add("Biometrics.Standards.Fingers");
+        requiredLicenses.add("Biometrics.Standards.FingerTemplates");
+        requiredLicenses.add("Devices.FingerScanners");
 
-            int encounterTypeId = NumberUtils.toInt("1", -999);
-            EncounterType encounterType = Context.getEncounterService().getEncounterType(encounterTypeId);
-            encounter.setEncounterType(encounterType);
+        boolean status = FingersTools.getInstance().obtainLicenses(requiredLicenses);
+        if(status){
 
-            String providerString = jsonObject.getString("provider_id");
-            User user = Context.getUserService().getUserByUuid(providerString);
-            encounter.setCreator(user);
-
-            String locationString = jsonObject.getString("location_id");
-            Location location = Context.getLocationService().getLocationByUuid(locationString);
-            encounter.setLocation(location);
-
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            Date encounterDatetime = formatter.parse(jsonObject.getString("encounter_datetime"));
-            encounter.setEncounterDatetime(encounterDatetime);
+            List<PatientFingerPrintModel> patients = getAllPatientsWithFingerPrint();
+            enrollFingerPrints(patients);
+            String patientID = identifyFinger(fingerprint);
+            patient = Context.getPatientService().getPatientByUuid(patientID);
         }
-        return  encounter;
+        return new PatientFingerPrintModel(patient.getUuid(),fingerprint, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
 
-    private MuzimaFingerprint CreatePatientFingerPrint(Patient patient, String patientData) throws JSONException {
-
-        MuzimaFingerprint fingerprint = new MuzimaFingerprint();
-        String fingerprintData = getFingerPrintFromJson(patientData);
-        fingerprint.setPatientId(patient.getPatientId().toString());
-        fingerprint.setFingerprint(fingerprintData);
-        muzimaFingerprintDAO.saveMuzimaFingerprint(fingerprint);
-
-        return fingerprint;
-    }
-
-    private String getFingerPrintFromJson(String patientData) throws JSONException {
-        JSONArray jsonArray = new JSONArray("["+patientData+"]");
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject = jsonObject.getJSONObject("patient");
-            return jsonObject.getString("fingerprint");
+    public void enrollFingerPrints(java.util.List<PatientFingerPrintModel> patientModels) throws IOException {
+        NBiometricTask enrollTask = FingersTools.getInstance().getClient().createTask(EnumSet.of(NBiometricOperation.ENROLL), null);
+        if (patientModels.size() > 0) {
+            for (PatientFingerPrintModel model : patientModels) {
+                NTemplate template = createTemplate(model.getFingerprintTemplate());
+                enrollTask.getSubjects().add(createSubject(template, model.getPatientUUID()));
+            }
+            FingersTools.getInstance().getClient().performTask(enrollTask, NBiometricOperation.ENROLL, enrollCompletionHandler);
+        } else {
+            return;
         }
-        return "";
+
+    }
+    private NTemplate createTemplate(String fingerPrintTemplateString) {
+        byte[] templateBuffer = DatatypeConverter.parseBase64Binary(fingerPrintTemplateString);//Base64.decode(fingerPrintTemplateString);
+        return new NTemplate(new NBuffer(templateBuffer));
     }
 
-    private Patient CreatePatient(final Encounter encounter, String patientData) throws JSONException, ParseException {
-        Patient patient = new Patient();
-        JSONArray jsonArray = new JSONArray("["+patientData+"]");
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject = jsonObject.getJSONObject("patient");
+    private NSubject createSubject(NTemplate template, String id) throws IOException {
+        NSubject subject = new NSubject();
+        subject.setTemplate(template);
+        subject.setId(id);
+        return subject;
+    }
 
-            //setting names
-            PersonName personName = new PersonName();
-            personName.setFamilyName(jsonObject.getString("family_name"));
-            personName.setGivenName(jsonObject.getString("given_name"));
-            personName.setMiddleName((jsonObject.getString("middle_name")));
-            patient.addName(personName);
+    public String identifyFinger(String fingerprint) throws IOException {
 
-            //setting identifiers
-            Set<PatientIdentifier> patientIdentifiers = new HashSet<PatientIdentifier>();
-            PatientIdentifier patientIdentifier = new PatientIdentifier();
-
-            PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByName("OpenMRS Identification Number");
-            patientIdentifier.setIdentifierType(identifierType);
-            patientIdentifier.setIdentifier(jsonObject.getString("amrs_id"));
-            patientIdentifier.setLocation(encounter.getLocation());
-            patientIdentifier.setPreferred(true);
-
-            patientIdentifiers.add(patientIdentifier);
-            patient.setIdentifiers(patientIdentifiers);
-
-            patient.setGender((jsonObject.getString("sex")));
+        NTemplate nTemplate = createTemplate(fingerprint);
+        NSubject nSubject = createSubject(nTemplate, "0");
+        NBiometricTask task = FingersTools.getInstance().getClient().createTask(EnumSet.of(NBiometricOperation.IDENTIFY), nSubject);
+        NBiometricStatus status = FingersTools.getInstance().getClient().identify(nSubject);
+        if (status == NBiometricStatus.OK) {
+            for (NMatchingResult result : nSubject.getMatchingResults()) {
+                return result.getId();
+            }
         }
-        encounter.setPatient(patient);
-        return patient;
-    }
+        return "PATIENT_NOT_FOUND";
 
-    private Patient getPatientFromUUID(String uuid){
-        return Context.getPatientService().getPatientByUuid(uuid);
     }
+    private class EnrollCompletionHandler implements CompletionHandler<NBiometricTask, Object> {
 
+        @Override
+        public void completed(final NBiometricTask result, final Object attachment) {
+
+        }
+
+        @Override
+        public void failed(final Throwable throwable, final Object attachment) {
+
+        }
+
+    }
 
 }

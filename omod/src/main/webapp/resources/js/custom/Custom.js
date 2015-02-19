@@ -3,20 +3,40 @@ function showMessage() {
         return "This is from javascript";
     };
 
-function GetAllPatient(){
-    $.ajax(
-           {
-                url: "fingerprint/identify.form",
-                type: "POST",
-                async: false,
-                success: function(msg) {
-                    return msg;
-                },
-                error: function(msg){
-                    alert("Internal server error");
-                }
-            }
-        );
+function identifyPatient(fingerprintData){
+
+//     $.ajax({
+//                url: "fingerprint/identifyPatient.form",
+//                type: "POST",
+//                data: fingerprintData,
+//                contentType: 'application/json',
+//                dataType: 'json',
+//                async: false,
+//                success: function(msg) {
+//                    console.log(msg);
+//                    return msg;
+//                },
+//                error: function(msg){
+//                    alert("Internal server error");
+//                }
+//            });
+         var xmlhttp;
+         var data = 'no data found';
+        if (window.XMLHttpRequest) {
+             xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                     data = xmlhttp.responseText;
+              }
+        }
+        xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
+        xmlhttp.setRequestHeader("Content-type","application/json");
+        xmlhttp.send(fingerprintData);
+        return '['+data+']';
 };
 
 function updatePatientList(id, GivenName, FamilyName, Gender){

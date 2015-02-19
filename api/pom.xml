@@ -23,6 +23,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>${project.parent.artifactId}-fingerprint</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!--
         Add other dependencies from parent's pom:
         <dependency>

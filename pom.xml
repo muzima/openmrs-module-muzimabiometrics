@@ -28,6 +28,7 @@
 	</scm>
 
 	<modules>
+        <module>fingerprint</module>
 		<module>api</module>
 		<module>omod</module>
     </modules>
@@ -182,6 +183,7 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>

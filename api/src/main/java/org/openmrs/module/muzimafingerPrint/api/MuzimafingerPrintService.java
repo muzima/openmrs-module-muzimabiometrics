@@ -3,7 +3,7 @@ package org.openmrs.module.muzimafingerPrint.api;
 import org.json.JSONException;
 import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.module.muzimafingerPrint.PatientFingerPrintModel;
+import org.openmrs.module.muzimafingerPrint.model.PatientFingerPrintModel;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -18,5 +18,7 @@ public interface MuzimafingerPrintService extends OpenmrsService {
     List<PatientFingerPrintModel> getAllPatientsWithFingerPrint();
     @Transactional
     PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException;
+
+    PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException;
 
 }

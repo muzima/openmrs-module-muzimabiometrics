@@ -96,7 +96,7 @@
 				<input autocomplete="off" type="text" name="amrs_id">
 
 				<label for= "fingerprint">Finger Print</label>
-				<input autocomplete="off" type="text" name="fingerprint">
+				<input id = "fingerprint" autocomplete="off" type="text" name="fingerprint">
 
 				<label for= "birth_date">Date of Birth</label>
 				<input autocomplete="off" type="date" name="birth_date">
