@@ -34,7 +34,7 @@
     <div class = "row forms-list">
         <div class ="col-lg-12" >
 
-            <table>
+            <table  id="tblData">
                 <thead >
                 <tr class = "forms-header">
                     <th>Patient List</th>
@@ -52,18 +52,35 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td id = 'paitentId'>
-                        <a href=""></a>
-                    </td>
-                    <td id = 'GivenN'></td>
-                    <td id = 'FamilyN'></td>
-                    <td id = 'Gender'></td>
-                </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+<div id = "registrationSection">
+<div id = "otherIdentificationOption">
+	<h4>Do you want to search Patient by other identifier?</h4>
+	<a href="#" id="btnYes">Yes</a>
+	<a href="#" id="btnNo">No</a>
+</div>
+<br>
+<div id = "otherIdentifiers">
+    <form id = "IdentifierForm">
+        <fieldset  name="Identifier">
+            <div class="form-group">
+                <label for= "identifier_id">Patient Identifiers</label>
+                <select id = "IdentifierOptions" name="identifier_id">
+                    <option  value="">...</option>
+                </select>
+                <label for= "identifier_value">Family Name</label>
+                <input autocomplete="off" type="text" name="identifier_value">
+            </div>
+        </fieldset>
+        <br/>
+    </form>
+    <input id = "btnByIdentifier" type="button" value= "Identify patient">
+    <input id = "btnCancel" type="button" value= "Cancel">
 </div>
 <div id = "registrationForm">
 <form id = "formData" method = "post" action = "">
@@ -120,6 +137,7 @@
 		<br/>
 		<input type="submit" text= "create patient">
 	</form>
+</div>
 </div>
 </div>
 

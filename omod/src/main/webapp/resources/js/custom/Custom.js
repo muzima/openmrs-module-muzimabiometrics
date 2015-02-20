@@ -16,45 +16,74 @@ function identifyPatient(fingerprintData){
         xmlhttp.onreadystatechange = function() {
               if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                      data = xmlhttp.responseText;
+                     console.log(data);
+                     updatePatientListTable(data);
               }
         }
         xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
         xmlhttp.setRequestHeader("Content-type","application/json");
         xmlhttp.send(fingerprintData);
-        return '['+data+']';
 };
 
-function updatePatientList(id, GivenName, FamilyName, Gender){
+function updatePatientListTable(Patients){
+    updateControls(1);
+    $("#tblData tbody tr").remove();
+    Patients.forEach( function (patient){
 
-     var tdID = document.getElementById("paitentId");
-     tdID.innerHTML = id;
-     var tdGName = document.getElementById("GivenN");
-     tdGName.innerHTML = GivenName;
-     var tdFName = document.getElementById("FamilyN");
-     tdFName.innerHTML = FamilyName;
-     var tdGender = document.getElementById("Gender");
-     tdGender.innerHTML = Gender;
-     return;
+        $("#tblData tbody").append( "<tr>"
+                                    + "<td><a href='#'>"+patient.id+" </a></td>"
+                                    + "<td>"+patient.givenName +"</td>"
+                                    + "<td>"+ patient.familyName+"</td>"
+                                    + "<td>"+ patient.gender+"</td>"
+                                    + "</tr>");
+    });
 };
 function RegisterPatient(fingerprint){
+        updateControls(2);
         var elm_reg = document.getElementById('fingerprint');
         elm_reg.value = fingerprint;
-        showRegistration('true');
-    };
+};
 
-function showRegistration(status){
-    if(status == 'true'){
-        var elm_reg = document.getElementById("registrationForm");
-        elm_reg.style.display = 'block';
-        var elm_list = document.getElementById("body-wrapper");
-        elm_list.style.display = 'none';
+function updateControls(status){
+    if(status==0){
+
+        //Hiding all the section -- case0 : loading time
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#otherIdentifiers').hide();
+        $('#registrationForm').hide();
+
+    }else if(status ==1){
+
+        //Show table - case1 : Patient found
+         $('#body-wrapper').show();
+         $('#otherIdentificationOption').hide();
+         $('#otherIdentifiers').hide();
+         $('#registrationForm').hide();
+
+    }else if(status ==2){
+
+        //Show other option - case2 : Patient not found
+         $('#body-wrapper').hide();
+         $('#otherIdentificationOption').show();
+         $('#otherIdentifiers').hide();
+         $('#registrationForm').hide();
+    } else if(status ==3){
+
+        //Show other identifiers section - case3 : clicked yes
+         $('#body-wrapper').hide();
+         $('#otherIdentificationOption').hide();
+         $('#otherIdentifiers').show();
+         $('#registrationForm').hide();
+    } else if(status ==4){
+
+         //Show registration section - case4 : clicked No
+          $('#body-wrapper').hide();
+          $('#otherIdentificationOption').hide();
+          $('#otherIdentifiers').hide();
+          $('#registrationForm').show();
     }
-    else{
-        var elm_reg = document.getElementById("registrationForm");
-        elm_reg.style.display = 'none';
-        var elm_list = document.getElementById("body-wrapper");
-        elm_list.style.display = 'block';
-    }
+
 };
 
 var pushIntoArray = function (object, key, value) {
@@ -140,6 +169,52 @@ $(function(){
             }
         );
 
+        $.ajax({
+                url: "../../ws/rest/v1/patientidentifiertype",
+                type: "GET",
+                async: true,
+                success: function(result) {
+
+                    var options = $("#IdentifierOptions");
+                    $.each(result.results, function(val, text) {
+                        options.append($("<option />").val(text.uuid).text(text.display));
+                    });
+                },
+                error: function(msg){
+                        alert("Internal server error : while getting Identifier list ");
+                    }
+                }
+           );
+
+        $("#btnByIdentifier").click(function(){
+                var jsonData = JSON.stringify($('#IdentifierForm').serializeEncounterForm());
+                console.log(jsonData);
+                $.ajax({
+                            url: "fingerprint/identifyPatientByOtherIdentifier.form",
+                            type: "POST",
+                            data: jsonData,
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            async: false,
+                            success: function(msg) {
+                                console.log(msg);
+                                updatePatientListTable(msg);
+                            },
+                            error: function(msg, status, error){
+                                alert(error);
+                            }
+                        });
+
+        });
+        $("#btnYes").click(function(){
+            updateControls(3);
+        });
+        $("#btnNo").click(function(){
+            updateControls(4);
+        });
+        $("#btnCancel").click(function(){
+            updateControls(4);
+        });
         $.validator.addMethod("checkDigit", function (value, element) {
                     var num = value.split('-');
                     if (num.length != 2) {
@@ -229,7 +304,7 @@ $(function(){
                         async: false,
                         success: function(msg) {
                             alert("Patient Created!");
-                            showRegistration('false');
+                            updatePatientListTable(msg);
                         },
                         error: function(msg, status, error){
                             console.log(msg);
@@ -240,6 +315,6 @@ $(function(){
             }
 
         });
-    });
-showRegistration('false');
+   updateControls(0);
+ });
 

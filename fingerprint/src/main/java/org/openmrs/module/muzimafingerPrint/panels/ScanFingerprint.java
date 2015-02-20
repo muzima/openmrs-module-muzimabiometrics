@@ -48,7 +48,6 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private JPanel panelMessage;
     private JList scannerList;
     private JButton btnTryAgain;
-    private JButton btnRegisterPatient;
     private JButton btnLaunchApplet;
     private final NDeviceManager deviceManager;
     private NSubject subject;
@@ -78,7 +77,6 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         lblProgressMessage = new JLabel(LAUNCH_FINGERPRINT_APP);
         btnTryAgain = new JButton("Try Again");
-        btnRegisterPatient = new JButton("RegisterPatient");
         btnLaunchApplet = new JButton("Launch Application");
 
     }
@@ -88,13 +86,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         try {
             if (actionEvent.getSource() == btnTryAgain) {
-
                 RunFingerprintScanProcess();
-
-            } else if (actionEvent.getSource() == btnRegisterPatient) {
-
-                String template = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
-                service.callRegisterPatientJavaScriptFunction(template);
             }
             else if(actionEvent.getSource() == btnLaunchApplet){
                 btnLaunchApplet.setVisible(false);
@@ -124,14 +116,10 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         btnTryAgain.setVisible(false);
         btnTryAgain.addActionListener(this);
 
-        btnRegisterPatient.setVisible(false);
-        btnRegisterPatient.addActionListener(this);
-
         btnLaunchApplet.setVisible(true);
         btnLaunchApplet.addActionListener(this);
 
         panelButtons.add(btnTryAgain);
-        panelButtons.add(btnRegisterPatient);
         panelButtons.add(btnLaunchApplet);
 
         panelMain.add(panelMessage);
@@ -172,7 +160,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         String fingerprint = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
         PatientFingerPrintModel patient = service.identifyPatient(fingerprint);
         if (patient != null) {
-            service.updatePatientListView(patient);
+
             return true;
         }
         return false;
@@ -268,7 +256,10 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                                         btnLaunchApplet.setVisible(true);
                                     } else {
                                         lblProgressMessage.setText(NO_PATIENT_FOUND);
-                                        btnRegisterPatient.setVisible(true);
+                                        String template = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
+                                        service.RegisterPatient(template);
+                                        btnLaunchApplet.setVisible(true);
+                                        lblProgressMessage.setText(LAUNCH_FINGERPRINT_APP);
                                     }
                             } catch (JSONException e) {
                                 e.printStackTrace();

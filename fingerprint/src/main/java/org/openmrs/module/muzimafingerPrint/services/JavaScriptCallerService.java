@@ -22,22 +22,8 @@ public class JavaScriptCallerService {
         applet = appletWindow;
     }
 
-    public void updatePatientListView(PatientFingerPrintModel patient) {
-        callUpdatePatientListJavaScriptFunction(patient);
-    }
-
     public void RegisterPatient(String fingerprintData) {
         callRegisterPatientJavaScriptFunction(fingerprintData);
-    }
-
-    public void callUpdatePatientListJavaScriptFunction(PatientFingerPrintModel patient)
-    {
-        try {
-            JSObject window = JSObject.getWindow(applet);
-            window.call("updatePatientList", new Object[] {patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()});
-        } catch (JSException jse) {
-            jse.printStackTrace();
-        }
     }
 
     public void callRegisterPatientJavaScriptFunction(String fingerprintData)

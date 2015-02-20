@@ -98,6 +98,29 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         return new PatientFingerPrintModel(patient.getUuid(),fingerprint, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
 
+    @Override
+    public List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(String identifier) throws JSONException {
+        PatientJsonParser patientJsonParser = new PatientJsonParser();
+        List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
+        List<PatientIdentifier> patientIdentifiers = patientJsonParser.getPatientIdentifier(identifier);
+        if(patientIdentifiers.size() != 0){
+            for(PatientIdentifier patientIdentifier : patientIdentifiers){
+                patients.add(new PatientFingerPrintModel(patientIdentifier.getPatient().getUuid(),
+                                                        "No-finger-print",
+                                                        patientIdentifier.getPatient().getId(),
+                                                        patientIdentifier.getPatient().getGivenName(),
+                                                        patientIdentifier.getPatient().getFamilyName(),
+                                                        patientIdentifier.getPatient().getGender()));
+            }
+        }
+        return patients;
+    }
+
+    @Override
+    public PatientFingerPrintModel updatePatient(String patientWithFingerprint) {
+        return null;
+    }
+
     public void enrollFingerPrints(java.util.List<PatientFingerPrintModel> patientModels) throws IOException {
         NBiometricTask enrollTask = FingersTools.getInstance().getClient().createTask(EnumSet.of(NBiometricOperation.ENROLL), null);
         if (patientModels.size() > 0) {

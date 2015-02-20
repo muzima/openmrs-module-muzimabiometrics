@@ -9,9 +9,7 @@ import org.openmrs.api.context.Context;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by vikas on 17/02/15.
@@ -95,5 +93,18 @@ public class PatientJsonParser {
         }
         encounter.setPatient(patient);
         return patient;
+    }
+   public List<PatientIdentifier> getPatientIdentifier(String jsonIdentifier) throws JSONException {
+
+       List<PatientIdentifier> patientIdentifiers = new ArrayList<PatientIdentifier>();
+       JSONArray jsonArray = new JSONArray("["+jsonIdentifier+"]");
+       for(int i = 0; i < jsonArray.length(); i++) {
+           JSONObject jsonObject = jsonArray.getJSONObject(i);
+           jsonObject = jsonObject.getJSONObject("patient");
+
+           PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObject.getString("identifier_id"));
+           patientIdentifiers = Context.getPatientService().getPatientIdentifiers(jsonObject.getString("identifier_value"), identifierType);
+       }
+        return patientIdentifiers;
     }
 }

@@ -132,7 +132,7 @@ public final class EnrollFromScanner extends BasePanel implements ActionListener
         PatientFingerPrintModel patient =  service.identifyPatient(fingerprint);
 
         if(patient!= null){
-            service.updatePatientListView(patient);
+
         }
         else {
             btnRegisterPatient.setEnabled(true);

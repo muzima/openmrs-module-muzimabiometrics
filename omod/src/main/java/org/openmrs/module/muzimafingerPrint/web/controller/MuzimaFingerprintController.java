@@ -46,4 +46,22 @@ public class MuzimaFingerprintController {
         PatientFingerPrintModel patient = service.identifyPatient(fingerprint);
         return patient;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/identifyPatientByOtherIdentifier.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(@RequestBody String identifier) throws Exception {
+
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+        List<PatientFingerPrintModel> patients = service.identifyPatientByOtherIdentifier(identifier);
+        return patients;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/UpdatePatientWithFingerprint.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public PatientFingerPrintModel UpdatePatientWithFingerprint(@RequestBody String patientWithFingerprint) throws Exception {
+
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+        PatientFingerPrintModel patient = service.updatePatient(patientWithFingerprint);
+        return patient;
+    }
 }
