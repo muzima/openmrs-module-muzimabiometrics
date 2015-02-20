@@ -25,7 +25,7 @@
 </header>
 <div id = "applet">
     <script>
-        var attributes = {code:'Muzima fingerprint module',  width:700, height:100} ;
+        var attributes = {code:'Muzima fingerprint module',  width:"100%", height:"100"} ;
         var parameters = {jnlp_href: '/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp'} ;
         deployJava.runApplet(attributes, parameters, '1.6');
     </script>

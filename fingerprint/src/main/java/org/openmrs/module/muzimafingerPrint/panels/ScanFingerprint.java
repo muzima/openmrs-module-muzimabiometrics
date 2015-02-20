@@ -28,6 +28,7 @@ import java.util.EnumSet;
  */
 public class ScanFingerprint extends BasePanel implements ActionListener {
 
+    private static final String LAUNCH_FINGERPRINT_APP = "Click to start scanning process ";
     private static final String INITIALIZING_FINGERPRINT_MODULE = "initializing fingerprint";
     private static final String OBTAINING_LICENCES = "Obtaining licences, please wait.";
     private static final String SEARCHING_FOR_DEVICE = "Connecting to fingerprint device.";
@@ -48,6 +49,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private JList scannerList;
     private JButton btnTryAgain;
     private JButton btnRegisterPatient;
+    private JButton btnLaunchApplet;
     private final NDeviceManager deviceManager;
     private NSubject subject;
     private JavaScriptCallerService service;
@@ -74,9 +76,11 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         deviceManager.setDeviceTypes(EnumSet.of(NDeviceType.FINGER_SCANNER));
         deviceManager.initialize();
 
-        lblProgressMessage = new JLabel(INITIALIZING_FINGERPRINT_MODULE);
+        lblProgressMessage = new JLabel(LAUNCH_FINGERPRINT_APP);
         btnTryAgain = new JButton("Try Again");
         btnRegisterPatient = new JButton("RegisterPatient");
+        btnLaunchApplet = new JButton("Launch Application");
+
     }
 
     @Override
@@ -92,23 +96,30 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                 String template = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
                 service.callRegisterPatientJavaScriptFunction(template);
             }
+            else if(actionEvent.getSource() == btnLaunchApplet){
+                btnLaunchApplet.setVisible(false);
+                RunFingerprintScanProcess();
+            }
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Applet Error", JOptionPane.PLAIN_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Applet Error", JOptionPane.PLAIN_MESSAGE);
         }
     }
 
     @Override
-    protected void initGUI() throws IOException, JSONException{
+    protected void initGUI() throws IOException, JSONException {
         panelMain = new JPanel();
+        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
 
         panelMessage = new JPanel();
         panelMessage.add(lblProgressMessage);
         panelMessage.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
         panelButtons = new JPanel();
-        panelButtons.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        panelButtons.setLayout(new FlowLayout(FlowLayout.LEADING));
 
         btnTryAgain.setVisible(false);
         btnTryAgain.addActionListener(this);
@@ -116,8 +127,12 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         btnRegisterPatient.setVisible(false);
         btnRegisterPatient.addActionListener(this);
 
+        btnLaunchApplet.setVisible(true);
+        btnLaunchApplet.addActionListener(this);
+
         panelButtons.add(btnTryAgain);
         panelButtons.add(btnRegisterPatient);
+        panelButtons.add(btnLaunchApplet);
 
         panelMain.add(panelMessage);
         panelMain.add(panelButtons);
@@ -125,13 +140,9 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         add(panelMain);
 
         scannerList = new JList();
-
         scannerList.setModel(new DefaultListModel());
         scannerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         scannerList.addListSelectionListener(new ScannerSelectionListener());
-
-        RunFingerprintScanProcess();
     }
 
     private void RunFingerprintScanProcess() throws IOException, JSONException {
@@ -141,8 +152,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
             lblProgressMessage.setText(SEARCHING_FOR_DEVICE);
             if (SearchDevice()) {
                 lblProgressMessage.setText(SCANNING_FINGERPRINT_PROGRESS);
-                if (ScanFingerPrint()) {
-                } else {
+                if (!ScanFingerPrint()) {
                     lblProgressMessage.setText(SCANNING_FAILED);
                     btnTryAgain.setVisible(true);
                 }
@@ -227,6 +237,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
             return status;
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Licenses Error", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
     }
@@ -244,7 +255,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         @Override
         public void completed(final NBiometricTask result, final Object attachment) {
-            if(result != null) {
+            if (result != null) {
                 SwingUtilities.invokeLater(new Runnable() {
 
                     @Override
@@ -252,16 +263,16 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                         if (result.getStatus() == NBiometricStatus.OK) {
                             lblProgressMessage.setText(IDENTIFYING_PATIENT);
                             try {
-                                if (IdentifyPatient()) {
-                                    lblProgressMessage.setText("Found");
-                                } else {
-                                    lblProgressMessage.setText(NO_PATIENT_FOUND);
-                                    btnRegisterPatient.setVisible(true);
-                                }
+                                    if (IdentifyPatient()) {
+                                        lblProgressMessage.setText(LAUNCH_FINGERPRINT_APP);
+                                        btnLaunchApplet.setVisible(true);
+                                    } else {
+                                        lblProgressMessage.setText(NO_PATIENT_FOUND);
+                                        btnRegisterPatient.setVisible(true);
+                                    }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        } else {
                         }
                     }
 
@@ -275,6 +286,8 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
                 @Override
                 public void run() {
+                    lblProgressMessage.setText(SCANNING_FAILED);
+                    btnTryAgain.setVisible(true);
                     th.printStackTrace();
                 }
 

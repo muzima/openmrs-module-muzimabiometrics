@@ -21,13 +21,10 @@ public class SimpleFingersApplication extends Applet {
 //        frame.setVisible(true);
 //    }
     public void init() {
-        final Component parent = this;
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
 
-//                    JFrame frame = new JFrame();
-//                    frame.setTitle("Muzima Fingerprint Identification");
                     MainPanel panel = null;
                     try {
                         panel = new MainPanel();
@@ -36,12 +33,6 @@ public class SimpleFingersApplication extends Applet {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                    frame.add(panel);
-//                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                    frame.pack();
-//                    //frame.setLocationRelativeTo(null);
-//                    frame.setVisible(true);
-
                     add(panel);
                 }
             });

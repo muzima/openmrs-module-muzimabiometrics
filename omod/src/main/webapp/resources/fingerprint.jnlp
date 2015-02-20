@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp spec="1.0+" codebase="" href="">
     <information>
-        <title>Hello Applet</title>
+        <title>muzima fingerprint applet</title>
         <vendor>Self</vendor>
     </information>
     <resources>

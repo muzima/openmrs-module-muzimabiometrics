@@ -231,8 +231,9 @@ $(function(){
                             alert("Patient Created!");
                             showRegistration('false');
                         },
-                        error: function(msg){
-                            alert("Internal server error");
+                        error: function(msg, status, error){
+                            console.log(msg);
+                            alert(error);
                         }
                     }
                 );
