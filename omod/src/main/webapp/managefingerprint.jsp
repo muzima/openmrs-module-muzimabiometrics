@@ -58,7 +58,13 @@
         </div>
     </div>
 </div>
+<br>
 <div id = "registrationSection">
+<div id = "updatePatient">
+    <input id = "btnUpdatePatient" type="button" value= "Update Selected patient">
+    <input id = "btnCancel" type="button" value= "Cancel">
+</div>
+<br>
 <div id = "otherIdentificationOption">
 	<h4>Do you want to search Patient by other identifier?</h4>
 	<a href="#" id="btnYes">Yes</a>
@@ -69,11 +75,11 @@
     <form id = "IdentifierForm">
         <fieldset  name="Identifier">
             <div class="form-group">
-                <label for= "identifier_id">Patient Identifiers</label>
+                <label for= "identifier_id">Patient Identifier Type</label>
                 <select id = "IdentifierOptions" name="identifier_id">
                     <option  value="">...</option>
                 </select>
-                <label for= "identifier_value">Family Name</label>
+                <label for= "identifier_value">Identifier Value</label>
                 <input autocomplete="off" type="text" name="identifier_value">
             </div>
         </fieldset>

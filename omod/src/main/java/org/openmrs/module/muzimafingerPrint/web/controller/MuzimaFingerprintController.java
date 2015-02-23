@@ -58,10 +58,9 @@ public class MuzimaFingerprintController {
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/UpdatePatientWithFingerprint.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
-    public PatientFingerPrintModel UpdatePatientWithFingerprint(@RequestBody String patientWithFingerprint) throws Exception {
+    public boolean UpdatePatientWithFingerprint(@RequestBody String patientWithFingerprint) throws Exception {
 
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-        PatientFingerPrintModel patient = service.updatePatient(patientWithFingerprint);
-        return patient;
+        return service.updatePatient(patientWithFingerprint);
     }
 }

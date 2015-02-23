@@ -1,12 +1,15 @@
 
+var _FINGERPRINT_DATA = "";
+
 function showMessage() {
         return "This is from javascript";
     };
 
 function identifyPatient(fingerprintData){
 
-         var xmlhttp;
-         var data = 'no data found';
+        _FINGERPRINT_DATA = fingerprintData;
+        var xmlhttp;
+        var data = 'no data found';
         if (window.XMLHttpRequest) {
              xmlhttp=new XMLHttpRequest();
         }
@@ -17,7 +20,7 @@ function identifyPatient(fingerprintData){
               if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                      data = xmlhttp.responseText;
                      console.log(data);
-                     updatePatientListTable(data);
+                     updatePatientListTable(data, 1);
               }
         }
         xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
@@ -25,13 +28,20 @@ function identifyPatient(fingerprintData){
         xmlhttp.send(fingerprintData);
 };
 
-function updatePatientListTable(Patients){
-    updateControls(1);
+function updatePatientListTable(Patients, updateControlsStatus){
+
+    updateControls(updateControlsStatus);
     $("#tblData tbody tr").remove();
     Patients.forEach( function (patient){
-
+        var selectionColumn = "";
+            if(updateControlsStatus == 5){
+               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.id+"'></td>";
+            }
+            else{
+                selectionColumn =  "<td><a href='#'>"+patient.id+" </a></td>";
+         }
         $("#tblData tbody").append( "<tr>"
-                                    + "<td><a href='#'>"+patient.id+" </a></td>"
+                                    + selectionColumn
                                     + "<td>"+patient.givenName +"</td>"
                                     + "<td>"+ patient.familyName+"</td>"
                                     + "<td>"+ patient.gender+"</td>"
@@ -52,14 +62,16 @@ function updateControls(status){
         $('#otherIdentificationOption').hide();
         $('#otherIdentifiers').hide();
         $('#registrationForm').hide();
+        $('#updatePatient').hide();
 
     }else if(status ==1){
 
-        //Show table - case1 : Patient found
+        //Show table - case1 : Patient found for scan process
          $('#body-wrapper').show();
          $('#otherIdentificationOption').hide();
          $('#otherIdentifiers').hide();
          $('#registrationForm').hide();
+         $('#updatePatient').hide();
 
     }else if(status ==2){
 
@@ -68,6 +80,7 @@ function updateControls(status){
          $('#otherIdentificationOption').show();
          $('#otherIdentifiers').hide();
          $('#registrationForm').hide();
+         $('#updatePatient').hide();
     } else if(status ==3){
 
         //Show other identifiers section - case3 : clicked yes
@@ -75,6 +88,7 @@ function updateControls(status){
          $('#otherIdentificationOption').hide();
          $('#otherIdentifiers').show();
          $('#registrationForm').hide();
+         $('#updatePatient').hide();
     } else if(status ==4){
 
          //Show registration section - case4 : clicked No
@@ -82,7 +96,17 @@ function updateControls(status){
           $('#otherIdentificationOption').hide();
           $('#otherIdentifiers').hide();
           $('#registrationForm').show();
+          $('#updatePatient').hide();
     }
+    else if(status ==5){
+            //Show table - case1 : Patient found for other identifier
+             $('#body-wrapper').show();
+             $('#otherIdentificationOption').hide();
+             $('#otherIdentifiers').hide();
+             $('#registrationForm').hide();
+             $('#updatePatient').show();
+
+        }
 
 };
 
@@ -198,7 +222,7 @@ $(function(){
                             async: false,
                             success: function(msg) {
                                 console.log(msg);
-                                updatePatientListTable(msg);
+                                updatePatientListTable(msg, 5);
                             },
                             error: function(msg, status, error){
                                 alert(error);
@@ -214,6 +238,28 @@ $(function(){
         });
         $("#btnCancel").click(function(){
             updateControls(4);
+        });
+        $("#btnUpdatePatient").click(function(){
+            var selectedPatientId = $('input[name=selectedPatient]:checked').val();
+            alert(selectedPatientId);
+            var jsonData = "{patient: {patientId : '"+selectedPatientId+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
+            $.ajax({
+                    url: "fingerprint/UpdatePatientWithFingerprint.form",
+                    type: "POST",
+                    data: jsonData,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    async: false,
+                    success: function(msg) {
+                        alert("Patient updated!");
+                        updateControls(0);
+                    },
+                    error: function(msg, status, error){
+                        console.log(msg);
+                        alert(error);
+                    }
+                });
+
         });
         $.validator.addMethod("checkDigit", function (value, element) {
                     var num = value.split('-');

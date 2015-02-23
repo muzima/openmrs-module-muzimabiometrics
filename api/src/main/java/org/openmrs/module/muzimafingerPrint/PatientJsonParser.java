@@ -107,4 +107,14 @@ public class PatientJsonParser {
        }
         return patientIdentifiers;
     }
+
+    public String getPatientIdFromJson(String patientWithFingerprint) throws JSONException {
+        JSONArray jsonArray = new JSONArray("["+patientWithFingerprint+"]");
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            jsonObject = jsonObject.getJSONObject("patient");
+            return jsonObject.getString("patientId");
+        }
+        return "";
+    }
 }
