@@ -20,12 +20,16 @@ function identifyPatient(fingerprintData){
               if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                      data = xmlhttp.responseText;
                      console.log(data);
-                     updatePatientListTable(data, 1);
+                     var data1 = JSON.parse("["+data+"]");
+                     updatePatientListTable(data1, 1);
               }
         }
         xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
         xmlhttp.setRequestHeader("Content-type","application/json");
         xmlhttp.send(fingerprintData);
+
+        return "[" + data + "]";
+
 };
 
 function updatePatientListTable(Patients, updateControlsStatus){
@@ -48,6 +52,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
                                     + "</tr>");
     });
 };
+
 function RegisterPatient(fingerprint){
         updateControls(2);
         var elm_reg = document.getElementById('fingerprint');

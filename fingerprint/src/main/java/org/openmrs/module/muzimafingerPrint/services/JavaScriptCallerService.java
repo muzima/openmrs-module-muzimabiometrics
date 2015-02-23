@@ -52,6 +52,9 @@ public class JavaScriptCallerService {
     public PatientFingerPrintModel identifyPatient(String fingerprint) throws JSONException {
 
         String JSONPatient = callIdentifyPatientJavascriptFunction(fingerprint);
+        if (JSONPatient.equals("[no data found]")) {
+            return null;
+        }
         PatientFingerPrintModel patient = PatientFingerPrintModelBuilder(JSONPatient);
         return patient;
     }
