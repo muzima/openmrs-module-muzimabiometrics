@@ -72,7 +72,7 @@
 </div>
 <br>
 <div id = "otherIdentifiers">
-    <form id = "IdentifierForm">
+    <form id = "IdentifierForm" method = "post" action = "">
         <fieldset  name="Identifier">
             <div class="form-group">
                 <label for= "identifier_id">Patient Identifier Type</label>
@@ -140,9 +140,9 @@
 
 			</div>
 		</fieldset>
-		<br/>
-		<input type="submit" text= "create patient">
 	</form>
+	<br/>
+      <input id = "btnCreatePatient" type="button" value= "create patient">
 </div>
 </div>
 </div>

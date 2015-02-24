@@ -32,7 +32,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private static final String INITIALIZING_FINGERPRINT_MODULE = "initializing fingerprint";
     private static final String OBTAINING_LICENCES = "Obtaining licences, please wait.";
     private static final String SEARCHING_FOR_DEVICE = "Connecting to fingerprint device.";
-    private static final String SCANNING_FINGERPRINT_PROGRESS = "Scanning fingerprint.";
+    private static final String SCANNING_FINGERPRINT_PROGRESS = "Scanning fingerprint. please put your finger on scanner.";
     private static final String SCANNING_FINGERPRINT_COMPLETED = "Scanning fingerprint completed";
     private static final String IDENTIFYING_PATIENT = "Identification of patient stared";
 
@@ -40,6 +40,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private static final String NO_DEVICE_FOUND = "No device Found";
     private static final String NO_PATIENT_FOUND = "No patient Found";
     private static final String SCANNING_FAILED = "Unable to scan finger";
+    private static final String INTERNAL_ERROR = "Something went wrong while identifying the patient.";
 
     private final CaptureCompletionHandler captureCompletionHandler = new CaptureCompletionHandler();
     private JLabel lblProgressMessage;
@@ -77,7 +78,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         lblProgressMessage = new JLabel(LAUNCH_FINGERPRINT_APP);
         btnTryAgain = new JButton("Try Again");
-        btnLaunchApplet = new JButton("Launch Application");
+        btnLaunchApplet = new JButton("Identify Patient");
 
     }
 
@@ -262,7 +263,8 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                                         lblProgressMessage.setText(LAUNCH_FINGERPRINT_APP);
                                     }
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                lblProgressMessage.setText( INTERNAL_ERROR);
+                                btnTryAgain.setVisible(true);
                             }
                         }
                     }

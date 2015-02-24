@@ -266,6 +266,29 @@ $(function(){
                 });
 
         });
+
+        $("#btnCreatePatient").click(function(){
+            if($("#formData").valid()){
+                var jsonData = JSON.stringify($('#formData').serializeEncounterForm());
+                $.ajax({
+                        url: "fingerprint/register.form",
+                        type: "POST",
+                        data: jsonData,
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        async: false,
+                        success: function(msg) {
+                            alert("Patient Created!");
+                            updatePatientListTable(msg, 1);
+                        },
+                        error: function(msg, status, error){
+                            console.log(msg);
+                            alert(error);
+                        }
+                    });
+                }
+        });
+
         $.validator.addMethod("checkDigit", function (value, element) {
                     var num = value.split('-');
                     if (num.length != 2) {
@@ -342,29 +365,7 @@ $(function(){
                     required : true,
                     nonFutureDate: true
                 }
-            },
-            submitHandler:function(){
-                var jsonData = JSON.stringify($('form').serializeEncounterForm());
-                $.ajax(
-                   {
-                        url: "fingerprint/register.form",
-                        type: "POST",
-                        data: jsonData,
-                        contentType: 'application/json',
-                        dataType: 'json',
-                        async: false,
-                        success: function(msg) {
-                            alert("Patient Created!");
-                            updatePatientListTable(msg);
-                        },
-                        error: function(msg, status, error){
-                            console.log(msg);
-                            alert(error);
-                        }
-                    }
-                );
             }
-
         });
    updateControls(0);
  });

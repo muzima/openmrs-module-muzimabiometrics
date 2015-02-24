@@ -95,6 +95,8 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
             String patientID = identifyFinger(fingerprint);
             patient = Context.getPatientService().getPatientByUuid(patientID);
         }
+        if(patient == null)
+            return null;
         return new PatientFingerPrintModel(patient.getUuid(),fingerprint, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
 

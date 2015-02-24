@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,10 +33,12 @@ public class MuzimaFingerprintController {
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/register.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
-    public PatientFingerPrintModel registerPatient(@RequestBody String jsonPayload) throws Exception {
+    public List<PatientFingerPrintModel> registerPatient(@RequestBody String jsonPayload) throws Exception {
             MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
             PatientFingerPrintModel patients = service.savePatient(jsonPayload);
-            return patients;
+            List<PatientFingerPrintModel> patientFingerPrintModels = new ArrayList<PatientFingerPrintModel>();
+            patientFingerPrintModels.add(patients);
+            return patientFingerPrintModels;
     }
 
     @ResponseBody
