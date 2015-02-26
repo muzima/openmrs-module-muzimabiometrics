@@ -121,6 +121,16 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
        return muzimaFingerprintDAO.findByPatientId(patientId);
     }
 
+    @Override
+    public List<MuzimaFingerprint> getAll() {
+       return muzimaFingerprintDAO.getAll();
+    }
+
+    @Override
+    public MuzimaFingerprint findByUniqueId(String uuid) {
+        return muzimaFingerprintDAO.findByUuid(uuid);
+    }
+
     public void enrollFingerPrints(java.util.List<PatientFingerPrintModel> patientModels) throws IOException {
         NBiometricTask enrollTask = FingersTools.getInstance().getClient().createTask(EnumSet.of(NBiometricOperation.ENROLL), null);
         if (patientModels.size() > 0) {
