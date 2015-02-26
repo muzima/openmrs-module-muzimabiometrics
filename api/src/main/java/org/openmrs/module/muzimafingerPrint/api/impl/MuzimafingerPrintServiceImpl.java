@@ -46,17 +46,16 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     public MuzimafingerPrintServiceImpl() {
 
     }
+
     @Override
-    public List<PatientFingerPrintModel> getAllPatientsWithFingerPrint() {
-        List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
-        List<MuzimaFingerprint> fingerprints = muzimaFingerprintDAO.getAll();
-        for (MuzimaFingerprint fingerprint : fingerprints) {
-            if(fingerprint.getFingerprint() != null) {
-                Patient patient = Context.getPatientService().getPatient(Integer.parseInt(fingerprint.getPatientId()));
-                patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()));
+    public PatientFingerPrintModel getFingerprint(String patientIdentifier) {
+        List<PatientFingerPrintModel> allPatientsWithFingerPrint = getAllPatientsWithFingerPrint();
+        for (PatientFingerPrintModel patientFingerPrintModel : allPatientsWithFingerPrint) {
+            if(patientIdentifier.equals(patientFingerPrintModel.getPatientUUID())) {
+                return patientFingerPrintModel;
             }
         }
-        return patients;
+        return null;
     }
 
     @Override
@@ -140,6 +139,18 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
             return;
         }
 
+    }
+
+    private List<PatientFingerPrintModel> getAllPatientsWithFingerPrint() {
+        List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
+        List<MuzimaFingerprint> fingerprints = muzimaFingerprintDAO.getAll();
+        for (MuzimaFingerprint fingerprint : fingerprints) {
+            if(fingerprint.getFingerprint() != null) {
+                Patient patient = Context.getPatientService().getPatient(Integer.parseInt(fingerprint.getPatientId()));
+                patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()));
+            }
+        }
+        return patients;
     }
     private NTemplate createTemplate(String fingerPrintTemplateString) {
         byte[] templateBuffer = DatatypeConverter.parseBase64Binary(fingerPrintTemplateString);//Base64.decode(fingerPrintTemplateString);

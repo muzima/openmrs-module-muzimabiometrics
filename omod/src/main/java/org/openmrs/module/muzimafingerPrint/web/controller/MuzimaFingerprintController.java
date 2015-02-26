@@ -22,13 +22,11 @@ import java.util.List;
 public class MuzimaFingerprintController {
 
     @ResponseBody
-    @RequestMapping(value = "fingerprint/identify.form", method = RequestMethod.POST)
-    public List<PatientFingerPrintModel> GetAllPatient() throws Exception {
+    @RequestMapping(value = "patient/{identifier}/fingerprint.form", method = RequestMethod.GET)
+    public PatientFingerPrintModel getPatientFingerprint(@PathVariable String identifier) throws Exception {
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
 
-           MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-           List<PatientFingerPrintModel> patients = service.getAllPatientsWithFingerPrint();
-
-           return patients;
+        return service.getFingerprint(identifier);
     }
 
     @ResponseBody
@@ -66,4 +64,5 @@ public class MuzimaFingerprintController {
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
         return service.updatePatient(patientWithFingerprint);
     }
+
 }

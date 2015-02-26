@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface MuzimafingerPrintService extends OpenmrsService {
 
-    List<PatientFingerPrintModel> getAllPatientsWithFingerPrint();
+    PatientFingerPrintModel getFingerprint(String patientIdentifier);
     @Transactional
     PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException;
 
