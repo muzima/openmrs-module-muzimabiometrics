@@ -3,6 +3,7 @@ package org.openmrs.module.muzimafingerPrint.web.controller;
 import org.directwebremoting.guice.RequestParameters;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.muzimafingerPrint.MuzimaFingerprint;
 import org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService;
 import org.openmrs.module.muzimafingerPrint.model.PatientFingerPrintModel;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,11 @@ import java.util.List;
 public class MuzimaFingerprintController {
 
     @ResponseBody
-    @RequestMapping(value = "patient/{identifier}/fingerprint.form", method = RequestMethod.GET)
-    public PatientFingerPrintModel getPatientFingerprint(@PathVariable String identifier) throws Exception {
-        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+    @RequestMapping(value = "patient/{fingerprint}/fingerprint.form",  method = RequestMethod.GET)
+    public MuzimaFingerprint getPatientFingerprintById(@PathVariable String patientId){
 
-        return service.getFingerprint(identifier);
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+        return service.getFingerprintByPatientId(patientId);
     }
 
     @ResponseBody

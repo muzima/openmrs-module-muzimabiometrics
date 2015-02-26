@@ -48,17 +48,6 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     }
 
     @Override
-    public PatientFingerPrintModel getFingerprint(String patientIdentifier) {
-        List<PatientFingerPrintModel> allPatientsWithFingerPrint = getAllPatientsWithFingerPrint();
-        for (PatientFingerPrintModel patientFingerPrintModel : allPatientsWithFingerPrint) {
-            if(patientIdentifier.equals(patientFingerPrintModel.getPatientUUID())) {
-                return patientFingerPrintModel;
-            }
-        }
-        return null;
-    }
-
-    @Override
     public PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException {
 
         PatientJsonParser patientJsonParser = new PatientJsonParser();
@@ -125,6 +114,11 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint(patientID, fingerprint);
         muzimaFingerprintDAO.saveMuzimaFingerprint(muzimaFingerprint);
         return true;
+    }
+
+    @Override
+    public MuzimaFingerprint getFingerprintByPatientId(String patientId) {
+       return muzimaFingerprintDAO.findByPatientId(patientId);
     }
 
     public void enrollFingerPrints(java.util.List<PatientFingerPrintModel> patientModels) throws IOException {

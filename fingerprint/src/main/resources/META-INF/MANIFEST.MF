@@ -1,0 +1,3 @@
+Permissions: all-permissions
+Codebase: localhost
+Application-Name: Muzima fingerprint Module

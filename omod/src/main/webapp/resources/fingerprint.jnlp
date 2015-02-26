@@ -2,7 +2,7 @@
 <jnlp spec="1.0+" codebase="" href="">
     <information>
         <title>muzima fingerprint applet</title>
-        <vendor>Self</vendor>
+        <vendor>Sahaj Software Solution</vendor>
     </information>
     <resources>
         <!-- Application Resources -->
@@ -17,6 +17,7 @@
             name="Hello Applet"
             main-class="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"
             width="300"
-            height="300">
+            height="300"
+            archive="muzimafingerPrint-fingerprint-1.0-SNAPSHOT-jar-with-dependencies.jar">
     </applet-desc>
 </jnlp>

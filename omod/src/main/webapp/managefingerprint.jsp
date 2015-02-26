@@ -66,7 +66,7 @@
 </div>
 <br>
 <div id = "otherIdentificationOption">
-	<h4>Do you want to search Patient by other identifier?</h4>
+	<h4>No Patient found with this fingerprint, Do you want to search Patient by other identifier?</h4>
 	<a href="#" id="btnYes">Yes</a>
 	<a href="#" id="btnNo">No</a>
 </div>
