@@ -46,7 +46,7 @@ public class MuzimaFingerprintDAOImpl implements MuzimaFingerprintDAO {
     }
 
     public MuzimaFingerprint findByUuid(String uuid) {
-        return null;
+        return (MuzimaFingerprint) session().createQuery("from MuzimaFingerprint m where m.uuid = '" +uuid + "'").uniqueResult();
     }
 
     @Override

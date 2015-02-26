@@ -40,15 +40,15 @@ public class MuzimaFingerprintResource extends DataDelegatingCrudResource<Muzima
     }
 
     @Override
-    public MuzimaFingerprint getByUniqueId(String patientId) {
+    public MuzimaFingerprint getByUniqueId(String uuid) {
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-        return service.getFingerprintByPatientId(patientId);
+        return service.findByUniqueId(uuid);
     }
 
     @Override
-    public Object retrieve(String uuid, RequestContext context) throws ResponseException {
+    public Object retrieve(String patientID, RequestContext context) throws ResponseException {
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-        return asRepresentation(service.findByUniqueId(uuid), context.getRepresentation());
+        return asRepresentation(service.getFingerprintByPatientId(patientID), context.getRepresentation());
     }
 
     @Override
