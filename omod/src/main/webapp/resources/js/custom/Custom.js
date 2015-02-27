@@ -39,10 +39,10 @@ function updatePatientListTable(Patients, updateControlsStatus){
     Patients.forEach( function (patient){
         var selectionColumn = "";
             if(updateControlsStatus == 5){
-               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.patientUUID+"'> "+patient.patientUUID+"</td>";
+               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.patientUUID+"'> "+patient.id+"</td>";
             }
             else{
-                selectionColumn =  "<td><a href='#'>"+patient.patientUUID+" </a></td>";
+                selectionColumn =  "<td><a href='#'>"+patient.id+" </a></td>";
          }
         $("#tblData tbody").append( "<tr>"
                                     + selectionColumn
@@ -241,7 +241,7 @@ $(function(){
         $("#btnNo").click(function(){
             updateControls(4);
         });
-        $("#btnCancel").click(function(){
+        $(".doCancel").click(function(){
             updateControls(4);
         });
         $("#btnUpdatePatient").click(function(){

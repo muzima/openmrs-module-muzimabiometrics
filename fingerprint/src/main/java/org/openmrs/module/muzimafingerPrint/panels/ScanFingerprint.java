@@ -87,6 +87,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         try {
             if (actionEvent.getSource() == btnTryAgain) {
+                btnTryAgain.setVisible(false);
                 RunFingerprintScanProcess();
             }
             else if(actionEvent.getSource() == btnLaunchApplet){

@@ -58,7 +58,7 @@
 <div id = "registrationSection">
 <div id = "updatePatient" class = "button-loc">
     <input id = "btnUpdatePatient" type="button" value= "Update Selected patient">
-    <input id = "btnCancel" type="button" value= "Cancel">
+    <input id = "btnCancel" class = "doCancel" type="button" value= "Cancel">
 </div>
 <div id = "otherIdentificationOption">
 	<h4>No Patient found with this fingerprint, Do you want to search Patient by other identifier?</h4>
@@ -81,7 +81,7 @@
         <br/>
     </form>
     <input id = "btnByIdentifier" type="button" value= "Identify patient">
-    <input id = "btnCancel" type="button" value= "Cancel">
+    <input id = "btnCancel" class = "doCancel" type="button" value= "Cancel">
 </div>
 <div id = "registrationForm">
 <form id = "formData" method = "post" action = "">
@@ -114,7 +114,8 @@
 				<input autocomplete="off" type="text" name="amrs_id">
 
 				<label for= "fingerprint">Finger Print</label>
-				<input id = "fingerprint" autocomplete="off" type="text" name="fingerprint">
+				<img src ="/openmrs-standalone/moduleResources/muzimafingerPrint/images/done.png"/>
+				<input id = "fingerprint" autocomplete="off" type="hidden" name="fingerprint">
 
 				<label for= "birth_date">Date of Birth</label>
 				<input autocomplete="off" type="date" name="birth_date">
