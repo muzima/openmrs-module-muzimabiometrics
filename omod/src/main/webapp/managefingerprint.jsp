@@ -4,8 +4,6 @@
 
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/animate/animate.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/bootstrap/css/bootstrap.min.css"/>
-<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/openmrs2.0/index.css"/>
-<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/openmrs2.0/openmrs.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/custom/custom.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/styles/font-awesome/css/font-awesome.min.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/jquery/jquery.js"/>
@@ -13,22 +11,21 @@
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/jquery/jquery-ui-1.10.4.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/jquery/jquery.validate.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/underscore/underscore-min.js"/>
-<openmrs:htmlInclude file="/moduleResources/muzimafingerPrint/js/custom/deployJava.js"/>
 
 <div>
-<br>
-<br>
-<header id="style-guide-header">
-    <div  class="col-lg-8">
-        <h2><i class="icon-home"></i> Muzima Fingerprint Module</h2>
+<div class="navbar navbar-custom">
+    <div>
+        <a href="#"><i class="icon-home"></i> Muzima Fingerprint Module</a>
     </div>
-</header>
+</div>
 <div id = "applet">
-    <script>
-        var attributes = {code:'Muzima fingerprint module',  width:"100%", height:"100"} ;
-        var parameters = {jnlp_href: '/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp'} ;
-        deployJava.runApplet(attributes, parameters, '1.6');
-    </script>
+    <applet name="Muzima fingerprint module" id="Abis" code="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"  width="100%"  height="100">
+        <param name="jnlp_href" value="/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp" />
+        <param name="codebase_lookup" value="false" />
+        <param name="separate_jvm" value="true" />
+        <param name="server_address" value="/local" />
+        <param name="server_port" value="5000" />
+    </applet>
 </div>
 <div id="body-wrapper" class="test-page">
     <div class = "row forms-list">
@@ -58,20 +55,18 @@
         </div>
     </div>
 </div>
-<br>
 <div id = "registrationSection">
-<div id = "updatePatient">
+<div id = "updatePatient" class = "button-loc">
     <input id = "btnUpdatePatient" type="button" value= "Update Selected patient">
     <input id = "btnCancel" type="button" value= "Cancel">
 </div>
-<br>
 <div id = "otherIdentificationOption">
 	<h4>No Patient found with this fingerprint, Do you want to search Patient by other identifier?</h4>
 	<a href="#" id="btnYes">Yes</a>
 	<a href="#" id="btnNo">No</a>
 </div>
-<br>
 <div id = "otherIdentifiers">
+    <h4>Please select other Identifier Type and respective value</h4>
     <form id = "IdentifierForm" method = "post" action = "">
         <fieldset  name="Identifier">
             <div class="form-group">
@@ -142,7 +137,9 @@
 		</fieldset>
 	</form>
 	<br/>
+     <div class = "button-loc">
       <input id = "btnCreatePatient" type="button" value= "create patient">
+     </div>
 </div>
 </div>
 </div>

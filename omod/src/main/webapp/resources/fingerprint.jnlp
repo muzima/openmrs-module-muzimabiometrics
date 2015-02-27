@@ -14,7 +14,7 @@
     </security>
 
     <applet-desc
-            name="Hello Applet"
+            name="Muzima fingerprint module"
             main-class="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"
             width="300"
             height="300"

@@ -39,7 +39,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
     Patients.forEach( function (patient){
         var selectionColumn = "";
             if(updateControlsStatus == 5){
-               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.id+"'></td>";
+               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.id+"'> "+patient.id+"</td>";
             }
             else{
                 selectionColumn =  "<td><a href='#'>"+patient.id+" </a></td>";

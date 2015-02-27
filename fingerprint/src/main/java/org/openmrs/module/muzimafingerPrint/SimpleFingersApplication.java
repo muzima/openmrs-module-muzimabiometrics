@@ -19,6 +19,7 @@ public class SimpleFingersApplication extends Applet {
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.pack();
 //        frame.setVisible(true);
+//
 //    }
     public void init() {
         try {

@@ -1,11 +1,146 @@
 
+.button, button, input[type="submit"], input[type="button"], input[type="submit"], a.button {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));
+    background: -webkit-linear-gradient(top, #ffffff, #dddddd);
+    background: -moz-linear-gradient(top, #ffffff, #dddddd);
+    background: -o-linear-gradient(top, #ffffff, #dddddd);
+    background: -ms-linear-gradient(top, #ffffff, #dddddd);
+    background: linear-gradient(top, #ffffff, #dddddd);
+    background-color: #dddddd;
+    border: #dddddd 1px solid;
+    padding: 8px 20px;
+    display: inline-block;
+    line-height: 1.2em;
+    color: #363463;
+    cursor: pointer;
+    min-width: 0;
+    max-width: 300px;
+    text-decoration: none;
+}
+
+form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form ul.select {
+min-width: 80%;
+color: #363463;
+display: block;
+padding: 5px 10px;
+margin: 0;
+margin-top: 5px;
+background-color: #FFF;
+border: 1px solid #dddddd;
+}
+
+input[type="text"], input[type="password"] {
+padding: 1px;
+border: 1px solid cadetblue;
+}
+
+#body-wrapper {
+margin-top: 10px;
+padding: 10px;
+background-color: white;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-o-border-radius: 5px;
+-ms-border-radius: 5px;
+-khtml-border-radius: 5px;
+border-radius: 5px;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+width: 100%;
+}
+
+table th, table td {
+padding: 5px 10px;
+border: 1px solid #dddddd;
+}
+
+table thead th {
+border-bottom: 1px solid #dddddd;
+background: #f3f3f3;
+width: auto;
+text-align: left;
+word-break: normal;
+font-weight: normal;
+font-family: "OpenSansBold";
+}
+
+table th, table td {
+padding: 5px 10px;
+border: 1px solid #dddddd;
+}
+
+input[type="radio"] {
+box-sizing: border-box;
+padding: 0;
+}
+
+form select, .form select {
+min-width: 200px;
+}
+
+form fieldset, .form fieldset {
+border: 1px solid #eeeeee;
+display: inline-block;
+padding: 20px;
+min-width: 60%;
+}
+
+
+form label, .form label {
+
+display: block;
+text-align: left;
+margin-bottom: 0px;
+margin-top: 8px;
+}
+
+a {
+    color: #003366;
+}
+
+h4 {
+font-size: 1.2em;
+color: #009384;
+}
+
+h3 {
+font-size: 1.2em;
+}
+
+div#updatePatient {
+margin-left: 20px;
+}
+
 .navbar-custom{
-    background-color: #231F20;
-    margin: 10px 10px 10px 10px;
+    background-color: #05A476;
+    margin: 30px 10px 10px 10px;
+    padding-top: 10px;
+}
+
+button-loc{
+    margin-left: 20px;
+}
+div#otherIdentificationOption {
+margin-left: 20px;
+}
+
+div#otherIdentifiers {
+margin-left: 20px;
+}
+div#registrationForm {
+margin-left: 20px;
 }
 .upload-btn
 {
-
 background-color: #5b57a6;
 border: #5b57a6 1px solid;
 padding: 8px 20px;

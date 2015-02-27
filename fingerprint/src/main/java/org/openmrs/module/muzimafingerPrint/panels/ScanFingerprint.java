@@ -105,13 +105,16 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     @Override
     protected void initGUI() throws IOException, JSONException {
         panelMain = new JPanel();
+        panelMain.setBackground(Color.white);
         panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
 
         panelMessage = new JPanel();
+        panelMessage.setBackground(Color.white);
         panelMessage.add(lblProgressMessage);
         panelMessage.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
         panelButtons = new JPanel();
+        panelButtons.setBackground(Color.white);
         panelButtons.setLayout(new FlowLayout(FlowLayout.LEADING));
 
         btnTryAgain.setVisible(false);

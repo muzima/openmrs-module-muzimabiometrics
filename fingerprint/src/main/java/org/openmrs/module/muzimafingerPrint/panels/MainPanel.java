@@ -38,6 +38,7 @@ public final class MainPanel extends JPanel {
     private void initGUI() throws IOException, JSONException {
 
         scanFingerprint = new ScanFingerprint();
+        scanFingerprint.setBackground(Color.white);
         add(scanFingerprint);
         scanFingerprint.init();
         scanFingerprint.updateFingersTools();
