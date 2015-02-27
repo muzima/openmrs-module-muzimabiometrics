@@ -24,10 +24,10 @@ public class MuzimaFingerprintController {
 
     @ResponseBody
     @RequestMapping(value = "patient/{fingerprint}/fingerprint.form",  method = RequestMethod.GET)
-    public MuzimaFingerprint getPatientFingerprintById(@PathVariable String patientId){
+    public MuzimaFingerprint getPatientFingerprintById(@PathVariable String patientUUID){
 
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-        return service.getFingerprintByPatientId(patientId);
+        return service.getFingerprintByPatientUUID(patientUUID);
     }
 
     @ResponseBody

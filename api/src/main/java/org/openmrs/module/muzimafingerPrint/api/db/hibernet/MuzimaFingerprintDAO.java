@@ -14,5 +14,5 @@ public interface MuzimaFingerprintDAO {
     public void saveMuzimaFingerprint(MuzimaFingerprint Fingerprint);
     public MuzimaFingerprint findById(Integer id);
     public MuzimaFingerprint findByUuid(String uuid);
-    public MuzimaFingerprint findByPatientId(String patientId);
+    public MuzimaFingerprint findByPatientUUID(String patientUUID);
 }

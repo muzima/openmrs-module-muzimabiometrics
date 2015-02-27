@@ -50,9 +50,9 @@ public class MuzimaFingerprintDAOImpl implements MuzimaFingerprintDAO {
     }
 
     @Override
-    public MuzimaFingerprint findByPatientId(String patientId) {
+    public MuzimaFingerprint findByPatientUUID(String patientUUID) {
 
-        return (MuzimaFingerprint)session().createQuery("from MuzimaFingerprint m where m.patientId = '" + patientId + "'").uniqueResult();
+        return (MuzimaFingerprint)session().createQuery("from MuzimaFingerprint m where m.patientUUID = '" + patientUUID + "'").uniqueResult();
     }
 
 

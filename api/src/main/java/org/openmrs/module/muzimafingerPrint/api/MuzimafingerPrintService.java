@@ -26,7 +26,7 @@ public interface MuzimafingerPrintService extends OpenmrsService {
     @Transactional
     boolean updatePatient(String patientWithFingerprint) throws JSONException;
 
-    MuzimaFingerprint getFingerprintByPatientId(String patientId);
+    MuzimaFingerprint getFingerprintByPatientUUID(String patientUUID);
 
     List<MuzimaFingerprint> getAll();
 

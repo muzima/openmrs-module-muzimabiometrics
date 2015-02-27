@@ -46,9 +46,9 @@ public class MuzimaFingerprintResource extends DataDelegatingCrudResource<Muzima
     }
 
     @Override
-    public Object retrieve(String patientID, RequestContext context) throws ResponseException {
+    public Object retrieve(String patientUUID, RequestContext context) throws ResponseException {
         MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
-        return asRepresentation(service.getFingerprintByPatientId(patientID), context.getRepresentation());
+        return asRepresentation(service.getFingerprintByPatientUUID(patientUUID), context.getRepresentation());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MuzimaFingerprintResource extends DataDelegatingCrudResource<Muzima
             description = new DelegatingResourceDescription();
             description.addProperty("uuid");
             description.addProperty("id");
-            description.addProperty("patientId");
+            description.addProperty("patientUUID");
             description.addProperty("fingerprint");
             description.addSelfLink();
         }

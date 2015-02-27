@@ -34,4 +34,14 @@
         <addUniqueConstraint constraintName="unique-muzimafingerprint-uuid" tableName="muzimafingerprint_fingerprint" columnNames="uuid"/>
     </changeSet>
 
+    <changeSet id="muzimafingerprint_fingerprint.1.0.1" author="sahajsoft">
+    <comment>
+        alter table for column patient Id to Patient UUID
+    </comment>
+        <renameColumn columnDataType="varchar(255)"
+                      newColumnName="patientUUID"
+                      oldColumnName="patientId"
+                      tableName="muzimafingerprint_fingerprint"/>
+
+    </changeSet>
 </databaseChangeLog>

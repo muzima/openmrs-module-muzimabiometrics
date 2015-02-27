@@ -80,8 +80,8 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
 
             List<PatientFingerPrintModel> patients = getAllPatientsWithFingerPrint();
             enrollFingerPrints(patients);
-            String patientID = identifyFinger(fingerprint);
-            patient = Context.getPatientService().getPatientByUuid(patientID);
+            String patientUUID = identifyFinger(fingerprint);
+            patient = Context.getPatientService().getPatientByUuid(patientUUID);
         }
         if(patient == null)
             return null;
@@ -110,15 +110,15 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     public boolean updatePatient(String patientWithFingerprint) throws JSONException {
         PatientJsonParser patientJsonParser = new PatientJsonParser();
         String fingerprint = patientJsonParser.getFingerPrintFromJson(patientWithFingerprint);
-        String patientID = patientJsonParser.getPatientIdFromJson(patientWithFingerprint);
-        MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint(patientID, fingerprint);
+        String patientUUID = patientJsonParser.getPatientUUIDFromJson(patientWithFingerprint);
+        MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint(patientUUID, fingerprint);
         muzimaFingerprintDAO.saveMuzimaFingerprint(muzimaFingerprint);
         return true;
     }
 
     @Override
-    public MuzimaFingerprint getFingerprintByPatientId(String patientId) {
-       return muzimaFingerprintDAO.findByPatientId(patientId);
+    public MuzimaFingerprint getFingerprintByPatientUUID(String patientUUID) {
+       return muzimaFingerprintDAO.findByPatientUUID(patientUUID);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         List<MuzimaFingerprint> fingerprints = muzimaFingerprintDAO.getAll();
         for (MuzimaFingerprint fingerprint : fingerprints) {
             if(fingerprint.getFingerprint() != null) {
-                Patient patient = Context.getPatientService().getPatient(Integer.parseInt(fingerprint.getPatientId()));
+                Patient patient = Context.getPatientService().getPatientByUuid(fingerprint.getPatientUUID());
                 patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()));
             }
         }

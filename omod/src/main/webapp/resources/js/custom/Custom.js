@@ -39,10 +39,10 @@ function updatePatientListTable(Patients, updateControlsStatus){
     Patients.forEach( function (patient){
         var selectionColumn = "";
             if(updateControlsStatus == 5){
-               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.id+"'> "+patient.id+"</td>";
+               selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.patientUUID+"'> "+patient.patientUUID+"</td>";
             }
             else{
-                selectionColumn =  "<td><a href='#'>"+patient.id+" </a></td>";
+                selectionColumn =  "<td><a href='#'>"+patient.patientUUID+" </a></td>";
          }
         $("#tblData tbody").append( "<tr>"
                                     + selectionColumn
@@ -247,7 +247,7 @@ $(function(){
         $("#btnUpdatePatient").click(function(){
             var selectedPatientId = $('input[name=selectedPatient]:checked').val();
             alert(selectedPatientId);
-            var jsonData = "{patient: {patientId : '"+selectedPatientId+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
+            var jsonData = "{patient: {patientUUID : '"+selectedPatientId+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
             $.ajax({
                     url: "fingerprint/UpdatePatientWithFingerprint.form",
                     type: "POST",

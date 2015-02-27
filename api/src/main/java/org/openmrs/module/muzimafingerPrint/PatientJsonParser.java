@@ -46,7 +46,7 @@ public class PatientJsonParser {
 
         MuzimaFingerprint fingerprint = new MuzimaFingerprint();
         String fingerprintData = getFingerPrintFromJson(patientData);
-        fingerprint.setPatientId(patient.getPatientId().toString());
+        fingerprint.setPatientUUID(patient.getUuid().toString());
         fingerprint.setFingerprint(fingerprintData);
         
         return fingerprint;
@@ -108,12 +108,12 @@ public class PatientJsonParser {
         return patientIdentifiers;
     }
 
-    public String getPatientIdFromJson(String patientWithFingerprint) throws JSONException {
+    public String getPatientUUIDFromJson(String patientWithFingerprint) throws JSONException {
         JSONArray jsonArray = new JSONArray("["+patientWithFingerprint+"]");
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             jsonObject = jsonObject.getJSONObject("patient");
-            return jsonObject.getString("patientId");
+            return jsonObject.getString("patientUUID");
         }
         return "";
     }

@@ -11,19 +11,19 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MuzimaFingerprint extends BaseOpenmrsData{
     private Integer id;
-    private String patientId;
+    private String patientUUID;
     private String fingerprint;
 
 
 
     public MuzimaFingerprint(){
     }
-    public MuzimaFingerprint(String patientId, String fingerprint){
+    public MuzimaFingerprint(String patientUUID, String fingerprint){
 
         if (getUuid()==null) {
             setUuid(UUID.randomUUID().toString());
         }
-        this.patientId = patientId;
+        this.patientUUID = patientUUID;
         this.fingerprint = fingerprint;
     }
 
@@ -44,7 +44,7 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
     public String toString() {
         return "MuzimaFingerprint{" +
                 "id=" + id +
-                ", patientId=" + getPatientId() +
+                ", patientUUID=" + getPatientUUID() +
                 ", fingerprint='" + getFingerprint()+ '\'' +
                 '}';
     }
@@ -53,12 +53,12 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
         this.id = id;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getPatientUUID() {
+        return patientUUID;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatientUUID(String patientUUID) {
+        this.patientUUID = patientUUID;
     }
 
     public String getFingerprint() {
