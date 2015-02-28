@@ -1,5 +1,6 @@
 package org.openmrs.module.muzimafingerPrint.api.db.hibernet.impl;
 
+import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,7 +33,7 @@ public class MuzimaFingerprintDAOImpl implements MuzimaFingerprintDAO {
         try{
         session().saveOrUpdate(fingerprint);}
         catch (Exception e){
-            session().save(fingerprint);
+            e.printStackTrace();
         }
     }
 
@@ -42,6 +43,7 @@ public class MuzimaFingerprintDAOImpl implements MuzimaFingerprintDAO {
     }
 
     private Session session() {
+        factory.getCurrentSession().setCacheMode(CacheMode.IGNORE);
         return factory.getCurrentSession();
     }
 

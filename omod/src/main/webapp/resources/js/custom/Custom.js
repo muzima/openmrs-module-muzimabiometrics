@@ -246,7 +246,6 @@ $(function(){
         });
         $("#btnUpdatePatient").click(function(){
             var selectedPatientId = $('input[name=selectedPatient]:checked').val();
-            alert(selectedPatientId);
             var jsonData = "{patient: {patientUUID : '"+selectedPatientId+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
             $.ajax({
                     url: "fingerprint/UpdatePatientWithFingerprint.form",

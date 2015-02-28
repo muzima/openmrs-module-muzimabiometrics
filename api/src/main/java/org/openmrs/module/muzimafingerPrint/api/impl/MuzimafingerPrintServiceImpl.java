@@ -112,6 +112,11 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         String fingerprint = patientJsonParser.getFingerPrintFromJson(patientWithFingerprint);
         String patientUUID = patientJsonParser.getPatientUUIDFromJson(patientWithFingerprint);
         MuzimaFingerprint muzimaFingerprint = muzimaFingerprintDAO.findByPatientUUID(patientUUID);
+        if( muzimaFingerprint == null) {
+            muzimaFingerprint = new MuzimaFingerprint(patientUUID, fingerprint);
+        } else {
+            muzimaFingerprint.setFingerprint(fingerprint);
+        }
         muzimaFingerprintDAO.saveMuzimaFingerprint(muzimaFingerprint);
         return true;
     }
