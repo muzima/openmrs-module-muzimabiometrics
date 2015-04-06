@@ -43,7 +43,7 @@
                 <thead >
                 <tr class = "forms-list-header">
                     <th>Id</th>
-                    <th>Given</th>
+                    <th>First Name</th>
                     <th>Family Name</th>
                     <th>Gender</th>
                 </tr>
@@ -88,22 +88,23 @@
 		<h3 id="form-title">Registration Form</h3>
 		<fieldset  name="patient">
 			<div class="form-group">
-				<label for= "family_name">Family Name</label>
-				<input autocomplete="off" type="text" name="family_name">
 
-				<label for= "given_name">Given Name</label>
-				<input autocomplete="off" type="text" name="given_name">
+                <label for= "given_name">First Name</label>
+                <input autocomplete="off" type="text" name="given_name">
 
-				<label for= "middle_name">Middle Name</label>
+                <label for= "middle_name">Middle Name</label>
 				<input autocomplete="off" type="text" name="middle_name">
 
-				<label for= "sex">Sex</label>
-				<select name="sex">
-			        <option value="">...</option>
-			        <option value="M">Male</option>
-			        <option value="F">Female</option>
-			    </select>
-
+				<label for= "family_name">Family Name</label>
+				<input autocomplete="off" type="text" name="family_name">
+                <br/>
+               <label class="radio-inline">
+                     <input type="radio" name="sex" value = "F"><b>Female</b>
+               </label>
+               <label class="radio-inline">
+                     <input type="radio" name="sex" value = "M"><b>Male</b>
+               </label>
+                <br/><br/>
 				<label for= "phone_number">Phone Number</label>
 				<input autocomplete="off" type="text" name="phone_number">
 
@@ -121,18 +122,9 @@
 				<input autocomplete="off" type="date" name="birth_date">
 
 				<label for= "location_id">Encounter Location</label>
-				<select id = "LocationOptions" name="location_id">
-				    <option  value="">...</option>
-				</select>
-
-				<label for= "provider_id">Provider ID</label>
-				<select name="provider_id" id = "ProviderOptions">
-				    <option value="">...</option>
-
-				</select>
-
-				<label for= "encounter_datetime">Encounter Date</label>
-				<input autocomplete="off" type="date" name="encounter_datetime">
+                <select id = "LocationOptions" name="location_id">
+                    <option  value="">...</option>
+                </select>
 
 			</div>
 		</fieldset>

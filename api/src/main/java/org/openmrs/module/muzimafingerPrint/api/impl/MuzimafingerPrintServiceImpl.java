@@ -51,10 +51,10 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     public PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException {
 
         PatientJsonParser patientJsonParser = new PatientJsonParser();
-        Encounter encounter = patientJsonParser.CreateEncounter(patientData);
-        Patient patient = patientJsonParser.CreatePatient(encounter, patientData);
+        //Encounter encounter = patientJsonParser.CreateEncounter(patientData);
+        Patient patient = patientJsonParser.CreatePatient(patientData);
         Context.getPatientService().savePatient(patient);
-        Context.getEncounterService().saveEncounter(encounter);
+        //Context.getEncounterService().saveEncounter(encounter);
         MuzimaFingerprint muzimaFingerprint = patientJsonParser.CreatePatientFingerPrint(patient, patientData);
         muzimaFingerprintDAO.saveMuzimaFingerprint(muzimaFingerprint);
 

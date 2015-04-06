@@ -62,7 +62,7 @@ public class PatientJsonParser {
         return "";
     }
 
-    public Patient CreatePatient(final Encounter encounter, String patientData) throws JSONException, ParseException {
+    public Patient CreatePatient(String patientData) throws JSONException, ParseException {
         Patient patient = new Patient();
         JSONArray jsonArray = new JSONArray("["+patientData+"]");
         for(int i = 0; i < jsonArray.length(); i++){
@@ -83,15 +83,24 @@ public class PatientJsonParser {
             PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByName("OpenMRS Identification Number");
             patientIdentifier.setIdentifierType(identifierType);
             patientIdentifier.setIdentifier(jsonObject.getString("amrs_id"));
-            patientIdentifier.setLocation(encounter.getLocation());
+
+            String locationString = jsonObject.getString("location_id");
+            Location location = Context.getLocationService().getLocationByUuid(locationString);
+
+            patientIdentifier.setLocation(location);
+
             patientIdentifier.setPreferred(true);
 
             patientIdentifiers.add(patientIdentifier);
             patient.setIdentifiers(patientIdentifiers);
 
             patient.setGender((jsonObject.getString("sex")));
+
+            String birthDate = jsonObject.getString("birth_date");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            patient.setBirthdate(formatter.parse(birthDate));
         }
-        encounter.setPatient(patient);
+        //encounter.setPatient(patient);
         return patient;
     }
    public List<PatientIdentifier> getPatientIdentifier(String jsonIdentifier) throws JSONException {

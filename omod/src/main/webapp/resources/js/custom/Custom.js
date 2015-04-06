@@ -42,7 +42,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
                selectionColumn =  "<td><input type='radio' name='selectedPatient' value = '"+patient.patientUUID+"'> "+patient.id+"</td>";
             }
             else{
-                selectionColumn =  "<td><a href='#'>"+patient.id+" </a></td>";
+                selectionColumn =  "<td><a href='/openmrs-standalone/patientDashboard.form?patientId="+patient.id+"'>"+patient.id+" </a></td>";
          }
         $("#tblData tbody").append( "<tr>"
                                     + selectionColumn
@@ -278,6 +278,7 @@ $(function(){
                         async: false,
                         success: function(msg) {
                             alert("Patient Created!");
+                            $('#formData').trigger("reset");
                             updatePatientListTable(msg, 1);
                         },
                         error: function(msg, status, error){
@@ -334,13 +335,13 @@ $(function(){
                     required : true
                 },
                 middle_name:{
-                    required : true
+
                 },
                 sex :{
                     required : true
                 },
                 phone_number :{
-                    required : true
+
                 },
                 amrs_id : {
                     required : true,
