@@ -9,6 +9,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import com.neurotec.lang.NCore;
+
 public class SimpleFingersApplication extends Applet {
 
 //    public static void main(String[] arg) throws IOException, JSONException {
@@ -51,5 +53,6 @@ public class SimpleFingersApplication extends Applet {
     }
     public void destroy() {
         System.out.println("preparing to unload...");
+        NCore.shutdown();
     }
 }

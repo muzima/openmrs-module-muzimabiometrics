@@ -34,7 +34,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private static final String SEARCHING_FOR_DEVICE = "Connecting to fingerprint device.";
     private static final String SCANNING_FINGERPRINT_PROGRESS = "Scanning fingerprint. please put your finger on scanner.";
     private static final String SCANNING_FINGERPRINT_COMPLETED = "Scanning fingerprint completed";
-    private static final String IDENTIFYING_PATIENT = "Identification of patient stared";
+    private static final String IDENTIFYING_PATIENT = "Identification of patient started";
 
     private static final String NO_LICENCE_FOUND = "No licence Found";
     private static final String NO_DEVICE_FOUND = "No device Found";

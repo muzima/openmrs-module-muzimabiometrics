@@ -20,12 +20,17 @@ function identifyPatient(fingerprintData){
               if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                      data = xmlhttp.responseText;
                      console.log(data);
-                     var data1 = JSON.parse("["+data+"]");
-                     updatePatientListTable(data1, 1);
+                     /*var data1 = JSON.parse("["+data+"]");
+                     updatePatientListTable(data1, 1);*/
+                  var data1 = JSON.parse(data);
+                  var dataArr = [];
+                  dataArr.push(data1);
+                  updatePatientListTable(dataArr, 1);
               }
         }
         xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
         xmlhttp.setRequestHeader("Content-type","application/json");
+    xmlhttp.setRequestHeader("Accept","application/json");
         xmlhttp.send(fingerprintData);
 
         return "[" + data + "]";

@@ -97,7 +97,8 @@ public class PatientJsonParser {
             patient.setGender((jsonObject.getString("sex")));
 
             String birthDate = jsonObject.getString("birth_date");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            formatter.setLenient(false);
             patient.setBirthdate(formatter.parse(birthDate));
         }
         //encounter.setPatient(patient);

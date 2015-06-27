@@ -76,47 +76,47 @@
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-core</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-gui</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-media</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-media-processing</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-biometrics</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-biometrics-client</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-biometrics-gui</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-devices</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.neurotec</groupId>
             <artifactId>neurotec-licensing</artifactId>
-            <version>5.0.0.0</version>
+            <version>5.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>sun.jdk</groupId>

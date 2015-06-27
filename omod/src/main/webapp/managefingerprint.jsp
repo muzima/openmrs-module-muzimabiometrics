@@ -20,7 +20,7 @@
 </div>
 <div id = "applet">
     <applet name="Muzima fingerprint module" id="Abis" code="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"  width="100%"  height="100">
-        <param name="jnlp_href" value="/openmrs-standalone/moduleResources/muzimafingerPrint/fingerprint.jnlp" />
+        <param name="jnlp_href" value="/openmrs/moduleResources/muzimafingerPrint/fingerprint.jnlp" />
         <param name="codebase_lookup" value="false" />
         <param name="separate_jvm" value="true" />
         <param name="server_address" value="/local" />
@@ -115,10 +115,10 @@
 				<input autocomplete="off" type="text" name="amrs_id">
 
 				<label for= "fingerprint">Finger Print</label>
-				<img src ="/openmrs-standalone/moduleResources/muzimafingerPrint/images/done.png"/>
+				<img src ="/openmrs/moduleResources/muzimafingerPrint/images/done.png"/>
 				<input id = "fingerprint" autocomplete="off" type="hidden" name="fingerprint">
 
-				<label for= "birth_date">Date of Birth</label>
+				<label for= "birth_date">Date of Birth(Format: MM/dd/yyyy)</label>
 				<input autocomplete="off" type="date" name="birth_date">
 
 				<label for= "location_id">Encounter Location</label>
