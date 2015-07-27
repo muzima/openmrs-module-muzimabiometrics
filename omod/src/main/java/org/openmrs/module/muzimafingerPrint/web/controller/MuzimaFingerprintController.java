@@ -9,9 +9,11 @@ import org.openmrs.module.muzimafingerPrint.model.PatientFingerPrintModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,4 +68,30 @@ public class MuzimaFingerprintController {
         return service.updatePatient(patientWithFingerprint);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/findPatients.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public List<PatientFingerPrintModel> findPatientsByNameOrIdentifier(@RequestBody String searchInput)
+    {
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+        List<PatientFingerPrintModel> patients=service.findPatients(searchInput);
+        //System.out.println("after");
+        return patients;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/addFingerprint.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public List<PatientFingerPrintModel> addFingerprint(@RequestBody String patientWithFingerprint) throws Exception
+    {
+        MuzimafingerPrintService service = Context.getService(MuzimafingerPrintService.class);
+        PatientFingerPrintModel patient=service.addFingerprintToPatient(patientWithFingerprint);
+        List<PatientFingerPrintModel> patientFingerPrintModels = new ArrayList<PatientFingerPrintModel>();
+        patientFingerPrintModels.add(patient);
+        return patientFingerPrintModels;
+    }
+
+    @RequestMapping(value = "editPatient.form")
+    public void editPatient(HttpServletRequest request, Model model)
+    {
+        model.addAttribute("pUuid",request.getParameter("patUuid"));
+    }
 }

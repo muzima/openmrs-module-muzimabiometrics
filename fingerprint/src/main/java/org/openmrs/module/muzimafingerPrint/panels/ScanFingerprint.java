@@ -78,8 +78,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         lblProgressMessage = new JLabel(LAUNCH_FINGERPRINT_APP);
         btnTryAgain = new JButton("Try Again");
-        btnLaunchApplet = new JButton("Identify Patient");
-
+        btnLaunchApplet = new JButton("Scan fingerprint");
     }
 
     @Override

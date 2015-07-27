@@ -45,6 +45,7 @@ public class PatientJsonParser {
     public MuzimaFingerprint CreatePatientFingerPrint(Patient patient, String patientData) throws JSONException {
 
         MuzimaFingerprint fingerprint = new MuzimaFingerprint();
+        System.out.println("In create patient finger print "+patientData);
         String fingerprintData = getFingerPrintFromJson(patientData);
         fingerprint.setPatientUUID(patient.getUuid().toString());
         fingerprint.setFingerprint(fingerprintData);

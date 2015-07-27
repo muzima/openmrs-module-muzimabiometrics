@@ -236,7 +236,7 @@ public final class EnrollFromScanner extends BasePanel implements ActionListener
 
         panelSave.setLayout(new FlowLayout(FlowLayout.LEADING));
 
-        btnIdentifyPatient.setText("Identify Patient");
+        btnIdentifyPatient.setText("Scan fingerprint");
         btnIdentifyPatient.setEnabled(true);
         panelSave.add(btnIdentifyPatient);
 
