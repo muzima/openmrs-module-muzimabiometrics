@@ -4,12 +4,23 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openmrs.*;
+import org.openmrs.Patient;
+import org.openmrs.PersonName;
+import org.openmrs.PatientIdentifier;
+import org.openmrs.PatientIdentifierType;
+import org.openmrs.Encounter;
+import org.openmrs.EncounterType;
+import org.openmrs.Location;
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
 
 /**
  * Created by vikas on 17/02/15.
@@ -35,7 +46,7 @@ public class PatientJsonParser {
             Location location = Context.getLocationService().getLocationByUuid(locationString);
             encounter.setLocation(location);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat formatter = Context.getDateFormat();
             Date encounterDatetime = formatter.parse(jsonObject.getString("encounter_datetime"));
             encounter.setEncounterDatetime(encounterDatetime);
         }
@@ -45,7 +56,6 @@ public class PatientJsonParser {
     public MuzimaFingerprint CreatePatientFingerPrint(Patient patient, String patientData) throws JSONException {
 
         MuzimaFingerprint fingerprint = new MuzimaFingerprint();
-        System.out.println("In create patient finger print "+patientData);
         String fingerprintData = getFingerPrintFromJson(patientData);
         fingerprint.setPatientUUID(patient.getUuid().toString());
         fingerprint.setFingerprint(fingerprintData);
@@ -98,7 +108,7 @@ public class PatientJsonParser {
             patient.setGender((jsonObject.getString("sex")));
 
             String birthDate = jsonObject.getString("birth_date");
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat formatter = Context.getDateFormat();
             formatter.setLenient(false);
             patient.setBirthdate(formatter.parse(birthDate));
         }

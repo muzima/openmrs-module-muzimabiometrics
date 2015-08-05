@@ -1,6 +1,10 @@
 package org.openmrs.module.muzimafingerPrint.panels;
 
-import com.neurotec.biometrics.*;
+import com.neurotec.biometrics.NBiometricOperation;
+import com.neurotec.biometrics.NBiometricTask;
+import com.neurotec.biometrics.NFinger;
+import com.neurotec.biometrics.NSubject;
+import com.neurotec.biometrics.NBiometricStatus;
 import com.neurotec.devices.NDevice;
 import com.neurotec.devices.NDeviceManager;
 import com.neurotec.devices.NDeviceType;
@@ -164,7 +168,6 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         String fingerprint = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
         PatientFingerPrintModel patient = service.identifyPatient(fingerprint);
         if (patient != null) {
-
             return true;
         }
         return false;
@@ -261,12 +264,13 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                                     } else {
                                         lblProgressMessage.setText(NO_PATIENT_FOUND);
                                         String template = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
-                                        service.RegisterPatient(template);
+                                        service.registerPatient(template);
                                         btnLaunchApplet.setVisible(true);
                                         lblProgressMessage.setText(LAUNCH_FINGERPRINT_APP);
                                     }
                             } catch (JSONException e) {
-                                lblProgressMessage.setText( INTERNAL_ERROR);
+                                e.printStackTrace();
+                                lblProgressMessage.setText(INTERNAL_ERROR);
                                 btnTryAgain.setVisible(true);
                             }
                         }

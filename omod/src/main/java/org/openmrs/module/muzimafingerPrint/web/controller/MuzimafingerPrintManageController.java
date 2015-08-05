@@ -13,13 +13,10 @@
  */
 package org.openmrs.module.muzimafingerPrint.web.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,11 +32,11 @@ public class MuzimafingerPrintManageController {
 	@RequestMapping(value = "module/muzimafingerPrint/managefingerprint.form",  method = RequestMethod.GET)
 	public void findPatient(HttpServletRequest request, Model model)
 	{
-		if(request!=null) {
-			if(request.getParameter("patientUuid")!=null) {
-				Patient pat = Context.getPatientService().getPatientByUuid(request.getParameter("patientUuid"));
-				if(pat!=null) {
-					model.addAttribute("identifier", pat.getPatientIdentifier(1));
+		if(request != null) {
+			if(request.getParameter("patientUuid") != null) {
+				Patient patient = Context.getPatientService().getPatientByUuid(request.getParameter("patientUuid"));
+				if(patient != null) {
+					model.addAttribute("identifier", patient.getPatientIdentifier(1));
 				}
 			}
 		}

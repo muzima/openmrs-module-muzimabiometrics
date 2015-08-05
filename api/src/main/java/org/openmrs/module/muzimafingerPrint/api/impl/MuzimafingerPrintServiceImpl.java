@@ -1,34 +1,34 @@
 package org.openmrs.module.muzimafingerPrint.api.impl;
 
-
-import com.neurotec.biometrics.*;
+import com.neurotec.biometrics.NBiometricOperation;
+import com.neurotec.biometrics.NBiometricTask;
+import com.neurotec.biometrics.NSubject;
+import com.neurotec.biometrics.NTemplate;
+import com.neurotec.biometrics.NBiometricStatus;
+import com.neurotec.biometrics.NMatchingResult;
 import com.neurotec.io.NBuffer;
 import com.neurotec.util.concurrent.CompletionHandler;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.json.JSONArray;
+
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.openmrs.*;
-import org.openmrs.api.PatientService;
+import org.openmrs.Patient;
+import org.openmrs.PatientIdentifier;
 import org.openmrs.api.context.Context;
-import org.openmrs.api.db.PatientDAO;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.muzimafingerPrint.MuzimaFingerprint;
 import org.openmrs.module.muzimafingerPrint.PatientJsonParser;
 import org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService;
 import org.openmrs.module.muzimafingerPrint.api.db.MuzimaFingerprintDAO;
 import org.openmrs.module.muzimafingerPrint.model.PatientFingerPrintModel;
-import org.openmrs.module.muzimafingerPrint.panels.EnrollFromScanner;
 import org.openmrs.module.muzimafingerPrint.settings.FingersTools;
 import org.springframework.stereotype.Service;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import javax.xml.bind.DatatypeConverter;
+
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Created by vikas on 15/10/14.
@@ -51,10 +51,8 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     public PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException {
 
         PatientJsonParser patientJsonParser = new PatientJsonParser();
-        //Encounter encounter = patientJsonParser.CreateEncounter(patientData);
         Patient patient = patientJsonParser.CreatePatient(patientData);
         Context.getPatientService().savePatient(patient);
-        //Context.getEncounterService().saveEncounter(encounter);
         MuzimaFingerprint muzimaFingerprint = patientJsonParser.CreatePatientFingerPrint(patient, patientData);
         dao.saveMuzimaFingerprint(muzimaFingerprint);
 
@@ -64,8 +62,6 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
     @Override
     public PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException {
         Patient patient = null;
-        MuzimaFingerprint mfingerprint = null;
-        String patfingerprint = null;
         List<String> requiredLicenses = new ArrayList<String>();
         requiredLicenses.add("Biometrics.FingerExtraction");
         requiredLicenses.add("Biometrics.FingerMatchingFast");
@@ -87,13 +83,7 @@ public class MuzimafingerPrintServiceImpl extends BaseOpenmrsService implements 
         }
         if(patient == null)
             return null;
-        else {
-            mfingerprint = getFingerprintByPatientUUID(patient.getUuid());
-            if (mfingerprint != null) {
-                patfingerprint = mfingerprint.getFingerprint();
-            }
-            return new PatientFingerPrintModel(patient.getUuid(), patfingerprint, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
-        }
+        return new PatientFingerPrintModel(patient.getUuid(), fingerprint, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
 
     public List<PatientFingerPrintModel> findPatients(String searchInput) {

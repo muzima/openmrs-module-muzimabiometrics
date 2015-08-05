@@ -30,7 +30,7 @@
     <div id = "otherIdentificationOption">
         <h4>Do you want to add fingerprint?</h4>
         <a href="#" id="Yes">Yes</a>
-        <input type="hidden" value="${pUuid}" id="uid">
+        <input type="hidden" value="${patientUuid}" id="uid">
         <a href="#" id="No">No</a>
     </div>
 </div>

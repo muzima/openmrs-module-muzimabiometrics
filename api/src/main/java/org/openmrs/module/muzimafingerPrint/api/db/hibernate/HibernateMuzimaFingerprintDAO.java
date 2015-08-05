@@ -42,8 +42,8 @@ public class HibernateMuzimaFingerprintDAO implements MuzimaFingerprintDAO {
     }
 
     private Session session() {
-        sessionFactory.getCurrentSession().setCacheMode(CacheMode.IGNORE);
-        return sessionFactory.getCurrentSession();
+        getSessionFactory().getCurrentSession().setCacheMode(CacheMode.IGNORE);
+        return getSessionFactory().getCurrentSession();
     }
 
     public MuzimaFingerprint findByUuid(String uuid) {

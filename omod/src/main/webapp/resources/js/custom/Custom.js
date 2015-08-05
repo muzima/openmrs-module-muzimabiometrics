@@ -7,31 +7,27 @@ function showMessage() {
 function identifyPatient(fingerprintData){
 
     _FINGERPRINT_DATA = fingerprintData;
-    var xmlhttp;
-    var data = 'no data found';
-    if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-    }
-    else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            data = xmlhttp.responseText;
-            console.log(data);
-            var data1 = JSON.parse(data);
-            var dataArr = [];
-            dataArr.push(data1);
-            updatePatientListTable(dataArr, 1);
+    var identifiedPatient = 'no data found';
+
+    $.ajax({
+        url: "fingerprint/identifyPatient.form",
+        type: "POST",
+        data: _FINGERPRINT_DATA,
+        contentType: 'application/json',
+        dataType: 'json',
+        async: false,
+        success: function(msg) {
+            console.log(msg);
+            identifiedPatient = JSON.stringify(msg);
+            updatePatientListTable(msg, 1);
+        },
+        error: function(msg, status, error){
+            alert(error);
         }
-    }
-    xmlhttp.open("POST","fingerprint/identifyPatient.form",false);
-    xmlhttp.setRequestHeader("Content-type","application/json");
-    xmlhttp.setRequestHeader("Accept","application/json");
-    xmlhttp.send(fingerprintData);
 
-    return "[" + data + "]";
+    });
 
+    return identifiedPatient;
 };
 
 function updatePatientListTable(Patients, updateControlsStatus){
@@ -61,14 +57,15 @@ function activate(val, e){
             success: function (result) {
                 console.log(result);
                 if(result.length == 0) {
-                    updateControls(5);
+                    updateControls(4);
                 }
                 else{
                     updatePatientListTable(result, 1);
                 }
             },
-            error: function (result) {
-                alert('Oh no :(');
+            error: function(msg, status, error){
+                console.log(msg);
+                alert(error);
             }
         });
     }
@@ -84,10 +81,10 @@ function show(fingerprint, patientUuid){
 };
 
 function addFPrint(patientUuid){
-    window.location = openmrsContextPath+'/module/muzimafingerPrint/editPatient.form?patUuid='+patientUuid;
+    window.location = openmrsContextPath+'/module/muzimafingerPrint/editPatient.form?patientUuid='+patientUuid;
 };
 
-function RegisterPatient(fingerprint){
+function registerPatient(fingerprint){
     updateControls(2);
     var elm_reg = document.getElementById('fingerprint');
     elm_reg.value = fingerprint;
@@ -96,59 +93,58 @@ function RegisterPatient(fingerprint){
 function updateControls(status){
     if(status==0){
 
-        //Hiding all the section -- case0 : loading time
+        //Hiding all the section loading time - case0
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
-        $('#otherIdentifiers').hide();
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
-    }else if(status ==1){
+        $('#patientCreated').hide();
+    } else if(status ==1){
 
-        //Show table - case1 : Patient found for scan process
+        //Show patient found for scan process - case1
         $('#body-wrapper').show();
         $('#otherIdentificationOption').hide();
-        $('#otherIdentifiers').hide();
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
-    }else if(status ==2){
+        $('#patientCreated').hide();
+    } else if(status ==2){
 
-        //Show other option - case2 : Patient not found
+        //Show other option i.e. to register - case2
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').show();
-        $('#otherIdentifiers').hide();
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
+        $('#patientCreated').hide();
     } else if(status ==3){
 
-        //Show other identifiers section - case3 : clicked yes
+        //Show registration section - case3
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
-        $('#otherIdentifiers').show();
-        $('#registrationForm').hide();
-        $('#updatePatient').hide();
-        $('#searchResults').hide();
-    } else if(status ==4){
-
-        //Show registration section - case4 : clicked No
-        $('#body-wrapper').hide();
-        $('#otherIdentificationOption').hide();
-        $('#otherIdentifiers').hide();
         $('#registrationForm').show();
         $('#updatePatient').hide();
         $('#searchResults').hide();
-    }
-    else if(status ==5){
+        $('#patientCreated').hide();
+    } else if(status ==4){
 
-        //Show registration section - case4 : clicked No
+        //No patient found with search by name or identifier - case4
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
-        $('#otherIdentifiers').hide();
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').show();
+        $('#patientCreated').hide();
+    } else if(status ==5){
+
+        //Show created patient - case5
+        $('#body-wrapper').show();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').show();
     }
 };
 
@@ -219,21 +215,16 @@ $(function(){
             }
         }
     );
-    $.ajax({
-            url: "../../ws/rest/v1/user",
-            type: "GET",
-            async: true,
-            success: function(result) {
-                var options = $("#ProviderOptions");
-                $.each(result.results,  function(val, text) {
-                    options.append($("<option />").val(text.uuid).text(text.display));
-                });
-            },
-            error: function(msg){
-                alert("Internal server error : while getting provider list ");
-            }
-        }
-    );
+
+    $.get( "../../ws/rest/v1/user", function(result) {
+        var options = $("#ProviderOptions");
+        $.each(result.results,  function(val, text) {
+            options.append($("<option />").val(text.uuid).text(text.display));
+        });
+
+    }).fail(function() {
+        alert("Internal server error : while getting provider list ");
+        });
 
     $.ajax({
             url: "../../ws/rest/v1/patientidentifiertype",
@@ -273,7 +264,7 @@ $(function(){
 
     });
     $("#btnYes").click(function(){
-        updateControls(4);
+        updateControls(3);
     });
     $("#btnNo").click(function(){
         updateControls(0);
@@ -303,11 +294,15 @@ $(function(){
         window.location = openmrsContextPath+'/module/muzimafingerPrint/managefingerprint.form';
     });
     $(".doCancel").click(function(){
-        updateControls(4);
+        updateControls(3);
     });
     $("#btnUpdatePatient").click(function(){
         var selectedPatientId = $('input[name=selectedPatient]:checked').val();
-        var jsonData = "{patient: {patientUUID : '"+selectedPatientId+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
+        var jsonData = {};
+        jsonData.patient = {
+            patientUUID: selectedPatientId,
+            fingerPrint: _FINGERPRINT_DATA
+        };
         $.ajax({
             url: "fingerprint/UpdatePatientWithFingerprint.form",
             type: "POST",
@@ -338,9 +333,8 @@ $(function(){
                 dataType: 'json',
                 async: false,
                 success: function(msg) {
-                    alert("Patient Created!");
                     $('#formData').trigger("reset");
-                    updatePatientListTable(msg, 1);
+                    updatePatientListTable(msg, 5);
                 },
                 error: function(msg, status, error){
                     console.log(msg);
@@ -440,14 +434,15 @@ $(function(){
             success: function (result) {
                 console.log(result);
                 if(result.length == 0) {
-                    updateControls(5);
+                    updateControls(4);
                 }
                 else{
                     updatePatientListTable(result, 1);
                 }
             },
-            error: function (result) {
-                alert('Oh no :(');
+            error: function(msg, status, error){
+                console.log(msg);
+                alert(error);
             }
         });
     }

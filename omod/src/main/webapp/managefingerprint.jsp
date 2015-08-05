@@ -32,8 +32,6 @@
                         <tbody>
                         <tr>
                             <td>Patient Identifier or Patient Name:<input type="text" id="findPatients" name="findPatients" value="${identifier}" onkeypress="activate(this.value, event)"></td>
-                            <%--onKeyDown="if(event.keyCode==13) activate(this.value);"></td>--%>
-                            <%--onkeyup="activate(this.value);--%>
                             <td>
                                 <div id = "applet">
                                     <applet name="Muzima fingerprint module" id="Abis" code="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"  width="100%"  height="100">
@@ -51,6 +49,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="patientCreated">
+        <h5>Patient Created</h5>
     </div>
     <div id="body-wrapper">
         <div class = "row forms-list">
@@ -95,24 +96,6 @@
             <a href="#" id="btnYes">Yes</a>
             <a href="#" id="btnNo">No</a>
         </div>
-        <div id = "otherIdentifiers">
-            <h4>Please select other Identifier Type and respective value</h4>
-            <form id = "IdentifierForm" method = "post" action = "">
-                <fieldset  name="Identifier">
-                    <div class="form-group">
-                        <label for= "identifier_id">Patient Identifier Type</label>
-                        <select id = "IdentifierOptions" name="identifier_id">
-                            <option  value="">...</option>
-                        </select>
-                        <label for= "identifier_value">Identifier Value</label>
-                        <input autocomplete="off" type="text" name="identifier_value">
-                    </div>
-                </fieldset>
-                <br/>
-            </form>
-            <input id = "btnByIdentifier" type="button" value= "Search Patient">
-            <input id = "btnCancel" class = "doCancel" type="button" value= "Cancel">
-        </div>
         <div id = "registrationForm">
             <form id = "formData" method = "post" action = "">
                 <h3 id="form-title">Registration Form</h3>
@@ -148,7 +131,7 @@
                         <img src ="${pageContext.request.contextPath}/moduleResources/muzimafingerPrint/images/done.png"/>
                         <input id = "fingerprint" autocomplete="off" type="hidden" name="fingerprint">
 
-                        <label for= "birth_date">Date of Birth(MM/dd/yyyy)</label>
+                        <label for= "birth_date">Date of Birth</label>
                         <input autocomplete="off" type="date" name="birth_date">
 
                         <label for= "location_id">Encounter Location</label>
