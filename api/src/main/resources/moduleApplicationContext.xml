@@ -10,18 +10,19 @@
         <property name="moduleService">
             <list>
                 <value>org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService</value>
-                <bean
-                        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                <bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
                         <bean class="org.openmrs.module.muzimafingerPrint.api.impl.MuzimafingerPrintServiceImpl">
-                            <constructor-arg>
-                                <bean class="org.openmrs.module.muzimafingerPrint.api.db.hibernet.impl.MuzimaFingerprintDAOImpl">
-                                    <constructor-arg ref="sessionFactory"/>
+                            <property name="dao">
+                                <bean class="org.openmrs.module.muzimafingerPrint.api.db.hibernate.HibernateMuzimaFingerprintDAO">
+                                    <property name="sessionFactory">
+                                        <ref bean="sessionFactory"/>
+                                    </property>
                                 </bean>
-                            </constructor-arg>
+                            </property>
                         </bean>
                     </property>
                     <property name="preInterceptors">

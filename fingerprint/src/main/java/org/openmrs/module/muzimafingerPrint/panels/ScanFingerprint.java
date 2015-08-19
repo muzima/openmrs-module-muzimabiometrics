@@ -1,6 +1,10 @@
 package org.openmrs.module.muzimafingerPrint.panels;
 
-import com.neurotec.biometrics.*;
+import com.neurotec.biometrics.NBiometricOperation;
+import com.neurotec.biometrics.NBiometricTask;
+import com.neurotec.biometrics.NFinger;
+import com.neurotec.biometrics.NSubject;
+import com.neurotec.biometrics.NBiometricStatus;
 import com.neurotec.devices.NDevice;
 import com.neurotec.devices.NDeviceManager;
 import com.neurotec.devices.NDeviceType;
@@ -34,7 +38,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
     private static final String SEARCHING_FOR_DEVICE = "Connecting to fingerprint device.";
     private static final String SCANNING_FINGERPRINT_PROGRESS = "Scanning fingerprint. please put your finger on scanner.";
     private static final String SCANNING_FINGERPRINT_COMPLETED = "Scanning fingerprint completed";
-    private static final String IDENTIFYING_PATIENT = "Identification of patient stared";
+    private static final String IDENTIFYING_PATIENT = "Identification of patient started";
 
     private static final String NO_LICENCE_FOUND = "No licence Found";
     private static final String NO_DEVICE_FOUND = "No device Found";
@@ -78,8 +82,7 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
 
         lblProgressMessage = new JLabel(LAUNCH_FINGERPRINT_APP);
         btnTryAgain = new JButton("Try Again");
-        btnLaunchApplet = new JButton("Identify Patient");
-
+        btnLaunchApplet = new JButton("Scan fingerprint");
     }
 
     @Override
@@ -165,7 +168,6 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
         String fingerprint = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
         PatientFingerPrintModel patient = service.identifyPatient(fingerprint);
         if (patient != null) {
-
             return true;
         }
         return false;
@@ -262,12 +264,13 @@ public class ScanFingerprint extends BasePanel implements ActionListener {
                                     } else {
                                         lblProgressMessage.setText(NO_PATIENT_FOUND);
                                         String template = DatatypeConverter.printBase64Binary(subject.getTemplateBuffer().toByteArray());
-                                        service.RegisterPatient(template);
+                                        service.registerPatient(template);
                                         btnLaunchApplet.setVisible(true);
                                         lblProgressMessage.setText(LAUNCH_FINGERPRINT_APP);
                                     }
                             } catch (JSONException e) {
-                                lblProgressMessage.setText( INTERNAL_ERROR);
+                                e.printStackTrace();
+                                lblProgressMessage.setText(INTERNAL_ERROR);
                                 btnTryAgain.setVisible(true);
                             }
                         }

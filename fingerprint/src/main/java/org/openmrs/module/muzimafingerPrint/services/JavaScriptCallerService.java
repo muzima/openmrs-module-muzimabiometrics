@@ -22,7 +22,7 @@ public class JavaScriptCallerService {
         applet = appletWindow;
     }
 
-    public void RegisterPatient(String fingerprintData) {
+    public void registerPatient(String fingerprintData) {
         callRegisterPatientJavaScriptFunction(fingerprintData);
     }
 
@@ -30,29 +30,16 @@ public class JavaScriptCallerService {
     {
         try {
             JSObject window = JSObject.getWindow(applet);
-            window.call("RegisterPatient", new Object[] {fingerprintData});
+            window.call("registerPatient", new Object[] {fingerprintData});
         } catch (JSException jse) {
             jse.printStackTrace();
         }
     }
-
-    public String alertMessage() {
-        try {
-
-            JSObject window = JSObject.getWindow(applet);
-            String str = (String)window.call("showMessage", null);
-            return str;
-        } catch (JSException jse) {
-            jse.printStackTrace();
-        }
-        return null;
-    }
-
 
     public PatientFingerPrintModel identifyPatient(String fingerprint) throws JSONException {
 
         String JSONPatient = callIdentifyPatientJavascriptFunction(fingerprint);
-        if (JSONPatient.equals("[no data found]") || JSONPatient.equals("[]")) {
+        if (JSONPatient.equals("no data found") || JSONPatient.equals("[]")) {
             return null;
         }
         PatientFingerPrintModel patient = PatientFingerPrintModelBuilder(JSONPatient);

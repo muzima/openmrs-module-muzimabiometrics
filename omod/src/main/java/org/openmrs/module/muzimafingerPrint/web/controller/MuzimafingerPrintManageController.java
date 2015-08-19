@@ -13,27 +13,32 @@
  */
 package org.openmrs.module.muzimafingerPrint.web.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * The main controller.
  */
+
 @Controller
-@RequestMapping(value = "module/muzimafingerPrint/managefingerprint.form")
 public class MuzimafingerPrintManageController {
-	
-	protected final Log log = LogFactory.getLog(getClass());
 
-    private final String SUCCESS_fingerPrint_VIEW = "/module/muzimafingerPrint/managefingerprint";
-
-	@RequestMapping(method = RequestMethod.GET)
-	public String showForm() {
-		return SUCCESS_fingerPrint_VIEW;
+	@RequestMapping(value = "module/muzimafingerPrint/managefingerprint.form",  method = RequestMethod.GET)
+	public void findPatient(HttpServletRequest request, Model model)
+	{
+		if(request != null) {
+			if(request.getParameter("patientUuid") != null) {
+				Patient patient = Context.getPatientService().getPatientByUuid(request.getParameter("patientUuid"));
+				if(patient != null) {
+					model.addAttribute("identifier", patient.getPatientIdentifier(1));
+				}
+			}
+		}
 	}
 }
