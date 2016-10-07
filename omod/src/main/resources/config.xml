@@ -7,7 +7,7 @@
 	<name>${project.parent.name}</name>
 	<version>${project.parent.version}</version>
 	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
-	<author>Sahaj software solution</author>
+	<author>Muzima Team</author>
 	<description>
 		${project.parent.description}
 	</description>
@@ -15,9 +15,12 @@
 	<require_version>${openMRSVersion}</require_version>
 	<!-- / Module Properties -->
 
+	<require_modules>
+		<require_module version="1.0.0">org.openmrs.module.muzimacore</require_module>
+	</require_modules>
 	
 	<!-- Module Activator -->
-	<activator>${project.parent.groupId}.${project.parent.artifactId}.muzimafingerPrintActivator</activator>
+	<activator>${project.parent.groupId}.${project.parent.artifactId}.MuzimaBiometricsActivator</activator>
 
 
     <mappingFiles>

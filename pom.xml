@@ -3,16 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>muzimafingerPrint</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<artifactId>muzimabiometrics</artifactId>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>muzimafingerPrint Module</name>
-	<description>OpenMRS module project for muzima fingerPrint</description>
-	<url>https://wiki.openmrs.org/display/docs/muzimafingerPrint+Module+Module</url>
+	<name>Muzima Biometrics Module</name>
+	<description>OpenMRS module project for Muzima Biometrics. Provides biometrics services to both OpenMRS and Muzima mobile application</description>
+	<url>https://wiki.muzima.org/display/docs/muzimabiometrics+Module+Module</url>
 	
 	<developers>
 		<developer>
-			<name>Sahaj software solution</name>
+			<name>Muzima Team</name>
 		</developer>
 	</developers>
 	
@@ -22,15 +22,15 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/muzimafingerPrint/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/muzimafingerPrint/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/muzimafingerPrint/trunk/</url>
+		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/muzimabiometrics/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/muzimabiometrics/trunk/</developerConnection>
+		<url>https://svn.openmrs.org/openmrs-modules/muzimabiometrics/trunk/</url>
 	</scm>
 
 	<modules>
         <module>fingerprint</module>
-		<module>api</module>
-		<module>omod</module>
+	<module>api</module>
+	<module>omod</module>
     </modules>
 	
 	<properties>
@@ -60,6 +60,13 @@
                 <version>${openmrs.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>muzimacore-omod</artifactId>
+                <version>1.0.0</version>
+                <type>jar</type>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.openmrs.web</groupId>

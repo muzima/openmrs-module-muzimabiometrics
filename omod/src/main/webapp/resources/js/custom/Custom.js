@@ -73,7 +73,7 @@ function activate(val, e){
 
 function show(fingerprint, patientUuid){
     if(fingerprint!==null) {
-        return "<img src ='"+openmrsContextPath+"/moduleResources/muzimafingerPrint/images/done.png'/>"
+        return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
     }
     else {
         return "<input id = 'addFingerprint' type='button' value= 'Add fingerprint' class='addFingerprintButton' onClick='addFPrint(\""+patientUuid+"\")'/>"
@@ -81,7 +81,7 @@ function show(fingerprint, patientUuid){
 };
 
 function addFPrint(patientUuid){
-    window.location = openmrsContextPath+'/module/muzimafingerPrint/editPatient.form?patientUuid='+patientUuid;
+    window.location = openmrsContextPath+'/module/muzimabiometrics/editPatient.form?patientUuid='+patientUuid;
 };
 
 function registerPatient(fingerprint){
@@ -282,7 +282,7 @@ $(function(){
             async: false,
             success: function(msg) {
                 console.log(msg);
-                window.location = openmrsContextPath+'/module/muzimafingerPrint/managefingerprint.form?patientUuid='+patientUuid;
+                window.location = openmrsContextPath+'/module/muzimabiometrics/managefingerprint.form?patientUuid='+patientUuid;
             },
             error: function(msg, status, error){
                 alert(error);
@@ -291,7 +291,7 @@ $(function(){
     });
     $("#No").click(function(){
         updateControls(0);
-        window.location = openmrsContextPath+'/module/muzimafingerPrint/managefingerprint.form';
+        window.location = openmrsContextPath+'/module/muzimabiometrics/managefingerprint.form';
     });
     $(".doCancel").click(function(){
         updateControls(3);

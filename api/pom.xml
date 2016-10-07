@@ -4,21 +4,20 @@
 
     <parent>
         <groupId>org.openmrs.module</groupId>
-        <artifactId>muzimafingerPrint</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <artifactId>muzimabiometrics</artifactId>
+        <version>1.0.0</version>
     </parent>
 
-    <artifactId>muzimafingerPrint-api</artifactId>
+    <artifactId>muzimabiometrics-api</artifactId>
     <packaging>jar</packaging>
-    <name>muzimafingerPrint Module API</name>
-    <version>1.0-SNAPSHOT</version>
-    <description>API project for muzimafingerPrint</description>
+    <name>Muzima Biometrics Module API</name>
+    <description>API project for Muzima Biometrics</description>
 
     <repositories>
         <repository>
-            <id>local-project-libraries-github</id>
+            <id>local-project-libraries-github-muzimacore-omod</id>
             <name>Local project libraries</name>
-            <url>https://raw.github.com/muzima/muzima-maven/master/releases</url>
+            <url>https://github.com/muzima/muzima-maven/tree/openmrs-module-muzimacore</url>
         </repository>
     </repositories>
 
@@ -76,6 +75,11 @@
             <artifactId>openmrs-test</artifactId>
             <type>pom</type>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>muzimacore-omod</artifactId>
         </dependency>
 
         <!-- End OpenMRS core -->

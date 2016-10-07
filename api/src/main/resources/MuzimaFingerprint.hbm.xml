@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.openmrs.module.muzimafingerPrint">
+<hibernate-mapping package="org.openmrs.module.muzimabiometrics">
     <class name="MuzimaFingerprint" table="muzimafingerprint_fingerprint">
         <id name="id" type="java.lang.Integer" column="fingerprint_id">
             <generator class="increment"/>

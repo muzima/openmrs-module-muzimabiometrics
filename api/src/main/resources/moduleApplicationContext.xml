@@ -9,15 +9,15 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
-                <value>org.openmrs.module.muzimafingerPrint.api.MuzimafingerPrintService</value>
+                <value>org.openmrs.module.muzimabiometrics.api.MuzimaFingerprintService</value>
                 <bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
-                        <bean class="org.openmrs.module.muzimafingerPrint.api.impl.MuzimafingerPrintServiceImpl">
+                        <bean class="org.openmrs.module.muzimabiometrics.api.impl.MuzimaFingerprintServiceImpl">
                             <property name="dao">
-                                <bean class="org.openmrs.module.muzimafingerPrint.api.db.hibernate.HibernateMuzimaFingerprintDAO">
+                                <bean class="org.openmrs.module.muzimabiometrics.api.db.hibernate.HibernateMuzimaFingerprintDAO">
                                     <property name="sessionFactory">
                                         <ref bean="sessionFactory"/>
                                     </property>

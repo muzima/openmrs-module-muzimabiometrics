@@ -15,7 +15,7 @@
 
     <applet-desc
             name="Muzima fingerprint module"
-            main-class="org.openmrs.module.muzimafingerPrint.SimpleFingersApplication"
+            main-class="org.openmrs.module.muzimabiometrics.SimpleFingersApplication"
             width="300"
             height="300"
             archive="muzimafingerPrint-fingerprint-1.0-SNAPSHOT-jar-with-dependencies.jar">
