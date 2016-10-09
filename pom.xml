@@ -144,11 +144,6 @@
                 <version>2.3.0</version>
             </dependency>
             <dependency>
-                <groupId>net.sf.kxml</groupId>
-                <artifactId>kxml2</artifactId>
-                <version>2.3.0</version>
-            </dependency>
-            <dependency>
                 <groupId>jakarta-regexp</groupId>
                 <artifactId>jakarta-regexp</artifactId>
                 <version>1.4</version>

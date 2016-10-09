@@ -2,12 +2,12 @@
 <jnlp spec="1.0+" codebase="" href="">
     <information>
         <title>muzima fingerprint applet</title>
-        <vendor>Sahaj Software Solution</vendor>
+        <vendor>Muzima Team</vendor>
     </information>
     <resources>
         <!-- Application Resources -->
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
-        <jar href="muzimafingerPrint-fingerprint-1.0-SNAPSHOT-jar-with-dependencies.jar" main="true" />
+        <jar href="muzimabiometrics-fingerprint-1.0.0-jar-with-dependencies.jar" main="true" />
     </resources>
     <security>
         <all-permissions/>
@@ -18,6 +18,6 @@
             main-class="org.openmrs.module.muzimabiometrics.SimpleFingersApplication"
             width="300"
             height="300"
-            archive="muzimafingerPrint-fingerprint-1.0-SNAPSHOT-jar-with-dependencies.jar">
+            archive="muzimabiometrics-fingerprint-1.0.0-jar-with-dependencies.jar">
     </applet-desc>
 </jnlp>
