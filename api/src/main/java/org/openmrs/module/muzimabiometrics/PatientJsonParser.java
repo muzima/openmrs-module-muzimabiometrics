@@ -53,15 +53,15 @@ public class PatientJsonParser {
         return  encounter;
     }
 
-    public MuzimaFingerprint CreatePatientFingerPrint(Patient patient, String patientData) throws JSONException {
+    /*public MuzimaFingerprint CreatePatientFingerPrint(Patient patient, String patientData) throws JSONException {
 
         MuzimaFingerprint fingerprint = new MuzimaFingerprint();
-        String fingerprintData = getFingerPrintFromJson(patientData);
+        //String fingerprintData = getFingerPrintFromJson(patientData);
         fingerprint.setPatientUUID(patient.getUuid().toString());
-        fingerprint.setFingerprint(fingerprintData);
-        
+        fingerprint.setFingerprint("elly");
+
         return fingerprint;
-    }
+    }*/
 
     public String getFingerPrintFromJson(String patientData) throws JSONException {
         JSONArray jsonArray = new JSONArray("["+patientData+"]");
@@ -115,17 +115,17 @@ public class PatientJsonParser {
         //encounter.setPatient(patient);
         return patient;
     }
-   public List<PatientIdentifier> getPatientIdentifier(String jsonIdentifier) throws JSONException {
+    public List<PatientIdentifier> getPatientIdentifier(String jsonIdentifier) throws JSONException {
 
-       List<PatientIdentifier> patientIdentifiers = new ArrayList<PatientIdentifier>();
-       JSONArray jsonArray = new JSONArray("["+jsonIdentifier+"]");
-       for(int i = 0; i < jsonArray.length(); i++) {
-           JSONObject jsonObject = jsonArray.getJSONObject(i);
-           jsonObject = jsonObject.getJSONObject("patient");
+        List<PatientIdentifier> patientIdentifiers = new ArrayList<PatientIdentifier>();
+        JSONArray jsonArray = new JSONArray("["+jsonIdentifier+"]");
+        for(int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            jsonObject = jsonObject.getJSONObject("patient");
 
-           PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObject.getString("identifier_id"));
-           patientIdentifiers = Context.getPatientService().getPatientIdentifiers(jsonObject.getString("identifier_value"), identifierType);
-       }
+            PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObject.getString("identifier_id"));
+            patientIdentifiers = Context.getPatientService().getPatientIdentifiers(jsonObject.getString("identifier_value"), identifierType);
+        }
         return patientIdentifiers;
     }
 

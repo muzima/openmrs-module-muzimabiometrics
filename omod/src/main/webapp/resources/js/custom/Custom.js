@@ -5,7 +5,7 @@ function showMessage() {
 };
 
 function identifyPatient(fingerprintData){
-
+alert("identifyPatieent is called ");
     _FINGERPRINT_DATA = fingerprintData;
     var identifiedPatient = 'no data found';
 
@@ -84,11 +84,6 @@ function addFPrint(patientUuid){
     window.location = openmrsContextPath+'/module/muzimabiometrics/editPatient.form?patientUuid='+patientUuid;
 };
 
-function registerPatient(fingerprint){
-    updateControls(2);
-    var elm_reg = document.getElementById('fingerprint');
-    elm_reg.value = fingerprint;
-};
 
 function updateControls(status){
     if(status==0){
@@ -326,7 +321,7 @@ $(function(){
         if($("#formData").valid()){
             var jsonData = JSON.stringify($('#formData').serializeEncounterForm());
             $.ajax({
-                url: "fingerprint/register.form",
+                url: "fingerprint/enrollPatient.form",
                 type: "POST",
                 data: jsonData,
                 contentType: 'application/json',
@@ -335,6 +330,8 @@ $(function(){
                 success: function(msg) {
                     $('#formData').trigger("reset");
                     updatePatientListTable(msg, 5);
+                    document.getElementById("fingerprintScan").value="false";
+                    alert("message is "+JSON.stringify(msg));
                 },
                 error: function(msg, status, error){
                     console.log(msg);
@@ -402,9 +399,6 @@ $(function(){
                 required : true,
                 checkDigit: true
             },
-            fingerprint:{
-                required : true
-            },
             birth_date :{
                 required : true,
                 nonFutureDate: true
@@ -445,5 +439,46 @@ $(function(){
                 alert(error);
             }
         });
+    }
+    if ($("#fingerprintScan").val() !="true") {
+        setTimeout(function(){
+            $.ajax({
+                type: "GET",
+                url: "getFingerprint.form",
+                contentType: "application/json",
+                success: function (result) {
+                    if(result=="true"){
+                        document.getElementById("fingerprintScan").value=result;
+                        $.ajax({
+                            type: "POST",
+                            url: "identifyPatientByFingerprint.form?fingerprintIsSet="+result,
+                            contentType: "application/json",
+                            dataType: 'json',
+                            success: function (result) {
+                                muzimaFingerprint=JSON.parse(JSON.stringify(result));
+                                if(muzimaFingerprint.patientUuid==""){
+                                    updateControls(3);
+                                }
+                                else{
+
+                                }
+                                console.log(muzimaFingerprint.patientUuid);
+                            },
+                            error: function(msg, status, error){
+                                console.log(msg);
+                                alert(error);
+                            }
+                        });
+                    }
+                    else{
+                        location.href = "managefingerprint.form";
+                    }
+                },
+                error: function(msg, status, error){
+                    console.log(msg);
+                    alert(error);
+                }
+            });
+            },3000);
     }
 });

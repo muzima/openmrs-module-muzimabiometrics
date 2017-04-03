@@ -10,13 +10,13 @@ import java.util.UUID;
 public class MuzimaFingerprint extends BaseOpenmrsData{
     private Integer id;
     private String patientUUID;
-    private String fingerprint;
+    private byte[] fingerprint;
 
 
 
     public MuzimaFingerprint(){
     }
-    public MuzimaFingerprint(String patientUUID, String fingerprint){
+    public MuzimaFingerprint(String patientUUID, byte[] fingerprint){
 
         if (getUuid()==null) {
             setUuid(UUID.randomUUID().toString());
@@ -59,11 +59,11 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
         this.patientUUID = patientUUID;
     }
 
-    public String getFingerprint() {
+    public byte[] getFingerprint() {
         return fingerprint;
     }
 
-    public void setFingerprint(String fingerprint) {
+    public void setFingerprint(byte[] fingerprint) {
         this.fingerprint = fingerprint;
     }
 }

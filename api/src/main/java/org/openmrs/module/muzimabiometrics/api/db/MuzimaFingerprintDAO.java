@@ -1,6 +1,7 @@
 package org.openmrs.module.muzimabiometrics.api.db;
 
 import org.openmrs.module.muzimabiometrics.MuzimaFingerprint;
+import org.openmrs.module.muzimabiometrics.MuzimaTemporaryFingerprint;
 
 import java.util.List;
 

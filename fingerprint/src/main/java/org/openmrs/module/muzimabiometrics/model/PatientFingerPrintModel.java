@@ -1,8 +1,10 @@
 package org.openmrs.module.muzimabiometrics.model;
 
+import java.io.ByteArrayInputStream;
+
 public class PatientFingerPrintModel {
     private String patientUUID;
-    private String fingerprintTemplate;
+    private byte[] fingerprintTemplate;
     private int id;
     private String givenName;
     private String familyName;
@@ -11,7 +13,7 @@ public class PatientFingerPrintModel {
     public PatientFingerPrintModel() {
     }
 
-    public PatientFingerPrintModel(String patientUUID, String fingerprintTemplate, int id,
+    public PatientFingerPrintModel(String patientUUID, byte[] fingerprintTemplate, int id,
                                    String givenName, String familyName, String gender) {
         this.patientUUID = patientUUID;
         this.fingerprintTemplate = fingerprintTemplate;
@@ -25,7 +27,7 @@ public class PatientFingerPrintModel {
         return patientUUID;
     }
 
-    public String getFingerprintTemplate() {
+    public byte[] getFingerprintTemplate() {
         return fingerprintTemplate;
     }
 
@@ -50,7 +52,7 @@ public class PatientFingerPrintModel {
         this.patientUUID = patientUUID;
     }
 
-    public void setFingerprintTemplate(String fingerprintTemplate) {
+    public void setFingerprintTemplate(byte[] fingerprintTemplate) {
         this.fingerprintTemplate = fingerprintTemplate;
     }
 

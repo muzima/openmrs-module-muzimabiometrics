@@ -10,7 +10,7 @@
         <property name="uuid" type="java.lang.String"
                   column="uuid" length="38" unique="true"/>
         <property name="patientUUID" type="java.lang.String"/>
-        <property name="fingerprint" type="java.lang.String"/>
+        <property name="fingerprint"/>
 
         <property name="dateCreated" type="java.util.Date" column="date_created" length="19" />
         <property name="voided" type="java.lang.Boolean" column="retired" length="1"/>

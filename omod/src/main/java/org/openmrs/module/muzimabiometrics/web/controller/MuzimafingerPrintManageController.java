@@ -13,14 +13,22 @@
  */
 package org.openmrs.module.muzimabiometrics.web.controller;
 
+import org.apache.commons.codec.binary.Base64;
+import org.json.simple.parser.ParseException;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.muzimabiometrics.api.MuzimaFingerprintService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * The main controller.
@@ -28,9 +36,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MuzimafingerPrintManageController {
-
 	@RequestMapping(value = "module/muzimabiometrics/managefingerprint.form",  method = RequestMethod.GET)
-	public void findPatient(HttpServletRequest request, Model model)
+	public synchronized void findPatient(HttpServletRequest request, Model model)throws IOException, ParseException
 	{
 		if(request != null) {
 			if(request.getParameter("patientUuid") != null) {
@@ -38,6 +45,9 @@ public class MuzimafingerPrintManageController {
 				if(patient != null) {
 					model.addAttribute("identifier", patient.getPatientIdentifier(1));
 				}
+			}
+			if(request.getParameter("clearFinger") != null){
+				model.addAttribute("fingerprintIsSet",null);
 			}
 		}
 	}

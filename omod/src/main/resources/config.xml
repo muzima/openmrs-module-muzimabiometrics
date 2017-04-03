@@ -25,6 +25,7 @@
 
     <mappingFiles>
         MuzimaFingerprint.hbm.xml
+		MuzimaTemporaryFingerprint.hbm.xml
     </mappingFiles>
 
 	<!-- Adds link to admin page -->

@@ -44,4 +44,16 @@
                       tableName="muzimafingerprint_fingerprint"/>
 
     </changeSet>
+    <changeSet id="2017-03-26-05:21pm" author="ellymakuba">
+        <comment>table for temporary_fingerprint</comment>
+        <createTable tableName="muzima_temporary_fingerprint">
+            <column name="fingerprint_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="uuid" type="char(38)" />
+            <column name="fingerprint" type="text"></column>
+            <column name="date_created"  type="date"/>
+        </createTable>
+        <addPrimaryKey columnNames="fingerprint_id" constraintName="fingerprint_temp_id_pk" tableName="muzima_temporary_fingerprint"/>
+    </changeSet>
 </databaseChangeLog>

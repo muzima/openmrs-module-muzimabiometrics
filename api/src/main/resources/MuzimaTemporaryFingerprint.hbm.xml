@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.module.muzimabiometrics">
+    <class name="MuzimaTemporaryFingerprint" table="muzima_temporary_fingerprint">
+        <id name="id" type="java.lang.Integer" column="fingerprint_id">
+            <generator class="increment"/>
+        </id>
+        <property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true"/>
+        <property name="fingerprint" type="java.lang.String"/>
+        <property name="dateCreated" type="java.util.Date" column="date_created" length="19" />
+    </class>
+</hibernate-mapping>

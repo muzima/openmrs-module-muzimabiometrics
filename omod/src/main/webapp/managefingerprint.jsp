@@ -11,7 +11,6 @@
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/jquery/jquery-ui-1.10.4.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/jquery/jquery.validate.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/underscore/underscore-min.js"/>
-
 <div>
     <div class="navbar navbar-custom">
         <div>
@@ -32,17 +31,11 @@
                         <tbody>
                         <tr>
                             <td>Patient Identifier or Patient Name:<input type="text" id="findPatients" name="findPatients" value="${identifier}" onkeypress="activate(this.value, event)"></td>
-                            <td>
-                                <div id = "applet">
-                                    <applet name="Muzima fingerprint module" id="Abis" code="org.openmrs.module.muzimabiometrics.SimpleFingersApplication" width="100%" height="100">
-                                        <param name="jnlp_href" value="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp" />
-                                        <param name="codebase_lookup" value="false" />
-                                        <param name="separate_jvm" value="true" />
-                                        <param name="server_address" value="/local" />
-                                        <param name="server_port" value="5000" />
-                                    </applet>
-                                </div>
+                            <td><div>
+                            <a href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp">Scan Fingerprint</a>
+                            </div>
                             </td>
+                            <td>Fingerprint :<input type="text" id="fingerprintScan" /></td>
                         </tr>
                         </tbody>
                     </table>
@@ -56,7 +49,6 @@
     <div id="body-wrapper">
         <div class = "row forms-list">
             <div class ="col-lg-12" >
-
                 <table  id="tblData">
                     <thead >
                     <tr class = "forms-header">
@@ -129,8 +121,6 @@
 
                         <label for= "fingerprint">Finger Print</label>
                         <img src ="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/>
-                        <input id = "fingerprint" autocomplete="off" type="hidden" name="fingerprint">
-
                         <label for= "birth_date">Date of Birth</label>
                         <input autocomplete="off" type="date" name="birth_date">
 
