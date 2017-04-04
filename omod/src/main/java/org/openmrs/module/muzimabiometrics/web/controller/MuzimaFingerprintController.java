@@ -1,5 +1,6 @@
 package org.openmrs.module.muzimabiometrics.web.controller;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -36,7 +37,8 @@ public class MuzimaFingerprintController {
     private ObjectInputStream fingerprint;
     private boolean fingerprintIsSet;
     private byte[] fingerprintPayload;
-    JlibFprint.fp_print_data newJlibFprintData,savedJlibfprintData;
+    private String patientUUID;
+
     @ResponseBody
     @RequestMapping(value = "patient/{fingerprint}/fingerprint.form",  method = RequestMethod.GET)
     public MuzimaFingerprint getPatientFingerprintById(@PathVariable String patientUUID){
@@ -54,60 +56,74 @@ public class MuzimaFingerprintController {
         return new PatientFingerPrintModel(patient.getUuid(),fingerprintPayload, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
     @RequestMapping(value = "identifyPatientByFingerprint.form", method = RequestMethod.POST)
-    public synchronized void postFingerprintScan(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException, ParseException, ClassNotFoundException {
+    public synchronized void postFingerprintScan(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException, ClassNotFoundException, JlibFprint.EnrollException {
         service=Context.getService(MuzimaFingerprintService.class);
-        int matchValue=40;
-        ByteArrayInputStream newFingerprintScan,savedFingerprintScan;
-        byte newScanByte[],savedScanByte[];
-        ByteArrayInputStream newScanByteArray,savedScanByteArray;
-        ObjectInputStream newScanInputStream,savedScanInputStream;
-
+        JSONArray jsonArray=new JSONArray();
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("patientUuid","");
-        if(request != null) {
-            if(request.getParameter("fingerprintIsSet") != null) {
-                String requestInstance=request.getParameter("fingerprintIsSet");
-                newScanByte=Base64.decodeBase64(fingerprintPayload);
-                newScanByteArray=new ByteArrayInputStream(newScanByte);
-                newScanInputStream=new ObjectInputStream(newScanByteArray);
-                newJlibFprintData=(JlibFprint.fp_print_data)newScanInputStream.readObject();
+        if(request!= null && patientUUID !=null && patientUUID !=""){
+            if(request.getParameter("fingerprintIsSet").equalsIgnoreCase("true")) {
+                Patient patient = Context.getPatientService().getPatientByUuid(patientUUID);
+                jsonObject.put("patientUUID",patient.getUuid());
+                jsonObject.put("id",patient.getId());
+                jsonObject.put("givenName",patient.getGivenName());
+                jsonObject.put("familyName",patient.getFamilyName());
+                jsonObject.put("gender",patient.getGender());
+                jsonArray.add(jsonObject);
+            }
+        }
+        response.getWriter().print(jsonArray);
+    }
+    @ResponseBody
+    @RequestMapping(value = "setFingerprint.form",  method = RequestMethod.POST)
+    public synchronized void setFingerprint(@RequestBody byte[] request,Model model) throws IOException, ParseException, ClassNotFoundException {
+        int matchValue;
+        service=Context.getService(MuzimaFingerprintService.class);
+    byte[] newScanByte;
+        byte[] savedScanByte;
+        JlibFprint.fp_print_data newJlibFprintData,savedJlibfprintData;
+        ByteArrayInputStream newScanByteArray,savedScanByteArray;
+        ObjectInput newScanInput,savedScanInput;
+        fingerprintPayload=request;
+        byte[] b=Base64.decodeBase64(request);
+        ByteArrayInputStream is=new ByteArrayInputStream(b);
+        fingerprint=new ObjectInputStream(is);
+        fingerprintIsSet=true;
+        if(request!= null) {
+            newScanByte=Base64.decodeBase64(fingerprintPayload);
+            System.out.println("newScanByte+++++++++++++++++++++++++++++++++"+newScanByte);
+            newScanByteArray=new ByteArrayInputStream(newScanByte);
+            newScanInput=new ObjectInputStream(newScanByteArray);
+            newJlibFprintData=(JlibFprint.fp_print_data)newScanInput.readObject();
             List<MuzimaFingerprint> muzimaFingerprintList=service.getAll();
             for(MuzimaFingerprint muzimaFingerprint1:muzimaFingerprintList){
                 savedScanByte=Base64.decodeBase64(muzimaFingerprint1.getFingerprint());
-                System.out.println("savedScanByte+++++++++++++++++++++"+savedScanByte);
+                System.out.println("savedScanByte+++++++++++++++++++++++++++++++++"+muzimaFingerprint1.getFingerprint());
                 savedScanByteArray=new ByteArrayInputStream(savedScanByte);
-                savedScanInputStream=new ObjectInputStream(savedScanByteArray);
-                savedJlibfprintData=(JlibFprint.fp_print_data)savedScanInputStream.readObject();
+                savedScanInput=new ObjectInputStream(savedScanByteArray);
+                savedJlibfprintData=(JlibFprint.fp_print_data)savedScanInput.readObject();
                 matchValue = JlibFprint.img_compare_print_data(newJlibFprintData,savedJlibfprintData);
-                System.out.println("JlibFprint.BOZORTH_THRESHOLD+++++++++++++++++++++++++++"+JlibFprint.BOZORTH_THRESHOLD);
+                System.out.println("matchValue+++++++++++++++++++++++++++"+matchValue);
                 if (matchValue > JlibFprint.BOZORTH_THRESHOLD)
                 {
-                    jsonObject.put("patientUuid",muzimaFingerprint1.getPatientUUID());
+                    patientUUID=muzimaFingerprint1.getPatientUUID();
                     System.out.println("[OK] The two fingerprints are compatible!");
                     break;
                 }
             }
-            }
         }
-        response.getWriter().print(jsonObject);
-    }
-    @ResponseBody
-    @RequestMapping(value = "setFingerprint.form",  method = RequestMethod.POST)
-    public synchronized void setFingerprint(@RequestBody byte[] request,Model model)throws IOException, ParseException
-    {
-        //byte b[] =Base64.decodeBase64()
-        //ObjectInputStream os=new ObjectInputStream(request);
-        fingerprintPayload=request;
-        byte b[]=Base64.decodeBase64(request);
-        ByteArrayInputStream is=new ByteArrayInputStream(b);
-        fingerprint=new ObjectInputStream(is);
-        fingerprintIsSet=true;
-        model.addAttribute("fingerprintIsSet",fingerprintIsSet);
+
     }
     @RequestMapping(value = "getFingerprint.form",  method = RequestMethod.GET)
     public synchronized void getFingerprint(HttpServletRequest request,HttpServletResponse response,Model model)throws IOException, ParseException
     {
-        model.addAttribute("fingerprintIsSet",fingerprintIsSet);
+        if(request !=null) {
+            if (request.getParameter("fingerprintIsSet") != null) {
+                if (request.getParameter("fingerprintIsSet").equalsIgnoreCase("clear")) {
+                    fingerprintIsSet = false;
+                    patientUUID="";
+                }
+            }
+        }
         response.getWriter().print(fingerprintIsSet);
     }
     @ResponseBody

@@ -35,7 +35,8 @@
                             <a href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp">Scan Fingerprint</a>
                             </div>
                             </td>
-                            <td>Fingerprint :<input type="text" id="fingerprintScan" /></td>
+                            <input type="hidden" id="fingerprintScan" />
+                            <td><button type="button" id="refresh">Refresh</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -57,6 +58,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <thead >
@@ -66,6 +68,7 @@
                         <th>Family Name</th>
                         <th>Gender</th>
                         <th>Fingerprint</th>
+                        <th>Dispense Drugs</th>
                     </tr>
                     </thead>
                     <tbody>

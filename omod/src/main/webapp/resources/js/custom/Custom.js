@@ -41,6 +41,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
             + "<td>"+ patient.familyName+"</td>"
             + "<td>"+ patient.gender+"</td>"
             + "<td>"+show(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
+            + "<td><a href='"+openmrsContextPath+"/module/pharmacy/home.form?patientUUID="+patient.patientUUID+"'>Dispense</a></td>"
             + "</tr>");
     });
 };
@@ -440,6 +441,18 @@ $(function(){
             }
         });
     }
+    $("#refresh").on("click",function() {
+        $.ajax({
+            type: "GET",
+            url: "getFingerprint.form?fingerprintIsSet=clear",
+            contentType: "application/json",
+            success: function (result) {
+                document.getElementById("fingerprintScan").value = "false";
+                console.log("fingerprint reset to "+result);
+                location.href = "managefingerprint.form";
+            }
+        })
+    });
     if ($("#fingerprintScan").val() !="true") {
         setTimeout(function(){
             $.ajax({
@@ -453,19 +466,18 @@ $(function(){
                             type: "POST",
                             url: "identifyPatientByFingerprint.form?fingerprintIsSet="+result,
                             contentType: "application/json",
-                            dataType: 'json',
                             success: function (result) {
-                                muzimaFingerprint=JSON.parse(JSON.stringify(result));
-                                if(muzimaFingerprint.patientUuid==""){
+                                muzimaFingerprint=JSON.parse(result);
+                                console.log("result is "+JSON.stringify(muzimaFingerprint));
+                                if(muzimaFingerprint.length==0 || muzimaFingerprint[0]===""){
                                     updateControls(3);
                                 }
                                 else{
-
+                                    updatePatientListTable(muzimaFingerprint,1);
                                 }
-                                console.log(muzimaFingerprint.patientUuid);
+                                console.log(JSON.stringify(muzimaFingerprint));
                             },
                             error: function(msg, status, error){
-                                console.log(msg);
                                 alert(error);
                             }
                         });
