@@ -3,7 +3,7 @@ var _FINGERPRINT_DATA = "";
 function showMessage() {
     return "This is from javascript";
 };
-
+$("#enrollFingerprint").hide();
 function identifyPatient(fingerprintData){
 alert("identifyPatieent is called ");
     _FINGERPRINT_DATA = fingerprintData;
@@ -459,18 +459,18 @@ $(function(){
                 type: "GET",
                 url: "getFingerprint.form",
                 contentType: "application/json",
-                success: function (result) {
-                    if(result=="true"){
-                        document.getElementById("fingerprintScan").value=result;
+                success: function (response) {
+                    if(response=="true"){
+                        document.getElementById("fingerprintScan").value=response;
                         $.ajax({
                             type: "POST",
-                            url: "identifyPatientByFingerprint.form?fingerprintIsSet="+result,
+                            url: "identifyPatientByFingerprint.form?fingerprintIsSet="+response,
                             contentType: "application/json",
                             success: function (result) {
                                 muzimaFingerprint=JSON.parse(result);
                                 console.log("result is "+JSON.stringify(muzimaFingerprint));
                                 if(muzimaFingerprint.length==0 || muzimaFingerprint[0]===""){
-                                    updateControls(3);
+                                    $("#enrollFingerprint").show();
                                 }
                                 else{
                                     updatePatientListTable(muzimaFingerprint,1);
@@ -493,4 +493,18 @@ $(function(){
             });
             },3000);
     }
+    $("#enrollFingers").on("click",function(){
+        $.ajax({
+            type:"GET",
+            url:"fetchEnrolledFingers.form",
+            contentType:"application/json",
+            success:function(result){
+                var fingersStatus=JSON.parse(result);
+                if(fingersStatus.secondFingerPrintIsSet==true && fingersStatus.thirdFingerprintIsSet==true){
+                    updateControls(3);
+                    $("#enrollFingerprint").hide();
+                }
+            }
+        })
+    });
 });

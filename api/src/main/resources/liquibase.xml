@@ -56,4 +56,12 @@
         </createTable>
         <addPrimaryKey columnNames="fingerprint_id" constraintName="fingerprint_temp_id_pk" tableName="muzima_temporary_fingerprint"/>
     </changeSet>
+    <changeSet author="ellymakuba" id="2017-04-10-01:50pm">
+        <addColumn tableName="muzimafingerprint_fingerprint">
+            <column name="second_fingerprint"  type="BLOB" />
+        </addColumn>
+        <addColumn tableName="muzimafingerprint_fingerprint">
+            <column name="third_fingerprint"  type="BLOB" />
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

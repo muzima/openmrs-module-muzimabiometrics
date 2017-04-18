@@ -91,12 +91,15 @@
             <a href="#" id="btnYes">Yes</a>
             <a href="#" id="btnNo">No</a>
         </div>
+        <div id="enrollFingerprint">
+            <a href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp">Enroll Two More Fingerprints</a>
+        <button type="button" id="enrollFingers">Process Fingers</button>
+        </div>
         <div id = "registrationForm">
             <form id = "formData" method = "post" action = "">
                 <h3 id="form-title">Registration Form</h3>
                 <fieldset  name="patient">
                     <div class="form-group">
-
                         <label for= "given_name">First Name</label>
                         <input autocomplete="off" type="text" name="given_name">
 

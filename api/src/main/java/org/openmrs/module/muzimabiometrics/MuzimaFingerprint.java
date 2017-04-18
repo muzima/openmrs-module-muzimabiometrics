@@ -10,19 +10,21 @@ import java.util.UUID;
 public class MuzimaFingerprint extends BaseOpenmrsData{
     private Integer id;
     private String patientUUID;
-    private byte[] fingerprint;
-
-
+    private byte[] firstFingerprint;
+    private byte[] secondFingerprint;
+    private byte[] thirdFingerprint;
 
     public MuzimaFingerprint(){
     }
-    public MuzimaFingerprint(String patientUUID, byte[] fingerprint){
+    public MuzimaFingerprint(String patientUUID, byte[] firstFingerprint,byte[] secondFingerprint,byte[] thirdFingerprint){
 
         if (getUuid()==null) {
             setUuid(UUID.randomUUID().toString());
         }
         this.patientUUID = patientUUID;
-        this.fingerprint = fingerprint;
+        this.firstFingerprint = firstFingerprint;
+        this.secondFingerprint=secondFingerprint;
+        this.thirdFingerprint=thirdFingerprint;
     }
 
     public Integer getId() {
@@ -43,7 +45,9 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
         return "MuzimaFingerprint{" +
                 "id=" + id +
                 ", patientUUID=" + getPatientUUID() +
-                ", fingerprint='" + getFingerprint()+ '\'' +
+                ", firstFingerprint='" + getFirstFingerprint()+ '\'' +
+                ", secondFingerprint='" + getSecondFingerprint()+ '\'' +
+                ", thirdFingerprint='" + getThirdFingerprint()+ '\'' +
                 '}';
     }
 
@@ -59,11 +63,27 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
         this.patientUUID = patientUUID;
     }
 
-    public byte[] getFingerprint() {
-        return fingerprint;
+    public byte[] getFirstFingerprint() {
+        return firstFingerprint;
     }
 
-    public void setFingerprint(byte[] fingerprint) {
-        this.fingerprint = fingerprint;
+    public void setFirstFingerprint(byte[] firstFingerprint) {
+        this.firstFingerprint = firstFingerprint;
+    }
+
+    public byte[] getSecondFingerprint() {
+        return secondFingerprint;
+    }
+
+    public void setSecondFingerprint(byte[] secondFingerprint) {
+        this.secondFingerprint = secondFingerprint;
+    }
+
+    public byte[] getThirdFingerprint() {
+        return thirdFingerprint;
+    }
+
+    public void setThirdFingerprint(byte[] thirdFingerprint) {
+        this.thirdFingerprint = thirdFingerprint;
     }
 }
