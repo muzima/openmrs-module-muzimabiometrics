@@ -1,4 +1,7 @@
-import jlibfprint.*;
+package org.openmrs.module.muzimabiometrics;
+
+
+import jlibfprint.JlibFprint;
 import java.io.*;
 public class IdentifyFinger {
     public static void main(String[] args) {

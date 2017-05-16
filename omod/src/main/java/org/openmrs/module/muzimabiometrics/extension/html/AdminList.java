@@ -36,7 +36,7 @@ public class AdminList extends AdministrationSectionExt {
 	 * @see AdministrationSectionExt#getTitle()
 	 */
 	public String getTitle() {
-		return "Muzima Biometrics";
+		return "mUzima Biometrics";
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class AdminList extends AdministrationSectionExt {
 	 */
 	public Map<String, String> getLinks() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-		map.put("module/muzimabiometrics/managefingerprint.form", "Manage fingerPrint");
+		map.put("module/muzimabiometrics/managefingerprint.form", "View Fingerprint Form");
 		return map;
 	}
 	

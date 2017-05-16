@@ -52,6 +52,7 @@ public class HibernateMuzimaFingerprintDAO implements MuzimaFingerprintDAO {
 
     @Override
     public MuzimaFingerprint findByPatientUUID(String patientUUID) {
+        System.out.println("findbyPatientUUid ++++++++++++++++++++++++++++++++++++++"+patientUUID);
         return (MuzimaFingerprint)session().createQuery("from MuzimaFingerprint m where m.patientUUID = '" + patientUUID + "'").uniqueResult();
     }
 

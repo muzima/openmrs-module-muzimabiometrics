@@ -36,8 +36,6 @@ public interface MuzimaFingerprintService extends OpenmrsService {
     MuzimaFingerprint findByUniqueId(String uuid);
 
     @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(String patientWithFingerprint) throws JSONException;
-    @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(MuzimaFingerprint muzimaFingerprint);
-    public MuzimaFingerprint saveMuzimaFingerprint(MuzimaFingerprint Fingerprint);
+    PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage,Boolean fingerprintAlreadyExist) throws JSONException;
+
 }

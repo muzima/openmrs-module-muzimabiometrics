@@ -117,40 +117,22 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
     }*/
 
     @Override
-    public PatientFingerPrintModel addFingerprintToPatient(MuzimaFingerprint muzimaFingerprint){
-        byte[] fingerprint = muzimaFingerprint.getFirstFingerprint();
-        String patientUUID = muzimaFingerprint.getPatientUUID();
-        if(fingerprint!=null && !StringUtils.isEmpty(patientUUID)){
-            dao.saveMuzimaFingerprint(muzimaFingerprint);
-            Patient pat = Context.getPatientService().getPatientByUuid(patientUUID);
-            return new PatientFingerPrintModel(pat.getUuid(),
-                    fingerprint,
-                    pat.getId(),
-                    pat.getGivenName(),
-                    pat.getFamilyName(),
-                    pat.getGender());
-        } else {
-            return null;
-        }
-
-
-    }
-
-    @Override
-    public PatientFingerPrintModel addFingerprintToPatient(String patientWithFingerprint) throws JSONException {
+    public PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage,Boolean fingerprintAlreadyExist) throws JSONException {
         PatientJsonParser patientJsonParser = new PatientJsonParser();
         PatientFingerPrintModel patient = null;
         Patient pat = null;
         //ByteArrayInputStream fingerprint = patientJsonParser.getFingerPrintFromJson(patientWithFingerprint);
-        byte[] fingerprint =null;
-        String patientUUID = patientJsonParser.getPatientUUIDFromJson(patientWithFingerprint);
-        MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint();
-        muzimaFingerprint.setPatientUUID(patientUUID);
-        muzimaFingerprint.setFirstFingerprint(fingerprint);
-        dao.saveMuzimaFingerprint(muzimaFingerprint);
+        if(!fingerprintAlreadyExist) {
+            MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint();
+            muzimaFingerprint.setPatientUUID(patientUUID);
+            muzimaFingerprint.setFirstFingerprint(firstFingerImage);
+            muzimaFingerprint.setSecondFingerprint(secondeFingerImage);
+            muzimaFingerprint.setThirdFingerprint(thirdFingerImage);
+            dao.saveMuzimaFingerprint(muzimaFingerprint);
+        }
         pat = Context.getPatientService().getPatientByUuid(patientUUID);
         patient = new PatientFingerPrintModel(pat.getUuid(),
-                fingerprint,
+                firstFingerImage,
                 pat.getId(),
                 pat.getGivenName(),
                 pat.getFamilyName(),

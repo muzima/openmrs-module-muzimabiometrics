@@ -22,15 +22,14 @@ public class EnrollFingerprint {
     private JLabel statusLabel;
     private JPanel controlPanel;
     JlibFprint jlibfprint = new JlibFprint();
-    JlibFprint.fp_print_data secondFinger,thirdFinger;
+    JlibFprint.fp_print_data firstImage,secondImage,thirdImage;
+    JButton firstCaptureBtn,secondCaptureBtn,thirdCaptureBtn,exit;
     public EnrollFingerprint(){
-
         prepareGUI();
     }
     public static void main(String[] args){
         EnrollFingerprint  enrollFingerprint = new EnrollFingerprint();
-        enrollFingerprint.enrollSecondFinger();
-        enrollFingerprint.enrollThirdFinger();
+            enrollFingerprint.enrollFingerFirstTime();
     }
     private void prepareGUI(){
         mainFrame = new JFrame("Patient Fingerprint Enrollment");
@@ -63,20 +62,56 @@ public class EnrollFingerprint {
             return null;
         }
     }
-    private void enrollSecondFinger(){
-        JButton enrollSecondFinger = new JButton("Enroll Second Finger");
-        enrollSecondFinger.addActionListener(new ActionListener() {
+    private void enrollFingerFirstTime(){
+        firstCaptureBtn = new JButton("Capture Thumb Finger First Time");
+        firstCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    secondFinger = jlibfprint.enroll_finger();
+                    firstImage = jlibfprint.enroll_finger();
                     CloseableHttpClient client = HttpClientBuilder.create().build();
                     ByteArrayOutputStream secondFingerBO = new ByteArrayOutputStream();
                     ObjectOutputStream oos = new ObjectOutputStream(secondFingerBO);
-                    oos.writeObject(secondFinger);
+                    oos.writeObject(firstImage);
                     oos.flush();
                     byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
                     System.out.println("encodedByteArray +++++++++++++++++++"+secondFingerEncodedByteArray);
-                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollSecondFingerprint.form";
+                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollFirstImage.form";
+                    HttpPost request=new HttpPost(url);
+                    request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
+                    request.setHeader("Content-type", "application/octet-stream");
+                    HttpResponse response = client.execute(request);
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                    String line = "";
+                    while ((line = rd.readLine()) != null){
+                        System.out.println(line);
+                    }
+                    enrollFingerSecondTime();
+                    statusLabel.setText("First Capturing Completed");
+                } catch (JlibFprint.EnrollException e) {
+                    e.printStackTrace();
+                }
+                catch(IOException ex){
+                }
+            }
+        });
+        controlPanel.add(firstCaptureBtn);
+        mainFrame.setVisible(true);
+    }
+    private void enrollFingerSecondTime(){
+        firstCaptureBtn.setVisible(false);
+        secondCaptureBtn = new JButton("Capture Thumb Finger Second Time");
+        secondCaptureBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    secondImage = jlibfprint.enroll_finger();
+                    CloseableHttpClient client = HttpClientBuilder.create().build();
+                    ByteArrayOutputStream secondFingerBO = new ByteArrayOutputStream();
+                    ObjectOutputStream oos = new ObjectOutputStream(secondFingerBO);
+                    oos.writeObject(secondImage);
+                    oos.flush();
+                    byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
+                    System.out.println("encodedByteArray +++++++++++++++++++"+secondFingerEncodedByteArray);
+                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollSecondImage.form";
                     HttpPost request=new HttpPost(url);
                     request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
                     request.setHeader("Content-type", "application/octet-stream");
@@ -86,7 +121,8 @@ public class EnrollFingerprint {
                     while ((line = rd.readLine()) != null) {
                         System.out.println(line);
                     }
-                    statusLabel.setText("Completed scanning second finger");
+                    enrollFingerThirdTime();
+                    statusLabel.setText("Second Capturing Completed");
                 } catch (JlibFprint.EnrollException e) {
                     e.printStackTrace();
                 }
@@ -94,24 +130,25 @@ public class EnrollFingerprint {
                 }
             }
         });
-        controlPanel.add(enrollSecondFinger);
+        controlPanel.add(secondCaptureBtn);
         mainFrame.setVisible(true);
     }
-    private void enrollThirdFinger(){
-        JButton enrollThirdFinger = new JButton("Enroll Third Finger");
-        enrollThirdFinger.addActionListener(new ActionListener() {
+    private void enrollFingerThirdTime(){
+        secondCaptureBtn.setVisible(false);
+        thirdCaptureBtn = new JButton("Capture Thumb Finger Third Time");
+        thirdCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                statusLabel.setText("Completed scanning third finger");
+                statusLabel.setText("Third Capturing Completed");
                 try {
-                    thirdFinger = jlibfprint.enroll_finger();
+                    thirdImage = jlibfprint.enroll_finger();
                     CloseableHttpClient client = HttpClientBuilder.create().build();
                     ByteArrayOutputStream thirdFingerBO = new ByteArrayOutputStream();
                     ObjectOutputStream oos = new ObjectOutputStream(thirdFingerBO);
-                    oos.writeObject(thirdFinger);
+                    oos.writeObject(thirdImage);
                     oos.flush();
                     byte[] thirdFingerEncodedByteArray = Base64.encodeBase64(thirdFingerBO.toByteArray());
                     System.out.println("encodedByteArray +++++++++++++++++++"+thirdFingerEncodedByteArray);
-                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollThirdFingerprint.form";
+                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollThirdImage.form";
                     HttpPost request=new HttpPost(url);
                     request.setEntity(new ByteArrayEntity(thirdFingerEncodedByteArray));
                     request.setHeader("Content-type", "application/octet-stream");
@@ -121,6 +158,7 @@ public class EnrollFingerprint {
                     while ((line = rd.readLine()) != null) {
                         System.out.println(line);
                     }
+                    exit();
                 } catch (JlibFprint.EnrollException e) {
                     e.printStackTrace();
                 }
@@ -128,7 +166,18 @@ public class EnrollFingerprint {
                 }
             }
         });
-        controlPanel.add(enrollThirdFinger);
+        controlPanel.add(thirdCaptureBtn);
+        mainFrame.setVisible(true);
+    }
+    private void exit(){
+        thirdCaptureBtn.setVisible(false);
+        exit=new JButton("Exit");
+        exit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+        controlPanel.add(exit);
         mainFrame.setVisible(true);
     }
 }

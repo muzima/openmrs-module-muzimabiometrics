@@ -34,8 +34,8 @@ import org.apache.commons.codec.binary.Base64;
 @RequestMapping(value = "module/muzimabiometrics")
 public class MuzimaFingerprintController {
     private MuzimaFingerprintService service;
-    private boolean fingerprintIsSet,secondFingerPrintIsSet,thirdFingerprintIsSet;
-    private byte[] firstFingerBytes,secondFingerBytes,thirdFingerBytes;
+    private boolean fingerprintIsSet,firstImageIsSet,secondImageIsSet,thirdImageIsSet;
+    private byte[] fingerForIdentification,firstImageBytes,secondImageBytes,thirdImageBytes;
     private String patientUUID;
     private int bozorth_threshold=40;
     @ResponseBody
@@ -50,8 +50,8 @@ public class MuzimaFingerprintController {
     public synchronized PatientFingerPrintModel enrollPatient(@RequestBody String jsonPayload) throws Exception {
             MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
         PatientJsonParser patientJsonParser = new PatientJsonParser();
-        Patient patient = service.savePatient(jsonPayload,firstFingerBytes,secondFingerBytes,thirdFingerBytes);
-        return new PatientFingerPrintModel(patient.getUuid(),firstFingerBytes, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
+        Patient patient = service.savePatient(jsonPayload,firstImageBytes,secondImageBytes,thirdImageBytes);
+        return new PatientFingerPrintModel(patient.getUuid(),firstImageBytes, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
     }
     @RequestMapping(value = "identifyPatientByFingerprint.form", method = RequestMethod.POST)
     public synchronized void postFingerprintScan(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException, ClassNotFoundException, JlibFprint.EnrollException {
@@ -76,12 +76,12 @@ public class MuzimaFingerprintController {
     public synchronized void setFingerprint(@RequestBody byte[] request,Model model) throws IOException, ParseException, ClassNotFoundException {
         int matchValue;
         service=Context.getService(MuzimaFingerprintService.class);
-    byte[] newScanByte;
+        byte[] newScanByte;
         byte[] patientFirstFingerByte,patientSecondFingerByte,patientThirdFingerByte;
         JlibFprint.fp_print_data newJlibFprintData,firstFingerData,secondFingerData,thirdFingerData;
         ByteArrayInputStream newScanByteArray,patientFirstFingerByteArray,patientSecondFingerByteArray,patientThirdFingerByteArray;
         ObjectInput newScanInput,patientFirstFingerInput,patientSecondFingerInput,patientThirdFingerInput;
-        firstFingerBytes=request;
+        fingerForIdentification=request;
         byte[] b=Base64.decodeBase64(request);
         ByteArrayInputStream is=new ByteArrayInputStream(b);
         fingerprintIsSet=true;
@@ -89,7 +89,7 @@ public class MuzimaFingerprintController {
         int secondFingerMatchValue=0;
         int thirdFingerMatchValue=0;
         if(request!= null) {
-            newScanByte=Base64.decodeBase64(firstFingerBytes);
+            newScanByte=Base64.decodeBase64(fingerForIdentification);
             newScanByteArray=new ByteArrayInputStream(newScanByte);
             newScanInput=new ObjectInputStream(newScanByteArray);
             newJlibFprintData=(JlibFprint.fp_print_data)newScanInput.readObject();
@@ -101,24 +101,19 @@ public class MuzimaFingerprintController {
                 firstFingerData=(JlibFprint.fp_print_data)patientFirstFingerInput.readObject();
                 firstFingerMatchValue= JlibFprint.img_compare_print_data(newJlibFprintData,firstFingerData);
                 System.out.println("first finger matchValue+++++++++++++++++++++++++++"+firstFingerMatchValue);
-                if (firstFingerMatchValue > bozorth_threshold)
-                {
-                    patientSecondFingerByte=Base64.decodeBase64(muzimaFingerprint1.getSecondFingerprint());
-                    patientSecondFingerByteArray=new ByteArrayInputStream(patientSecondFingerByte);
-                    patientSecondFingerInput=new ObjectInputStream(patientSecondFingerByteArray);
-                    secondFingerData=(JlibFprint.fp_print_data)patientSecondFingerInput.readObject();
-                    secondFingerMatchValue=JlibFprint.img_compare_print_data(newJlibFprintData,secondFingerData);
-                    System.out.println("second finger match value +++++++++++++++++++++"+secondFingerMatchValue);
-                }
-                if(secondFingerMatchValue > bozorth_threshold){
-                    patientThirdFingerByte=Base64.decodeBase64(muzimaFingerprint1.getThirdFingerprint());
-                    patientThirdFingerByteArray=new ByteArrayInputStream(patientThirdFingerByte);
-                    patientThirdFingerInput=new ObjectInputStream(patientThirdFingerByteArray);
-                    thirdFingerData=(JlibFprint.fp_print_data)patientThirdFingerInput.readObject();
-                    thirdFingerMatchValue=JlibFprint.img_compare_print_data(newJlibFprintData,thirdFingerData);
-                    System.out.println("third finger match value +++++++++++++++++++++++++++++"+thirdFingerMatchValue);
-                }
-                if(thirdFingerMatchValue > bozorth_threshold){
+                patientSecondFingerByte=Base64.decodeBase64(muzimaFingerprint1.getSecondFingerprint());
+                patientSecondFingerByteArray=new ByteArrayInputStream(patientSecondFingerByte);
+                patientSecondFingerInput=new ObjectInputStream(patientSecondFingerByteArray);
+                secondFingerData=(JlibFprint.fp_print_data)patientSecondFingerInput.readObject();
+                secondFingerMatchValue=JlibFprint.img_compare_print_data(newJlibFprintData,secondFingerData);
+                System.out.println("second finger match value +++++++++++++++++++++"+secondFingerMatchValue);
+                patientThirdFingerByte=Base64.decodeBase64(muzimaFingerprint1.getThirdFingerprint());
+                patientThirdFingerByteArray=new ByteArrayInputStream(patientThirdFingerByte);
+                patientThirdFingerInput=new ObjectInputStream(patientThirdFingerByteArray);
+                thirdFingerData=(JlibFprint.fp_print_data)patientThirdFingerInput.readObject();
+                thirdFingerMatchValue=JlibFprint.img_compare_print_data(newJlibFprintData,thirdFingerData);
+                System.out.println("third finger match value +++++++++++++++++++++++++++++"+thirdFingerMatchValue);
+                if(firstFingerMatchValue > bozorth_threshold && secondFingerMatchValue > bozorth_threshold && thirdFingerMatchValue > bozorth_threshold){
                     patientUUID=muzimaFingerprint1.getPatientUUID();
                     System.out.println("[OK] The two fingerprints are compatible!");
                     break;
@@ -128,18 +123,25 @@ public class MuzimaFingerprintController {
 
     }
     @ResponseBody
-    @RequestMapping(value="enrollSecondFingerprint.form",method=RequestMethod.POST)
-    public synchronized void enrollSecondFingerprint(@RequestBody byte[] request){
-        secondFingerBytes=request;
-        secondFingerPrintIsSet=true;
-        System.out.println("second finger enrolled ++++++++++++++++++++++++++++++++"+secondFingerBytes);
+    @RequestMapping(value="enrollFirstImage.form",method=RequestMethod.POST)
+    public synchronized void enrollFirstImage(@RequestBody byte[] request){
+        firstImageBytes=request;
+        firstImageIsSet=true;
+        System.out.println("first image enrolled ++++++++++++++++++++++++++++++++"+firstImageBytes);
     }
     @ResponseBody
-    @RequestMapping(value="enrollThirdFingerprint.form",method=RequestMethod.POST)
-    public synchronized void enrollThirdFingerprint(@RequestBody byte[] request){
-        thirdFingerBytes=request;
-        thirdFingerprintIsSet=true;
-        System.out.println("third finger enrolled ++++++++++++++++++++++++++++++++++++"+thirdFingerBytes);
+    @RequestMapping(value="enrollSecondImage.form",method=RequestMethod.POST)
+    public synchronized void enrollSecondImage(@RequestBody byte[] request){
+        secondImageBytes=request;
+        secondImageIsSet=true;
+        System.out.println("second image enrolled ++++++++++++++++++++++++++++++++++++"+secondImageBytes);
+    }
+    @ResponseBody
+    @RequestMapping(value="enrollThirdImage.form",method=RequestMethod.POST)
+    public synchronized void enrollThirdImage(@RequestBody byte[] request){
+        thirdImageBytes=request;
+        thirdImageIsSet=true;
+        System.out.println("third image enrolled ++++++++++++++++++++++++++++++++++++"+thirdImageBytes);
     }
     @RequestMapping(value = "getFingerprint.form",  method = RequestMethod.GET)
     public synchronized void getFingerprint(HttpServletRequest request,HttpServletResponse response,Model model)throws IOException, ParseException
@@ -148,20 +150,23 @@ public class MuzimaFingerprintController {
             if (request.getParameter("fingerprintIsSet") != null) {
                 if (request.getParameter("fingerprintIsSet").equalsIgnoreCase("clear")) {
                     fingerprintIsSet = false;
-                    secondFingerPrintIsSet=false;
-                    thirdFingerprintIsSet=false;
+                    firstImageIsSet=false;
+                    secondImageIsSet=false;
+                    thirdImageIsSet=false;
                     patientUUID="";
                 }
             }
         }
+        System.out.println("fingerprintis set ++++++++++++++++++++++++++++++"+fingerprintIsSet);
         response.getWriter().print(fingerprintIsSet);
     }
     @RequestMapping(value = "fetchEnrolledFingers.form",  method = RequestMethod.GET)
     public synchronized void fetchEnrolledFingers(HttpServletRequest request,HttpServletResponse response,Model model)throws IOException, ParseException
     {
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("secondFingerPrintIsSet",secondFingerPrintIsSet);
-        jsonObject.put("thirdFingerprintIsSet",thirdFingerprintIsSet);
+        jsonObject.put("firstImageIsSet",firstImageIsSet);
+        jsonObject.put("secondImageIsSet",secondImageIsSet);
+        jsonObject.put("thirdImageIsSet",thirdImageIsSet);
         response.getWriter().print(jsonObject);
     }
     @ResponseBody
@@ -208,13 +213,18 @@ public class MuzimaFingerprintController {
     public List<PatientFingerPrintModel> addFingerprint(@RequestBody String patientWithFingerprint) throws Exception
     {
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        PatientFingerPrintModel patient = service.addFingerprintToPatient(patientWithFingerprint);
+        MuzimaFingerprint muzimaFingerprint=service.getFingerprintByPatientUUID(patientWithFingerprint);
+        Boolean fingerprintAlreadyExist=false;
+        if(muzimaFingerprint !=null){
+            fingerprintAlreadyExist=true;
+        }
+        PatientFingerPrintModel patient = service.addFingerprintToPatient(patientWithFingerprint,firstImageBytes,secondImageBytes,thirdImageBytes,fingerprintAlreadyExist);
         List<PatientFingerPrintModel> patientFingerPrintModels = new ArrayList<PatientFingerPrintModel>();
         patientFingerPrintModels.add(patient);
         return patientFingerPrintModels;
     }
 
-    @RequestMapping(value = "editPatient.form")
+    @RequestMapping(value = "patientEdit.form",method=RequestMethod.GET)
     public void editPatient(HttpServletRequest request, Model model)
     {
         model.addAttribute("patientUuid",request.getParameter("patientUuid"));
