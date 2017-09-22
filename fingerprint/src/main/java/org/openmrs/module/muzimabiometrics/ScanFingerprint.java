@@ -29,9 +29,8 @@ public class ScanFingerprint{
             oos.flush();
             byte[] encodedByteArray = Base64.encodeBase64(bo.toByteArray());
             System.out.println("new encodedByteArray +++++++++++++++++++"+encodedByteArray);
-            String url="http://localhost:8080/openmrs/module/muzimabiometrics/setFingerprint.form";
-            //List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-            //params.add(new BasicNameValuePair("fingerprint", encodedByteArray.toString()));
+            //String url="http://localhost:8080/openmrs/module/muzimabiometrics/setFingerprint.form";
+            String url="http://demo2.muzima.org/openmrs/module/muzimabiometrics/setFingerprint.form";
             HttpPost request=new HttpPost(url);
             request.setEntity(new ByteArrayEntity(encodedByteArray));
             request.setHeader("Content-type", "application/octet-stream");

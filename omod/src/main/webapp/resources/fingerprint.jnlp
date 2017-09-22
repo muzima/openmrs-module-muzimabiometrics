@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp spec="1.0+" codebase="http://localhost:8080/openmrs/moduleResources/muzimabiometrics/" href="">
+<jnlp spec="1.0+" codebase="http://demo2.muzima.org/openmrs/moduleResources/muzimabiometrics/" href="">
 <information>
     <title>Web start</title>
     <vendor>Muzima Team</vendor>
