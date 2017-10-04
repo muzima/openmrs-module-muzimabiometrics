@@ -27,6 +27,7 @@ public class EnrollFingerprint {
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
+    private String baseUrl="http://localhost:8080/openmrs/module/muzimabiometrics";
     JlibFprint jlibfprint = new JlibFprint();
     JlibFprint.fp_print_data firstImage,secondImage,thirdImage;
     JButton firstCaptureBtn,secondCaptureBtn,thirdCaptureBtn,exit;
@@ -73,7 +74,7 @@ public class EnrollFingerprint {
                     byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
                     System.out.println("encodedByteArray "+secondFingerEncodedByteArray);
                     log.info("encodedByteArray "+secondFingerEncodedByteArray);
-                    String url="http://demo2.muzima.org/openmrs/module/muzimabiometrics/enrollFirstImage.form";
+                    String url=baseUrl+"/enrollFirstImage.form";
                     HttpPost request=new HttpPost(url);
                     request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
                     request.setHeader("Content-type", "application/octet-stream");
@@ -109,7 +110,7 @@ public class EnrollFingerprint {
                     oos.flush();
                     byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
                     log.info("encodedByteArray "+secondFingerEncodedByteArray);
-                    String url="http://demo2.muzima.org/openmrs/module/muzimabiometrics/enrollSecondImage.form";
+                    String url=baseUrl+"/enrollSecondImage.form";
                     HttpPost request=new HttpPost(url);
                     request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
                     request.setHeader("Content-type", "application/octet-stream");
@@ -146,7 +147,7 @@ public class EnrollFingerprint {
                     oos.flush();
                     byte[] thirdFingerEncodedByteArray = Base64.encodeBase64(thirdFingerBO.toByteArray());
                     log.info("encodedByteThird "+thirdFingerEncodedByteArray);
-                    String url="http://demo2.muzima.org/openmrs/module/muzimabiometrics/enrollThirdImage.form";
+                    String url=baseUrl+"/enrollThirdImage.form";
                     HttpPost request=new HttpPost(url);
                     request.setEntity(new ByteArrayEntity(thirdFingerEncodedByteArray));
                     request.setHeader("Content-type", "application/octet-stream");
