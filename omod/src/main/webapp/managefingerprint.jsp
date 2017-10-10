@@ -229,7 +229,7 @@
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
-            <span style="font-weight:bold;color: red;">Selected:</span><br>
+            <span id="selected-patient" style="font-weight:bold;color:green;"></span><br>
             <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
             <button type="button" id="addFingers" class="btn btn-lg btn-primary">Add Fingerprints</button>
         </div>
