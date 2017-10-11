@@ -97,7 +97,7 @@
                     <thead >
                     <tr class = "forms-list-header">
                         <th style="display:none;"></th>
-                        <th>Id</th>
+                        <th>ID</th>
                         <th>First Name</th>
                         <th>Family Name</th>
                         <th>Identifier(s)</th>
@@ -225,7 +225,7 @@
         <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
             <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br>
             <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
-        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Update Scanned Thumb Fingers</button>
+        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Confirm Scanned Thumb Finger</button>
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
@@ -292,6 +292,54 @@
             </div>
             <div class="modal-body">
               <p>The patient identifier already exists, please use a different one.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div id="missing-first-scan" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Server Error</h4>
+            </div>
+            <div class="modal-body">
+              <p>First left thumb scan has not been performed, please enroll it to proceed</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div id="missing-second-scan" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Server Error</h4>
+            </div>
+            <div class="modal-body">
+              <p>Second left thumb scan has not been performed, please enroll it to proceed</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div id="missing-third-scan" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Server Error</h4>
+            </div>
+            <div class="modal-body">
+              <p>Third left thumb scan has not been performed, please enroll it to proceed</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

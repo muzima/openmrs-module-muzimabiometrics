@@ -120,19 +120,16 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
     }*/
 
     @Override
-    public PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage,Boolean fingerprintAlreadyExist) throws JSONException {
+    public PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage) throws JSONException {
         PatientJsonParser patientJsonParser = new PatientJsonParser();
         PatientFingerPrintModel patient = null;
         Patient pat = null;
-        //ByteArrayInputStream fingerprint = patientJsonParser.getFingerPrintFromJson(patientWithFingerprint);
-        if(!fingerprintAlreadyExist) {
-            MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint();
-            muzimaFingerprint.setPatientUUID(patientUUID);
-            muzimaFingerprint.setFirstFingerprint(firstFingerImage);
-            muzimaFingerprint.setSecondFingerprint(secondeFingerImage);
-            muzimaFingerprint.setThirdFingerprint(thirdFingerImage);
-            dao.saveMuzimaFingerprint(muzimaFingerprint);
-        }
+        MuzimaFingerprint muzimaFingerprint=new MuzimaFingerprint();
+        muzimaFingerprint.setPatientUUID(patientUUID);
+        muzimaFingerprint.setFirstFingerprint(firstFingerImage);
+        muzimaFingerprint.setSecondFingerprint(secondeFingerImage);
+        muzimaFingerprint.setThirdFingerprint(thirdFingerImage);
+        dao.saveMuzimaFingerprint(muzimaFingerprint);
         pat = Context.getPatientService().getPatientByUuid(patientUUID);
         patient = new PatientFingerPrintModel(pat.getUuid(),
                 firstFingerImage,

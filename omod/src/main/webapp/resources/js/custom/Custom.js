@@ -21,7 +21,7 @@ function identifyPatient(fingerprintData){
             updatePatientListTable(msg, 1);
         },
         error: function(msg, status, error){
-            alert(error);
+            console.log("server error +++++++++++++"+JSON.stringify(error));
         }
 
     });
@@ -63,13 +63,11 @@ function activate(val, e){
                 else{
                     $("#enrollFingerprint").hide();
                     updatePatientListTable(result, 1);
-                    patientUUID=result[0].patientUUID;
                     console.log("patientsearch is "+JSON.stringify(result));
                 }
             },
             error: function(msg, status, error){
-                console.log(msg);
-                alert(error);
+                console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
             }
         });
     }
@@ -80,7 +78,7 @@ function show(fingerprint, patientUuid){
         return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
     }
     else {
-        return "<button type='button'>Add Fingerprint</button>"
+        return "<button type='button'>Add Fingerprints</button>"
     }
 };
 
@@ -250,7 +248,7 @@ $(function(){
                 updatePatientListTable(msg, 1);
             },
             error: function(msg, status, error){
-                alert(error);
+                console.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
 
@@ -277,7 +275,7 @@ $(function(){
                 window.location = openmrsContextPath+'/module/muzimabiometrics/managefingerprint.form?patientUuid='+patientUuid;
             },
             error: function(msg, status, error){
-                alert(error);
+                console.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
     });
@@ -307,8 +305,7 @@ $(function(){
                 updateControls(0);
             },
             error: function(msg, status, error){
-                console.log(msg);
-                alert(error);
+                cconsole.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
 
@@ -342,8 +339,7 @@ $(function(){
                         document.getElementById("fingerprintScan").value="false";
                     },
                     error: function(msg, status, error){
-                        console.log(msg);
-                        alert(error);
+                        console.log("server error +++++++++++++"+JSON.stringify(error));
                     }
                 });
               }
@@ -458,8 +454,7 @@ $(function(){
                 }
             },
             error: function(msg, status, error){
-                console.log(msg);
-                alert(error);
+                console.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
     }
@@ -636,6 +631,15 @@ $(function(){
                     updateControls(3);
                     $("#enrollFingerprint").hide();
                 }
+                else if(fingersStatus.firstImageIsSet==false){
+                  $('#missing-first-scan').modal('show');
+                }
+                else if(fingersStatus.secondImageIsSet==false){
+                  $('#missing-second-scan').modal('show');
+                }
+                else{
+                  $('#missing-third-scan').modal('show');
+                }
             }
         })
     });
@@ -658,6 +662,15 @@ $(function(){
                             updatePatientListTable(result, 5);
                         }
                     })
+                }
+                else if(fingersStatus.firstImageIsSet==false){
+                  $('#missing-first-scan').modal('show');
+                }
+                else if(fingersStatus.secondImageIsSet==false){
+                  $('#missing-second-scan').modal('show');
+                }
+                else{
+                  $('#missing-third-scan').modal('show');
                 }
             }
         })
