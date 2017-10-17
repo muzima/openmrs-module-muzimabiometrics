@@ -40,10 +40,7 @@ public class ScanFingerprint{
             request.setEntity(new ByteArrayEntity(encodedByteArray));
             request.setHeader("Content-type", "application/octet-stream");
             HttpResponse response = client.execute(request);
-            BufferedReader rd = new BufferedReader
-                    (new InputStreamReader(
-                            response.getEntity().getContent()));
-
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line = "";
             while ((line = rd.readLine()) != null) {
                 System.out.println(line);
