@@ -651,16 +651,31 @@ $(function(){
             success:function(result){
                 var fingersStatus=JSON.parse(result);
                 if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
-                    $("#addFingerprints").hide();
-                    $.ajax({
-                        type:"POST",
-                        url:"fingerprint/addFingerprint.form",
-                        contentType:"application/json",
-                        data:patientUUID,
-                        success:function(result){
-                            $("#enrollFingerprint").html("<span style='font-weight:bold;color:green;'>Fingerprint Successfully added</span>").show();
-                            updatePatientListTable(result, 5);
-                        }
+                  $.ajax({
+                      type: "GET",
+                      url: "getFingerprint.form",
+                      contentType: "application/json",
+                      success: function (response){
+                        if(response.patientUUID==""){
+                        $("#addFingerprints").hide();
+                        $.ajax({
+                            type:"POST",
+                            url:"fingerprint/addFingerprint.form",
+                            contentType:"application/json",
+                            data:patientUUID,
+                            success:function(result){
+                                $("#enrollFingerprint").html("<span style='font-weight:bold;color:green;'>Fingerprint Successfully added</span>").show();
+                                updatePatientListTable(result, 5);
+                            }
+                        })
+                      }
+                      else{
+                        $('#fingerprint-exists').modal('show');
+                      }
+                      },
+                      error:function(error){
+                        console.log("error is ++++++++"+JSON.stringify(error));
+                      }
                     })
                 }
                 else if(fingersStatus.firstImageIsSet==false){

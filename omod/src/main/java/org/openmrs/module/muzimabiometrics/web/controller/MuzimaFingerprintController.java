@@ -43,7 +43,7 @@ public class MuzimaFingerprintController {
     private MuzimaFingerprintService service;
     private boolean fingerprintIsSet,firstImageIsSet,secondImageIsSet,thirdImageIsSet;
     private byte[] fingerForIdentification,firstImageBytes,secondImageBytes,thirdImageBytes;
-    private String patientUUID;
+    private String patientUUID="";
     private int bozorth_threshold=40;
     private String scannerException="";
     @ResponseBody
@@ -85,41 +85,22 @@ public class MuzimaFingerprintController {
     }
     @ResponseBody
     @RequestMapping(value = "setFingerprint.form",  method = RequestMethod.POST)
-    public synchronized void setFingerprint(@RequestBody byte[] request,Model model) throws IOException, ParseException, ClassNotFoundException {
+    public synchronized void setFingerprint(@RequestBody byte[] request,Model model){
         service=Context.getService(MuzimaFingerprintService.class);
         fingerForIdentification=request;
         fingerprintIsSet=true;
-        int firstFingerMatchValue=0;
-        int secondFingerMatchValue=0;
-        int thirdFingerMatchValue=0;
         if(request!= null) {
-            List<MuzimaFingerprint> muzimaFingerprintList=service.getAll();
-            for(MuzimaFingerprint muzimaFingerprint1:muzimaFingerprintList){
-                if(muzimaFingerprint1.getFirstFingerprint() !=null) {
-                    firstFingerMatchValue=matchFingerprints(fingerForIdentification,muzimaFingerprint1.getFirstFingerprint());
-                    log.info("first finger matchValue " + firstFingerMatchValue);
-                    System.out.println("first finger matchValue+++++++++++++++++++++++++"+firstFingerMatchValue);
-                }
-                if(muzimaFingerprint1.getSecondFingerprint() !=null) {
-                    secondFingerMatchValue = matchFingerprints(fingerForIdentification,muzimaFingerprint1.getSecondFingerprint());
-                    log.info("second finger match value " + secondFingerMatchValue);
-                    System.out.println("second finger matchValue+++++++++++++++++++++++++"+secondFingerMatchValue);
-                }
-                if(muzimaFingerprint1.getThirdFingerprint()!=null) {
-                    thirdFingerMatchValue = matchFingerprints(fingerForIdentification,muzimaFingerprint1.getThirdFingerprint());
-                    log.info("third finger match value " + thirdFingerMatchValue);
-                    System.out.println("third finger matchValue+++++++++++++++++++++++++"+thirdFingerMatchValue);
-                }
-                if(firstFingerMatchValue > bozorth_threshold || secondFingerMatchValue > bozorth_threshold || thirdFingerMatchValue > bozorth_threshold){
-                    patientUUID=muzimaFingerprint1.getPatientUUID();
-                    log.info("The two fingerprints are compatible");
-                    break;
-                }
+            try {
+                matchPatients(fingerForIdentification);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
 
     }
-    public int matchFingerprints(byte[] fingerToVerify,byte[] storedFingerprint) throws IOException, ClassNotFoundException {
+    public int processFingerprintMatching(byte[] fingerToVerify,byte[] storedFingerprint) throws IOException, ClassNotFoundException {
         byte[] patientFingerByte,scanByteToVerify;
         ByteArrayInputStream patientFingerByteArray,scanByteArrayToVerify;
         ObjectInput patientFingerInput,fingerprintToverify;
@@ -136,12 +117,48 @@ public class MuzimaFingerprintController {
         matchValue = JlibFprint.img_compare_print_data(scanJlibData, fingerData);
         return matchValue;
     }
+    public void matchPatients(byte[] fingerToMatch) throws IOException, ClassNotFoundException {
+        int firstFingerMatchValue=0;
+        int secondFingerMatchValue=0;
+        int thirdFingerMatchValue=0;
+        patientUUID="";
+        List<MuzimaFingerprint> muzimaFingerprintList=service.getAll();
+        for(MuzimaFingerprint muzimaFingerprint1:muzimaFingerprintList){
+            if(muzimaFingerprint1.getFirstFingerprint() !=null) {
+                firstFingerMatchValue=processFingerprintMatching(fingerToMatch,muzimaFingerprint1.getFirstFingerprint());
+                log.info("first finger matchValue " + firstFingerMatchValue);
+                System.out.println("first finger matchValue+++++++++++++++++++++++++"+firstFingerMatchValue);
+            }
+            if(muzimaFingerprint1.getSecondFingerprint() !=null) {
+                secondFingerMatchValue = processFingerprintMatching(fingerToMatch,muzimaFingerprint1.getSecondFingerprint());
+                log.info("second finger match value " + secondFingerMatchValue);
+                System.out.println("second finger matchValue+++++++++++++++++++++++++"+secondFingerMatchValue);
+            }
+            if(muzimaFingerprint1.getThirdFingerprint()!=null) {
+                thirdFingerMatchValue = processFingerprintMatching(fingerToMatch,muzimaFingerprint1.getThirdFingerprint());
+                log.info("third finger match value " + thirdFingerMatchValue);
+                System.out.println("third finger matchValue+++++++++++++++++++++++++"+thirdFingerMatchValue);
+            }
+            if(firstFingerMatchValue > bozorth_threshold || secondFingerMatchValue > bozorth_threshold || thirdFingerMatchValue > bozorth_threshold){
+                patientUUID=muzimaFingerprint1.getPatientUUID();
+                log.info("The two fingerprints are compatible");
+                break;
+            }
+        }
+    }
     @ResponseBody
     @RequestMapping(value="enrollFirstImage.form",method=RequestMethod.POST)
     public synchronized void enrollFirstImage(@RequestBody byte[] request){
         firstImageBytes=request;
         firstImageIsSet=true;
         log.info("first image enrolled "+firstImageBytes);
+        try {
+            matchPatients(firstImageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     @ResponseBody
     @RequestMapping(value="enrollSecondImage.form",method=RequestMethod.POST)
@@ -176,6 +193,7 @@ public class MuzimaFingerprintController {
         JSONObject resp=new JSONObject();
         resp.put("fingerprintIsSet",fingerprintIsSet);
         resp.put("exception",scannerException);
+        resp.put("patientUUID",patientUUID);
         log.info("fingerprintis set "+fingerprintIsSet);
         return resp;
     }

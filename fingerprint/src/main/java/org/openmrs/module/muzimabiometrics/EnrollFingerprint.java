@@ -68,15 +68,16 @@ public class EnrollFingerprint {
         firstCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    enrollFinger(jlibfprint.enroll_finger(),"/enrollFirstImage.form","First Capturing Completed");
                     firstImage=jlibfprint.enroll_finger();
+                    statusLabel.setText("Scanning............");
+                    enrollFinger(firstImage,"/enrollFirstImage.form","First Capturing Completed");
                     enrollFingerSecondTime();
                 } catch (JlibFprint.EnrollException e) {
                     if(e.enroll_exception==-2){
-                        exception="Scanner not found, please insert scanner to continue.";
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
                     }
                     else if(e.enroll_exception==100){
-                        exception="Low quality image captured, please scan again.";
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
                     }
                     statusLabel.setText(exception);
                     e.printStackTrace();
@@ -98,18 +99,18 @@ public class EnrollFingerprint {
                     secondImage=jlibfprint.enroll_finger();
                     matchValue = JlibFprint.img_compare_print_data(firstImage,secondImage);
                     if(matchValue>bozorthThreshold){
-                        enrollFinger(jlibfprint.enroll_finger(),"/enrollSecondImage.form","Second Capturing Completed");
+                        enrollFinger(secondImage,"/enrollSecondImage.form","Second Capturing Completed");
                         enrollFingerThirdTime();
                     }
                     else{
-                        statusLabel.setText("The captured second thumb does not match, please rescan.");
+                        statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan.</font></html>");
                     }
                 } catch (JlibFprint.EnrollException e) {
                     if(e.enroll_exception==-2){
-                        exception="Scanner not found, please insert scanner to continue.";
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
                     }
                     else if(e.enroll_exception==100){
-                        exception="Low quality image captured, please scan again.";
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
                     }
                     statusLabel.setText(exception);
                     e.printStackTrace();
@@ -132,19 +133,18 @@ public class EnrollFingerprint {
                     thirdImage=jlibfprint.enroll_finger();
                     matchValue = JlibFprint.img_compare_print_data(secondImage,thirdImage);
                     if(matchValue>bozorthThreshold){
-                        enrollFinger(jlibfprint.enroll_finger(),"/enrollThirdImage.form","Third Capturing Completed");
+                        enrollFinger(thirdImage,"/enrollThirdImage.form","Third Capturing Completed");
                         exit();
                     }
                     else{
-                        statusLabel.setText("The captured third thumb does not match, please rescan.");
+                        statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan</font></html>");
                     }
-                    exit();
                 } catch (JlibFprint.EnrollException e) {
                     if(e.enroll_exception==-2){
-                        exception="Scanner not found, please insert scanner to continue.";
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
                     }
                     else if(e.enroll_exception==100){
-                        exception="Low quality image captured, please scan again.";
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
                     }
                     statusLabel.setText(exception);
                     e.printStackTrace();
@@ -169,7 +169,7 @@ public class EnrollFingerprint {
         mainFrame.setVisible(true);
     }
     private void enrollFinger(JlibFprint.fp_print_data image,String path,String msg) throws JlibFprint.EnrollException, IOException {
-        image=jlibfprint.enroll_finger();
+
         CloseableHttpClient client = HttpClientBuilder.create().build();
         ByteArrayOutputStream fingerBO = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(fingerBO);
@@ -188,6 +188,6 @@ public class EnrollFingerprint {
         while ((line = rd.readLine()) != null){
             System.out.println(line);
         }
-        statusLabel.setText(msg);
+        statusLabel.setText("<html><font color='green'>"+msg+"</font></html>");
     }
 }

@@ -1,6 +1,8 @@
 package org.openmrs.module.muzimabiometrics;
 
 import jlibfprint.JlibFprint;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScanFingerprint{
+    private static final Log log= LogFactory.getLog(ScanFingerprint.class);
     private String baseUrl;
     private String url;
     public static void main(String[] args) throws IOException {
@@ -34,7 +37,7 @@ public class ScanFingerprint{
             oos.writeObject(pd1);
             oos.flush();
             byte[] encodedByteArray = Base64.encodeBase64(bo.toByteArray());
-            System.out.println("encodedByteArray +++++++++++++++++++"+encodedByteArray);
+            log.info("encodedByteArray "+encodedByteArray);
             scanFingerprint.url=scanFingerprint.baseUrl+"/setFingerprint.form";
             HttpPost request=new HttpPost(scanFingerprint.url);
             request.setEntity(new ByteArrayEntity(encodedByteArray));

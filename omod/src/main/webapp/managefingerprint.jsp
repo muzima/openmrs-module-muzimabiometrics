@@ -347,6 +347,22 @@
           </div>
         </div>
         </div>
+        <div id="fingerprint-exists" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Server Error</h4>
+            </div>
+            <div class="modal-body">
+              <p>This patient's fingerprint matches an existing patient, it cannot be appended</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+        </div>
 </div>
 <script>
 
