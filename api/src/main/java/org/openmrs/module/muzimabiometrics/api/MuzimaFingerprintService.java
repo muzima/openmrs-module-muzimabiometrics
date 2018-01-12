@@ -1,8 +1,10 @@
 package org.openmrs.module.muzimabiometrics.api;
 
 import org.json.JSONException;
+import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.muzimabiometrics.MuzimaFingerprint;
+import org.openmrs.module.muzimabiometrics.MuzimaTemporaryFingerprint;
 import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModel;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +18,14 @@ import java.util.List;
 public interface MuzimaFingerprintService extends OpenmrsService {
 
     @Transactional
-    PatientFingerPrintModel savePatient(String patientData) throws JSONException, ParseException;
+    Patient savePatient(String patientData,byte[] firstFingerPrint,byte[] secondFingerprint,byte[] thirdFingerprint) throws JSONException, ParseException;
 
     PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException;
 
     List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(String identifier) throws JSONException;
 
-    @Transactional
-    boolean updatePatient(String patientWithFingerprint) throws JSONException;
+
+    //boolean updatePatient(String patientWithFingerprint) throws JSONException;
 
     List<PatientFingerPrintModel> findPatients(String searchInput);
 
@@ -34,7 +36,6 @@ public interface MuzimaFingerprintService extends OpenmrsService {
     MuzimaFingerprint findByUniqueId(String uuid);
 
     @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(String patientWithFingerprint) throws JSONException;
-    @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(MuzimaFingerprint muzimaFingerprint);
+    PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage,Boolean fingerprintAlreadyExist) throws JSONException;
+
 }

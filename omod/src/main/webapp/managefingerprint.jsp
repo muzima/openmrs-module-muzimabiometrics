@@ -11,11 +11,31 @@
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/jquery/jquery-ui-1.10.4.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/jquery/jquery.validate.min.js"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/underscore/underscore-min.js"/>
+<style>
+    .loader {
+        border: 5px solid #f3f3f3;
+        -webkit-animation: spin 1s linear infinite;
+        animation: spin 1s linear infinite;
+        border-top: 5px solid #555;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
 
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
 <div>
     <div class="navbar navbar-custom">
         <div>
-            <a href="#"><i class="icon-home"></i> Muzima Fingerprint Module</a>
+            <a href="#"><i class="icon-home"></i> mUzima Fingerprint Module</a>
         </div>
     </div>
     <div>
@@ -27,22 +47,26 @@
                         <tr class = "forms-header">
                             <th>Find Patient(s)</th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Patient Identifier or Patient Name:<input type="text" id="findPatients" name="findPatients" value="${identifier}" onkeypress="activate(this.value, event)"></td>
-                            <td>
-                                <div id = "applet">
-                                    <applet name="Muzima fingerprint module" id="Abis" code="org.openmrs.module.muzimabiometrics.SimpleFingersApplication" width="100%" height="100">
-                                        <param name="jnlp_href" value="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp" />
-                                        <param name="codebase_lookup" value="false" />
-                                        <param name="separate_jvm" value="true" />
-                                        <param name="server_address" value="/local" />
-                                        <param name="server_port" value="5000" />
-                                    </applet>
+                            <td><div id="downloadDiv">
+                                <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp" id="download"><b>Please Place your left thumb on to the scanner & click here</b></a>
+                            <input type="hidden" id="startScanning"/>
+                            <input type="hidden" id="fingerprintScan" />
+                            </div>
+                            <div id="refreshDiv">
+                                <span>Fingerprint processing timed out, please click refresh to continue</span>
+                                <button type="button" id="refresh">Refresh</button></div>
+                                <div id="spinner">
+                                    <div class="loader"></div>
+                                    <span>Scanning In Progress</span>
                                 </div>
                             </td>
+                            <td><button type="button" id="reload">Clear Data</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -56,11 +80,11 @@
     <div id="body-wrapper">
         <div class = "row forms-list">
             <div class ="col-lg-12" >
-
                 <table  id="tblData">
                     <thead >
                     <tr class = "forms-header">
                         <th>Patient List</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -74,6 +98,7 @@
                         <th>Family Name</th>
                         <th>Gender</th>
                         <th>Fingerprint</th>
+                        <th>Dispense Drugs</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,8 +108,8 @@
             </div>
         </div>
     </div>
-    <div id="searchResults">
-        <h5>No Patient found</h5>
+    <div id="searchResults" style="margin:0 auto;padding:10px;border: 1px solid gray;width:50%;text-align: center;">
+        <h5>No Patient found with this identifier. Please search patient using fingerprint</h5>
     </div>
     <div id = "registrationSection">
         <div id = "updatePatient" class = "button-loc">
@@ -96,12 +121,23 @@
             <a href="#" id="btnYes">Yes</a>
             <a href="#" id="btnNo">No</a>
         </div>
+        <div style="height:20px;"></div>
+        <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;width:50%;text-align: center;">
+            <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br>
+            <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
+        <button type="button" id="enrollFingers">Update Scanned Thumb Fingers</button>
+        </div>
+        <div style="height:20px;"></div>
+        <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;width:50%;text-align: center;">
+            <span style="font-weight:bold;color: red;">Patient doesn't have enrolled fingerprints, click below to enroll.</span><br>
+            <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
+            <button type="button" id="addFingers">Add fingerprints</button>
+        </div>
         <div id = "registrationForm">
             <form id = "formData" method = "post" action = "">
                 <h3 id="form-title">Registration Form</h3>
                 <fieldset  name="patient">
                     <div class="form-group">
-
                         <label for= "given_name">First Name</label>
                         <input autocomplete="off" type="text" name="given_name">
 
@@ -129,8 +165,6 @@
 
                         <label for= "fingerprint">Finger Print</label>
                         <img src ="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/>
-                        <input id = "fingerprint" autocomplete="off" type="hidden" name="fingerprint">
-
                         <label for= "birth_date">Date of Birth</label>
                         <input autocomplete="off" type="date" name="birth_date">
 
