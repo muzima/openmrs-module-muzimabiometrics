@@ -1,6 +1,9 @@
 package org.openmrs.module.muzimabiometrics;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +13,8 @@ import java.io.*;
 
 import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
@@ -17,13 +22,18 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class EnrollFingerprint {
+    private static final Log log= LogFactory.getLog(EnrollFingerprint.class);
     private JFrame mainFrame;
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
+    private String baseUrl="http://localhost:8080/openmrs/module/muzimabiometrics";
     JlibFprint jlibfprint = new JlibFprint();
     JlibFprint.fp_print_data firstImage,secondImage,thirdImage;
     JButton firstCaptureBtn,secondCaptureBtn,thirdCaptureBtn,exit;
+    int matchValue=0;
+    int bozorthThreshold=40;
+    String exception="";
     public EnrollFingerprint(){
         prepareGUI();
     }
@@ -32,7 +42,7 @@ public class EnrollFingerprint {
             enrollFingerprint.enrollFingerFirstTime();
     }
     private void prepareGUI(){
-        mainFrame = new JFrame("Patient Fingerprint Enrollment");
+        mainFrame = new JFrame("Patient Fingerprint Registration");
         mainFrame.setSize(400,400);
         mainFrame.setLayout(new GridLayout(3, 1));
 
@@ -53,44 +63,27 @@ public class EnrollFingerprint {
         mainFrame.add(statusLabel);
         mainFrame.setVisible(true);
     }
-    private static ImageIcon createImageIcon(String path, String description) {
-        java.net.URL imgURL = ScanFingerprint.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
     private void enrollFingerFirstTime(){
         firstCaptureBtn = new JButton("Capture Thumb Finger First Time");
         firstCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    firstImage = jlibfprint.enroll_finger();
-                    CloseableHttpClient client = HttpClientBuilder.create().build();
-                    ByteArrayOutputStream secondFingerBO = new ByteArrayOutputStream();
-                    ObjectOutputStream oos = new ObjectOutputStream(secondFingerBO);
-                    oos.writeObject(firstImage);
-                    oos.flush();
-                    byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
-                    System.out.println("encodedByteArray +++++++++++++++++++"+secondFingerEncodedByteArray);
-                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollFirstImage.form";
-                    HttpPost request=new HttpPost(url);
-                    request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
-                    request.setHeader("Content-type", "application/octet-stream");
-                    HttpResponse response = client.execute(request);
-                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                    String line = "";
-                    while ((line = rd.readLine()) != null){
-                        System.out.println(line);
-                    }
+                    firstImage=jlibfprint.enroll_finger();
+                    statusLabel.setText("Scanning............");
+                    enrollFinger(firstImage,"/enrollFirstImage.form","First Capturing Completed");
                     enrollFingerSecondTime();
-                    statusLabel.setText("First Capturing Completed");
                 } catch (JlibFprint.EnrollException e) {
+                    if(e.enroll_exception==-2){
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
+                    }
+                    else if(e.enroll_exception==100){
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
+                    }
+                    statusLabel.setText(exception);
                     e.printStackTrace();
                 }
                 catch(IOException ex){
+                    ex.printStackTrace();
                 }
             }
         });
@@ -103,30 +96,27 @@ public class EnrollFingerprint {
         secondCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    secondImage = jlibfprint.enroll_finger();
-                    CloseableHttpClient client = HttpClientBuilder.create().build();
-                    ByteArrayOutputStream secondFingerBO = new ByteArrayOutputStream();
-                    ObjectOutputStream oos = new ObjectOutputStream(secondFingerBO);
-                    oos.writeObject(secondImage);
-                    oos.flush();
-                    byte[] secondFingerEncodedByteArray = Base64.encodeBase64(secondFingerBO.toByteArray());
-                    System.out.println("encodedByteArray +++++++++++++++++++"+secondFingerEncodedByteArray);
-                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollSecondImage.form";
-                    HttpPost request=new HttpPost(url);
-                    request.setEntity(new ByteArrayEntity(secondFingerEncodedByteArray));
-                    request.setHeader("Content-type", "application/octet-stream");
-                    HttpResponse response = client.execute(request);
-                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                    String line = "";
-                    while ((line = rd.readLine()) != null) {
-                        System.out.println(line);
+                    secondImage=jlibfprint.enroll_finger();
+                    matchValue = JlibFprint.img_compare_print_data(firstImage,secondImage);
+                    if(matchValue>bozorthThreshold){
+                        enrollFinger(secondImage,"/enrollSecondImage.form","Second Capturing Completed");
+                        enrollFingerThirdTime();
                     }
-                    enrollFingerThirdTime();
-                    statusLabel.setText("Second Capturing Completed");
+                    else{
+                        statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan.</font></html>");
+                    }
                 } catch (JlibFprint.EnrollException e) {
+                    if(e.enroll_exception==-2){
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
+                    }
+                    else if(e.enroll_exception==100){
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
+                    }
+                    statusLabel.setText(exception);
                     e.printStackTrace();
                 }
                 catch(IOException ex){
+                    ex.printStackTrace();
                 }
             }
         });
@@ -140,29 +130,27 @@ public class EnrollFingerprint {
             public void actionPerformed(ActionEvent actionEvent) {
                 statusLabel.setText("Third Capturing Completed");
                 try {
-                    thirdImage = jlibfprint.enroll_finger();
-                    CloseableHttpClient client = HttpClientBuilder.create().build();
-                    ByteArrayOutputStream thirdFingerBO = new ByteArrayOutputStream();
-                    ObjectOutputStream oos = new ObjectOutputStream(thirdFingerBO);
-                    oos.writeObject(thirdImage);
-                    oos.flush();
-                    byte[] thirdFingerEncodedByteArray = Base64.encodeBase64(thirdFingerBO.toByteArray());
-                    System.out.println("encodedByteArray +++++++++++++++++++"+thirdFingerEncodedByteArray);
-                    String url="http://localhost:8080/openmrs/module/muzimabiometrics/enrollThirdImage.form";
-                    HttpPost request=new HttpPost(url);
-                    request.setEntity(new ByteArrayEntity(thirdFingerEncodedByteArray));
-                    request.setHeader("Content-type", "application/octet-stream");
-                    HttpResponse response = client.execute(request);
-                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                    String line = "";
-                    while ((line = rd.readLine()) != null) {
-                        System.out.println(line);
+                    thirdImage=jlibfprint.enroll_finger();
+                    matchValue = JlibFprint.img_compare_print_data(secondImage,thirdImage);
+                    if(matchValue>bozorthThreshold){
+                        enrollFinger(thirdImage,"/enrollThirdImage.form","Third Capturing Completed");
+                        exit();
                     }
-                    exit();
+                    else{
+                        statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan</font></html>");
+                    }
                 } catch (JlibFprint.EnrollException e) {
+                    if(e.enroll_exception==-2){
+                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
+                    }
+                    else if(e.enroll_exception==100){
+                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
+                    }
+                    statusLabel.setText(exception);
                     e.printStackTrace();
                 }
                 catch(IOException ex){
+                    ex.printStackTrace();
                 }
             }
         });
@@ -179,5 +167,27 @@ public class EnrollFingerprint {
         });
         controlPanel.add(exit);
         mainFrame.setVisible(true);
+    }
+    private void enrollFinger(JlibFprint.fp_print_data image,String path,String msg) throws JlibFprint.EnrollException, IOException {
+
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        ByteArrayOutputStream fingerBO = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(fingerBO);
+        oos.writeObject(image);
+        oos.flush();
+        byte[] fingerEncodedByteArray = Base64.encodeBase64(fingerBO.toByteArray());
+        System.out.println("encodedByteArray "+fingerEncodedByteArray);
+        log.info("encodedByteArray "+fingerEncodedByteArray);
+        String url=baseUrl+path;
+        HttpPost request=new HttpPost(url);
+        request.setEntity(new ByteArrayEntity(fingerEncodedByteArray));
+        request.setHeader("Content-type", "application/octet-stream");
+        HttpResponse response = client.execute(request);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null){
+            System.out.println(line);
+        }
+        statusLabel.setText("<html><font color='green'>"+msg+"</font></html>");
     }
 }

@@ -10,63 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>muzimabiometrics-fingerprint</artifactId>
-    <build>
-        <resources>
-            <resource>
-                <targetPath>${project.build.outputDirectory}/images</targetPath>
-                <directory>${basedir}/../../../../Resources</directory>
-                <includes>
-                    <include>Logo16x16.png</include>
-                </includes>
-            </resource>
-        </resources>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>sign</id>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keystore>${project.basedir}/mykeystore</keystore>
-                    <alias>vikas</alias>
-                    <storepass>password</storepass>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4.1</version>
-
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <!-- bind to the packaging phase -->
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- get all project dependencies -->
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <outputDirectory>${project.parent.basedir}/omod/src/main/webapp/resources</outputDirectory>
-                    <archive>
-                        <manifestFile>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>

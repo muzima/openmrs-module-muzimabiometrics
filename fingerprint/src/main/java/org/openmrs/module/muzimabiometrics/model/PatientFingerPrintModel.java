@@ -9,18 +9,20 @@ public class PatientFingerPrintModel {
     private String givenName;
     private String familyName;
     private String gender;
+    private String identifiers;
 
     public PatientFingerPrintModel() {
     }
 
     public PatientFingerPrintModel(String patientUUID, byte[] fingerprintTemplate, int id,
-                                   String givenName, String familyName, String gender) {
+                                   String givenName, String familyName, String gender, String identifiers) {
         this.patientUUID = patientUUID;
         this.fingerprintTemplate = fingerprintTemplate;
         this.id = id;
         this.givenName = givenName;
         this.familyName = familyName;
         this.gender = gender;
+        this.identifiers=identifiers;
     }
 
     public String getPatientUUID() {
@@ -70,5 +72,13 @@ public class PatientFingerPrintModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getIdentifiers() {
+        return identifiers;
+    }
+
+    public void setIdentifiers(String identifiers) {
+        this.identifiers = identifiers;
     }
 }

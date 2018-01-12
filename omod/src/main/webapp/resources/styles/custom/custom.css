@@ -1,5 +1,5 @@
 
-.button, button, input[type="submit"], input[type="button"], input[type="submit"], a.button {
+.button, button, a.button {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     -o-border-radius: 3px;
@@ -24,17 +24,6 @@
     text-decoration: none;
 }
 
-form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form ul.select {
-min-width: 80%;
-color: #363463;
-display: block;
-padding: 5px 10px;
-margin: 0;
-margin-top: 5px;
-background-color: #FFF;
-border: 1px solid #dddddd;
-}
-
 input[type="text"], input[type="password"] {
 padding: 1px;
 border: 1px solid cadetblue;
@@ -42,7 +31,6 @@ border: 1px solid cadetblue;
 
 #body-wrapper {
 margin-top: 10px;
-padding: 10px;
 background-color: white;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
@@ -76,11 +64,6 @@ font-family: "OpenSansBold";
 table th, table td {
 padding: 5px 10px;
 border: 1px solid #dddddd;
-}
-
-input[type="radio"] {
-box-sizing: border-box;
-padding: 0;
 }
 
 form select, .form select {
@@ -122,13 +105,10 @@ margin-left: 20px;
 
 .navbar-custom{
     background-color: #05A476;
-    margin: 30px 10px 10px 10px;
+    margin-top: 30px;
     padding-top: 10px;
 }
 
-button-loc{
-    margin-left: 20px;
-}
 div#otherIdentificationOption {
 margin-left: 20px;
 }

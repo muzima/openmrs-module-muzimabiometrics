@@ -57,16 +57,17 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
     @Override
     public PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException {
         Patient patient = null;
-        return new PatientFingerPrintModel(patient.getUuid(), null, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender());
+        return new PatientFingerPrintModel(patient.getUuid(), null, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender(),patient.getIdentifiers().toString());
     }
 
     public List<PatientFingerPrintModel> findPatients(String searchInput) {
         List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
         List<Patient> searchResults = Context.getPatientService().getPatients(searchInput);
         MuzimaFingerprint mfingerprint = null;
-        byte[] fingerprint = null;
+        byte[] fingerprint;
         if(searchResults.size() != 0){
             for(Patient patientSearched : searchResults) {
+                fingerprint = null;
                 mfingerprint = getFingerprintByPatientUUID(patientSearched.getUuid());
                 if (mfingerprint != null) {
                     fingerprint = mfingerprint.getFirstFingerprint();
@@ -76,7 +77,8 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
                                 patientSearched.getId(),
                                 patientSearched.getGivenName(),
                                 patientSearched.getFamilyName(),
-                                patientSearched.getGender())
+                                patientSearched.getGender(),
+                                patientSearched.getIdentifiers().toString())
                 );
             }
         }
@@ -95,7 +97,8 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
                         patientIdentifier.getPatient().getId(),
                         patientIdentifier.getPatient().getGivenName(),
                         patientIdentifier.getPatient().getFamilyName(),
-                        patientIdentifier.getPatient().getGender()));
+                        patientIdentifier.getPatient().getGender(),
+                        patientIdentifier.getPatient().getIdentifiers().toString()));
             }
         }
         return patients;
@@ -117,26 +120,24 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
     }*/
 
     @Override
-    public PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage,Boolean fingerprintAlreadyExist) throws JSONException {
+    public PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage) throws JSONException {
         PatientJsonParser patientJsonParser = new PatientJsonParser();
         PatientFingerPrintModel patient = null;
         Patient pat = null;
-        //ByteArrayInputStream fingerprint = patientJsonParser.getFingerPrintFromJson(patientWithFingerprint);
-        if(!fingerprintAlreadyExist) {
-            MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint();
-            muzimaFingerprint.setPatientUUID(patientUUID);
-            muzimaFingerprint.setFirstFingerprint(firstFingerImage);
-            muzimaFingerprint.setSecondFingerprint(secondeFingerImage);
-            muzimaFingerprint.setThirdFingerprint(thirdFingerImage);
-            dao.saveMuzimaFingerprint(muzimaFingerprint);
-        }
+        MuzimaFingerprint muzimaFingerprint=new MuzimaFingerprint();
+        muzimaFingerprint.setPatientUUID(patientUUID);
+        muzimaFingerprint.setFirstFingerprint(firstFingerImage);
+        muzimaFingerprint.setSecondFingerprint(secondeFingerImage);
+        muzimaFingerprint.setThirdFingerprint(thirdFingerImage);
+        dao.saveMuzimaFingerprint(muzimaFingerprint);
         pat = Context.getPatientService().getPatientByUuid(patientUUID);
         patient = new PatientFingerPrintModel(pat.getUuid(),
                 firstFingerImage,
                 pat.getId(),
                 pat.getGivenName(),
                 pat.getFamilyName(),
-                pat.getGender());
+                pat.getGender(),
+                pat.getIdentifiers().toString());
         return patient;
     }
 
@@ -166,7 +167,7 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
         for (MuzimaFingerprint fingerprint : fingerprints) {
             if(fingerprint.getFirstFingerprint() != null) {
                 Patient patient = Context.getPatientService().getPatientByUuid(fingerprint.getPatientUUID());
-                patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFirstFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender()));
+                patients.add(new PatientFingerPrintModel(patient.getUuid(),fingerprint.getFirstFingerprint(), patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender(),patient.getIdentifiers().toString()));
             }
         }
         return patients;
