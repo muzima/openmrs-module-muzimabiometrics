@@ -1,6 +1,6 @@
 package org.openmrs.module.muzimabiometrics.web.controller;
 
-import javassist.expr.Instanceof;
+//import javassist.expr.Instanceof;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
