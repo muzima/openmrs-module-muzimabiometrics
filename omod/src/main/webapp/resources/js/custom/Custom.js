@@ -622,7 +622,8 @@ $(function(){
         }
     }
     updateScanningView(1);
-    }
+
+    $("#enrollFingers").show();
     $("#enrollFingers").on("click",function(){
         $.ajax({
             type:"GET",

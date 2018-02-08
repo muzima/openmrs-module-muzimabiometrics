@@ -11,15 +11,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
-
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -177,38 +168,6 @@ public class EnrollFingerprint {
         });
         controlPanel.add(exit);
         mainFrame.setVisible(true);
-      /*  //start activating the show of the button to register users
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("JavaScript");
-        //Create file and reader instance for reading the script file
-        File file = new File("/home/enock/projects/openmrs-module-muzimabiometrics/omod/src/main/webapp/resources/js/custom/Custom.js");
-        Reader reader = null;
-        try {
-            try {
-                engine.eval(reader);
-                reader = new FileReader(file);
-                engine.eval(reader);
-            } catch (ScriptException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //Pass the script file to the engine
-        //Create invocable instance
-        Invocable invocable = (Invocable) engine;
-
-        //Invoke the methods defined in the script file
-        try {
-            invocable.invokeFunction("showenrollFingersbutton", "/home/enock/projects/openmrs-module-muzimabiometrics/omod/src/main/webapp/resources/js/custom/Custom.js");
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        //end of script showing the register button*/
-
     }
     private void enrollFinger(JlibFprint.fp_print_data image,String path,String msg) throws JlibFprint.EnrollException, IOException {
         //the finger enrolment process begins here, unhide the button here
