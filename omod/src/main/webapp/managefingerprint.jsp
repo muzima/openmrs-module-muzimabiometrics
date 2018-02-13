@@ -225,7 +225,7 @@
         <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
             <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br>
             <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
-        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary" style="display:none;">Confirm Scanned Thumb Finger</button>
+        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Confirm Scanned Thumb Finger</button>
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
