@@ -371,7 +371,6 @@ $(function(){
         function (value, element) { return Date.parse(value.replace("-","/")) < new Date().getTime(); },
         "Date can not be in the future."
     );
-
     $.fn.luhnCheckDigit = function (number) {
         var validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_";
         number = number.toUpperCase().trim();

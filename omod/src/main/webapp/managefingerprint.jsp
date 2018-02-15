@@ -34,13 +34,68 @@
         100% { transform: rotate(360deg); }
     }
 </style>
-<div class="container">
-    <div class="navbar navbar-custom">
+<!--start of trial -->
+<br/><br/><br/>
+<nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#codebrainery-toggle-nav" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">mUzima Fingerprint Module</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><button id="activatehomecontainer" type="button" class="btn btn-success btn-lg" title="This is the mUzima Fingerprint module home screen.">Home Screen</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activatemaincontainersignin" type="button" class="btn btn-success btn-lg" title="This screen allows users who have appended their fingerprints to their details to login simply by scanning the fingerprint">Identification</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activatemaincontainersignup" type="button" class="btn btn-success btn-lg" title="This screen allows you to signup a new user with fingerprint capability or append an old patient without fingerprint capability with a fingerprint ability.">Registration</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activedefaultsettings" type="button" class="btn btn-success btn-lg" title="this page allows the implementor to set the default finger to be scanned in the particular setting that will show on the sign in screen">Settings</button></li>
+          </ul>
+        </div>
+
+      </div> <!-- close container div -->
+    </nav> <!-- close navbar nav -->
+<br/>
+<div id="homecontainer" class="container">
+  <h3>Welcome to mUzima Fingerprint Biometrics Module</h3>
+  <p>This module allows you to register a new patient with a fingerprint scan option or to append an existing user with the fingerprint capability. It is also used to access patient information whose fingerprint
+    had already been registered in the system. Navigate through the menu bars above. You can hover the mouse over a certain menu that is not clear to get more information about it.</p>
+</div>
+<div id="showdefaultsettings" style="display:hidden;" class="container">
+          <fieldset style="width:80%;text-align:center;">
+            <legend><h2>DEFAULT FINGER SETTINGS<h2></legend>
+            <p>Choose the default finger in the dropdown below and click apply to save you setting.</p><br/>
+            <select id="defaultfinger" style="width:80%;text-align:center;">
+              <option style="text-align:center;">left thumb</option>
+              <option style="text-align:center;">left index</option>
+              <option style="text-align:center;">left middle</option>
+              <option style="text-align:center;">left ring</option>
+              <option style="text-align:center;">left little</option>
+              <option style="text-align:center;">right thumb</option>
+              <option style="text-align:center;">right index</option>
+              <option style="text-align:center;">right middle</option>
+              <option style="text-align:center;">right ring</option>
+              <option style="text-align:center;">right little</option>
+            </select>
+            <br/></br/>
+            <button style="width:60%;" id="applydefaultfinger" type="button" class="btn btn-success btn-lg">APPLY SETTINGS</button>
+          </fieldset>
+            
+</div>
+<!-- end of trial-->
+<div id="mainframecontainer" class="container" style="display:none;">
+    <!--<div class="navbar navbar-custom">
         <div>
             <a href="#"><i class="icon-home"></i> mUzima Fingerprint Module</a>
         </div>
-    </div>
-    <div>
+    </div>-->
+
+    <!-- sign in screen -->
+    <div id="signinscreen" style="display:hidden;">
         <div id="find-patient">
             <div class = "row forms-list">
                 <div class ="col-lg-12" >
@@ -77,6 +132,8 @@
             </div>
         </div>
     </div>
+    <!-- -->
+
     <div id="patientCreated">
         <h5>Patient Created</h5>
     </div>
@@ -368,6 +425,36 @@
 
     var openmrsContextPath = '${pageContext.request.contextPath}';
 
+</script>
+<script>
+$(document).ready(function(){
+  $("#showdefaultsettings").hide();
+});
+$(document).ready(function(){
+  $("#activatemaincontainersignin").click(function(){
+      $("#homecontainer").fadeOut();
+       $("#showdefaultsettings").slideUp();
+      $("#mainframecontainer").slideDown();
+      $("#signinscreen").fadeIn();
+  });
+});
+//hide mainframecontainer,showdefaultsettingscontainer show homecontainer
+$(document).ready(function(){
+  $("#activatehomecontainer").click(function(){
+      $("#mainframecontainer").slideUp();
+       $("#showdefaultsettings").slideUp();
+      $("#homecontainer").fadeIn();
+  });
+});
+//end
+//activate settings
+$(document).ready(function(){
+  $("#activedefaultsettings").click(function(){
+      $("#mainframecontainer").hide();
+      $("#homecontainer").hide();
+      $("#showdefaultsettings").show();
+  });
+});
 </script>
 
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/custom/Custom.js"/>
