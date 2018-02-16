@@ -36,7 +36,7 @@
 </style>
 <!--start of trial -->
 <br/><br/><br/>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" style="background-color:#009D8E !important;">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#codebrainery-toggle-nav" aria-expanded="false">
@@ -50,10 +50,10 @@
 
         <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
           <ul class="nav navbar-nav navbar-right">
-            <li><button id="activatehomecontainer" type="button" class="btn btn-success btn-lg" title="This is the mUzima Fingerprint module home screen.">Home Screen</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-            <li><button id="activatemaincontainersignin" type="button" class="btn btn-success btn-lg" title="This screen allows users who have appended their fingerprints to their details to login simply by scanning the fingerprint">Identification</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-            <li><button id="activatemaincontainersignup" type="button" class="btn btn-success btn-lg" title="This screen allows you to signup a new user with fingerprint capability or append an old patient without fingerprint capability with a fingerprint ability.">Registration</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-            <li><button id="activedefaultsettings" type="button" class="btn btn-success btn-lg" title="this page allows the implementor to set the default finger to be scanned in the particular setting that will show on the sign in screen">Settings</button></li>
+            <li><button id="activatehomecontainer" type="button" class="btn btn-success btn-lg" style="background-color:#4ebaaa !important;" title="This is the mUzima Fingerprint module home screen.">Home Screen</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activatemaincontainersignin" type="button" class="btn btn-success btn-lg" style="background-color:#4ebaaa !important;"  title="This screen allows users who have appended their fingerprints to their details to login simply by scanning the fingerprint">Identification</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activatemaincontainersignup" type="button" class="btn btn-success btn-lg" style="background-color:#4ebaaa !important;"  title="This screen allows you to signup a new user with fingerprint capability or append an old patient without fingerprint capability with a fingerprint ability.">Registration</button>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button id="activedefaultsettings" type="button" class="btn btn-success btn-lg" style="background-color:#4ebaaa !important;"  title="this page allows the implementor to set the default finger to be scanned in the particular setting that will show on the sign in screen">Settings</button></li>
           </ul>
         </div>
 
@@ -67,22 +67,21 @@
 </div>
 <div id="showdefaultsettings" style="display:hidden;" class="container">
           <fieldset style="width:80%;text-align:center;">
-            <legend><h2>DEFAULT FINGER SETTINGS<h2></legend>
             <p>Choose the default finger in the dropdown below and click apply to save you setting.</p><br/>
             <select id="defaultfinger" style="width:80%;text-align:center;">
-              <option style="text-align:center;">left thumb</option>
-              <option style="text-align:center;">left index</option>
-              <option style="text-align:center;">left middle</option>
-              <option style="text-align:center;">left ring</option>
-              <option style="text-align:center;">left little</option>
-              <option style="text-align:center;">right thumb</option>
-              <option style="text-align:center;">right index</option>
-              <option style="text-align:center;">right middle</option>
-              <option style="text-align:center;">right ring</option>
-              <option style="text-align:center;">right little</option>
+              <option>left thumb</option>
+              <option>left index</option>
+              <option>left middle</option>
+              <option>left ring</option>
+              <option>left little</option>
+              <option>right thumb</option>
+              <option>right index</option>
+              <option>right middle</option>
+              <option>right ring</option>
+              <option>right little</option>
             </select>
             <br/></br/>
-            <button style="width:60%;" id="applydefaultfinger" type="button" class="btn btn-success btn-lg">APPLY SETTINGS</button>
+            <button style="width:60%;" id="applydefaultfinger" style="background-color:#4ebaaa !important;">APPLY SETTINGS</button>
           </fieldset>
             
 </div>
@@ -124,7 +123,7 @@
                                     <span>Scanning In Progress</span>
                                 </div>
                             </td>
-                            <td><button type="button" id="reload" class="btn btn-lg btn-primary">Clear Data</button></td>
+                            <td><button type="button" id="reload" class="btn btn-lg btn-primary" style="background-color:#4ebaaa !important;">Clear Data</button></td>
                         </tr>
                         </tbody>
                     </table>

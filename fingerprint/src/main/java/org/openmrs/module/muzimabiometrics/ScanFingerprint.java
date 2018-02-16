@@ -44,8 +44,8 @@ public class ScanFingerprint{
                 System.out.println(line);
             }
         }
-        catch(IOException ex){
-        }
+//        catch(IOException ex){
+//        }
         catch (JlibFprint.EnrollException e)
         {
             CloseableHttpClient client = HttpClientBuilder.create().build();
