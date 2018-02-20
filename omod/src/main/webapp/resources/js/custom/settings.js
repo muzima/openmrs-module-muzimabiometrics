@@ -4,7 +4,8 @@ $(document).ready(function(){
 $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
       $("#homecontainer").fadeOut();
-       $("#showdefaultsettings").slideUp();
+      $("#enrollFingerprint").hide();
+      $("#showdefaultsettings").slideUp();
       $("#registrationSections").fadeOut();
       $("#mainframecontainer").slideDown();
       $("#signinscreen").fadeIn();
@@ -31,8 +32,9 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $("#activatemaincontainersignup").click(function(){
-     $("#homecontainer").fadeOut();
-       $("#showdefaultsettings").slideUp();
+      $("#homecontainer").fadeOut();
+      $("#enrollFingerprint").hide();
+      $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();
       $("#signinscreen").fadeOut();
       $("#registrationSections").fadeIn();
@@ -40,6 +42,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     $("#interfacecontrol").click(function(){
-    //$("#signinscreen").fadeOut();
+    $("#interfacecontrol").slideUp("slow");
+    $("#unregisteredscantext").slideUp("slow");
     });
 });

@@ -487,6 +487,7 @@ $(function(){
                             console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
+                                $("#signinscreen").fadeOut("slow");
                                 updateScanningView(1);
                             }
                             else {
@@ -525,7 +526,7 @@ $(function(){
                 else {
                     //location.href = "managefingerprint.form";
                     updateScanningView(3);
-                    console.log("please refresh to load fingerptint again");
+                    console.log("please refresh to load fingerprint again");
                 }
 
             },
@@ -620,29 +621,26 @@ $(function(){
         }
     }
     updateScanningView(1);
-    $("#enrollFingers").on("click",function(){
-        $.ajax({
-            type:"GET",
-            url:"fetchEnrolledFingers.form",
-            contentType:"application/json",
-            success:function(result){
-                var fingersStatus=JSON.parse(result);
-                if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
-                    updateControls(3);
-                    $("#enrollFingerprint").hide();
-                }
-                else if(fingersStatus.firstImageIsSet==false){
-                  $('#missing-first-scan').modal('show');
-                }
-                else if(fingersStatus.secondImageIsSet==false){
-                  $('#missing-second-scan').modal('show');
-                }
-                else{
-                  $('#missing-third-scan').modal('show');
-                }
-            }
-        })
-    });
+    //modify function to show register patient button(headache solved)
+    $(document).ready(function(){
+           setInterval(function(){
+            //start ajax
+                        $.ajax({
+                                    type:"GET",
+                                    url:"fetchEnrolledFingers.form",
+                                    contentType:"application/json",
+                                    success:function(result){
+                                        var fingersStatus=JSON.parse(result);
+                                        if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
+                                            updateControls(3);
+                                            $("#enrollFingerprint").hide();
+                                        }
+                                    }
+                                });
+                    //end ajax
+            }, 3000);
+        });
+    //end of modifying function to show register patient button
     $("#addFingers").on("click",function(){
         $.ajax({
             type:"GET",

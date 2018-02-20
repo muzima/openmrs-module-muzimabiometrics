@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
@@ -157,7 +158,8 @@ public class EnrollFingerprint {
         controlPanel.add(thirdCaptureBtn);
         mainFrame.setVisible(true);
     }
-    private void exit(){
+//  no longer useful, manual ways need to be overwritten
+ private void exit(){
         thirdCaptureBtn.setVisible(false);
         exit=new JButton("Exit");
         exit.addActionListener(new ActionListener(){

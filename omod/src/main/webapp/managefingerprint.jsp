@@ -278,10 +278,10 @@
             <a href="#" id="btnNo">No</a>
         </div>
         <div style="height:20px;"></div>
-        <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
-            <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br><br/>
-            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a><br/><br/>
-        <button id="confirmscanned" type="button" id="enrollFingers" class="btn btn-lg btn-primary" style="display:none;">Confirm Scanned Thumb Finger</button>
+        <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;width:100%;">
+            <span id="unregisteredscantext" style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br><br/>
+            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button style="background-color:#009D8E !important;">Click here to scan left thumb finger three times</button></a><br/><br/>
+        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary" style="display:none;">PROCEED TO REGISTER</button>
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
@@ -292,27 +292,7 @@
     </div>
     <!--start of registration click content -->
     <div id = "registrationSections">
-            <div style="height:20px;"></div>
-            <div class="enrollfingerprints" id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
-            <fieldset>
-            <legend>Patient Registration</legend>
-            <table style="width:100%;">
-            <tr style="width:100%;">
-            <span style="font-weight:bold;color:green;">Click Scan Finger button below to capture your fingerprint before registering patient details</span>
-            </tr><br/><br/>
-            <tr style="width:100%;">
-            <a style="text-decoration:none;width:100%;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button>Scan left thumb finger three times</button></a>
-            </tr><br/><br/>
-            <tr>
-            <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Confirm Scanned Thumb Finger</button>
-            </tr><br/><br/>
-            <tr>
-
-            </tr>
-            </table>
-            </fieldset>
-            </div>
-            <div style="height:20px;"></div>
+            <p>registration content is currently being engineered.</p>
     </div>
     <!--end of registration click content -->
         <div id = "registrationForm" style="margin-left:0px;">
@@ -364,7 +344,7 @@
                 <input id = "btnCreatePatient" type="button" value= "Create Patient" class="btn btn-lg btn-primary btn-block">
             </div>
         </div>
-        <div id="patient-exists" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
+        <div id="patient-exists" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:green;">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -385,13 +365,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Server Error</h4>
+              <h4 class="modal-title">Fingerprint Notification</h4>
             </div>
             <div class="modal-body">
-              <p>First left thumb scan has not been performed, please enroll it to proceed</p>
+              <p>First left thumb scan has not been performed, please <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b style="background-color:#009D8E !important;">:-CLICK HERE TO SCAN AFRESH-:</b></a> or navigate to the webstart app that you started to scan first print</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close Notification</button>
             </div>
           </div>
         </div>
@@ -401,13 +381,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Server Error</h4>
+              <h4 class="modal-title">Fingerprint Notification</h4>
             </div>
             <div class="modal-body">
-              <p>Second left thumb scan has not been performed, please enroll it to proceed</p>
+              <p>Second left thumb scan has not been performed, please <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b style="background-color:#009D8E !important;">:-CLICK HERE TO SCAN AFRESH-:</b></a> or navigate to the webstart app that you started to scan second print</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close Notification</button>
             </div>
           </div>
         </div>
@@ -417,13 +397,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Server Error</h4>
+              <h4 class="modal-title">Fingerprint Notification</h4>
             </div>
             <div class="modal-body">
-              <p>Third left thumb scan has not been performed, please enroll it to proceed</p>
+              <p>Third left thumb scan has not been performed, please <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b style="background-color:#009D8E !important;">:-CLICK HERE TO SCAN AFRESH-:</b></a> or navigate to the webstart app that you started to scan third print</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close Notification</button>
             </div>
           </div>
         </div>
@@ -433,13 +413,13 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Server Error</h4>
+              <h4 class="modal-title">Fingerprint Notification</h4>
             </div>
             <div class="modal-body">
               <p>This patient's fingerprint matches an existing patient, it cannot be appended</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close Notification</button>
             </div>
           </div>
         </div>
