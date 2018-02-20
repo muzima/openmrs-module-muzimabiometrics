@@ -290,6 +290,28 @@
             <button type="button" id="addFingers" class="btn btn-lg btn-primary">Add Fingerprints</button>
         </div>
     </div>
+    <!--start of registration click content -->
+    <div id = "registrationSections">
+            <div style="height:20px;"></div>
+            <div class="enrollfingerprints" id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
+            <fieldset>
+            <legend>Patient Registration</legend>
+            <table style="width:100%;">
+            <tr style="width:100%;">
+            <span style="font-weight:bold;color:green;">Click Scan Finger button below to capture your fingerprint before registering patient details</span>
+            </tr><br/><br/>
+            <tr style="width:100%;">
+            <a style="text-decoration:none;width:100%;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button>Scan left thumb finger three times</button></a>
+            </tr><br/>
+            <tr style="width:100%;">
+            <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Register Scanned Finger</button>
+            </tr>
+            </table>
+            </fieldset>
+            </div>
+            <div style="height:20px;"></div>
+    </div>
+    <!--end of registration click content -->
         <div id = "registrationForm" style="margin-left:0px;">
             <h3 id="form-title">Registration Form</h3>
             <form id = "formData" method = "post" action = "" style="border: 1px solid #eeeeee;padding:20px;">
@@ -433,6 +455,7 @@ $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
       $("#homecontainer").fadeOut();
        $("#showdefaultsettings").slideUp();
+      $("#registrationSections").fadeOut();
       $("#mainframecontainer").slideDown();
       $("#signinscreen").fadeIn();
   });
@@ -442,6 +465,7 @@ $(document).ready(function(){
   $("#activatehomecontainer").click(function(){
       $("#mainframecontainer").slideUp();
        $("#showdefaultsettings").slideUp();
+      $("#registrationSections").fadeOut();
       $("#homecontainer").fadeIn();
   });
 });
@@ -451,7 +475,17 @@ $(document).ready(function(){
   $("#activedefaultsettings").click(function(){
       $("#mainframecontainer").hide();
       $("#homecontainer").hide();
+      $("#registrationSections").fadeOut();
       $("#showdefaultsettings").show();
+  });
+});
+$(document).ready(function(){
+  $("#activatemaincontainersignup").click(function(){
+     $("#homecontainer").fadeOut();
+       $("#showdefaultsettings").slideUp();
+      $("#mainframecontainer").slideDown();
+      $("#signinscreen").fadeOut();
+      $("#registrationSections").fadeIn();
   });
 });
 </script>
