@@ -104,6 +104,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#basicdemographicform').hide();
     } else if(status ==2){
         //Show other option i.e. to register - case2
         $('#body-wrapper').hide();
@@ -116,7 +117,8 @@ function updateControls(status){
         //Show registration section - case3
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
-        $('#registrationForm').show();
+        $('#registrationForm').hide();
+        $('#basicdemographicform').show();
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();

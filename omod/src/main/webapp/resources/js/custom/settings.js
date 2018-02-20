@@ -4,6 +4,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
       $("#homecontainer").fadeOut();
+      $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#registrationSections").fadeOut();
@@ -33,6 +34,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   $("#activatemaincontainersignup").click(function(){
       $("#homecontainer").fadeOut();
+      $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();
@@ -44,5 +46,20 @@ $(document).ready(function(){
     $("#interfacecontrol").click(function(){
     $("#interfacecontrol").slideUp("slow");
     $("#unregisteredscantext").slideUp("slow");
+    });
+});
+$(document).ready(function(){
+    $("#cancelregistration").click(function(){
+        $.ajax({
+                    type: "GET",
+                    url: "getFingerprint.form?fingerprintIsSet=clear",
+                    contentType: "application/json",
+                    success: function (result) {
+                        document.getElementById("fingerprintScan").value = "false";
+                        document.getElementById("startScanning").value="false";
+                        console.log("fingerprint reset to ");
+                        location.href = "managefingerprint.form";
+                    }
+                });
     });
 });

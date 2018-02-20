@@ -135,7 +135,8 @@ public class EnrollFingerprint {
                     matchValue = JlibFprint.img_compare_print_data(secondImage,thirdImage);
                     if(matchValue>bozorthThreshold){
                         enrollFinger(thirdImage,"/enrollThirdImage.form","Third Capturing Completed");
-                        exit();
+                        System.exit(0);
+                        //exit();
                     }
                     else{
                         statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan</font></html>");
@@ -159,17 +160,17 @@ public class EnrollFingerprint {
         mainFrame.setVisible(true);
     }
 //  no longer useful, manual ways need to be overwritten
- private void exit(){
-        thirdCaptureBtn.setVisible(false);
-        exit=new JButton("Exit");
-        exit.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
-        controlPanel.add(exit);
-        mainFrame.setVisible(true);
-    }
+// private void exit(){
+//        thirdCaptureBtn.setVisible(false);
+//        exit=new JButton("Exit");
+//        exit.addActionListener(new ActionListener(){
+//            public void actionPerformed(ActionEvent actionEvent) {
+//                System.exit(0);
+//            }
+//        });
+//        controlPanel.add(exit);
+//        mainFrame.setVisible(true);
+//    }
     private void enrollFinger(JlibFprint.fp_print_data image,String path,String msg) throws JlibFprint.EnrollException, IOException {
         //the finger enrolment process begins here, unhide the button here
         CloseableHttpClient client = HttpClientBuilder.create().build();

@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">mUzima Fingerprint Module</a>
+          <a class="navbar-brand" style="color:white !important;font-size:2em !important;">mUzima Fingerprint Module</a>
         </div>
 
         <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
@@ -344,6 +344,36 @@
                 <input id = "btnCreatePatient" type="button" value= "Create Patient" class="btn btn-lg btn-primary btn-block">
             </div>
         </div>
+        <!-- start of person basic demographics form -->
+        <div id = "basicdemographicform" style="margin-left:0px;display:hidden;">
+                    <h3 id="form-title">Create Patient </h3>
+                    <form id = "formData" method = "post" action = "" style="border: 1px solid #eeeeee;padding:20px;">
+                    <p>To create a new person, enter the person's name and other information below first to double-check that they don't already have a record in the system. </p>
+                            <div class="form-group">
+                                <label for= "family_name">Person Name</label>
+                                <input autocomplete="off" type="text" name="family_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for= "age">Age</label>
+                                <input autocomplete="off" name="age" class="form-control"  required>
+                            </div>
+                            <div class="form-inline">
+                            <label for="gender">gender</label>
+                                <input type="radio" name="sex" value = "F" class="form-control"><b>Female</b>
+                                <input type="radio" name="sex" value = "M" class="form-control"><b>Male</b>
+                            </div>
+                    </form>
+                    <br/>
+                    <div style="width:100% !important;">
+                    <div style="width:65% !important;float:left;">
+                        <input id = "btnCreatePatient" type="button" value= "Create Person" class="btn btn-lg btn-primary btn-block">
+                    </div>
+                    <div style="width:25% !important;float:right;">
+                        <input id = "cancelregistration" type="button" value= "Cancel Registration" class="btn btn-lg btn-primary btn-block">
+                    </div>
+                    </div>
+                </div>
+        <!-- end of person basic demographic form -->
         <div id="patient-exists" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:green;">
         <div class="modal-dialog">
           <div class="modal-content">
