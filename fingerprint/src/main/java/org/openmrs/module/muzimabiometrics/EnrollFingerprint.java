@@ -134,7 +134,6 @@ public class EnrollFingerprint {
                     matchValue = JlibFprint.img_compare_print_data(secondImage,thirdImage);
                     if(matchValue>bozorthThreshold){
                         enrollFinger(thirdImage,"/enrollThirdImage.form","Third Capturing Completed");
-                        //unhide the form here
                         exit();
                     }
                     else{

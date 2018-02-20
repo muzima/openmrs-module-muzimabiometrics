@@ -1,0 +1,40 @@
+$(document).ready(function(){
+  $("#showdefaultsettings").hide();
+});
+$(document).ready(function(){
+  $("#activatemaincontainersignin").click(function(){
+      $("#homecontainer").fadeOut();
+       $("#showdefaultsettings").slideUp();
+      $("#registrationSections").fadeOut();
+      $("#mainframecontainer").slideDown();
+      $("#signinscreen").fadeIn();
+  });
+});
+//hide mainframecontainer,showdefaultsettingscontainer show homecontainer
+$(document).ready(function(){
+  $("#activatehomecontainer").click(function(){
+      $("#mainframecontainer").slideUp();
+       $("#showdefaultsettings").slideUp();
+      $("#registrationSections").fadeOut();
+      $("#homecontainer").fadeIn();
+  });
+});
+//end
+//activate settings
+$(document).ready(function(){
+  $("#activedefaultsettings").click(function(){
+      $("#mainframecontainer").hide();
+      $("#homecontainer").hide();
+      $("#registrationSections").fadeOut();
+      $("#showdefaultsettings").show();
+  });
+});
+$(document).ready(function(){
+  $("#activatemaincontainersignup").click(function(){
+     $("#homecontainer").fadeOut();
+       $("#showdefaultsettings").slideUp();
+      $("#mainframecontainer").slideDown();
+      $("#signinscreen").fadeOut();
+      $("#registrationSections").fadeIn();
+  });
+});
