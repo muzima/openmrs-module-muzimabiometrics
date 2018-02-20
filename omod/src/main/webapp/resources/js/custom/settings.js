@@ -38,3 +38,8 @@ $(document).ready(function(){
       $("#registrationSections").fadeIn();
   });
 });
+$(document).ready(function(){
+    $("#interfacecontrol").click(function(){
+    //$("#signinscreen").fadeOut();
+    });
+});

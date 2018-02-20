@@ -279,9 +279,9 @@
         </div>
         <div style="height:20px;"></div>
         <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
-            <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br>
-            <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
-        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Confirm Scanned Thumb Finger</button>
+            <span style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br><br/>
+            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a><br/><br/>
+        <button id="confirmscanned" type="button" id="enrollFingers" class="btn btn-lg btn-primary" style="display:none;">Confirm Scanned Thumb Finger</button>
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
@@ -302,6 +302,12 @@
             </tr><br/><br/>
             <tr style="width:100%;">
             <a style="text-decoration:none;width:100%;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button>Scan left thumb finger three times</button></a>
+            </tr><br/><br/>
+            <tr>
+            <button type="button" id="enrollFingers" class="btn btn-lg btn-primary">Confirm Scanned Thumb Finger</button>
+            </tr><br/><br/>
+            <tr>
+
             </tr>
             </table>
             </fieldset>

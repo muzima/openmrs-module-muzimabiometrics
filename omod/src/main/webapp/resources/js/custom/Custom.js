@@ -554,6 +554,7 @@ $(function(){
                             console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
+                                $("#signinscreen").fadeOut();
                                 updateScanningView(1);
                             }
                             else {
