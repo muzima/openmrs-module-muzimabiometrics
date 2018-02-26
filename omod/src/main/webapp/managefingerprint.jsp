@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:white !important;font-size:2em !important;">mUzima Fingerprint Module</a>
+          <a class="navbar-brand" style="color:white !important;font-size:2em !important    ;">mUzima Fingerprint Module</a>
         </div>
 
         <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
@@ -149,6 +149,9 @@
                         <th></th>
                         <th></th>
                     </tr>
+                    <tr>
+                        <th colspan='6'>The following persons  were found with similar characterictics as entered, click Append Fingerprint Button next to the person to append the Finger Print to the Existing Patient. If a tick sign is in the Fingerprint Column, then the patient has already been registered fully hence no need to create the person </th>
+                    </tr>
                     </thead>
                     <thead >
                     <tr class = "forms-list-header">
@@ -164,6 +167,12 @@
                     <tbody>
 
                     </tbody>
+                    <thead>
+                        <th colspan='6'>person is not listed above? click on Create Person button below to register a new patient</th>
+                    </thead>
+                    <thead>
+                        <th colspan='6' style="text-align:center;"><button id="createNewPatient" class="btn input-block-level btn-success" type="button">Create Person</button></th>
+                    </thead>
                 </table>
             </div>
         </div>
@@ -280,8 +289,12 @@
         <div style="height:20px;"></div>
         <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;width:100%;">
             <span id="unregisteredscantext" style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br><br/>
-            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button style="background-color:#009D8E !important;">Click here to scan left thumb finger three times</button></a><br/><br/>
-        <button type="button" id="enrollFingers" class="btn btn-lg btn-primary" style="display:none;">PROCEED TO REGISTER</button>
+            <span id="scanwaittext" style="font-weight:bold;color: green;display:none;">
+            <marquee>the scanner is being started automatically,follow the instructions in the pop up to proceed, if it does not show up after 5 seconds click the link below to start it manually</marquee><br><br/>
+            <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button class="btn btn-primary" style="background-color:#009D8E !important;">Restart Scanner</button></a>
+            </span>
+            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button class="btn btn-success btn-lg" style="background-color:#009D8E !important;">Click to Scan left thumb finger three times</button></a><br/><br/>
+        <button type="button" id="enrollFingers" class="btn btn-lg btn-success" style="display:none;">PROCEED TO REGISTER</button>
         </div>
         <div style="height:20px;"></div>
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
@@ -351,22 +364,22 @@
                     <p>To create a new person, enter the person's name and other information below first to double-check that they don't already have a record in the system. </p>
                             <div class="form-group">
                                 <label for= "family_name">Person Name</label>
-                                <input autocomplete="off" type="text" name="family_name" class="form-control" required>
+                                <input autocomplete="off" type="text" id="family_name" name="family_name" class="form-control" value="${identifier}" required>
                             </div>
                             <div class="form-group">
                                 <label for= "age">Age</label>
-                                <input autocomplete="off" name="age" class="form-control"  required>
+                                <input autocomplete="off" id="age" name="age" class="form-control"  required>
                             </div>
                             <div class="form-inline">
                             <label for="gender">gender</label>
-                                <input type="radio" name="sex" value = "F" class="form-control"><b>Female</b>
-                                <input type="radio" name="sex" value = "M" class="form-control"><b>Male</b>
+                                <input id="gender1" type="radio" name="sex" value = "F" class="form-control"><b>Female</b>
+                                <input type="radio" id="gender2" name="sex" value = "M" class="form-control"><b>Male</b>
                             </div>
                     </form>
                     <br/>
                     <div style="width:100% !important;">
                     <div style="width:65% !important;float:left;">
-                        <input id = "btnCreatePatient" type="button" value= "Create Person" class="btn btn-lg btn-primary btn-block">
+                        <input id = "btnSearchPatient" type="button" value= "Create Person" class="btn btn-lg btn-primary btn-block">
                     </div>
                     <div style="width:25% !important;float:right;">
                         <input id = "cancelregistration" type="button" value= "Cancel Registration" class="btn btn-lg btn-primary btn-block">

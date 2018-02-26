@@ -78,7 +78,7 @@ function show(fingerprint, patientUuid){
         return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
     }
     else {
-        return "<button type='button'>Add Fingerprints</button>"
+        return "<button type='button'>Append Fingerprints</button>"
     }
 };
 
@@ -307,7 +307,7 @@ $(function(){
                 updateControls(0);
             },
             error: function(msg, status, error){
-                cconsole.log("server error +++++++++++++"+JSON.stringify(error));
+                console.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
 
@@ -352,6 +352,57 @@ $(function(){
           });
         }
     });
+
+//search basic demographics
+$(document).ready(function(){
+    $("#btnSearchPatient").click(function(){
+        //check if forms are field
+        if($("#family_name").val() == "")
+        {
+            $("#family_name").attr("placeholder", "This name field cannot be empty, please enter the person name");
+        }
+        else if($("#age").val() == "")
+        {
+            $("#age").attr("placeholder", "This name field cannot be empty, please enter the age of person");
+        }
+        else{
+                if($("#gender1").is(":checked")==false && $("#gender2").is(":checked")==false)
+                {
+                    alert("please choose your gender to proceed");
+                }
+                else
+                {
+                            //start of getting data
+                            $.ajax({
+                                type: "POST",
+                                url: "fingerprint/findPatients.form",
+                                contentType: "application/json",
+                                data: $("#family_name").val(),
+                                dataType: 'json',
+                                success: function (result) {
+                                    console.log(result);
+                                    if(result.length == 0) {
+                                        updateControls(4);
+                                    }
+                                    else{
+                                        $("#enrollFingerprint").hide();
+                                        updatePatientListTable(result, 1);
+                                        window.clearInterval(yellowMan);
+                                        console.log("patientsearch is "+JSON.stringify(result));
+                                    }
+                                },
+                                error: function(msg, status, error){
+                                    console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
+                                }
+                            });
+                            //end that method
+                }
+
+        }
+        //end check
+    });
+    });
+//end search of basic demographics
 
     $.validator.addMethod("checkDigit", function (value, element) {
             var num = value.split('-');
@@ -624,8 +675,7 @@ $(function(){
     }
     updateScanningView(1);
     //modify function to show register patient button(headache solved)
-    $(document).ready(function(){
-           setInterval(function(){
+           var yellowMan=setInterval(function(){
             //start ajax
                         $.ajax({
                                     type:"GET",
@@ -641,7 +691,6 @@ $(function(){
                                 });
                     //end ajax
             }, 3000);
-        });
     //end of modifying function to show register patient button
     $("#addFingers").on("click",function(){
         $.ajax({

@@ -46,6 +46,7 @@ $(document).ready(function(){
     $("#interfacecontrol").click(function(){
     $("#interfacecontrol").slideUp("slow");
     $("#unregisteredscantext").slideUp("slow");
+    $("#scanwaittext").fadeIn("slow");
     });
 });
 $(document).ready(function(){
@@ -61,5 +62,20 @@ $(document).ready(function(){
                         location.href = "managefingerprint.form";
                     }
                 });
+    });
+});
+$(document).ready(function(){
+    $("#createNewPatient").click(function(){
+        //show registration form
+           $('#body-wrapper').hide();
+           $('#otherIdentificationOption').hide();
+           $('#registrationForm').hide();
+           $('#basicdemographicform').hide();
+           $('#updatePatient').hide();
+           $('#searchResults').hide();
+           $('#patientCreated').hide();
+           $('#registrationForm').slideDown("slow");
+           $('#signinscreen').hide();
+        //end showing registration form
     });
 });

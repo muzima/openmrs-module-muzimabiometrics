@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
-import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 
 import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
@@ -24,7 +24,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 public class EnrollFingerprint {
     private static final Log log= LogFactory.getLog(EnrollFingerprint.class);
-    private JFrame mainFrame;
+    private static JFrame mainFrame;
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
@@ -41,6 +41,7 @@ public class EnrollFingerprint {
     public static void main(String[] args){
         EnrollFingerprint  enrollFingerprint = new EnrollFingerprint();
             enrollFingerprint.enrollFingerFirstTime();
+            enrollFingerprint.timeout();
     }
     private void prepareGUI(){
         mainFrame = new JFrame("Patient Fingerprint Registration");
@@ -64,26 +65,24 @@ public class EnrollFingerprint {
         mainFrame.add(statusLabel);
         mainFrame.setVisible(true);
     }
-    private void enrollFingerFirstTime(){
+    private void enrollFingerFirstTime() {
         firstCaptureBtn = new JButton("Capture Thumb Finger First Time");
         firstCaptureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    firstImage=jlibfprint.enroll_finger();
+                    firstImage = jlibfprint.enroll_finger();
                     statusLabel.setText("Scanning............");
-                    enrollFinger(firstImage,"/enrollFirstImage.form","First Capturing Completed");
+                    enrollFinger(firstImage, "/enrollFirstImage.form", "First Capturing Completed");
                     enrollFingerSecondTime();
                 } catch (JlibFprint.EnrollException e) {
-                    if(e.enroll_exception==-2){
-                        exception="<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
-                    }
-                    else if(e.enroll_exception==100){
-                        exception="<html><font color='red'>Low quality image captured, please scan again.</font></html>";
+                    if (e.enroll_exception == -2) {
+                        exception = "<html><font color='red'>Scanner not found, please insert scanner to continue.</font></html>";
+                    } else if (e.enroll_exception == 100) {
+                        exception = "<html><font color='red'>Low quality image captured, please scan again.</font></html>";
                     }
                     statusLabel.setText(exception);
                     e.printStackTrace();
-                }
-                catch(IOException ex){
+                } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
@@ -135,8 +134,8 @@ public class EnrollFingerprint {
                     matchValue = JlibFprint.img_compare_print_data(secondImage,thirdImage);
                     if(matchValue>bozorthThreshold){
                         enrollFinger(thirdImage,"/enrollThirdImage.form","Third Capturing Completed");
-                        System.exit(0);
-                        //exit();
+                        mainFrame.dispose();
+                        exit();
                     }
                     else{
                         statusLabel.setText("<html><font color='red'>Captured finger does not match, please rescan</font></html>");
@@ -160,17 +159,17 @@ public class EnrollFingerprint {
         mainFrame.setVisible(true);
     }
 //  no longer useful, manual ways need to be overwritten
-// private void exit(){
-//        thirdCaptureBtn.setVisible(false);
-//        exit=new JButton("Exit");
-//        exit.addActionListener(new ActionListener(){
-//            public void actionPerformed(ActionEvent actionEvent) {
-//                System.exit(0);
-//            }
-//        });
-//        controlPanel.add(exit);
-//        mainFrame.setVisible(true);
-//    }
+ private void exit(){
+        thirdCaptureBtn.setVisible(false);
+        exit=new JButton("Exit");
+        exit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+        controlPanel.add(exit);
+        mainFrame.setVisible(true);
+    }
     private void enrollFinger(JlibFprint.fp_print_data image,String path,String msg) throws JlibFprint.EnrollException, IOException {
         //the finger enrolment process begins here, unhide the button here
         CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -193,4 +192,18 @@ public class EnrollFingerprint {
         }
         statusLabel.setText("<html><font color='green'>"+msg+"</font></html>");
     }
+    //start of timeout
+    public void timeout(){
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        JOptionPane.showMessageDialog(null, "you have been timed out due to inactivity");
+                        mainFrame.dispose();
+                    }
+                },
+                15000
+        );
+    }
+    //end timeout
 }
