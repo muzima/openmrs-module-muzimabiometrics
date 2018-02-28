@@ -5,7 +5,7 @@
     <parent>
         <artifactId>muzimabiometrics</artifactId>
         <groupId>org.openmrs.module</groupId>
-        <version>1.0.0</version>
+        <version>2.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -56,15 +56,64 @@
             <artifactId>httpcore</artifactId>
             <version>4.4.4</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20090211</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>scanner</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>src/assembly/scanner.xml</descriptor>
+                    </descriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.openmrs.module.muzimabiometrics.ScanFingerprint</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <directory>src/main/java/</directory>
+                            <include>*.jar</include>
+                        </resource>
+                    </resources>
+                    <outputDirectory>${project.parent.basedir}/omod/src/main/webapp/resources/</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

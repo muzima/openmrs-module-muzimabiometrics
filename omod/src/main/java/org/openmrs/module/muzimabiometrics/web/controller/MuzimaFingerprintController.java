@@ -1,5 +1,4 @@
 package org.openmrs.module.muzimabiometrics.web.controller;
-
 import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
