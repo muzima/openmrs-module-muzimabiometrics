@@ -1,19 +1,14 @@
 package org.openmrs.module.muzimabiometrics.web.controller;
-
-//import javassist.expr.Instanceof;
+import jlibfprint.JlibFprint;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openmrs.Patient;
-import org.openmrs.PatientIdentifier;
-import org.openmrs.PatientIdentifierType;
-import org.openmrs.PersonName;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.muzimabiometrics.MuzimaFingerprint;
-import org.openmrs.module.muzimabiometrics.PatientJsonParser;
 import org.openmrs.module.muzimabiometrics.api.MuzimaFingerprintService;
 import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModel;
 import org.springframework.stereotype.Controller;
@@ -22,16 +17,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
-
-
-import jlibfprint.JlibFprint;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * Created by vikas on 15/01/15.

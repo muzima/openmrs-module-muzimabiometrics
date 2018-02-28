@@ -29,6 +29,24 @@ function identifyPatient(fingerprintData){
     return identifiedPatient;
 };
 
+function updatePersonListTable(Patients, updateControlsStatus){
+    updateControls(updateControlsStatus);
+    $("#tblStore tbody tr").remove();
+    var identifiers;
+    Patients.forEach( function (patient){
+        identifiers=patient.identifiers.replace(/[\[\]']+/g,'');
+        $("#tblStore tbody").append( "<tr>"
+            + "<td style='display:none;'>"+patient.patientUUID+"</td>"
+            + "<td><a href='"+openmrsContextPath+"/patientDashboard.form?patientId="+patient.id+"'>"+patient.id+" </a></td>"
+            + "<td>"+patient.givenName +"</td>"
+            + "<td>"+ patient.familyName+"</td>"
+            + "<td>"+ identifiers+"</td>"
+            + "<td>"+ patient.gender+"</td>"
+            + "<td>"+show(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
+            + "</tr>");
+    });
+};
+//function to handle create data
 function updatePatientListTable(Patients, updateControlsStatus){
     updateControls(updateControlsStatus);
     $("#tblData tbody tr").remove();
@@ -46,6 +64,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
             + "</tr>");
     });
 };
+//end function to handle create data
 function activate(val, e){
     var key=e.keyCode || e.which;
     if (key==13){
@@ -78,7 +97,7 @@ function show(fingerprint, patientUuid){
         return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
     }
     else {
-        return "<button type='button'>Add Fingerprints</button>"
+        return "<button type='button'>Append Fingerprints</button>"
     }
 };
 
@@ -104,6 +123,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#basicdemographicform').hide();
     } else if(status ==2){
         //Show other option i.e. to register - case2
         $('#body-wrapper').hide();
@@ -116,7 +136,8 @@ function updateControls(status){
         //Show registration section - case3
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
-        $('#registrationForm').show();
+        $('#registrationForm').hide();
+        $('#basicdemographicform').show();
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
@@ -135,6 +156,24 @@ function updateControls(status){
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
+    } else if(status ==6){
+        //Show patient found for scan process - case6
+        $('#body-wrapperr').show();
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').hide();
+        $('#basicdemographicform').hide();
+    }else if(status ==7){
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').show();
+        $('#basicdemographicform').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').hide();
     }
 };
 
@@ -305,7 +344,7 @@ $(function(){
                 updateControls(0);
             },
             error: function(msg, status, error){
-                cconsole.log("server error +++++++++++++"+JSON.stringify(error));
+                console.log("server error +++++++++++++"+JSON.stringify(error));
             }
         });
 
@@ -351,6 +390,58 @@ $(function(){
         }
     });
 
+//search basic demographics
+$(document).ready(function(){
+    $("#btnSearchPatient").click(function(){
+        //check if forms are field
+        if($("#family_name").val() == "")
+        {
+            $("#family_name").attr("placeholder", "This field cannot be empty, please enter the person name");
+        }
+        else if($("#age").val() == "")
+        {
+            $("#age").attr("placeholder", "This field cannot be empty, please enter the age of person");
+        }
+        else{
+                if($("#gender1").is(":checked")==false && $("#gender2").is(":checked")==false)
+                {
+                    alert("please choose your gender to proceed");
+                }
+                else
+                {
+                            //start of getting data
+                            $.ajax({
+                                type: "POST",
+                                url: "fingerprint/findPatients.form",
+                                contentType: "application/json",
+                                data: $("#family_name").val(),
+                                dataType: 'json',
+                                success: function (result) {
+                                    console.log(result);
+                                    if(result.length == 0) {
+                                        window.clearInterval(yellowMan);
+                                        updateControls(7);
+                                    }
+                                    else{
+                                        $("#enrollFingerprint").hide();
+                                        updatePersonListTable(result, 6);
+                                        window.clearInterval(yellowMan);
+                                        console.log("patientsearch is "+JSON.stringify(result));
+                                    }
+                                },
+                                error: function(msg, status, error){
+                                    console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
+                                }
+                            });
+                            //end that method
+                }
+
+        }
+        //end check
+    });
+    });
+//end search of basic demographics
+
     $.validator.addMethod("checkDigit", function (value, element) {
             var num = value.split('-');
             if (num.length != 2) {
@@ -371,7 +462,6 @@ $(function(){
         function (value, element) { return Date.parse(value.replace("-","/")) < new Date().getTime(); },
         "Date can not be in the future."
     );
-
     $.fn.luhnCheckDigit = function (number) {
         var validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_";
         number = number.toUpperCase().trim();
@@ -488,6 +578,7 @@ $(function(){
                             console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
+                                $("#signinscreen").fadeOut("slow");
                                 updateScanningView(1);
                             }
                             else {
@@ -526,7 +617,9 @@ $(function(){
                 else {
                     //location.href = "managefingerprint.form";
                     updateScanningView(3);
-                    console.log("please refresh to load fingerptint again");
+                    $("#refreshDiv").hide();
+                    $("#downloadDiv").show();
+                    console.log("please refresh to load fingerprint again");
                 }
 
             },
@@ -555,6 +648,7 @@ $(function(){
                             console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
+                                $("#signinscreen").fadeOut();
                                 updateScanningView(1);
                             }
                             else {
@@ -592,7 +686,7 @@ $(function(){
                 else {
                     //location.href = "managefingerprint.form";
                     updateScanningView(3);
-                    console.log("please scan fingerptint again");
+                    console.log("please scan fingerprint again");
                 }
 
             },
@@ -620,29 +714,24 @@ $(function(){
         }
     }
     updateScanningView(1);
-    $("#enrollFingers").on("click",function(){
-        $.ajax({
-            type:"GET",
-            url:"fetchEnrolledFingers.form",
-            contentType:"application/json",
-            success:function(result){
-                var fingersStatus=JSON.parse(result);
-                if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
-                    updateControls(3);
-                    $("#enrollFingerprint").hide();
-                }
-                else if(fingersStatus.firstImageIsSet==false){
-                  $('#missing-first-scan').modal('show');
-                }
-                else if(fingersStatus.secondImageIsSet==false){
-                  $('#missing-second-scan').modal('show');
-                }
-                else{
-                  $('#missing-third-scan').modal('show');
-                }
-            }
-        })
-    });
+    //modify function to show register patient button(headache solved)
+           var yellowMan=setInterval(function(){
+            //start ajax
+                        $.ajax({
+                                    type:"GET",
+                                    url:"fetchEnrolledFingers.form",
+                                    contentType:"application/json",
+                                    success:function(result){
+                                        var fingersStatus=JSON.parse(result);
+                                        if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
+                                            updateControls(3);
+                                            $("#enrollFingerprint").hide();
+                                        }
+                                    }
+                                });
+                    //end ajax
+            }, 3000);
+    //end of modifying function to show register patient button
     $("#addFingers").on("click",function(){
         $.ajax({
             type:"GET",

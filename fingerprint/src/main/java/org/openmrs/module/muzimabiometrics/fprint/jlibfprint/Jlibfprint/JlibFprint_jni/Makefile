@@ -50,7 +50,7 @@ CP=cp
 CCADMIN=CCadmin
 # -------------------
 # Modify the includes of the project, add you jdk include directory and libfprint includes
-ADD_INCLUDES=-I/home/elly/workspace/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1 -L/home/elly/workspace/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1 -I/home/elly/workspace/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1/libfprint/nbis/include -I/usr/lib/jvm/java-7-openjdk-amd64/include -I/usr/lib/jvm/java-7-openjdk-amd64/include/linux
+ADD_INCLUDES=-I/home/enock/projects/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1 -L/home/enock/projects/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1 -I/home/enock/projects/openmrs-module-muzimabiometrics/fingerprint/src/main/java/org/openmrs/module/muzimabiometrics/fprint/jlibfprint/Jlibfprint/libfprint/libfprint-0.5.1/libfprint/nbis/include -I/usr/lib/jvm/java-8-openjdk-amd64/include -I/usr/lib/jvm/java-8-openjdk-amd64/include/linux
 # Example
 # ADD_INCLUDES=-I/opt/jdk1.7.0_03/include -I/opt/jdk1.7.0_03/include/linux -I../../Downloads/libfprint-0.4.0 -I../../Downloads/libfprint-0.4.0/libfprint/nbis/include
 #--------------------

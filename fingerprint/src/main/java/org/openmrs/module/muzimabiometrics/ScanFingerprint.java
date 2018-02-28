@@ -1,24 +1,19 @@
 package org.openmrs.module.muzimabiometrics;
 
 import jlibfprint.JlibFprint;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ScanFingerprint{
     private static final Log log= LogFactory.getLog(ScanFingerprint.class);
@@ -49,8 +44,8 @@ public class ScanFingerprint{
                 System.out.println(line);
             }
         }
-        catch(IOException ex){
-        }
+//        catch(IOException ex){
+//        }
         catch (JlibFprint.EnrollException e)
         {
             CloseableHttpClient client = HttpClientBuilder.create().build();
