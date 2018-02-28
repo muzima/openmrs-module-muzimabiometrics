@@ -33,6 +33,14 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+    @keyframes skew {
+      0% {
+        transform: skewX(20deg);
+      }
+      100% {
+        transform: skewX(-20deg);
+      }
+    }
 </style>
 <!--start of trial -->
 <br/><br/><br/>
@@ -45,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:white !important;font-size:2em !important    ;">mUzima Fingerprint Module</a>
+          <a class="navbar-brand" style="color:white !important;font-size:2em !important    ;">mUzima Biometrics Module</a>
         </div>
 
         <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
@@ -61,28 +69,58 @@
     </nav> <!-- close navbar nav -->
 <br/>
 <div id="homecontainer" class="container">
-  <h3>Welcome to mUzima Fingerprint Biometrics Module</h3>
-  <p>This module allows you to register a new patient with a fingerprint scan option or to append an existing user with the fingerprint capability. It is also used to access patient information whose fingerprint
-    had already been registered in the system. Navigate through the menu bars above. You can hover the mouse over a certain menu that is not clear to get more information about it.</p>
+  <table>
+  <thead>
+        <tr  class = "forms-header">
+            <th>
+            <h3>Welcome to mUzima Fingerprint</h3>
+            </th>
+        </tr>
+  </thead>
+  <thead>
+          <tr>
+              <th>
+              <p>This module allows you to register a new patient with a fingerprint scan option or to append an existing user with the fingerprint capability. It is also used to access patient information whose fingerprint had already been registered in the system. Navigate through the menu bars above. You can hover the mouse over a individual menu above if you are not sure what to do in order to get more information about it.Enjoy!</p>
+              </th>
+          </tr>
+  </thead>
+    </table>
 </div>
 <div id="showdefaultsettings" style="display:hidden;" class="container">
-          <fieldset style="width:80%;text-align:center;">
-            <p>Choose the default finger in the dropdown below and click apply to save you setting.</p><br/>
-            <select id="defaultfinger" style="width:80%;text-align:center;">
-              <option>left thumb</option>
-              <option>left index</option>
-              <option>left middle</option>
-              <option>left ring</option>
-              <option>left little</option>
-              <option>right thumb</option>
-              <option>right index</option>
-              <option>right middle</option>
-              <option>right ring</option>
-              <option>right little</option>
-            </select>
-            <br/></br/>
-            <button style="width:60%;" id="applydefaultfinger" style="background-color:#4ebaaa !important;">APPLY SETTINGS</button>
-          </fieldset>
+<table>
+  <thead>
+        <tr  class = "forms-header" style="text-align:center;">
+            <th>
+            <p>Choose the default finger in the dropdown below and click Apply Setting button to save you setting.</p>
+            </th>
+        </tr>
+  </thead>
+  <thead>
+          <tr>
+              <th>
+              <select id="defaultfinger" style="width:100%;text-align:center;">
+                            <option>left thumb</option>
+                            <option>left index</option>
+                            <option>left middle</option>
+                            <option>left ring</option>
+                            <option>left little</option>
+                            <option>right thumb</option>
+                            <option>right index</option>
+                            <option>right middle</option>
+                            <option>right ring</option>
+                            <option>right little</option>
+               </select>
+              </th>
+          </tr>
+    </thead>
+    <thead>
+            <tr>
+                <th>
+                <input id="applydefaultfinger" type="button" value= "Apply Setting" class="btn btn-primary btn-block" style="background-color:#009D8E !important;">
+                </th>
+            </tr>
+      </thead>
+</table>
             
 </div>
 <!-- end of trial-->
@@ -101,29 +139,28 @@
                     <table  id="find-options">
                         <thead>
                         <tr class = "forms-header">
-                            <th>Find Patient(s)</th>
-                            <th></th>
-                            <th></th>
+                            <th colspan="3"><h2 style="font-size:1.3em;">Find Patient by Patient Identifier or Patient Name or by scanning finger print below</h2></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Patient Identifier or Patient Name:<input type="text" id="findPatients" name="findPatients" value="${identifier}" onkeypress="activate(this.value, event)"></td>
-                            <td><div id="downloadDiv">
-                                <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp" id="download"><b>Please place your left thumb on to the scanner & click here</b></a>
+                            <td colspan="2"><div id="downloadDiv">
+                                <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/fingerprint.jnlp" id="download"><!--<b>Please place your left thumb on to the scanner & click here</b>--><input type="button" value= "Place Left Thumb on Scanner and Click Here to Identify Patient" class="btn btn-primary btn-block" style="background-color:#009D8E !important;"></a>
                             <input type="hidden" id="startScanning"/>
                             <input type="hidden" id="fingerprintScan" />
                             </div>
                             <div id="refreshDiv">
-                                <span>Fingerprint processing timed out, please click refresh to continue</span>
-                                <button type="button" id="refresh" class="btn btn-lg btn-primary">Refresh</button>
+                                <!-- <span>Fingerprint processing timed out, please click refresh to continue</span>
+                                <button type="button" id="refresh" class="btn btn-lg btn-primary">Refresh</button>-->
+                                <input id="refresh" type="button" value= "Fingerprint processing timed out, click here to Refresh" class="btn btn-primary btn-block" style="background-color:#009D8E !important;">
                               </div>
                                 <div id="spinner">
                                     <div class="loader"></div>
                                     <span>Scanning In Progress</span>
                                 </div>
                             </td>
-                            <td><button type="button" id="reload" class="btn btn-lg btn-primary" style="background-color:#4ebaaa !important;">Clear Data</button></td>
+                            <!-- no longer needed <td><button type="button" id="reload" class="btn btn-lg btn-primary" style="background-color:#4ebaaa !important;">Clear Data</button></td> -->
                         </tr>
                         </tbody>
                     </table>
@@ -136,6 +173,7 @@
     <div id="patientCreated">
         <h5>Patient Created</h5>
     </div>
+    <!-- start of body wrapper for non create -->
     <div id="body-wrapper">
         <div class = "row forms-list">
             <div class ="col-lg-12" >
@@ -148,9 +186,6 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                    </tr>
-                    <tr>
-                        <th colspan='6'>The following persons  were found with similar characterictics as entered, click Append Fingerprint Button next to the person to append the Finger Print to the Existing Patient. If a tick sign is in the Fingerprint Column, then the patient has already been registered fully hence no need to create the person </th>
                     </tr>
                     </thead>
                     <thead >
@@ -167,19 +202,69 @@
                     <tbody>
 
                     </tbody>
-                    <thead>
-                        <th colspan='6'>person is not listed above? click on Create Person button below to register a new patient</th>
-                    </thead>
-                    <thead>
-                        <th colspan='6' style="text-align:center;"><button id="createNewPatient" class="btn input-block-level btn-success" type="button">Create Person</button></th>
-                    </thead>
                 </table>
             </div>
         </div>
     </div>
+    <!-- end of body wrapper for non create -->
+
+    <!-- start of body wrapper -->
+        <div id="body-wrapperr" style="display:none;">
+            <div class = "row forms-list">
+                <div class ="col-lg-12" >
+                    <table  id="tblStore">
+                        <thead >
+                        <tr class = "forms-header">
+                            <th>Possible Matching Patient List</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th colspan='6'>The following persons  were found with similar characterictics as entered, click Append Fingerprint Button next to the person to append the Finger Print to the Existing Patient. If a tick sign is in the Fingerprint Column, then the patient has already been registered fully hence no need to create the person </th>
+                        </tr>
+                        </thead>
+                        <thead >
+                        <tr class = "forms-list-header">
+                            <th style="display:none;"></th>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Family Name</th>
+                            <th>Identifier(s)</th>
+                            <th>Gender</th>
+                            <th>Fingerprint</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <thead>
+                            <th colspan='6'>Is the person not listed above? click on Create Person button below to register a new patient</th>
+                        </thead>
+                        <thead>
+                            <th colspan='6' style="text-align:center;">
+                            <div style="float:left;width:70%;">
+                                <input id="createNewPatient" type="button" value= "Create Person" class="btn btn-primary btn-block" style="background-color:#009D8E !important;">
+                            </div>
+                            <div style="float:right;width:25%;">
+                                <input id="CancelCreateNewPatient" type="button" value= "Go Back" class="btn btn-primary btn-block" style="background-color:red !important;">
+                            </div>
+                            </th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end of body wrapper -->
+
+    <!-- start of search results -->
     <div id="searchResults" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
         <h5>No patient found with this identifier. Please search patient using fingerprint</h5>
     </div>
+    <!-- end of search results -->
+
         <div id="exception_device" class="modal fade" role="dialog" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;color:red;">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -276,6 +361,8 @@
             </div>
           </div>
         </div>
+
+    <!-- start of registration section -->
     <div id = "registrationSection">
         <div id = "updatePatient" class="btn btn-lg btn-primary">
             <input id = "btnUpdatePatient" type="button" value= "Update Selected patient" class="btn btn-lg btn-primary">
@@ -288,28 +375,74 @@
         </div>
         <div style="height:20px;"></div>
         <div id="enrollFingerprint" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;width:100%;">
-            <span id="unregisteredscantext" style="font-weight:bold;color: red;">Fingerprint does not match any patient. Please scan the left thumb finger three times to register.</span><br><br/>
-            <span id="scanwaittext" style="font-weight:bold;color: green;display:none;">
-            <marquee>the scanner is being started automatically,follow the instructions in the pop up to proceed, if it does not show up after 5 seconds click the link below to start it manually</marquee><br><br/>
-            <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button class="btn btn-primary" style="background-color:#009D8E !important;">Restart Scanner</button></a>
-            </span>
-            <a id="interfacecontrol" style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><button class="btn btn-success btn-lg" style="background-color:#009D8E !important;">Click to Scan left thumb finger three times</button></a><br/><br/>
+              <table id="unregisteredscantext" border="0" style="text-align:center !important;width:100% !important;">
+                <thead>
+                  <tr class = "forms-header" style="text-align:center;">
+                      <th style="text-align:center;font-size:1.3em;">
+                          <h2  id="scanHeaderMessage">Patient Fingerprint Identification Result</h2>
+                      </th>
+                  </tr>
+                </thead>
+                <thead style="text-align:center;">
+                  <tr style="text-align:center;">
+                      <th style="text-align:center;color: green;">
+                        <br/>
+                        <p id="userNotificationScan">Fingerprint does not match any patient. Please scan the left thumb finger three times to register by clicking the button below.</p>
+                        <br/>
+                      </th>
+                  </tr>
+                </thead>
+            <thead style="text-align:center;">
+                  <tr style="text-align:center;">
+                      <th style="text-align:center;">
+                         <a id="interfacecontrol" style="text-decoration:none;width:100% !important;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><input  type="button" value= "Scan Left Thumb Three Times" class="btn btn-primary btn-block" style="background-color:#009384 !important;"></a>
+                      </th>
+                  </tr>
+            </thead>
+            </table>
+            <table id="scanwaittext" style="display:none;">
+                    <thead>
+                            <tr  class = "forms-header">
+                                  <th style="text-align:center;">mUzima Biometrics Information</th>
+                            </tr>
+                    </thead>
+                    <thead>
+                            <tr>
+                                  <th style="color: green;">
+                                      <br/><br/>
+                                      <marquee>the scanner is being started automatically,scan the finger in the pop up to proceed, if it does not show up after 5 seconds click the button below to start it manually</marquee>
+                                      <br><br/>
+                                  </th>
+                            </tr>
+                    </thead>
+                    <thead>
+                            <tr>
+                                  <th>
+                                       <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><input  type="button" value= "Re-Scan Left Thumb Three Times" class="btn btn-lg btn-primary btn-block" style="background-color:#009384 !important;"></a> 
+                                  </th>
+                            </tr>
+                    </thead>
+            </table>
+          </div>
         <button type="button" id="enrollFingers" class="btn btn-lg btn-success" style="display:none;">PROCEED TO REGISTER</button>
-        </div>
+
         <div style="height:20px;"></div>
+
         <div id="addFingerprints" style="margin:0 auto;padding:10px;border: 1px solid gray;text-align: center;">
             <span id="selected-patient" style="font-weight:bold;color:green;"></span><br>
             <a style="text-decoration:none;" href="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/enroll-fingerprint.jnlp"><b>Click here to enroll left thumb finger three times</b></a>
             <button type="button" id="addFingers" class="btn btn-lg btn-primary">Add Fingerprints</button>
         </div>
-    </div>
+  </div>
     <!--start of registration click content -->
+
+
     <div id = "registrationSections">
-            <p>registration content is currently being engineered.</p>
+            <p></p>
     </div>
     <!--end of registration click content -->
         <div id = "registrationForm" style="margin-left:0px;">
-            <h3 id="form-title">Registration Form</h3>
+            <h3 id="form-title">New Patient Registration Form</h3>
             <form id = "formData" method = "post" action = "" style="border: 1px solid #eeeeee;padding:20px;">
                     <div class="form-group">
                         <label for= "given_name">First Name</label>
@@ -353,8 +486,11 @@
                     </div>
             </form>
             <br/>
-            <div>
-                <input id = "btnCreatePatient" type="button" value= "Create Patient" class="btn btn-lg btn-primary btn-block">
+            <div style="float:left;width:70%;">
+                <input id = "btnCreatePatient" type="button" value= "Register Patient" class="btn btn-lg btn-primary btn-block" style="background-color:#009D8E !important;">
+            </div>
+            <div style="float:right;width:25%;">
+                <input id = "btnCancelTransaction" type="button" value= "Cancel Registration" class="btn btn-lg btn-primary btn-block" style="background-color:red !important;">
             </div>
         </div>
         <!-- start of person basic demographics form -->
@@ -379,10 +515,10 @@
                     <br/>
                     <div style="width:100% !important;">
                     <div style="width:65% !important;float:left;">
-                        <input id = "btnSearchPatient" type="button" value= "Create Person" class="btn btn-lg btn-primary btn-block">
+                        <input id = "btnSearchPatient" type="button" value= "Create Person" class="btn btn-lg btn-primary btn-block" style="background-color:#54BFB2 !important;">
                     </div>
-                    <div style="width:25% !important;float:right;">
-                        <input id = "cancelregistration" type="button" value= "Cancel Registration" class="btn btn-lg btn-primary btn-block">
+                    <div style="width:28% !important;float:right;">
+                        <input id = "cancelregistration" type="button" value= "Cancel Registration" class="btn btn-lg btn-primary btn-block" style="background-color:red !important;">
                     </div>
                     </div>
                 </div>

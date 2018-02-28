@@ -29,6 +29,24 @@ function identifyPatient(fingerprintData){
     return identifiedPatient;
 };
 
+function updatePersonListTable(Patients, updateControlsStatus){
+    updateControls(updateControlsStatus);
+    $("#tblStore tbody tr").remove();
+    var identifiers;
+    Patients.forEach( function (patient){
+        identifiers=patient.identifiers.replace(/[\[\]']+/g,'');
+        $("#tblStore tbody").append( "<tr>"
+            + "<td style='display:none;'>"+patient.patientUUID+"</td>"
+            + "<td><a href='"+openmrsContextPath+"/patientDashboard.form?patientId="+patient.id+"'>"+patient.id+" </a></td>"
+            + "<td>"+patient.givenName +"</td>"
+            + "<td>"+ patient.familyName+"</td>"
+            + "<td>"+ identifiers+"</td>"
+            + "<td>"+ patient.gender+"</td>"
+            + "<td>"+show(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
+            + "</tr>");
+    });
+};
+//function to handle create data
 function updatePatientListTable(Patients, updateControlsStatus){
     updateControls(updateControlsStatus);
     $("#tblData tbody tr").remove();
@@ -46,6 +64,7 @@ function updatePatientListTable(Patients, updateControlsStatus){
             + "</tr>");
     });
 };
+//end function to handle create data
 function activate(val, e){
     var key=e.keyCode || e.which;
     if (key==13){
@@ -137,6 +156,24 @@ function updateControls(status){
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
+    } else if(status ==6){
+        //Show patient found for scan process - case6
+        $('#body-wrapperr').show();
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').hide();
+        $('#basicdemographicform').hide();
+    }else if(status ==7){
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').show();
+        $('#basicdemographicform').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').hide();
     }
 };
 
@@ -359,11 +396,11 @@ $(document).ready(function(){
         //check if forms are field
         if($("#family_name").val() == "")
         {
-            $("#family_name").attr("placeholder", "This name field cannot be empty, please enter the person name");
+            $("#family_name").attr("placeholder", "This field cannot be empty, please enter the person name");
         }
         else if($("#age").val() == "")
         {
-            $("#age").attr("placeholder", "This name field cannot be empty, please enter the age of person");
+            $("#age").attr("placeholder", "This field cannot be empty, please enter the age of person");
         }
         else{
                 if($("#gender1").is(":checked")==false && $("#gender2").is(":checked")==false)
@@ -382,11 +419,12 @@ $(document).ready(function(){
                                 success: function (result) {
                                     console.log(result);
                                     if(result.length == 0) {
-                                        updateControls(4);
+                                        window.clearInterval(yellowMan);
+                                        updateControls(7);
                                     }
                                     else{
                                         $("#enrollFingerprint").hide();
-                                        updatePatientListTable(result, 1);
+                                        updatePersonListTable(result, 6);
                                         window.clearInterval(yellowMan);
                                         console.log("patientsearch is "+JSON.stringify(result));
                                     }
@@ -579,6 +617,8 @@ $(document).ready(function(){
                 else {
                     //location.href = "managefingerprint.form";
                     updateScanningView(3);
+                    $("#refreshDiv").hide();
+                    $("#downloadDiv").show();
                     console.log("please refresh to load fingerprint again");
                 }
 
@@ -646,7 +686,7 @@ $(document).ready(function(){
                 else {
                     //location.href = "managefingerprint.form";
                     updateScanningView(3);
-                    console.log("please scan fingerptint again");
+                    console.log("please scan fingerprint again");
                 }
 
             },

@@ -7,24 +7,25 @@ import java.util.UUID;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MuzimaFingerprint extends BaseOpenmrsData{
+public class MuzimaFingerprint extends BaseOpenmrsData {
     private Integer id;
     private String patientUUID;
     private byte[] firstFingerprint;
     private byte[] secondFingerprint;
     private byte[] thirdFingerprint;
 
-    public MuzimaFingerprint(){
+    public MuzimaFingerprint() {
     }
-    public MuzimaFingerprint(String patientUUID, byte[] firstFingerprint,byte[] secondFingerprint,byte[] thirdFingerprint){
 
-        if (getUuid()==null) {
+    public MuzimaFingerprint(String patientUUID, byte[] firstFingerprint, byte[] secondFingerprint, byte[] thirdFingerprint) {
+
+        if (getUuid() == null) {
             setUuid(UUID.randomUUID().toString());
         }
         this.patientUUID = patientUUID;
         this.firstFingerprint = firstFingerprint;
-        this.secondFingerprint=secondFingerprint;
-        this.thirdFingerprint=thirdFingerprint;
+        this.secondFingerprint = secondFingerprint;
+        this.thirdFingerprint = thirdFingerprint;
     }
 
     public Integer getId() {
@@ -45,9 +46,9 @@ public class MuzimaFingerprint extends BaseOpenmrsData{
         return "MuzimaFingerprint{" +
                 "id=" + id +
                 ", patientUUID=" + getPatientUUID() +
-                ", firstFingerprint='" + getFirstFingerprint()+ '\'' +
-                ", secondFingerprint='" + getSecondFingerprint()+ '\'' +
-                ", thirdFingerprint='" + getThirdFingerprint()+ '\'' +
+                ", firstFingerprint='" + getFirstFingerprint() + '\'' +
+                ", secondFingerprint='" + getSecondFingerprint() + '\'' +
+                ", thirdFingerprint='" + getThirdFingerprint() + '\'' +
                 '}';
     }
 
