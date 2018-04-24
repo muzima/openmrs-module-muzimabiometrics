@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.openmrs.module</groupId>
 		<artifactId>muzimabiometrics</artifactId>
-		<version>2.0.0</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<artifactId>muzimabiometrics-omod</artifactId>
@@ -14,14 +14,6 @@
 	<description>OMOD project for Muzima Biometrics</description>
 
 	<dependencies>
-
-		<!-- 
-		Add other dependencies from parent's pom: 
-		<dependency> 
-			<groupId>org.other.library</groupId> 
-			<artifactId>library-name</artifactId> 
-		</dependency> 
-		-->
 		
 		<!-- Begin OpenMRS modules -->
 		

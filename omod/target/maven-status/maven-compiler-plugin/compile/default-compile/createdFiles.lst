@@ -1,0 +1,6 @@
+org\openmrs\module\muzimabiometrics\resources\MuzimaFingerprintResource.class
+org\openmrs\module\muzimabiometrics\MuzimaConstants.class
+org\openmrs\module\muzimabiometrics\extension\html\AdminList.class
+org\openmrs\module\muzimabiometrics\web\controller\MuzimafingerPrintManageController.class
+org\openmrs\module\muzimabiometrics\web\controller\MuzimaFingerprintController.class
+org\openmrs\module\muzimabiometrics\web\controller\MuzimafingerPrintResourceController.class

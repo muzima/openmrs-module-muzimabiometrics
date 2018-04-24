@@ -1,6 +1,0 @@
-.idea/
-*.iml
-**/*.class
-**/target/
-**/*.DS_STORE
-omod/src/main/webapp/resources/*.jar
