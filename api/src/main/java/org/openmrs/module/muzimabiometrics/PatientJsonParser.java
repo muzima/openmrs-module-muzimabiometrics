@@ -91,7 +91,7 @@ public class PatientJsonParser {
             Set<PatientIdentifier> patientIdentifiers = new HashSet<PatientIdentifier>();
             PatientIdentifier patientIdentifier = new PatientIdentifier();
 
-            PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByName(jsonObject.getString("identifierType"));
+            PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObject.getString("identifierType"));
             patientIdentifier.setIdentifierType(identifierType);
             patientIdentifier.setIdentifier(jsonObject.getString("amrs_id"));
 

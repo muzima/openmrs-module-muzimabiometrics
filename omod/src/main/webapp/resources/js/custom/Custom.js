@@ -606,8 +606,8 @@ $(document).ready(function(){
             },
             amrs_id : {
                 required : true,
-                //numbersOnly:true
-                checkDigit: true
+               // numbersOnly:true
+                // checkDigit: true
             },
             age :{
                 required : true,

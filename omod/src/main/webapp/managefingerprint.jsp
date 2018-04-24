@@ -497,18 +497,18 @@
             <div class="form-group">
                 <label for= "phone_number">Phone Number</label>
                 <input autocomplete="off" type="text" name="phone_number" class="form-control" required>
-                <input autocomplete="off" type="hidden" name="identifierType" value="OpenMRS Identification Number"/>
+                <%--<input autocomplete="off" type="hidden" name="identifierType" value="OpenMRS Identification Number"/>--%>
             </div>
             <div class="form-group">
                 <label for= "mothers_name">Mothers Name</label>
                 <input autocomplete="off" type="text" name="mothers_name" class="form-control">
             </div>
-            <%--<div class="form-group">--%>
-                <%--<label for= "identifierType">Identifier Type</label>--%>
-                <%--<select id = "IdentifierOptions" name=" identifierType " class="form-control" required>--%>
-                    <%--<option value="">...</option>--%>
-                <%--</select>--%>
-            <%--</div>--%>
+            <div class="form-group">
+                <label for= "identifierType">Identifier Type</label>
+                <select id = "IdentifierOptions" name="identifierType" class="form-control" required>
+                    <option value="">...</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for= "amrs_id">Universal ID Assigned</label>
                 <input autocomplete="off" type="text" name="amrs_id" id="amrs_id" class="form-control" required>
