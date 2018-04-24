@@ -1,9 +1,32 @@
 var _FINGERPRINT_DATA = "";
-function showMessage() {
-    return "This is from javascript";
-};
 $("#enrollFingerprint").hide();
 $("#addFingerprints").hide();
+function updateIdentificationStatus(patientUuid){
+    if(patientUuid=="PATIENT_NOT_FOUND"){
+        updateControls(8);
+    }else {
+        _PATIENT_UUID = patientUuid;
+        $.ajax({
+            url: "fingerprint/getPatient.form",
+            type: "POST",
+            data: _PATIENT_UUID,
+            contentType: 'application/json',
+            dataType: 'json',
+            async: false,
+            success: function(msg) {
+                console.log(msg);
+                $("#signinscreen").hide();
+                updatePatientListTable(msg, 1);
+            },
+            error: function(msg, status, error){
+                console.log("server error +++++++++++++"+JSON.stringify(error));
+                updateControls(8);
+            }
+
+        });
+    }
+};
+
 function identifyPatient(fingerprintData){
     _FINGERPRINT_DATA = fingerprintData;
     var identifiedPatient = 'no data found';
@@ -18,16 +41,54 @@ function identifyPatient(fingerprintData){
         success: function(msg) {
             console.log(msg);
             identifiedPatient = JSON.stringify(msg);
-            updatePatientListTable(msg, 1);
         },
         error: function(msg, status, error){
             console.log("server error +++++++++++++"+JSON.stringify(error));
+            updateControls(8);
+        }
+
+    });
+    return identifiedPatient;
+};
+
+function registerPatient(fingerprintData){
+        var fingerprint = document.getElementById('fingerprint');
+        fingerprint.value = fingerprintData;
+        updateControls(3);
+};
+
+function appendFingerPrint(fingerPrint) {
+    var patientUuid = $("#appendPatientUuid").val();
+    _FINGERPRINT_DATA = fingerPrint;
+    var jsonData = "{patient: {patientUuid : '"+patientUuid+"' , fingerPrint :'"+ _FINGERPRINT_DATA+"'}}";
+    $.ajax({
+        url: "fingerprint/appendFingerPrint.form",
+        type: "POST",
+        data: jsonData,
+        contentType: 'application/json',
+        dataType: 'json',
+        async: false,
+        success: function(msg) {
+            $("#signinscreen").hide();
+            $("#body-wrapperr").hide();
+            $("#body-wrapper").hide();
+            $("#addFingerprints").hide();
+            //update
+            $("#enrollFingerprint").show();
+            $("#registeredWell").hide();
+            $("#unregisteredscantext").hide();
+            $("#scanwaittext").hide();
+            $("#appendWell").slideDown("slow");
+            //end update
+        },
+        error: function(msg, status, error){
+            console.log("server error +++++++++++++"+JSON.stringify(error));
+            updateControls(8);
         }
 
     });
 
-    return identifiedPatient;
-};
+}
 
 function updatePersonListTable(Patients, updateControlsStatus){
     updateControls(updateControlsStatus);
@@ -77,6 +138,7 @@ function activate(val, e){
             success: function (result) {
                 console.log(result);
                 if(result.length == 0) {
+                    $("#signinscreen").hide();
                     updateControls(4);
                 }
                 else{
@@ -97,7 +159,7 @@ function show(fingerprint, patientUuid){
         return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
     }
     else {
-        return "<button type='button'>Append Fingerprints</button>"
+        return "<button type='button' >Append Fingerprint</button>"
     }
 };
 
@@ -115,6 +177,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==1){
         //Show patient found for scan process - case1
         $('#body-wrapper').show();
@@ -124,6 +187,7 @@ function updateControls(status){
         $('#searchResults').hide();
         $('#patientCreated').hide();
         $('#basicdemographicform').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==2){
         //Show other option i.e. to register - case2
         $('#body-wrapper').hide();
@@ -132,6 +196,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==3){
         //Show registration section - case3
         $('#body-wrapper').hide();
@@ -141,6 +206,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==4){
         //No patient found with search by name or identifier - case4
         $('#body-wrapper').hide();
@@ -149,6 +215,7 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').show();
         $('#patientCreated').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==5){
         //Show created patient - case5
         $('#body-wrapper').show();
@@ -156,6 +223,7 @@ function updateControls(status){
         $('#registrationForm').hide();
         $('#updatePatient').hide();
         $('#searchResults').hide();
+        $('#enrollFingerprint').hide();
     } else if(status ==6){
         //Show patient found for scan process - case6
         $('#body-wrapperr').show();
@@ -166,6 +234,7 @@ function updateControls(status){
         $('#searchResults').hide();
         $('#patientCreated').hide();
         $('#basicdemographicform').hide();
+        $('#enrollFingerprint').hide();
     }else if(status ==7){
         $('#body-wrapper').hide();
         $('#otherIdentificationOption').hide();
@@ -174,6 +243,17 @@ function updateControls(status){
         $('#updatePatient').hide();
         $('#searchResults').hide();
         $('#patientCreated').hide();
+        $('#enrollFingerprint').hide();
+    }else if(status ==8){
+        $('#body-wrapper').hide();
+        $('#otherIdentificationOption').hide();
+        $('#registrationForm').hide();
+        $('#basicdemographicform').hide();
+        $('#updatePatient').hide();
+        $('#searchResults').hide();
+        $('#patientCreated').hide();
+        $('#enrollFingerprint').show();
+        $('#signinscreen').hide();
     }
 };
 
@@ -295,6 +375,11 @@ $(function(){
     $("#btnYes").click(function(){
         updateControls(3);
     });
+	
+	function enrollFingerprint(){
+		updateControls(3);
+	}
+	
     $("#btnNo").click(function(){
         updateControls(0);
     });
@@ -352,16 +437,18 @@ $(function(){
 
     $("#btnCreatePatient").click(function(){
         if($("#formData").valid()){
-          $.ajax({
+         $.ajax({
             url:"../../ws/rest/v1/patient?q="+$("#amrs_id").val(),
             type:"GET",
             contentType: 'application/json',
             async:true,
             success:function(data){
               if(data.results.length>0){
+
                 $('#patient-exists').modal('show');
               }
               else{
+                console.log("start of inserting data block");
                 var jsonData = JSON.stringify($('#formData').serializeEncounterForm());
                 $.ajax({
                     url: "fingerprint/enrollPatient.form",
@@ -373,12 +460,19 @@ $(function(){
                     success: function(msg) {
                         console.log("new Patient data "+JSON.stringify(msg));
                         $('#formData').trigger("reset");
-                        $("#enrollFingerprint").html("<span style='font-weight:bold;color:green;'>Patient Successfully Saved</span>").show();
-                        updatePatientListTable(msg, 5);
-                        document.getElementById("fingerprintScan").value="false";
+                        $("#registrationForm").hide();
+                        $("#enrollFingerprint").show();
+                        $("#unregisteredscantext").hide();
+                        $("#scanwaittext").hide();
+                        $("#registeredWell").show();
                     },
                     error: function(msg, status, error){
+                        var logging = document.getElementById("logging");
+                        logging.value = "There is an error in success "+JSON.stringify(error)+" == "+msg+" ++ "+status;
                         console.log("server error +++++++++++++"+JSON.stringify(error));
+                        console.log("the error message is "+msg);
+                        console.log("the status is "+status);
+                        console.log("the error logged is "+error);
                     }
                 });
               }
@@ -387,6 +481,11 @@ $(function(){
               console.log("patient by identifier error +++++++++++++++++++++++++++"+JSON.stringify(error));
             }
           });
+        }
+        else
+        {
+            var logging = document.getElementById("logging");
+            logging.value = "There is an error ";
         }
     });
 
@@ -507,22 +606,24 @@ $(document).ready(function(){
             },
             amrs_id : {
                 required : true,
-                checkDigit: true
+               // numbersOnly:true
+                // checkDigit: true
             },
             age :{
                 required : true,
                 numbersOnly:true
             },
             location_id:{
-                required : true
-            },
-            provider_id : {
-                required : true
-            },
-            encounter_datetime:{
-                required : true,
-                nonFutureDate: true
-            }
+                required : false
+                }
+//            },
+//            provider_id : {
+//                required : true
+//            },
+//            encounter_datetime:{
+//                required : true,
+//                nonFutureDate: true
+//            }
         }
     });
     updateControls(0);
@@ -694,7 +795,7 @@ $(document).ready(function(){
                 console.log("server encountered an error repeat regisration");
             }
         });
-    },15000);
+    },7000);
     });
     function updateScanningView(value){
         if(value==1){
@@ -789,11 +890,31 @@ $(document).ready(function(){
         success:function(response){
           var display=response.display;
           $("#selected-patient").append("<h3>Append fingerprint to: "+display+"</h3>");
+          $("#appendPatientUuid").val(patientUUID);
           $("#addFingerprints").show();
         },
         error:function(error){
           console.log("selected patient to add fingerprint error +++++++++++++++++++++"+JSON.stringify(error));
         }
       });
+    });
+
+    $("#tblStore").on("click","tr td button",function(){
+        $("#selected-patient").empty();
+        patientUUID=$(this).parent().parent().find('td:nth-child(1)').html();
+        $.ajax({
+            url:"../../ws/rest/v1/patient/"+patientUUID,
+            type:"GET",
+            contentType: 'application/json',
+            success:function(response){
+                var display=response.display;
+                $("#selected-patient").append("<h3>Append fingerprint to: "+display+"</h3>");
+                $("#appendPatientUuid").val(patientUUID);
+                $("#addFingerprints").show();
+            },
+            error:function(error){
+                console.log("selected patient to add fingerprint error +++++++++++++++++++++"+JSON.stringify(error));
+            }
+        });
     });
 });

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="muzimabiometrics" level="project" />
+    <orderEntry type="library" name="JlibFprint" level="project" />
+    <orderEntry type="library" name="muzimabiometrics-1.0.0" level="project" />
+    <orderEntry type="library" name="muzimabiometrics-api-1.0.0" level="project" />
+    <orderEntry type="library" name="java" level="project" />
+    <orderEntry type="library" name="src" level="project" />
+    <orderEntry type="library" name="muzimabiometrics-fingerprint-1.0.0" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="resources" level="project" />
+    <orderEntry type="library" name="resources1" level="project" />
+    <orderEntry type="library" name="resources2" level="project" />
+    <orderEntry type="module" module-name="main2" />
+    <orderEntry type="module" module-name="main" />
+  </component>
+</module>

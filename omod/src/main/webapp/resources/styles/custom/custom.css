@@ -24,10 +24,10 @@
     text-decoration: none;
 }
 
-input[type="text"], input[type="password"] {
-padding: 1px;
-border: 1px solid cadetblue;
-}
+/*input[type="text"], input[type="password"] {*/
+/*padding: 1px;*/
+/*border: 1px solid cadetblue;*/
+/*}*/
 
 #body-wrapper {
 margin-top: 10px;

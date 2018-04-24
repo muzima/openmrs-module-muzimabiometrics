@@ -3,9 +3,15 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
-
+      $('basicdemographicform').hide();
       $('#body-wrapper').hide();
       $('#body-wrapperr').hide();
+      $('#addFingerprints').hide();
+      $("#refreshDiv").hide();
+      $("#registeredWell").hide();
+      $("#appendWell").hide();
+      $("#downloadDiv").show();
+      $("#searchResults").hide();
       $("#homecontainer").fadeOut();
       $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
@@ -20,6 +26,8 @@ $(document).ready(function(){
   $("#activatehomecontainer").click(function(){
       $('#body-wrapper').hide();
       $('#body-wrapperr').hide();
+      $("#registeredWell").hide();
+      $("#appendWell").hide();
       $("#mainframecontainer").slideUp();
        $("#showdefaultsettings").slideUp();
       $("#registrationSections").fadeOut();
@@ -40,18 +48,26 @@ $(document).ready(function(){
   $("#activatemaincontainersignup").click(function(){
       $('#body-wrapper').hide();
       $('#body-wrapperr').hide();
+      $("#searchResults").hide();
       $("#homecontainer").fadeOut();
       $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();
       $("#signinscreen").fadeOut();
+      $("#registeredWell").hide();
+      $("#appendWell").hide();
       $("#enrollFingerprint").show();
+      $("#addFingerprints").hide();
+      $("#unregisteredscantext").slideDown();
       $("#scanHeaderMessage").text("Patient Registration Section");
+      $("#scanHeaderMessage").show();
       $("#userNotificationScan").css("color","green");
-      $("#userNotificationScan").text("Please scan the left thumb finger three times to register by clicking the button below.");
-      $("#unregisteredscantext").show();
+      $("#userNotificationScan").show();
+      $("#userNotificationScan").text("Click the button below to activate the scanner.");
       $("#scanwaittext").hide();
+      $("#interfacecontrol").show();
+
   });
 });
 $(document).ready(function(){
@@ -121,10 +137,4 @@ $(document).ready(function(){
                         });
     });
 });
-$(document).ready(function(){
-    $( "#activatehomecontainer" ).hover(function(){
-            $("#activatehomecontainer").css("animation","skew 3s infinite");
-            $("#activatehomecontainer").css("transform","skew(20deg)");
-            $("#activatehomecontainer").css("animation-direction","alternate");
-    });
-});
+

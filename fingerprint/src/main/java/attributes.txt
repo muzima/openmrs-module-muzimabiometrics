@@ -1,3 +1,0 @@
-Permissions: all-permissions
-Codebase: http://192.168.1.100:8080/openmrs/moduleResources/muzimabiometrics/
-Application-Name: mUzima Fingerprint App

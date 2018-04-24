@@ -18,9 +18,9 @@ import java.util.List;
 public interface MuzimaFingerprintService extends OpenmrsService {
 
     @Transactional
-    Patient savePatient(String patientData,byte[] firstFingerPrint,byte[] secondFingerprint,byte[] thirdFingerprint) throws JSONException, ParseException;
+    Patient savePatient(String patientData,String firstFingerPrint,String secondFingerprint,String thirdFingerprint) throws JSONException, ParseException;
 
-    PatientFingerPrintModel identifyPatient(String fingerprint) throws IOException;
+    List<PatientFingerPrintModel> identifyPatient(String fingerprint) throws IOException;
 
     List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(String identifier) throws JSONException;
 
@@ -36,6 +36,7 @@ public interface MuzimaFingerprintService extends OpenmrsService {
     MuzimaFingerprint findByUniqueId(String uuid);
 
     @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(String patientUUID,byte[] firstFingerImage,byte[] secondeFingerImage,byte[] thirdFingerImage) throws JSONException;
+    PatientFingerPrintModel addFingerprintToPatient(String patientUUID,String firstFingerImage,String secondeFingerImage,String thirdFingerImage) throws JSONException;
 
+    List<PatientFingerPrintModel> getPatientByPatientUuid(String patientUuid);
 }

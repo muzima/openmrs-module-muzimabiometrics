@@ -20,10 +20,6 @@ import org.openmrs.module.webservices.rest.web.response.ResourceDoesNotSupportOp
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
 
 import java.util.List;
-
-/**
- * Created by vikas on 17/11/14.
- */
 @Resource(name = RestConstants.VERSION_1 + "/" + MuzimaConstants.MODULE_ID + "/fingerprint",
         supportedClass = MuzimaFingerprint.class, supportedOpenmrsVersions = {"1.8.*", "1.9.*","1.10.*","1.11.*"})
 @Handler(supports = MuzimaFingerprint.class)
