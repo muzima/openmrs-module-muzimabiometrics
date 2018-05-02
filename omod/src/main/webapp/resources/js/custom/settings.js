@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
-      $('basicdemographicform').hide();
+      $('#basicdemographicform').hide();
       $('#body-wrapper').hide();
       $('#body-wrapperr').hide();
       $('#addFingerprints').hide();
