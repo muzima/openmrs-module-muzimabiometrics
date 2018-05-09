@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+	<!-- Module Properties -->
+	<id>muzimabiometrics</id>
+	<name>Muzima Biometrics Module</name>
+	<version>1.0.0</version>
+	<package>org.openmrs.module.muzimabiometrics</package>
+	<author>Muzima Team</author>
+	<description>
+		OpenMRS module project for Muzima Biometrics. Provides biometrics services to both OpenMRS and Muzima mobile application
+	</description>
+	<updateURL>https://modules.openmrs.org/modules/download/muzimabiometrics/update.rdf</updateURL>
+	<require_version>1.8.2</require_version>
+	<!-- / Module Properties -->
+
+	<aware_of_modules>
+		<aware_of_module version="1.0.0">org.openmrs.module.muzimacore</aware_of_module>
+	</aware_of_modules>
+	
+	<!-- Module Activator -->
+	<activator>org.openmrs.module.muzimabiometrics.MuzimaBiometricsActivator</activator>
+
+
+    <mappingFiles>
+        MuzimaFingerprint.hbm.xml
+		MuzimaTemporaryFingerprint.hbm.xml
+    </mappingFiles>
+
+	<!-- Adds link to admin page -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.muzimabiometrics.extension.html.AdminList</class>
+	</extension>
+	
+	<!-- Maps hibernate file's, if present -->
+
+    <require_modules>
+        <require_module version="2.0">org.openmrs.module.webservices.rest</require_module>
+    </require_modules>
+
+	<!-- Internationalization -->
+	<!-- All message codes should start with muzimabiometrics. -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+
+</module>
+

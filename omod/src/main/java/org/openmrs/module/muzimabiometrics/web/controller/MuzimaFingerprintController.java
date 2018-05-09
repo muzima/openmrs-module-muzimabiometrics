@@ -47,6 +47,7 @@ public class MuzimaFingerprintController {
     @RequestMapping(value = "fingerprint/enrollPatient.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public synchronized JSONArray enrollPatient(@RequestBody String jsonPayload) throws Exception {
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
+       // System.out.println(jsonPayload);
         Patient patient = service.savePatient(jsonPayload,firstImageBytes,secondImageBytes,thirdImageBytes);
         PatientFingerPrintModel patientFingerPrintModel=new PatientFingerPrintModel(patient.getUuid(),firstImageBytes, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender(),patient.getIdentifiers().toString());
         JSONArray jsonArray=new JSONArray();

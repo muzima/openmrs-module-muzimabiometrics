@@ -10,5 +10,10 @@
         <module name="muzimabiometrics-omod" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="muzimabiometrics" target="1.5" />
+      <module name="muzimabiometrics-api" target="1.6" />
+      <module name="muzimabiometrics-omod" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>

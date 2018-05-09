@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db508a6d-3680-470e-976f-aaf77fa99aa6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" afterDir="false" />
+    <list default="true" id="69e6b520-fef0-4c46-b48b-4f3147fdb8a1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" afterPath="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java" afterPath="$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
-    <ignored path="$PROJECT_DIR$/api/target/" />
-    <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/omod/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/api/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,12 +22,23 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="managefingerprint.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="843" column="47" selection-start-line="843" selection-start-column="47" selection-end-line="843" selection-end-column="47" />
+            <state relative-caret-position="139">
+              <caret line="632" column="85" lean-forward="false" selection-start-line="632" selection-start-column="76" selection-end-line="632" selection-end-column="85" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -29,8 +46,9 @@
       <file leaf-file-name="Custom.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9614">
-              <caret line="437" column="44" selection-start-line="437" selection-start-column="44" selection-end-line="437" selection-end-column="44" />
+            <state relative-caret-position="14202">
+              <caret line="526" column="37" lean-forward="false" selection-start-line="526" selection-start-column="37" selection-end-line="526" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -38,8 +56,41 @@
       <file leaf-file-name="MuzimaFingerprintController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3762">
-              <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
+            <state relative-caret-position="675">
+              <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MuzimaFingerprintService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/MuzimaFingerprintService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MuzimaFingerprintServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4347">
+              <caret line="190" column="1" lean-forward="false" selection-start-line="190" selection-start-column="1" selection-end-line="190" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatientJsonParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="71" column="76" lean-forward="false" selection-start-line="71" selection-start-column="76" selection-end-line="71" selection-end-column="76" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -48,61 +99,77 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fingerprint/findPatients.form</find>
-      <find>Enjoy</find>
-      <find>btnSe</find>
-      <find>registrationForm</find>
-      <find>birthdate</find>
+      <find>amr</find>
+      <find>repeat</find>
+      <find>fingerp</find>
+      <find>fingerprint/enrollPatient.form</find>
+      <find>System.out</find>
+      <find>console.</find>
       <find>btnCreatePatient</find>
-      <find>Create Person</find>
+      <find>birthdate</find>
+      <find>age</find>
+      <find>age&quot;</find>
+      <find>basicdemographicform</find>
+      <find>updateControls</find>
+      <find>savePatient</find>
+      <find>datepicker</find>
+      <find>System.o</find>
     </findStrings>
-    <dirStrings>
-      <dir>C:\Users\User\Desktop\frommain\openmrs-module-muzimabiometrics</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
+        <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
     <option name="enabledProfiles">
       <list>
         <option value="1.8" />
       </list>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-155" />
-    <option name="y" value="240" />
-    <option name="width" value="1050" />
-    <option name="height" value="1040" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -170,16 +237,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -194,10 +253,30 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -207,13 +286,24 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
+      <envs />
       <patterns />
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -226,199 +316,299 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
+      <envs />
       <properties />
       <listeners />
     </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="db508a6d-3680-470e-976f-aaf77fa99aa6" name="Default" comment="" />
-      <created>1524734494374</created>
+      <changelist id="69e6b520-fef0-4c46-b48b-4f3147fdb8a1" name="Default" comment="" />
+      <created>1525804901147</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1524734494374</updated>
-      <workItem from="1524734495763" duration="11651000" />
-      <workItem from="1524807649781" duration="1834000" />
-      <workItem from="1524830344132" duration="2545000" />
-      <workItem from="1525069386810" duration="10330000" />
-      <workItem from="1525083185870" duration="6241000" />
-      <workItem from="1525227864929" duration="1066000" />
+      <updated>1525804901147</updated>
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33667000" />
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="0" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="1" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" weight="0.3295302" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32909605" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2671141" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="8" weight="0.24966443" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18502">
-          <caret line="841" column="31" lean-forward="true" selection-start-line="841" selection-start-column="31" selection-end-line="841" selection-end-column="31" />
+        <state relative-caret-position="17064">
+          <caret line="632" column="85" lean-forward="false" selection-start-line="632" selection-start-column="76" selection-end-line="632" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="18" />
+        <state relative-caret-position="1431">
+          <caret line="53" column="6" lean-forward="false" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9614">
-          <caret line="437" column="44" selection-start-line="437" selection-start-column="44" selection-end-line="437" selection-end-column="44" />
+        <state relative-caret-position="14202">
+          <caret line="526" column="37" lean-forward="false" selection-start-line="526" selection-start-column="37" selection-end-line="526" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4312">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
+        <state relative-caret-position="675">
+          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/MuzimaFingerprintService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4347">
+          <caret line="190" column="1" lean-forward="false" selection-start-line="190" selection-start-column="1" selection-end-line="190" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2241">
+          <caret line="94" column="103" lean-forward="false" selection-start-line="94" selection-start-column="103" selection-end-line="94" selection-end-column="103" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18326">
-          <caret line="833" lean-forward="true" selection-start-line="833" selection-end-line="833" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14823">
+          <caret line="549" column="34" lean-forward="false" selection-start-line="549" selection-start-column="32" selection-end-line="549" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://H:/openmrs-module-muzimabiometrics/omod/src/main/webapp/managefingerprint.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1215">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="881" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2348">
+          <caret line="549" column="34" lean-forward="false" selection-start-line="549" selection-start-column="32" selection-end-line="549" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/db/MuzimaFingerprintDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/api/PatientService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="34" column="7" lean-forward="false" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/Patient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/MuzimaFingerprintService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/PersonName.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3304">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/PersonAddress.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14202">
+          <caret line="526" column="37" lean-forward="false" selection-start-line="526" selection-start-column="37" selection-end-line="526" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4347">
+          <caret line="190" column="1" lean-forward="false" selection-start-line="190" selection-start-column="1" selection-end-line="190" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/Person.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="586" column="34" lean-forward="false" selection-start-line="586" selection-start-column="13" selection-end-line="586" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="71" column="76" lean-forward="false" selection-start-line="71" selection-start-column="76" selection-end-line="71" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9614">
-          <caret line="437" column="44" selection-start-line="437" selection-start-column="44" selection-end-line="437" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4312">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
+        <state relative-caret-position="199">
+          <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13530">
-          <caret line="615" column="46" selection-start-line="615" selection-start-column="46" selection-end-line="615" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4312">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4312">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4312">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/api/context/Context.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="482" column="24" selection-start-line="482" selection-start-column="24" selection-end-line="482" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3762">
-          <caret line="196" column="97" selection-start-line="196" selection-start-column="97" selection-end-line="196" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9614">
-          <caret line="437" column="44" selection-start-line="437" selection-start-column="44" selection-end-line="437" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="843" column="47" selection-start-line="843" selection-start-column="47" selection-end-line="843" selection-end-column="47" />
+        <state relative-caret-position="139">
+          <caret line="632" column="85" lean-forward="false" selection-start-line="632" selection-start-column="76" selection-end-line="632" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
