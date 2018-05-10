@@ -562,33 +562,33 @@
                 <legend>Person Name</legend>
                 <div class="form-group">
                     <label for="patient.given_name">Given</label>
-                    <input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control lettersOnly" required>
                 </div>
                 <label for="patient.middle_name">Middle Name</label>
-                <input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control" required>
+                <input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control lettersOnly" required>
                 <div class="form-group">
                     <label for="patient.family_name">Family Name</label>
-                    <input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control lettersOnly" required>
                 </div>
             </fieldset>
             <fieldset style="width:100%;">
                 <legend>Additional Details</legend>
                 <div class="form-group">
                     <label for="patient.phone_number">Phone Number</label>
-                    <input autocomplete="off" type="text" name="patient.phone_number" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.phone_number" class="form-control phoneNumber" required>
                 </div>
                 <div class="form-group">
                     <label for="patient.mothers_name">Mothers Name</label>
-                    <input autocomplete="off" type="text" name="patient.mothers_name" class="form-control">
+                    <input autocomplete="off" type="text" name="patient.mothers_name" class="form-control lettersOnly">
                 </div>
             </fieldset>
            <fieldset style="width:100%;">
            	<legend>ID Number(s)</legend>
            	<div class="form-group">
-           		<div class="section repeat identifierType" id="identifierType" data-name="identifierType">
+           		<div class="section repeat identifier_type" id="identifier_type" data-name="patient.identifier_type">
            			<div class="form-group">
-           				<label for="identifierType">Identifier Type</label>
-           				<select class="form-control identifierType" name="identifier.identifierType" id="IdentifierOptions">
+           				<label for="identifier_type">Identifier Type</label>
+           				<select class="form-control identifier_type" name="identifier.identifierType" id="IdentifierOptions" required>
            					<option value="">...</option>
            				</select>
            			</div>
@@ -614,23 +614,29 @@
                 <div class="form-group">
                     <label for="fingerprint">Finger Print</label>
                     <img src="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/>
-                    <input type="hidden" id="fingerprint" name="patient.fingerprint" value="TlQAEJUQAAAKAU5GVBCLEAAACgFORlImgRAZZQGIAfQB9AEAAFeCAwEfAAAAB/UjB3hRIA83C2pslcANNAh8HtFgFlAKfSvegB85CHKY7oAZUgl2mCZhF18GdYZpARRaFHGtogEkKgh9TsHBCSsMdp/CQRlkCm1MBmIOVhFwLzXCE0gtdq5CYiBTCX0xWQIaYAl1M6YCE2ARccauYglAB3Cv/uIXYwZztSWjH0gIfC5uAw5YB2+uioMfRQhwro4jHGQHcKsipA9RCWuqIsQTUQ1jqlYEIi0OcaBhRBpbC2ejfSQeUgttq5UECAERdJzhxCAlGHGfCcUQJRdylxnlDjETfJEZxRpDCm2RKmUQFRN4FEklEBIHfI1x5QojDXWJluUVGAVzBqQB////////AgY3Af8v/////wDyAgY2CgiFBQYVCABT/////wTxDAk3BABF/////wfx/////wP0DAkTBQIhAv8fBAcnCQsXBgEyAQBnAgVTCQsVCggk////////EwxkCQOB////////AQZUCg9BBQQTBwyDDQ4lCwZRD/8vCAFIBgskDhIxDhIVCgFLBglVDRBBAwc0////ERAoDQlTEBI6CwZDCQcqDBFTFhIkDwpzCwkVDRBSCg4nEhUy/////wjxCQ1DERRhGBY1Eg5yDP8v////ExQUEA1jFRoX/w/zCg4UEBZxEf8f////FxgWFBAkDREUExchGBZGFRCREhAYFh4hHCE5Gv9vDhAlFBhiIhxlFRIhE/8f/////xvzGRQxEBQ0FxlSHiJIHBZyFBMkF/8/Gx4VHBiCDxJHFR1iIf9P////GRcT////////HhhBFRY1GCJy/x/xHRokDxU1HB8hIP8vIRpCFhgkGRtU////IhxDGhwhGB5zIiARIR0x/////yHzHR8hGCKB/xr0HSBD////////IBYWHhtG/////yHyAQRN/QESAAcABAAA7CVtmUANNAeAId3gFkcJfZbiIBlQCXgr7uAfOAV1lRrhFlwGd3xZYRNOFnWrjuEjLgl/nq6hGGQKbk0KIhI4UHhKHgIOUgx0rTIiIFEJfy5qghRYFXczaUIaYQh5yJ5iCToHczS2QhNfDnGu7oIXYQV2thFjH0cIfrB2oxtfBnWuekMfRQhzL35jDk8Hcq8SRA9QCW6rEmQTUQtmrUaEIT0LcqJNpBlaC2ejaaQdUgttmtEkIEQTbp/5JBA+FHOZCSUOPRB8kA1FGkIKbpcNJSEcJnmFHgUQARd4EUWlECYJepVGhSAUHHyKZUUKIQ12jX1lEi8CfzmSRRUTBHYAlQUUCwR8vAH///////8BBRUJ/48EBRT/APH/////AvH/////A/UKBxQEATEKB0gC/1//////BvH/AfECAzcHCygFADL/APX/BPMHCxUICUP///////8WCnUHA5EEAiQDCoQMCyYIBVENCWP/BfQEB3ULDjIN/z//APgFCDMLE2IDBkX///8QDykMB1QVDlINCJMFB1YMD0ERDxMLBUEHBioKEFIJCDYTFEP///////8VEzUNCYUICyIPETQHDFMQEWIXFTYNDrMK/y////8SERQPDGIMEBQSFjIXFUcTD5IQ/x////8WFxYRDzUU/x//DfQJDiURFZITDxkVIzUaITn/DfMOETcSF5IiGoUUEzIS/x////8ZHDcYETIPETQWGFEcIzgaFWIREiQW/z8ZHBQiF7EYFhP///8dICIcFzEUFTUXI2IfHhEb/x8NFEUaHhEf/x8h/z8VFyMYGUP///8jH0MZFiT/////IPIjHHQbFBUaHBMkHzH/IfMi/y//IfIeGhEXHHMYHTL/////////HPH/DfcbHjP///////8fFSgXI6Ik/z//IfP///8kHhIXHIT///////////8iGjQXI6HbIa6RwCIBBYIg2cAWTQiWKeEAHzsEkZjuoBlWCJCZLsEXWQaQh1aBFEgPkq2mQSQ4BZpRycEJJAmHoMqBGWQGik3+oQ5QD4syNmITPSuUrkaiIFEGny1aQhRKFpQwYSIaXgeWM6YiE1kOkcW6oglBBYiuCkMYYgOVtSnjH0cFnS9qIw5XBoqtmmMcYgSOr5qjH0UFj6gmBBRVCX6oKiQQUgeGqmJEIi4JjZ9lhBpQCISihYQeUwiKrJEECBsRhZ3pBCEmEI6bHUUQNQuXkR0FG0IHi5QuRQ8tC5uMdUULHwiVkInlEh8CjowB////////BgIkA/9/BAUUB/9v////AAORCwg3A/9P/wD0/wbx////AAJ0CwgTBAEhAf8fAwYnCAoXBf8v////AQRCCAwVCgdSAP8v////FAtkCAKB////////AQlkDA+hBAMTBguDDQ4nDAVRD/8vB/9PBQgjChIxDg8WCf8/BQhVDQxBAgY0////ERAoDQhTFQ5BDwqBBQhVDRBBEBI7DAVCCAYqCxFTFRIkDwl0CgwRDRBiCQ4nEhYy/////wfxCA1DERNhGBU1Eg5yC/8v////FBMUEA1jFhoX/w/zCQ4UEBVxDREUFBchGBVGFhCREf8f////FxgWExAkDhAlExhiIBx2FhIhEhAYFRgkHB9JGv9vFP8f/////xvzGRMxEBM0/xnyHSBJHBWCExQkF/8/Gx0VIBiiDxJHFh5hH/9P////GRcT////////HRhBEhZUGB2EIP8vHhoTFRgkGRtU////IBxUGhYVHB0UIP8fH/8//xr0Hhw1////////HBUnHRtX/////x/y8iGW3uAYTgiRIuUAF0IHlS3pQB8sBJOWHgEXVgaShFKhE0ESlauOwSMqBpyetsEYZAeKShICDkkOjkoSwhEwSJStMiIgUQehNkJiEz8jlC5mYhRGEZUzbUIaUwaax6JiCTUFijSyQhNbDJGw9oIXYQOWtBVjH0YFnzF6Qw5OBY2uguMbYQSRsYYjH0MFkawOJBNTCIKuGkQPTweJrE6EIToHjqFRxBlZCIOjdcQdUQmKmdlkIDcOjZoNpQ8jC5eQESUaQgaLlCKFDiALnJZlpSABMI6McWUKGAmUjXrFHg4NiY19BRIjApOMAf////8C9AkGFAMBMQMEFP///////wAFFgkGNwD/T/////8F8f8B8QACNgYKKAT/P////wEDQwYKFgj/X////////xYJdQYCkQMAJAIJdAwLJgoEYQ3/P////wQIQwoRUhEHM////wQGVQoOIgIFNf///xAPKQwGVA4NGAcIUgQGZgwLQRQOUg0KkQQGZgwPQRIPEwsEQgYJJf8Q8gcINg8RtP///////xQRNQ0HhQsGKA8SNAYMUxASYhcUNhEOgwn/L////xMSFA8MYhX/H/8N9AcOJRIUkgwQFBMWMhcURxUPohD/H////xYXFhIPNQ4PNhIXciAadhURMhEOFhQbMRoeSf8N8xP/H////xkbNxgSMg8SNBYYURsgOBoUchITJBb/PxkbFCAXkRgWE/////8d9BsXMQ0VRBcbcyD/Hxz/HxQXIxgZQx//H/8g9P8V9hobFSD/Hx7/PxgZVP///////x8bJP8R+hwgMf///////xsYFRkdQv////8g8xoUFxcbhP////8e8eknfVFgDzkMZXSR4A04CGwe0UAWSgprLNZgHzkNXpr+4BlWCWOaMoEXXwdeh2kBFFwSXayVgSQmCmVVvmEQIyRZoMphGWQKWU72gQ5HFV9J+uESPlpoLjXCEzgxaK5GYiBTC2UwUcIZXwxcM5riElUSYsW2Ygk8CWGvAuMXXghetimDH04LZTBm4w1ZCluvkmMfRgxZrpZDHGQJWqoq5A9QClWqOWQTSw5TqV5EIiwTYZ9lZBpSDVSjgUQeUw5YoKGECBYMXi26xBEZFVSl5cQQJyhdneXEICcdX5cVxQ5CHmeQGeUaRg1ZBUVFEBUUZo1x5QoyD2aOckUTIghlCYllExkGaHeV5QgBCHCIlkUWFwlj1AH///////8CBjcB/y//////APICBjYI/48FBhX/APP/////BPENCTcE/0//////B/H///8DB0YNCRMFAiEC/x8EBygJDBcGATIBAGcCBVMJDBULCEL///////8YDXUJA5EK/x//AfgGCSILEyEFBBMHDZMOESQLBkEQ/y//AfgICxMME1ETCjMIASoGCUQODDEPExUQCIQLCRUOEUEDBzX///8SESgOCVMREzoMC0MJBysNElMWE1QQCnQMCRYOEVIKDycTFjL///////8ODTgSFWEZFzYTD3IN/y//GPEUFRQRDmMWGxf/EPMKDxQRF3ES/x////8YGRYVESQOEhQUGCEZF0cWEZETERgXICEcIhgb/28PETYZIDIjHGMWEyEU/x//////HvMaFTERFTT/GvIgJkgcF1MVFCQY/z8eIBUcGWL/E/cWH2Ii/0////8jHTEbEFIWFxMZJlMWHCEZJnIjISIfGzQaGBP///////8gGUEQFjUdJjMh/y8iG0IXGSQaHlT///8mI0Qj/x//IvMfFiQdICX/G/QfIUP///8l/y8hHBMZIIQmJBH/IvL/////IvIhIyEZJpH///8bImIj/z////8jHBMgHkf/////JPH/KndZwA42CmpsnWANOAhwIdnAFkoKbS3q4B86CmKX8mAZUghnlyZBF2IHY4BhgRNZFV+tjUEkKQtpoMbhGGQLW03S4Q8uHFpKCgIOUxNhNQpCEzRMaUYOwhJHTGqvOgIgUgtmLmpiFFkbZTJpQhphCWHHqkIJPQlkNK5CE2AQY6/yYhdeCGG2HWMfSQtnMHpDDlAJXrCCQx9HDF2wisMbYglerSJkD1AKWKopBBNLDlarVsQhPxBhoF0EGloOVaN1xB1SD1kYzuQRIBpWmtlEID4WXKPdZBAgHF0X/uQRKiFZmwlFDzQiZpgNRQ4+FmeQEUUaRQ1blxEFISAuZIttZQovEGiUdoUSJwdnhJbFFR8IZXqZRQgBC3MAmcUTHgZpBK3FBw8LfPgB////////AgYmCQGR/////wDxAgYVCf+PBQYU/wDy/////wTxDQhIBP9f/////wfx/////wP1DQgUBQIxAAIxBAM3CAsnBgEy/wH1AgVDCA4VCwlC////////GQ11CAORBQQkAw2EDw4mCwZRCv8f/wH4BggkDBE0EP8//wH4CQwUDhRiERAYDAEaBghFDw4yFApECQE6BgtBDw5CAwdF////ExIpDwhUGBFSEAySCwgmDxJBFhITDgZBCAcqDRNSChE4FBdD////////GBQ1EAqFDA4SEhY0CA9TExZiGhQ4EBGzDf8v////FRYUEg9iF/8f/xD0ChElFhiRE/8f////GRoWFhI1DxMUFRkyGhhHFxKiFBEWGCIhHCQp/xDzERI2GiIhHB4zFxQhFf8f////Ix1DGxYyEhY0GRtRIiY4HBhSFhUkGf8/HSIUHBphKB8xHv8fFxgjGiJRGxkT////I/8vIhohFxgjHB8RJSBDIf8fKCUiJCBDHhwRGiJiEBdFHiY0Jf8/JCFiEBc0HiASJf9PJP8/GBoTGx1C////JiVEHRkk////////JiJ0/xT6IR81////J/8fIB8yIiZBKP8f/yTyJR8SIh1G/////yjx////FySxJf8//yny/////yn0ISVxGiaB/////////xD9JyQk" autocomplete="false">
+                    <input type="hidden" id="fingerprint" name="patient.fingerprint" autocomplete="false">
                 </div>
             </fieldset>
             <fieldset style="width:100%;">
                 <legend>Demographics</legend>
                 <div class="form-group">
                     <div class="form-inline">
+                        <label for="gender">Gender</label>
                         <input type="radio" id="sex1" name="patient.sex" value="F" class="form-control"><b>Female</b>
                         <input type="radio" id="sex2" name="patient.sex" value="M" class="form-control"><b>Male</b>
                     </div>
                     <label for="age">Age</label>
-                    <input autocomplete="off" id="ageregistration" readonly name="patient.age" class="form-control" required>
+                    <input type="text" autocomplete="off" id="ageregistration" readonly name="patient.age" class="form-control validAge" required>
                     <br/>
                     or
                     <br/>
                     <label>Birthdate (Format: dd/mm/yyyy)</label>
                     <input autocomplete="off" id="datepicker" name="patient.birthdate" class="form-control">
+                    <br/>
+                    <div class="form-inline">
+                        <label>Date Estimated</label>
+                        <input type="checkbox" id="patient.birthdateEstimatedInput" name="patient.birthdateEstimatedInput" class="form-control">
+                    </div>
                 </div>
             </fieldset>
             <fieldset>
@@ -686,12 +692,13 @@
                 <legend>Date of Birth or Age</legend>
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input autocomplete="off" id="age" name="age" class="form-control" required>
+                    <input type="text" autocomplete="off" id="age" name="age" class="form-control" required>
+                    <input type="hidden" id="estimatedDOB" name="estimatedDOB" class="form-control">
                     <br/>
                     or
                     <br/>
                     <label for="datepicker1">Birth Date</label>
-                    <input autocomplete="off" id="datepicker1" name="datebirth" class="form-control" >
+                    <input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="form-control" >
                 </div>
             </fieldset>
             <div class="form-inline">
@@ -840,6 +847,7 @@
                     age--;
                 }
                 $("#age").val(age);
+                $("#estimatedDOB").val("No");
             },
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
@@ -874,22 +882,23 @@
         });
     } );
     $(document).ready(function(){
-        $("#age").keyup(function() {
-            var dateToday = new Date();
-            var todayYear = dateToday.getFullYear();
-            var inputAge=$(this).val();
-            if(inputAge<120 && !isNaN(inputAge))
-            {
-                var bornYear=todayYear-inputAge;
-                $("#datepicker1").val(bornYear+"-01-01");
-            }
-            else
-            {
-                $("#age").val("enter a valid age");
-                $("#datepicker1").val("");
+    	$("#age").keyup(function() {
+    		var dateToday = new Date();
+    		var todayYear = dateToday.getFullYear();
+    		var inputAge=$(this).val();
+    		if(inputAge<120 && !isNaN(inputAge))
+    		{
+    			var bornYear=todayYear-inputAge;
+    			$("#datepicker1").val(bornYear+"-01-01");
+    			$("#estimatedDOB").val("Yes");
+    		}
+    		else
+    		{
+    			$("#age").val("enter a valid age");
+    			$("#datepicker1").val("");
 
-            }
+    		}
 
-        });
+    	});
     });
 </script>

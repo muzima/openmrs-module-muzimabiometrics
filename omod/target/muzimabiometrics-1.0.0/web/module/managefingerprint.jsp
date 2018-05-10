@@ -562,33 +562,33 @@
                 <legend>Person Name</legend>
                 <div class="form-group">
                     <label for="patient.given_name">Given</label>
-                    <input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control lettersOnly" required>
                 </div>
                 <label for="patient.middle_name">Middle Name</label>
-                <input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control" required>
+                <input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control lettersOnly" required>
                 <div class="form-group">
                     <label for="patient.family_name">Family Name</label>
-                    <input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control lettersOnly" required>
                 </div>
             </fieldset>
             <fieldset style="width:100%;">
                 <legend>Additional Details</legend>
                 <div class="form-group">
                     <label for="patient.phone_number">Phone Number</label>
-                    <input autocomplete="off" type="text" name="patient.phone_number" class="form-control" required>
+                    <input autocomplete="off" type="text" name="patient.phone_number" class="form-control phoneNumber" required>
                 </div>
                 <div class="form-group">
                     <label for="patient.mothers_name">Mothers Name</label>
-                    <input autocomplete="off" type="text" name="patient.mothers_name" class="form-control">
+                    <input autocomplete="off" type="text" name="patient.mothers_name" class="form-control lettersOnly">
                 </div>
             </fieldset>
            <fieldset style="width:100%;">
            	<legend>ID Number(s)</legend>
            	<div class="form-group">
-           		<div class="section repeat identifierType" id="identifierType" data-name="identifierType">
+           		<div class="section repeat identifier_type" id="identifier_type" data-name="patient.identifier_type">
            			<div class="form-group">
-           				<label for="identifierType">Identifier Type</label>
-           				<select class="form-control identifierType" name="identifier.identifierType" id="IdentifierOptions">
+           				<label for="identifier_type">Identifier Type</label>
+           				<select class="form-control identifier_type" name="identifier.identifierType" id="IdentifierOptions" required>
            					<option value="">...</option>
            				</select>
            			</div>
@@ -621,16 +621,22 @@
                 <legend>Demographics</legend>
                 <div class="form-group">
                     <div class="form-inline">
+                        <label for="gender">Gender</label>
                         <input type="radio" id="sex1" name="patient.sex" value="F" class="form-control"><b>Female</b>
                         <input type="radio" id="sex2" name="patient.sex" value="M" class="form-control"><b>Male</b>
                     </div>
                     <label for="age">Age</label>
-                    <input autocomplete="off" id="ageregistration" readonly name="patient.age" class="form-control" required>
+                    <input type="text" autocomplete="off" id="ageregistration" name="patient.age" class="form-control validAge" required>
                     <br/>
                     or
                     <br/>
                     <label>Birthdate (Format: dd/mm/yyyy)</label>
                     <input autocomplete="off" id="datepicker" name="patient.birthdate" class="form-control">
+                    <br/>
+                    <div class="form-inline">
+                        <label>Date Estimated</label>
+                        <input type="checkbox" id="patient.birthdateEstimatedInput" name="patient.birthdateEstimatedInput" class="form-control">
+                    </div>
                 </div>
             </fieldset>
             <fieldset>
@@ -686,12 +692,13 @@
                 <legend>Date of Birth or Age</legend>
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input autocomplete="off" id="age" name="age" class="form-control" required>
+                    <input type="text" autocomplete="off" id="age" name="age" class="form-control" required>
+                    <input type="hidden" id="estimatedDOB" name="estimatedDOB" class="form-control">
                     <br/>
                     or
                     <br/>
                     <label for="datepicker1">Birth Date</label>
-                    <input autocomplete="off" id="datepicker1" name="datebirth" class="form-control" >
+                    <input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="form-control" >
                 </div>
             </fieldset>
             <div class="form-inline">
@@ -840,6 +847,7 @@
                     age--;
                 }
                 $("#age").val(age);
+                $("#estimatedDOB").val("No");
             },
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
@@ -874,22 +882,23 @@
         });
     } );
     $(document).ready(function(){
-        $("#age").keyup(function() {
-            var dateToday = new Date();
-            var todayYear = dateToday.getFullYear();
-            var inputAge=$(this).val();
-            if(inputAge<120 && !isNaN(inputAge))
-            {
-                var bornYear=todayYear-inputAge;
-                $("#datepicker1").val(bornYear+"-01-01");
-            }
-            else
-            {
-                $("#age").val("enter a valid age");
-                $("#datepicker1").val("");
+    	$("#age").keyup(function() {
+    		var dateToday = new Date();
+    		var todayYear = dateToday.getFullYear();
+    		var inputAge=$(this).val();
+    		if(inputAge<120 && !isNaN(inputAge))
+    		{
+    			var bornYear=todayYear-inputAge;
+    			$("#datepicker1").val(bornYear+"-01-01");
+    			$("#estimatedDOB").val("Yes");
+    		}
+    		else
+    		{
+    			$("#age").val("enter a valid age");
+    			$("#datepicker1").val("");
 
-            }
+    		}
 
-        });
+    	});
     });
 </script>

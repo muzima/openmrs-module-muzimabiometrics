@@ -448,9 +448,7 @@ $(function(){
                 $('#patient-exists').modal('show');
               }
               else{
-                console.log("start of inserting data block");
                 var jsonData = JSON.stringify($('#formData').serializeEncounterForm());
-                console.log("Json Data = "+jsonData);
                 $.ajax({
                     url: "fingerprint/enrollPatient.form",
                     type: "POST",
@@ -527,6 +525,11 @@ $(document).ready(function(){
                      if(arr.length==2){
                         $("#patient\\.family_name").val(arr[1]);
                      }
+
+                     if($("#estimatedDOB").val()=="Yes"){
+                        $("#patient\\.birthdateEstimatedInput").prop("checked", true);
+                     }
+
                     //start of getting data
                     $.ajax({
                         type: "POST",

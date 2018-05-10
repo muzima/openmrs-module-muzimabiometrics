@@ -512,6 +512,34 @@ $(document).ready(function () {
         return (today - birthDate) / milliSecondsInAYear;
     };
 
+    /* Start - Checking that the entered value has only lettersOnly */
+
+        jQuery.validator.addMethod("lettersOnly", function(value, element)
+        {
+        return this.optional(element) || /^[a-z ]+$/i.test(value);
+        }, "Letters and spaces only please");
+
+        // attach 'lettersOnly' class to perform validation.
+        jQuery.validator.addClassRules({
+            lettersOnly: { lettersOnly: true }
+        });
+
+    /* End - lettersOnly*/
+
+    /* Start - Checking that the entered value is a valid Age */
+
+        $.validator.addMethod("validAge", function (value, element) {  console.lo
+                return value >= 1 && value < 120;
+            }, "Invalid Age. Please Enter Value Between 1 and 120."
+        );
+
+        // attach 'validAge' class to perform validation.
+        jQuery.validator.addClassRules({
+            validAge: { validAge: true }
+        });
+
+    /* End - validAge*/
+
     /* Start - Used for Sub-Forms */
 
     $('.repeat')
@@ -533,6 +561,7 @@ $(document).ready(function () {
                 suffixInt = idnr;
             }
         });
+
         if (parseInt(suffixInt) == 0) {
             parentName += "1";
         } else {
@@ -548,7 +577,7 @@ $(document).ready(function () {
     $(document.body).on('click', '.remove_section', function () {
         var $parent = $(this).parent();
         var _id = $parent.attr('id');
-        if ($("." + _id).length > 1) {
+        if (($("." + _id).length/2) > 1) {
             $parent.remove();
         }
     });

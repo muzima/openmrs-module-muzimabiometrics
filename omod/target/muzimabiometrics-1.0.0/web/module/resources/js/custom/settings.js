@@ -46,12 +46,11 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $("#activatemaincontainersignup").click(function(){
-      $('#basicdemographicform').show();
       $('#body-wrapper').hide();
       $('#body-wrapperr').hide();
       $("#searchResults").hide();
       $("#homecontainer").fadeOut();
-      //$('#basicdemographicform').hide();
+      $('#basicdemographicform').show();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();
