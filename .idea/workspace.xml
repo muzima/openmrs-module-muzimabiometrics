@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="69e6b520-fef0-4c46-b48b-4f3147fdb8a1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" afterPath="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" />
+      <change beforePath="$PROJECT_DIR$/api/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/api/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
       <change beforePath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" />
       <change beforePath="$PROJECT_DIR$/api/target/muzimabiometrics-api-1.0.0.jar" afterPath="$PROJECT_DIR$/api/target/muzimabiometrics-api-1.0.0.jar" />
       <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
       <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js___jb_old___" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" afterPath="$PROJECT_DIR$/omod/target/classes/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" />
+      <change beforePath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/Custom.js" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/muzima.js" />
@@ -19,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.omod" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.omod" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/lib/muzimabiometrics-api-1.0.0.jar" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/lib/muzimabiometrics-api-1.0.0.jar" />
+      <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/Custom.js" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/muzima.js" />
@@ -36,21 +39,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="managefingerprint.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="managefingerprint.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="733">
-              <caret line="628" column="87" lean-forward="false" selection-start-line="628" selection-start-column="87" selection-end-line="628" selection-end-column="87" />
+            <state relative-caret-position="82">
+              <caret line="596" column="67" lean-forward="false" selection-start-line="596" selection-start-column="67" selection-end-line="596" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="muzima.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="muzima.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16389">
-              <caret line="607" column="11" lean-forward="false" selection-start-line="607" selection-start-column="11" selection-end-line="607" selection-end-column="11" />
+            <state relative-caret-position="203">
+              <caret line="545" column="97" lean-forward="false" selection-start-line="545" selection-start-column="97" selection-end-line="545" selection-end-column="97" />
               <folding />
             </state>
           </provider>
@@ -59,8 +62,8 @@
       <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2781">
-              <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="36" />
+            <state relative-caret-position="324">
+              <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -69,8 +72,8 @@
       <file leaf-file-name="Custom.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23976">
-              <caret line="888" column="32" lean-forward="false" selection-start-line="888" selection-start-column="24" selection-end-line="888" selection-end-column="32" />
+            <state relative-caret-position="182">
+              <caret line="364" column="99" lean-forward="false" selection-start-line="364" selection-start-column="99" selection-end-line="364" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -79,7 +82,7 @@
       <file leaf-file-name="MuzimaFingerprintController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
+            <state relative-caret-position="675">
               <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -111,7 +114,7 @@
       <file leaf-file-name="PatientJsonParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3672">
+            <state relative-caret-position="127">
               <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="23" />
               <folding />
             </state>
@@ -271,8 +274,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>amr</find>
-      <find>repeat</find>
       <find>fingerp</find>
       <find>fingerprint/enrollPatient.form</find>
       <find>System.out</find>
@@ -292,6 +293,17 @@
       <find>btnCreatePatient</find>
       <find>console.</find>
       <find>ageregistration</find>
+      <find>checkD</find>
+      <find>lettersOnly</find>
+      <find>clone</find>
+      <find>serializeEncounterForm</find>
+      <find>console</find>
+      <find>IdentifierOptions</find>
+      <find>clo</find>
+      <find>Options</find>
+      <find>validate</find>
+      <find>luhnCheckDigit</find>
+      <find>hereere</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -307,10 +319,10 @@
       <list>
         <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java" />
         <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" />
-        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
-        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
+        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
+        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" />
       </list>
     </option>
   </component>
@@ -542,10 +554,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2028136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -557,7 +570,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -581,7 +593,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -595,6 +607,161 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3672">
+          <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openmrs/api/openmrs-api/1.8.2/openmrs-api-1.8.2.jar!/org/openmrs/Person.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13932">
+          <caret line="579" column="16" lean-forward="false" selection-start-line="579" selection-start-column="16" selection-end-line="579" selection-end-column="16" />
+          <folding>
+            <marker date="1521535859921" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1521535859921" expanded="false" signature="135:752" ph="..." />
+            <marker date="1521535859921" expanded="true" signature="754:781" ph="@{...}" />
+            <marker date="1521535859921" expanded="true" signature="1737:1744" ph="{}" />
+            <marker date="1521535859921" expanded="true" signature="1779:2872" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="2909:2920" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="2945:2951" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="2991:3274" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="3301:3312" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="3397:3403" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="3409:3450" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="3483:3494" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="3515:3521" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="3527:3568" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="3614:3625" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="3650:3656" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="3662:3704" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="3734:3745" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="3764:3770" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="3776:3818" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="3859:3870" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="3891:3897" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="3903:3943" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="3974:3985" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4007:4013" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4019:4059" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4104:4115" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4142:4148" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="4191:4202" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4233:4239" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4245:4286" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4329:4340" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4375:4381" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4387:4428" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4494:4505" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4550:4556" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="4585:4596" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4613:4619" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4625:4666" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4695:4706" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4727:4733" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4739:4780" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4818:4829" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4846:4852" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4858:4898" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="4929:4940" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="4962:4968" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="4974:5014" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="5059:5070" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="5097:5103" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="5109:5149" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="5186:5197" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="5222:5228" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="5234:5274" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="5328:5339" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="5372:5378" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="5384:5428" ph="@{...}" />
+            <marker date="1521535859921" expanded="true" signature="5474:5605" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="5611:5655" ph="@{...}" />
+            <marker date="1521535859921" expanded="false" signature="5714:5725" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="5752:5758" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="5815:5934" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="6000:6011" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="6030:6036" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="6103:6237" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="6294:6618" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="6700:6779" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="6840:8238" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="8299:8431" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="8498:8889" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="8953:9439" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="9506:9902" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="9973:10437" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="10511:10933" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="11023:11416" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="11476:12091" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="12129:12466" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="12509:12807" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="12853:12942" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="12994:13320" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="13375:13475" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="13515:14259" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="14294:14423" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="14459:14589" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="14625:14755" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="14801:15570" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="15599:15610" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="15641:15647" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="15688:16598" ph="{...}" />
+            <marker date="1521535859921" expanded="true" signature="16661:16928" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="16966:16977" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17005:17011" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17063:17074" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17107:17113" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17153:17164" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17194:17200" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17256:17267" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17304:17310" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17346:17357" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17383:17389" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17437:17448" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17477:17483" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17523:17534" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17564:17570" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17626:17637" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17674:17680" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17719:17730" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17759:17765" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17819:17830" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17865:17871" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="17920:17931" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="17958:17964" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18002:18013" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18042:18048" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18085:18096" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18121:18127" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18164:18175" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18202:18208" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18258:18269" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18300:18306" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18347:18358" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18387:18393" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18449:18460" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18495:18501" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18533:18544" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18566:18572" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18620:18631" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18658:18664" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="18670:18688" ph="/**...*/" />
+            <marker date="1521535859921" expanded="false" signature="18716:18727" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18740:18746" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="18776:18787" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="18835:18841" ph=" }" />
+            <marker date="1521535859921" expanded="true" signature="18917:19025" ph="{...}" />
+            <marker date="1521535859921" expanded="false" signature="19053:19064" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="19090:19096" ph=" }" />
+            <marker date="1521535859921" expanded="false" signature="19131:19142" ph=" { " />
+            <marker date="1521535859921" expanded="false" signature="19163:19169" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1059,7 +1226,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/java/org/openmrs/module/muzimabiometrics/web/controller/MuzimaFingerprintController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
+        <state relative-caret-position="675">
           <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1222,42 +1389,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23976">
-          <caret line="888" column="32" lean-forward="false" selection-start-line="888" selection-start-column="24" selection-end-line="888" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2781">
-          <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="36" />
+        <state relative-caret-position="324">
+          <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3672">
+        <state relative-caret-position="127">
           <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16389">
-          <caret line="607" column="11" lean-forward="false" selection-start-line="607" selection-start-column="11" selection-end-line="607" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="628" column="87" lean-forward="false" selection-start-line="628" selection-start-column="87" selection-end-line="628" selection-end-column="87" />
+        <state relative-caret-position="82">
+          <caret line="596" column="67" lean-forward="false" selection-start-line="596" selection-start-column="67" selection-end-line="596" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="364" column="99" lean-forward="false" selection-start-line="364" selection-start-column="99" selection-end-line="364" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="545" column="97" lean-forward="false" selection-start-line="545" selection-start-column="97" selection-end-line="545" selection-end-column="97" />
           <folding />
         </state>
       </provider>

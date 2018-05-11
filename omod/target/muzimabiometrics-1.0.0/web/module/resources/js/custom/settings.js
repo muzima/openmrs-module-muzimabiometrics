@@ -79,16 +79,16 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#cancelregistration").click(function(){
         $.ajax({
-                    type: "GET",
-                    url: "getFingerprint.form?fingerprintIsSet=clear",
-                    contentType: "application/json",
-                    success: function (result) {
-                    document.getElementById("fingerprintScan").value = "false";
-                    document.getElementById("startScanning").value="false";
-                    console.log("fingerprint reset to ");
-                    location.href = "managefingerprint.form";
-                    }
-                });
+            type: "GET",
+            url: "getFingerprint.form?fingerprintIsSet=clear",
+            contentType: "application/json",
+            success: function (result) {
+            document.getElementById("fingerprintScan").value = "false";
+            document.getElementById("startScanning").value="false";
+            console.log("fingerprint reset to ");
+            location.href = "managefingerprint.form";
+            }
+        });
     });
 });
 $(document).ready(function(){
@@ -110,31 +110,31 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#btnCancelTransaction").click(function(){
         $.ajax({
-                            type: "GET",
-                            url: "getFingerprint.form?fingerprintIsSet=clear",
-                            contentType: "application/json",
-                            success: function (result) {
-                                document.getElementById("fingerprintScan").value = "false";
-                                document.getElementById("startScanning").value="false";
-                                console.log("fingerprint reset to ");
-                                location.href = "managefingerprint.form";
-                            }
-                        });
+            type: "GET",
+            url: "getFingerprint.form?fingerprintIsSet=clear",
+            contentType: "application/json",
+            success: function (result) {
+                document.getElementById("fingerprintScan").value = "false";
+                document.getElementById("startScanning").value="false";
+                console.log("fingerprint reset to ");
+                location.href = "managefingerprint.form";
+            }
+        });
     });
 });
 $(document).ready(function(){
     $("#CancelCreateNewPatient").click(function(){
         $.ajax({
-                            type: "GET",
-                            url: "getFingerprint.form?fingerprintIsSet=clear",
-                            contentType: "application/json",
-                            success: function (result) {
-                                document.getElementById("fingerprintScan").value = "false";
-                                document.getElementById("startScanning").value="false";
-                                console.log("fingerprint reset to ");
-                                location.href = "managefingerprint.form";
-                            }
-                        });
+            type: "GET",
+            url: "getFingerprint.form?fingerprintIsSet=clear",
+            contentType: "application/json",
+            success: function (result) {
+                document.getElementById("fingerprintScan").value = "false";
+                document.getElementById("startScanning").value="false";
+                console.log("fingerprint reset to ");
+                location.href = "managefingerprint.form";
+            }
+        });
     });
 });
 

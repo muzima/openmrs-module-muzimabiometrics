@@ -585,16 +585,16 @@
            <fieldset style="width:100%;">
            	<legend>ID Number(s)</legend>
            	<div class="form-group">
-           		<div class="section repeat identifier_type" id="identifier_type" data-name="patient.identifier_type">
+           		<div class="section repeat identifier_type" id="identifier_type" data-name="identifier_type">
            			<div class="form-group">
            				<label for="identifier_type">Identifier Type</label>
-           				<select class="form-control identifier_type" name="identifier.identifierType" id="IdentifierOptions" required>
+           				<select class="form-control identifierType" name="identifier.identifierType" id="IdentifierOptions" required>
            					<option value="">...</option>
            				</select>
            			</div>
            			<div class="form-group">
            				<label for="amrs_id">Enter Identifier</label>
-           				<input class="form-control" id="amrs_id" autocomplete="off" required name="identifier.amrs_id" type="text">
+           				<input class="form-control identifier-value" autocomplete="off" required name="identifier.amrs_id" type="text">
            			</div>
            			<div class="form-group">
                        <label for="identifier.location_id">Identifier Location</label>
@@ -835,7 +835,7 @@
     } );*/
 </script>
 <script>
-    $( function() {
+    $(function() {
         $("#datepicker1").datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
@@ -846,7 +846,11 @@
                 if (m < 0 || (m === 0 && dateToday.getDate() < standardBirthDate.getDate())) {
                     age--;
                 }
-                $("#age").val(age);
+                if(age==0){
+                     $("#age").val("< 1");
+                }else{
+                    $("#age").val(age);
+                }
                 $("#estimatedDOB").val("No");
             },
             dateFormat: 'yy-mm-dd',
@@ -854,10 +858,10 @@
             maxDate: new Date,
             changeYear: true
         });
-    } );
+    });
 </script>
 <script>
-    $( function() {
+    $(function() {
         $( "#datepicker" ).datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
@@ -880,7 +884,7 @@
             maxDate: new Date,
             changeYear: true
         });
-    } );
+    });
     $(document).ready(function(){
     	$("#age").keyup(function() {
     		var dateToday = new Date();

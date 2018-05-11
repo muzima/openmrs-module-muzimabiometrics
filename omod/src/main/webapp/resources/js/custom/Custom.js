@@ -336,14 +336,15 @@ $(function(){
         });
 
     $.ajax({
-            url: "../../ws/rest/v1/patientidentifiertype",
+            url: "../../ws/rest/v1/patientidentifiertype?v=full",
             type: "GET",
             async: true,
             success: function(result) {
 
                 var options = $("#IdentifierOptions");
                 $.each(result.results, function(val, text) {
-                    options.append($("<option />").val(text.uuid).text(text.display));
+
+                    options.append($("<option class='"+text.validator+"' />").val(text.uuid).text(text.display));
                 });
             },
             error: function(msg){
@@ -351,6 +352,29 @@ $(function(){
             }
         }
     );
+
+    $(".identifierType").change(function(){
+        var _identifierTypeUuid = $(this).val();
+        var $element=$(this);
+        $.ajax({
+            url: "../../ws/rest/v1/patientidentifiertype?v=full",
+            type: "GET",
+            async: true,
+            success: function(result) {
+
+                var identifierValueElement = $element.closest('.repeat').find('.identifier-value');
+                $(identifierValueElement).attr("class","form-control identifier-value");
+                $.each(result.results, function(val, text) {
+                    if(text.uuid == _identifierTypeUuid){
+                        $(identifierValueElement).addClass(text.validator);
+                    }
+                });
+            },
+            error: function(msg, status, error){
+                console.log("server error +++++++++++++"+JSON.stringify(error));
+            }
+        });
+    });
 
     $("#btnByIdentifier").click(function(){
         var jsonData = JSON.stringify($('#IdentifierForm').serializeEncounterForm());
@@ -563,7 +587,7 @@ $(document).ready(function(){
     });
 //end search of basic demographics
 
-    $.validator.addMethod("checkDigit", function (value, element) {
+    $.validator.addMethod("org.openmrs.patient.impl.LuhnIdentifierValidator", function (value, element) {
             var num = value.split('-');
             if (num.length != 2) {
                 return false;
@@ -571,6 +595,7 @@ $(document).ready(function(){
             return $.fn.luhnCheckDigit(num[0]) == num[1];
         }, "Please enter digits that matches CheckDigit algorithm."
     );
+
     $.validator.addMethod("lettersOnly", function(value, element) {
       return this.optional(element) || /^[a-z]+$/i.test(value);
     }, "Please enter letters only please");
@@ -606,6 +631,31 @@ $(document).ready(function(){
         return (10 - (sum % 10)) % 10;
     };
 
+     $.fn.luhn10CheckDigit =function(number) {
+      var validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_";
+      number = number.toUpperCase().trim();
+      var sum = 0;
+      for (var i = 0; i < number.length; i++) {
+        var ch = number.charAt(number.length - i - 1);
+        if (validChars.indexOf(ch) < 0) {
+          alert("Invalid character(s) found!");
+          return false;
+        }
+        var digit = ch.charCodeAt(0) - 48;
+        var weight;
+        if (i % 2 == 0) {
+          weight = (2 * digit) - parseInt(digit / 5) * 9;
+        }
+        else {
+          weight = digit;
+        }
+        sum += weight;
+      }
+      sum = Math.abs(sum) + 10;
+      var digit = (10 - (sum % 10)) % 10;
+      return digit;
+    }
+
     $('#formData').validate({
         rules :{
             family_name : {
@@ -629,7 +679,7 @@ $(document).ready(function(){
             amrs_id : {
                 required : true,
                // numbersOnly:true
-                // checkDigit: true
+               // checkDigit: true
             },
             age :{
                 required : true,
@@ -751,6 +801,7 @@ $(document).ready(function(){
             }
         });
     });
+
     $("#download").on("click",function() {
         document.getElementById("startScanning").value = "true";
         updateScanningView(2);
@@ -840,19 +891,19 @@ $(document).ready(function(){
     //modify function to show register patient button(headache solved)
            var yellowMan=setInterval(function(){
             //start ajax
-                        $.ajax({
-                                    type:"GET",
-                                    url:"fetchEnrolledFingers.form",
-                                    contentType:"application/json",
-                                    success:function(result){
-                                        var fingersStatus=JSON.parse(result);
-                                        if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
-                                            updateControls(3);
-                                            $("#enrollFingerprint").hide();
-                                        }
-                                    }
-                                });
-                    //end ajax
+            $.ajax({
+                    type:"GET",
+                    url:"fetchEnrolledFingers.form",
+                    contentType:"application/json",
+                    success:function(result){
+                        var fingersStatus=JSON.parse(result);
+                        if(fingersStatus.firstImageIsSet==true && fingersStatus.secondImageIsSet==true && fingersStatus.thirdImageIsSet==true){
+                            updateControls(3);
+                            $("#enrollFingerprint").hide();
+                        }
+                    }
+                });
+            //end ajax
             }, 3000);
     //end of modifying function to show register patient button
     $("#addFingers").on("click",function(){
@@ -940,3 +991,4 @@ $(document).ready(function(){
         });
     });
 });
+

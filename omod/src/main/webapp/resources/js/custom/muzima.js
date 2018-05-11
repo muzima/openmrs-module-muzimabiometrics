@@ -543,8 +543,8 @@ $(document).ready(function () {
     /* Start - Used for Sub-Forms */
 
     $('.repeat')
-        .append("<input class='btn btn-primary add_section pull-left' type='button' value='+'/>")
-        .append("<input class='btn btn-primary remove_section pull-right' type='button' value='-'/><span class='clear'></span>");
+        .append("<input class='btn btn-primary add_section pull-left' type='button' value='Add'/>")
+        .append("<input class='btn btn-danger remove_section pull-right' type='button' value='remove'/><span class='clear'></span><br/><br/>");
 
     /* Modified by Sam to create active cloned buttons and separate sections by data-name */
     $(document.body).on('click', '.add_section', function () {
@@ -577,7 +577,8 @@ $(document).ready(function () {
     $(document.body).on('click', '.remove_section', function () {
         var $parent = $(this).parent();
         var _id = $parent.attr('id');
-        if (($("." + _id).length/2) > 1) {
+        console.log($("." + _id).length);
+        if ($("." + _id).length > 1) {
             $parent.remove();
         }
     });
