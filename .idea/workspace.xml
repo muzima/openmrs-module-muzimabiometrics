@@ -3,29 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="69e6b520-fef0-4c46-b48b-4f3147fdb8a1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/api/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/api/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
       <change beforePath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/api/target/maven-archiver/pom.properties" />
       <change beforePath="$PROJECT_DIR$/api/target/muzimabiometrics-api-1.0.0.jar" afterPath="$PROJECT_DIR$/api/target/muzimabiometrics-api-1.0.0.jar" />
-      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
-      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" />
-      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js___jb_old___" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
+      <change beforePath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" afterPath="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" afterPath="$PROJECT_DIR$/omod/target/classes/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/omod/target/classes/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/Custom.js" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/muzima.js" />
-      <change beforePath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/settings.js" afterPath="$PROJECT_DIR$/omod/target/classes/web/module/resources/js/custom/settings.js" />
       <change beforePath="$PROJECT_DIR$/omod/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/omod/target/maven-archiver/pom.properties" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.jar" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.jar" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.omod" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0.omod" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/META-INF/maven/org.openmrs.module/muzimabiometrics-api/pom.properties" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/lib/muzimabiometrics-api-1.0.0.jar" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/lib/muzimabiometrics-api-1.0.0.jar" />
-      <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/org/openmrs/module/muzimabiometrics/PatientJsonParser.class" />
-      <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/managefingerprint.jsp" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/managefingerprint.jsp" />
       <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/Custom.js" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/Custom.js" />
-      <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/muzima.js" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/muzima.js" />
-      <change beforePath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/settings.js" afterPath="$PROJECT_DIR$/omod/target/muzimabiometrics-1.0.0/web/module/resources/js/custom/settings.js" />
     </list>
     <ignored path="$PROJECT_DIR$/omod/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,28 +31,28 @@
       <file leaf-file-name="managefingerprint.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="596" column="67" lean-forward="false" selection-start-line="596" selection-start-column="67" selection-end-line="596" selection-end-column="67" />
+            <state relative-caret-position="485">
+              <caret line="616" column="83" lean-forward="false" selection-start-line="616" selection-start-column="72" selection-end-line="616" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="muzima.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="muzima.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="545" column="97" lean-forward="false" selection-start-line="545" selection-start-column="97" selection-end-line="545" selection-end-column="97" />
+            <state relative-caret-position="-1351">
+              <caret line="354" column="37" lean-forward="false" selection-start-line="354" selection-start-column="27" selection-end-line="354" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="458">
+              <caret line="52" column="37" lean-forward="false" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -72,8 +61,8 @@
       <file leaf-file-name="Custom.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="364" column="99" lean-forward="false" selection-start-line="364" selection-start-column="99" selection-end-line="364" selection-end-column="99" />
+            <state relative-caret-position="418">
+              <caret line="743" column="7" lean-forward="false" selection-start-line="743" selection-start-column="7" selection-end-line="743" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -114,7 +103,7 @@
       <file leaf-file-name="PatientJsonParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
+            <state relative-caret-position="3672">
               <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="23" />
               <folding />
             </state>
@@ -274,7 +263,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fingerp</find>
       <find>fingerprint/enrollPatient.form</find>
       <find>System.out</find>
       <find>birthdate</find>
@@ -291,7 +279,6 @@
       <find>estimatedDOB</find>
       <find>successf</find>
       <find>btnCreatePatient</find>
-      <find>console.</find>
       <find>ageregistration</find>
       <find>checkD</find>
       <find>lettersOnly</find>
@@ -302,8 +289,10 @@
       <find>clo</find>
       <find>Options</find>
       <find>validate</find>
-      <find>luhnCheckDigit</find>
       <find>hereere</find>
+      <find>checkd</find>
+      <find>luhnCheckDigit</find>
+      <find>console.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -319,10 +308,10 @@
       <list>
         <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/api/impl/MuzimaFingerprintServiceImpl.java" />
         <option value="$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java" />
-        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp" />
-        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
         <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js" />
+        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js" />
+        <option value="$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js" />
       </list>
     </option>
   </component>
@@ -544,6 +533,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -552,24 +542,24 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2028136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2028136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -590,9 +580,9 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2028136" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1389,42 +1379,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/src/main/java/org/openmrs/module/muzimabiometrics/PatientJsonParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
+        <state relative-caret-position="3672">
           <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="596" column="67" lean-forward="false" selection-start-line="596" selection-start-column="67" selection-end-line="596" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/Custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="364" column="99" lean-forward="false" selection-start-line="364" selection-start-column="99" selection-end-line="364" selection-end-column="99" />
+        <state relative-caret-position="418">
+          <caret line="743" column="7" lean-forward="false" selection-start-line="743" selection-start-column="7" selection-end-line="743" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/managefingerprint.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="616" column="83" lean-forward="false" selection-start-line="616" selection-start-column="72" selection-end-line="616" selection-end-column="83" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/muzima.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="545" column="97" lean-forward="false" selection-start-line="545" selection-start-column="97" selection-end-line="545" selection-end-column="97" />
+        <state relative-caret-position="-1351">
+          <caret line="354" column="37" lean-forward="false" selection-start-line="354" selection-start-column="27" selection-end-line="354" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/omod/src/main/webapp/resources/js/custom/settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="52" column="37" lean-forward="false" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
           <folding />
         </state>
       </provider>

@@ -588,12 +588,49 @@ $(document).ready(function(){
 //end search of basic demographics
 
     $.validator.addMethod("org.openmrs.patient.impl.LuhnIdentifierValidator", function (value, element) {
+            var splitName = value.split('.');
             var num = value.split('-');
             if (num.length != 2) {
                 return false;
             }
             return $.fn.luhnCheckDigit(num[0]) == num[1];
-        }, "Please enter digits that matches CheckDigit algorithm."
+        }, "Please enter digits that matches Luhn CheckDigit algorithm."
+    );
+
+    $.validator.addMethod("org.openmrs.module.idgen.validator.LuhnMod10IdentifierValidator", function (value, element) {
+            var num = value.split('-');
+            var validChars = "0123456789";
+            if (num.length != 2) {
+                return false;
+            }
+            return $.fn.luhnNCheckDigit(num[0],validChars) == num[1];
+        }, "Please enter digits that matches Luhn Mod-10 CheckDigit algorithm."
+    );
+
+    $.validator.addMethod("org.openmrs.module.idgen.validator.LuhnMod25IdentifierValidator", function (value, element) {
+            var num = value.split('-');
+            var validChars = "34679ACDEFGHJKLMNPRTUVWXY";
+            if (num.length != 2) {
+                return false;
+            }
+            return $.fn.luhnNCheckDigit(num[0],validChars) == num[1];
+        }, "Please enter digits that matches Luhn Mod-25 CheckDigit algorithm."
+    );
+
+    $.validator.addMethod("org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator", function (value, element) {
+            var num = value.split('-');
+            var validChars = "0123456789ACDEFGHJKLMNPRTUVWXY";
+            if (num.length != 2) {
+                return false;
+            }
+            return $.fn.luhnNCheckDigit(num[0],validChars) == num[1];
+        }, "Please enter digits that matches Luhn Mod-30 CheckDigit algorithm."
+    );
+
+    $.validator.addMethod("org.openmrs.patient.impl.VerhoeffIdentifierValidator", function (value, element) {
+            var num = value.split('-');
+            return $.fn.verhoeffCheckDigit(num[0]) == 0;
+        }, "Please enter digits that matches Verhoeff CheckDigit algorithm."
     );
 
     $.validator.addMethod("lettersOnly", function(value, element) {
@@ -608,6 +645,7 @@ $(document).ready(function(){
         function (value, element) { return Date.parse(value.replace("-","/")) < new Date().getTime(); },
         "Date can not be in the future."
     );
+
     $.fn.luhnCheckDigit = function (number) {
         var validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_";
         number = number.toUpperCase().trim();
@@ -631,30 +669,81 @@ $(document).ready(function(){
         return (10 - (sum % 10)) % 10;
     };
 
-     $.fn.luhn10CheckDigit =function(number) {
-      var validChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_";
-      number = number.toUpperCase().trim();
-      var sum = 0;
-      for (var i = 0; i < number.length; i++) {
-        var ch = number.charAt(number.length - i - 1);
-        if (validChars.indexOf(ch) < 0) {
-          alert("Invalid character(s) found!");
-          return false;
-        }
-        var digit = ch.charCodeAt(0) - 48;
-        var weight;
-        if (i % 2 == 0) {
-          weight = (2 * digit) - parseInt(digit / 5) * 9;
-        }
-        else {
-          weight = digit;
-        }
-        sum += weight;
+    $.fn.luhnNCheckDigit = function (number,validChars) {
+       number = number.toUpperCase().trim();
+       var sum = 0;
+       var mod = validChars.length;
+       for (var i = 0; i < number.length; i++) {
+           var ch = number.charAt(number.length - i - 1);
+           if (validChars.indexOf(ch) < 0) {
+               console.log("Wrong characters");
+               return "Invalid Characters";
+           }
+           var digit = ch.charCodeAt(0) - 48;
+           var weight;
+           if (i % 2 == 0) {
+               weight = (2 * digit) - parseInt(digit / 5) * 9;
+           }
+           else {
+               weight = digit;
+           }
+           sum += weight;
+       }
+       sum = Math.abs(sum) + mod;
+       return (mod - (sum % mod)) % mod;
+    };
+
+    /*
+    For more info on the algorithm: http://en.wikipedia.org/wiki/Verhoeff_algorithm
+    by Sergey Petushkov, 2014
+    */
+    $.fn.verhoeffCheckDigit = function (number) {
+      // multiplication table d
+      var d=[
+          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+          [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+          [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+          [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+          [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+          [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+          [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+          [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+          [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+      ];
+
+      // permutation table p
+      var p=[
+          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+          [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
+          [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+          [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+          [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+          [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+          [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
+      ];
+
+      // inverse table inv
+      var inv = [0, 4, 3, 2, 1, 5, 6, 7, 8, 9];
+      var array;
+
+      if (Object.prototype.toString.call(number) == "[object Number]"){
+         array = String(number);
       }
-      sum = Math.abs(sum) + 10;
-      var digit = (10 - (sum % 10)) % 10;
-      return digit;
-    }
+
+      if (Object.prototype.toString.call(number) == "[object String]"){
+         array = number.split("").map(Number);
+      }
+
+      var c = 0;
+      var invertedArray = array.reverse();
+
+      for (var i = 0; i < invertedArray.length; i++){
+          c=d[c][p[(i % 8)][invertedArray[i]]];
+      }
+      return c;
+    };
 
     $('#formData').validate({
         rules :{

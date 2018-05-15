@@ -50,7 +50,7 @@ $(document).ready(function(){
       $('#body-wrapperr').hide();
       $("#searchResults").hide();
       $("#homecontainer").fadeOut();
-      $('#basicdemographicform').show();
+      $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();
