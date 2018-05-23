@@ -23,5 +23,6 @@
         <many-to-one name="creator" class="org.openmrs.User"/>
         <many-to-one name="voidedBy" class="org.openmrs.User" column="retired_by" />
         <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by" />
+        <property name="scannedFinger" column="scanned_finger" />
     </class>
 </hibernate-mapping>

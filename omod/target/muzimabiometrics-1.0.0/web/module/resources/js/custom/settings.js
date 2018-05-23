@@ -1,5 +1,20 @@
 $(document).ready(function(){
-  $("#showdefaultsettings").hide();
+    $("#showdefaultsettings").hide();
+    $('#basicdemographicform').hide();
+    $('#body-wrapper').hide();
+    $('#body-wrapperr').hide();
+    $('#addFingerprints').hide();
+    $("#refreshDiv").hide();
+    $("#registeredWell").hide();
+    $("#appendWell").hide();
+    $("#downloadDiv").show();
+    $("#searchResults").hide();
+    $("#homecontainer").fadeOut();
+    $("#enrollFingerprint").hide();
+    $("#showdefaultsettings").slideUp();
+    $("#registrationSections").fadeOut();
+    $("#mainframecontainer").slideDown();
+    $("#signinscreen").fadeIn();
 });
 $(document).ready(function(){
   $("#activatemaincontainersignin").click(function(){
@@ -29,9 +44,10 @@ $(document).ready(function(){
       $("#registeredWell").hide();
       $("#appendWell").hide();
       $("#mainframecontainer").slideUp();
-       $("#showdefaultsettings").slideUp();
+      $("#showdefaultsettings").slideUp();
       $("#registrationSections").fadeOut();
-      $("#homecontainer").fadeIn();
+      $("#homecontainer").hide();
+      $("#signinscreen").fadeIn();
   });
 });
 //end
@@ -50,7 +66,7 @@ $(document).ready(function(){
       $('#body-wrapperr').hide();
       $("#searchResults").hide();
       $("#homecontainer").fadeOut();
-      $('#basicdemographicform').show();
+      $('#basicdemographicform').hide();
       $("#enrollFingerprint").hide();
       $("#showdefaultsettings").slideUp();
       $("#mainframecontainer").slideDown();

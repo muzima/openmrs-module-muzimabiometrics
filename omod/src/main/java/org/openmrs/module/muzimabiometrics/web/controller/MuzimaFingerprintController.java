@@ -9,9 +9,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.openmrs.*;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.muzimabiometrics.MuzimaConstants;
 import org.openmrs.module.muzimabiometrics.MuzimaFingerprint;
 import org.openmrs.module.muzimabiometrics.api.MuzimaFingerprintService;
-import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModel;
+import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModels;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +50,7 @@ public class MuzimaFingerprintController {
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
        // System.out.println(jsonPayload);
         Patient patient = service.savePatient(jsonPayload,firstImageBytes,secondImageBytes,thirdImageBytes);
-        PatientFingerPrintModel patientFingerPrintModel=new PatientFingerPrintModel(patient.getUuid(),firstImageBytes, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender(),patient.getIdentifiers().toString());
+        PatientFingerPrintModels patientFingerPrintModel=new PatientFingerPrintModels(patient.getUuid(),firstImageBytes, patient.getId(), patient.getGivenName(), patient.getFamilyName(), patient.getGender(),patient.getIdentifiers().toString(),null);
         JSONArray jsonArray=new JSONArray();
         jsonArray.add(patientFingerPrintModel);
         return jsonArray;
@@ -173,44 +174,45 @@ public class MuzimaFingerprintController {
         jsonObject.put("thirdImageIsSet",thirdImageIsSet);
         response.getWriter().print(jsonObject);
     }
+
     @ResponseBody
     @RequestMapping(value = "fingerprint/identifyPatient.form", method = RequestMethod.POST, headers = {"content-type=application/json","Accept=application/json"})
-    public List<PatientFingerPrintModel> identifyPatient(@RequestBody String fingerprint) throws Exception {
+    public List<PatientFingerPrintModels> identifyPatient(@RequestBody String fingerprint) throws Exception {
 
-        List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
+        List<PatientFingerPrintModels> patients = new ArrayList<PatientFingerPrintModels>();
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        log.error("Function Call Gets Here");
-        List<PatientFingerPrintModel> patient = service.identifyPatient(fingerprint);
+        List<PatientFingerPrintModels> patient = service.identifyPatient(fingerprint);
         return patient;
     }
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/identifyPatientByOtherIdentifier.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
-    public List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(@RequestBody String identifier) throws Exception {
+    public List<PatientFingerPrintModels> identifyPatientByOtherIdentifier(@RequestBody String identifier) throws Exception {
 
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        List<PatientFingerPrintModel> patients = service.identifyPatientByOtherIdentifier(identifier);
+        List<PatientFingerPrintModels> patients = service.identifyPatientByOtherIdentifier(identifier);
         return patients;
     }
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/findPatients.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
-    public List<PatientFingerPrintModel> findPatientsByNameOrIdentifier(@RequestBody String searchInput)
+    public List<PatientFingerPrintModels> findPatientsByNameOrIdentifier(@RequestBody String searchInput)
     {
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        List<PatientFingerPrintModel> patients = service.findPatients(searchInput);
+        List<PatientFingerPrintModels> patients = service.findPatients(searchInput);
+
         return patients;
     }
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/addFingerprint.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
-    public List<PatientFingerPrintModel> addFingerprint(@RequestBody String patientWithFingerprint) throws Exception
+    public List<PatientFingerPrintModels> addFingerprint(@RequestBody String patientWithFingerprint) throws Exception
     {
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
         MuzimaFingerprint muzimaFingerprint=service.getFingerprintByPatientUUID(patientWithFingerprint);
-        List<PatientFingerPrintModel> patientFingerPrintModels = new ArrayList<PatientFingerPrintModel>();
+        List<PatientFingerPrintModels> patientFingerPrintModels = new ArrayList<PatientFingerPrintModels>();
         if(muzimaFingerprint==null) {
-            PatientFingerPrintModel patient = service.addFingerprintToPatient(patientWithFingerprint, firstImageBytes, secondImageBytes, thirdImageBytes);
+            PatientFingerPrintModels patient = service.addFingerprintToPatient(patientWithFingerprint, firstImageBytes, secondImageBytes, thirdImageBytes, null);
             patientFingerPrintModels.add(patient);
         }
         return patientFingerPrintModels;
@@ -228,27 +230,40 @@ public class MuzimaFingerprintController {
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/getPatient.form", method = RequestMethod.POST, headers = {"content-type=application/json","Accept=application/json"})
-    public List<PatientFingerPrintModel> getPatientByPatientUuid(@RequestBody String patientUuid) throws Exception {
+    public List<PatientFingerPrintModels> getPatientByPatientUuid(@RequestBody String patientUuid) throws Exception {
 
-        List<PatientFingerPrintModel> patients = new ArrayList<PatientFingerPrintModel>();
+        List<PatientFingerPrintModels> patients = new ArrayList<PatientFingerPrintModels>();
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        List<PatientFingerPrintModel> patient = service.getPatientByPatientUuid(patientUuid);
+        List<PatientFingerPrintModels> patient = service.getPatientByPatientUuid(patientUuid);
 
         return patient;
     }
 
     @ResponseBody
     @RequestMapping(value = "fingerprint/appendFingerPrint.form", method = RequestMethod.POST, headers = {"content-type=application/json","Accept=application/json"})
-    public PatientFingerPrintModel appendFingerToExistingPatient(@RequestBody String patientUuid, String fingerPrint) throws Exception {
+    public PatientFingerPrintModels appendFingerToExistingPatient(@RequestBody String patientUuid, String fingerPrint, String scannedFinger) throws Exception {
         org.json.JSONArray jsonArray = new org.json.JSONArray("["+patientUuid+"]");
         for(int i = 0; i < jsonArray.length(); i++){
             org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
             jsonObject = jsonObject.getJSONObject("patient");
             patientUuid = jsonObject.getString("patientUuid");
             fingerPrint = jsonObject.getString("fingerPrint");
+            scannedFinger = jsonObject.getString("scannedFinger");
         }
         MuzimaFingerprintService service = Context.getService(MuzimaFingerprintService.class);
-        PatientFingerPrintModel patient = service.addFingerprintToPatient(patientUuid,fingerPrint,fingerPrint,fingerPrint);
+        PatientFingerPrintModels patient = service.addFingerprintToPatient(patientUuid,fingerPrint,fingerPrint,fingerPrint,scannedFinger);
         return patient;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/getDefaultFinger.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public String getDefaultFingerSettings(){
+        return Context.getAdministrationService().getGlobalProperty(MuzimaConstants.DEFAULT_FINGER_PROPERTY_NAME);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "fingerprint/getMinimumFingerprintQuality.form", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public String getMinimumFingerprintQuality(){
+        return  Context.getAdministrationService().getGlobalProperty(MuzimaConstants.MINIMUM_FINGERPRINT_QUALITY_PROPERTY_NAME);
     }
 }

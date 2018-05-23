@@ -541,18 +541,19 @@ $(document).ready(function () {
     /* End - validAge*/
 
     /* Start - Used for Sub-Forms */
-
+/*
     $('.repeat')
-        .append("<input class='btn btn-primary add_section pull-left' type='button' value='Add'/>")
-        .append("<input class='btn btn-danger remove_section pull-right' type='button' value='remove'/><span class='clear'></span><br/><br/>");
-
+        .append("<input class='btn btn-primary add_section pull-right' type='button' value='Add'/>")
+        .append("<input class='btn btn-danger remove_section pull-right' type='button' value='remove'/><span class='clear'></span>");
+*/
     /* Modified by Sam to create active cloned buttons and separate sections by data-name */
     $(document.body).on('click', '.add_section', function () {
-        var $clonedSection = $(this).parent().clone(true).insertAfter($(this).parent());
+        var $parentRepeat = $(this).closest('tbody').find('tr').first();
+        var $clonedSection = $parentRepeat.clone(true).insertAfter($parentRepeat);
         var parentName = $clonedSection.attr("id");
 
         /* Get largest suffix so far */
-        var _id = $(this).parent().attr('id');
+        var _id = $parentRepeat.attr('id');
         var $repeatedSections = $("." + _id);
         var suffixInt = 0;
         $.each($repeatedSections, function (i, repeatedSection) {
@@ -572,10 +573,11 @@ $(document).ready(function () {
         /* clear values on cloned fields */
         $clonedSection.find(':input:not(:button)').val('');
         $clonedSection.find(':input:not(:button)').trigger('change');
+        $clonedSection.find('.removeButton').append("<input class='btn btn-danger remove_section pull-right' type='button' value='remove'/><span class='clear'></span>");
     });
 
     $(document.body).on('click', '.remove_section', function () {
-        var $parent = $(this).parent();
+        var $parent = $(this).closest('.repeat');
         var _id = $parent.attr('id');
         console.log($("." + _id).length);
         if ($("." + _id).length > 1) {

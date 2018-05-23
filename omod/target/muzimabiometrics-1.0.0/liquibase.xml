@@ -64,4 +64,25 @@
             <column name="third_fingerprint"  type="BLOB" />
         </addColumn>
     </changeSet>
+    <changeSet id="muzima-20180517120000" author="bmokaya">
+        <comment>Creating Priveledge For FingerPrint Module</comment>
+        <insert tableName="privilege">
+            <column name="privilege" value="View mUzima FingerPrint"/>
+            <column name="description" value="Able to see mUzima and use mUzima Finger Print Module"/>
+            <column name="uuid" value="3080d9c0-5a7a-11e8-9c2d-fa7ae01bbebc"/>
+        </insert>
+    </changeSet>
+    <changeSet id="muzima-20180521090000" author="bmokaya">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="muzimafingerprint_fingerprint" columnName="scanned_finger"/>
+            </not>
+        </preConditions>
+        <comment>
+            Add column data_source of type varchar(64) to take data source associated to the form
+        </comment>
+        <addColumn tableName="muzimafingerprint_fingerprint">
+            <column name="scanned_finger" type="varchar(64)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

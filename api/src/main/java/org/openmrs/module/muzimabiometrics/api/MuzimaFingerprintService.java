@@ -5,7 +5,7 @@ import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.muzimabiometrics.MuzimaFingerprint;
 import org.openmrs.module.muzimabiometrics.MuzimaTemporaryFingerprint;
-import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModel;
+import org.openmrs.module.muzimabiometrics.model.PatientFingerPrintModels;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -20,14 +20,14 @@ public interface MuzimaFingerprintService extends OpenmrsService {
     @Transactional
     Patient savePatient(String patientData,String firstFingerPrint,String secondFingerprint,String thirdFingerprint) throws JSONException, ParseException;
 
-    List<PatientFingerPrintModel> identifyPatient(String fingerprint) throws IOException;
+    List<PatientFingerPrintModels> identifyPatient(String fingerprint) throws IOException;
 
-    List<PatientFingerPrintModel> identifyPatientByOtherIdentifier(String identifier) throws JSONException;
+    List<PatientFingerPrintModels> identifyPatientByOtherIdentifier(String identifier) throws JSONException;
 
 
     //boolean updatePatient(String patientWithFingerprint) throws JSONException;
 
-    List<PatientFingerPrintModel> findPatients(String searchInput);
+    List<PatientFingerPrintModels> findPatients(String searchInput);
 
     MuzimaFingerprint getFingerprintByPatientUUID(String patientUUID);
 
@@ -36,7 +36,7 @@ public interface MuzimaFingerprintService extends OpenmrsService {
     MuzimaFingerprint findByUniqueId(String uuid);
 
     @Transactional
-    PatientFingerPrintModel addFingerprintToPatient(String patientUUID,String firstFingerImage,String secondeFingerImage,String thirdFingerImage) throws JSONException;
+    PatientFingerPrintModels addFingerprintToPatient(String patientUUID,String firstFingerImage,String secondeFingerImage,String thirdFingerImage,String scannedFinger) throws JSONException;
 
-    List<PatientFingerPrintModel> getPatientByPatientUuid(String patientUuid);
+    List<PatientFingerPrintModels> getPatientByPatientUuid(String patientUuid);
 }

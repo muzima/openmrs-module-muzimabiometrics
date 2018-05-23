@@ -13,11 +13,12 @@ public class MuzimaFingerprint extends BaseOpenmrsData {
     private String firstFingerprint;
     private String secondFingerprint;
     private String thirdFingerprint;
+    private String scannedFinger;
 
     public MuzimaFingerprint() {
     }
 
-    public MuzimaFingerprint(String patientUUID,String firstFingerprint, String secondFingerprint, String thirdFingerprint) {
+    public MuzimaFingerprint(String patientUUID,String firstFingerprint, String secondFingerprint, String thirdFingerprint,String scannedFinger) {
 
         if (getUuid() == null) {
             setUuid(UUID.randomUUID().toString());
@@ -26,6 +27,7 @@ public class MuzimaFingerprint extends BaseOpenmrsData {
         this.firstFingerprint = firstFingerprint;
         this.secondFingerprint = secondFingerprint;
         this.thirdFingerprint = thirdFingerprint;
+        this.scannedFinger =scannedFinger;
     }
 
     public Integer getId() {
@@ -49,6 +51,7 @@ public class MuzimaFingerprint extends BaseOpenmrsData {
                 ", firstFingerprint='" + getFirstFingerprint() + '\'' +
                 ", secondFingerprint='" + getSecondFingerprint() + '\'' +
                 ", thirdFingerprint='" + getThirdFingerprint() + '\'' +
+                ", scannedFinger='" + getScannedFinger() + '\'' +
                 '}';
     }
 
@@ -87,4 +90,8 @@ public class MuzimaFingerprint extends BaseOpenmrsData {
     public void setThirdFingerprint(String thirdFingerprint) {
         this.thirdFingerprint = thirdFingerprint;
     }
+
+    public String getScannedFinger() { return scannedFinger; }
+
+    public void setScannedFinger(String scannedFinger) { this.scannedFinger = scannedFinger; }
 }
