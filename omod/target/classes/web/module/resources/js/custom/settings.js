@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $("#showdefaultsettings").hide();
-    $('#basicdemographicform').hide();
+    $('#basicdemographicform').show();
     $('#body-wrapper').hide();
     $('#body-wrapperr').hide();
     $('#addFingerprints').hide();

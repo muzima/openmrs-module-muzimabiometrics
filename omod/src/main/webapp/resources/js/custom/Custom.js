@@ -567,7 +567,7 @@ $(function(){
             success: function(result) {
 
                 var identifierValueElement = $element.closest('.repeat').find('.identifier-value');
-                $(identifierValueElement).attr("class","identifier-value");
+                $(identifierValueElement).attr("class","identifier-value checkIfExistsInDatabase");
                 $.each(result.results, function(val, text) {
                     if(text.uuid == _identifierTypeUuid){
                         $(identifierValueElement).addClass(text.validator);
@@ -835,6 +835,29 @@ $(document).ready(function(){
             var num = value.split('-');
             return $.fn.verhoeffCheckDigit(num[0]) == 0;
         }, "Please enter digits that matches Verhoeff CheckDigit algorithm."
+    );
+
+    $.validator.addMethod("checkIfExistsInDatabase", function (value, element) {
+            var exists = 0;
+            $.ajax({
+                type: "POST",
+                url: "fingerprint/findPatients.form",
+                contentType: "application/json",
+                data: value,
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                        exists = result.length;
+                        console.log("existis"+exists);
+                },
+                error: function(msg, status, error){
+                    console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
+                }
+            });
+            console.log("exisists value is "+exists);
+
+            return exists == 0;
+        }, "Identifier already in use by other patient."
     );
 
     $.validator.addMethod("lettersOnly", function(value, element) {

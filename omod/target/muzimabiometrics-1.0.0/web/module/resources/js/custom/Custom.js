@@ -35,7 +35,7 @@ function updateIdentificationStatus(patientUuid){
             dataType: 'json',
             async: false,
             success: function(msg) {
-                console.log(msg);
+                //console.log(msg);
                 $("#signinscreen").hide();
                 updatePatientListTable(msg, 1);
             },
@@ -198,7 +198,7 @@ function activate(val, e){
             data: val,
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+                //console.log(result);
                 if(result.length == 0) {
                    // $("#signinscreen").hide();
                   //  updateControls(4);
@@ -227,7 +227,7 @@ function show(fingerprint, patientUuid){
 };
 
 function showScannedFinger(fingerprint, scannedFinger,patientId){
-    console.log("This is the scanned Finger "+scannedFinger);
+    //console.log("This is the scanned Finger "+scannedFinger);
     var fingerCode = "";
     $.ajax({
         url: "fingerprint/getDefaultFinger.form",
@@ -269,7 +269,7 @@ function showScannedFinger(fingerprint, scannedFinger,patientId){
          }
          return finger;
     }else{
-         console.log("Final Finger Code "+fingerCode);
+         //console.log("Final Finger Code "+fingerCode);
          var optionL5 = '<option value="L5">Left pinky/baby finger</option>';
          var optionL1 ='<option value="L1">Left thumb</option>';
          var optionL2 ='<option value="L2">Left index finger</option>';
@@ -567,7 +567,7 @@ $(function(){
             success: function(result) {
 
                 var identifierValueElement = $element.closest('.repeat').find('.identifier-value');
-                $(identifierValueElement).attr("class","identifier-value");
+                $(identifierValueElement).attr("class","identifier-value checkIfExistsInDatabase");
                 $.each(result.results, function(val, text) {
                     if(text.uuid == _identifierTypeUuid){
                         $(identifierValueElement).addClass(text.validator);
@@ -582,7 +582,7 @@ $(function(){
 
     $("#btnByIdentifier").click(function(){
         var jsonData = JSON.stringify($('#IdentifierForm').serializeEncounterForm());
-        console.log(jsonData);
+        //console.log(jsonData);
         $.ajax({
             url: "fingerprint/identifyPatientByOtherIdentifier.form",
             type: "POST",
@@ -591,7 +591,7 @@ $(function(){
             dataType: 'json',
             async: false,
             success: function(msg) {
-                console.log(msg);
+               // console.log(msg);
                 updatePatientListTable(msg, 1);
             },
             error: function(msg, status, error){
@@ -614,7 +614,7 @@ $(function(){
     $("#Yes").click(function(){
         var patientUuid = $('#uid').val();
         var jsonData = "{patient: {patientUUID : '"+patientUuid+"' , fingerprint :'"+ _FINGERPRINT_DATA+"'}}";
-        console.log(jsonData);
+       // console.log(jsonData);
         $.ajax({
             url: "fingerprint/addFingerprint.form",
             type: "POST",
@@ -623,7 +623,7 @@ $(function(){
             dataType: 'json',
             async: false,
             success: function(msg) {
-                console.log(msg);
+               // console.log(msg);
                 window.location = openmrsContextPath+'/module/muzimabiometrics/managefingerprint.form?patientUuid='+patientUuid;
             },
             error: function(msg, status, error){
@@ -685,7 +685,7 @@ $(function(){
                     dataType: 'json',
                     async: false,
                     success: function(msg) {
-                        console.log("new Patient data "+JSON.stringify(msg));
+                        //console.log("new Patient data "+JSON.stringify(msg));
                         $('#formData').trigger("reset");
                         $("#registrationForm").hide();
                         $("#enrollFingerprint").show();
@@ -766,7 +766,7 @@ $(document).ready(function(){
                         data: $("#family_name").val(),
                         dataType: 'json',
                         success: function (result) {
-                            console.log(result);
+                            //console.log(result);
                             if(result.length == 0) {
                                 window.clearInterval(yellowMan);
                                 updateControls(7);
@@ -775,7 +775,7 @@ $(document).ready(function(){
                                 $("#enrollFingerprint").hide();
                                 updatePersonListTable(result, 6);
                                 window.clearInterval(yellowMan);
-                                console.log("patientsearch is "+JSON.stringify(result));
+                                //console.log("patientsearch is "+JSON.stringify(result));
                             }
                         },
                         error: function(msg, status, error){
@@ -837,6 +837,29 @@ $(document).ready(function(){
         }, "Please enter digits that matches Verhoeff CheckDigit algorithm."
     );
 
+    $.validator.addMethod("checkIfExistsInDatabase", function (value, element) {
+            var exists = 0;
+            $.ajax({
+                type: "POST",
+                url: "fingerprint/findPatients.form",
+                contentType: "application/json",
+                data: value,
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                        exists = result.length;
+                        console.log("existis"+exists);
+                },
+                error: function(msg, status, error){
+                    console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
+                }
+            });
+            console.log("exisists value is "+exists);
+
+            return exists == 0;
+        }, "Identifier already in use by other patient."
+    );
+
     $.validator.addMethod("lettersOnly", function(value, element) {
       return this.optional(element) || /^[a-z]+$/i.test(value);
     }, "Please enter letters only please");
@@ -880,7 +903,7 @@ $(document).ready(function(){
        for (var i = 0; i < number.length; i++) {
            var ch = number.charAt(number.length - i - 1);
            if (validChars.indexOf(ch) < 0) {
-               console.log("Wrong characters");
+               //console.log("Wrong characters");
                return "Invalid Characters";
            }
            var digit = ch.charCodeAt(0) - 48;
@@ -1001,7 +1024,7 @@ $(document).ready(function(){
             data: $("#findPatients").val(),
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+                //console.log(result);
                 if(result.length == 0) {
                     updateControls(4);
                 }
@@ -1022,7 +1045,7 @@ $(document).ready(function(){
             success: function (result) {
                 document.getElementById("fingerprintScan").value = "false";
                 document.getElementById("startScanning").value="false";
-                console.log("fingerprint reset to ");
+                //console.log("fingerprint reset to ");
                 location.href = "managefingerprint.form";
             }
         })
@@ -1041,7 +1064,7 @@ $(document).ready(function(){
                         contentType: "application/json",
                         success: function (result) {
                             muzimaFingerprint = JSON.parse(result);
-                            console.log("result is " + JSON.stringify(muzimaFingerprint));
+                            //console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
                                 $("#signinscreen").fadeOut("slow");
@@ -1051,7 +1074,7 @@ $(document).ready(function(){
                                 updatePatientListTable(muzimaFingerprint, 1);
                                 updateScanningView(1);
                             }
-                            console.log(JSON.stringify(muzimaFingerprint));
+                            //console.log(JSON.stringify(muzimaFingerprint));
                         },
                         error: function (msg, status, error) {
                             console.log("sever encountered an error");
@@ -1112,7 +1135,7 @@ $(document).ready(function(){
                         contentType: "application/json",
                         success: function (result) {
                             muzimaFingerprint = JSON.parse(result);
-                            console.log("result is " + JSON.stringify(muzimaFingerprint));
+                            //console.log("result is " + JSON.stringify(muzimaFingerprint));
                             if (muzimaFingerprint.length == 0 || muzimaFingerprint[0] === "") {
                                 $("#enrollFingerprint").show();
                                 $("#signinscreen").fadeOut();
