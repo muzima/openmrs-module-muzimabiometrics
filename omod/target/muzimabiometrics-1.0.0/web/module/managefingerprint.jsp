@@ -114,25 +114,23 @@
                     <table id="find-options">
                         <thead>
                         <tr>
-                            <th><h2 style="font-size:1.3em;"><div id="defaultFingerDiv"></div></h2></th>
+                            <th><div id="defaultFingerDiv" align="center" style="font-size: 1.3em;font-family: Verdana,Arial,Helvetica,sans-serif;"></div></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td width="100%">
-                                <div id="downloadDiv">
-                                    <a style="text-decoration:none;" href="#" onclick="app.identifyFinger()"
-                                       id="download"> <input type="button" style="width: auto;" value="Launch Fingerprint Scanner"
-                                                             class="btn btn-primary btn-block"> </a>
+                                <div id="downloadDiv" align="center">
+                                    <input id="download" type="submit" onclick="app.identifyFinger()" onclick style="width: auto;" value="Launch fingerprint scanner." class="btn btn-primary btn-block">
                                     <input type="hidden" id="startScanning"/>
                                     <input type="hidden" id="fingerprintScan"/>
                                 </div>
-                                <div id="refreshDiv">
+                                <div id="refreshDiv" align="center">
                                     <input id="refresh" type="button" style="width: auto;"
-                                           value="Click to re-launch if Scanner was not launched."
+                                           value="Re-launch fingerprint scanner."
                                            class="btn btn-info btn-block">
                                 </div>
-                                <div id="spinner">
+                                <div id="spinner" align="center">
                                     <div class="loader"></div>
                                     <span>please wait while scanner is starting up</span>
                                 </div>
@@ -200,9 +198,10 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     <tr>
-                        <th colspan='8'>Here is a list of people who seem similar to the one you are about to create.<br/>
+                        <th colspan='9'>Here is a list of people who seem similar to the one you are about to create.<br/>
                         If the person you are in the process of creating already exists, select them from the list below. Otherwise click the button below to continue creating a new person.
                         </th>
                     </tr>
@@ -216,8 +215,9 @@
                         <th>Family Name</th>
                         <th>Identifier(s)</th>
                         <th>Gender</th>
-                        <th>Scanned Finger</th>
+                        <th style="display:none;">Scanned Finger</th>
                         <th>Fingerprint</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -632,6 +632,7 @@
     </div>
     <!-- start of person basic demographics form -->
     <div id="basicdemographicform" style="margin-left:0px;">
+        <div>Fingerprint not Identified in the system. Search for patient by Identifier/Name or create a new patient</div>
         <div id="" style="margin-left:0px; ">
             <h3 id="form-title">Patient Search</h3>
             <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
@@ -649,8 +650,9 @@
                     <th>Family Name</th>
                     <th>Identifier(s)</th>
                     <th>Gender</th>
-                    <th>Scanned Finger</th>
+                    <th style="display:none;">Scanned Finger</th>
                     <th>Fingerprint</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

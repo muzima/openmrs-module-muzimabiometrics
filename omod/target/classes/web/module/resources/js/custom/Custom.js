@@ -22,6 +22,25 @@ function getMinimumFingerPrintQuality(){
    return quality;
 }
 
+function getDefaultFinger(){
+    var defaultFingerCode = "";
+    $.ajax({
+        url: "fingerprint/getDefaultFinger.form",
+        type: "POST",
+        contentType: 'application/json',
+        dataType: 'text',
+        async: false,
+        success: function(result){
+            defaultFingerCode = result.charAt(0).toUpperCase() + result.slice(1);
+        },
+        error: function(msg){
+            console.log("Internal server Error while getting setting"+JSON.stringify(msg));
+            return null;
+        }
+    });
+    return defaultFingerCode;
+}
+
 function updateIdentificationStatus(patientUuid){
     if(patientUuid=="PATIENT_NOT_FOUND"){
         updateControls(3);
@@ -135,8 +154,9 @@ function updatePersonListTable(Patients, updateControlsStatus){
             + "<td>"+ patient.familyName+"</td>"
             + "<td>"+ identifiers+"</td>"
             + "<td>"+ patient.gender+"</td>"
-            + "<td>"+showScannedFinger(patient.fingerprintTemplate,patient.scannedFinger,patient.id)+"</td>"
+            + "<td style='display:none;'>"+showScannedFinger(patient.fingerprintTemplate,patient.scannedFinger,patient.id)+"</td>"
             + "<td>"+show(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
+            + "<td>"+showActionButton(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
             + "</tr>");
     });
 };
@@ -174,8 +194,9 @@ function updatePatientList(Patients){
             + "<td>"+ patient.familyName+"</td>"
             + "<td>"+ identifiers+"</td>"
             + "<td>"+ patient.gender+"</td>"
-            + "<td>"+showScannedFinger(patient.fingerprintTemplate,patient.scannedFinger,patient.id)+"</td>"
+            + "<td style='display:none;'>"+showScannedFinger(patient.fingerprintTemplate,patient.scannedFinger,patient.id)+"</td>"
             + "<td>"+show(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
+            + "<td>"+showActionButton(patient.fingerprintTemplate,patient.patientUUID)+"</td>"
             + "</tr>");
     });
 };
@@ -220,6 +241,15 @@ function activate(val, e){
 function show(fingerprint, patientUuid){
     if(fingerprint!==null) {
         return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/done.png'/>"
+    }
+    else {
+        return "<img src ='"+openmrsContextPath+"/moduleResources/muzimabiometrics/images/cross.png'/>"
+    }
+};
+
+function showActionButton(fingerprint, patientUuid){
+    if(fingerprint!==null) {
+        return "<button type='button' >Update Finger</button>"
     }
     else {
         return "<button type='button' >Append Fingerprint</button>"

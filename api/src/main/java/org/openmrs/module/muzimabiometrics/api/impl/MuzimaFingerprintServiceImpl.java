@@ -129,13 +129,22 @@ public class MuzimaFingerprintServiceImpl extends BaseOpenmrsService implements 
     @Override
     public PatientFingerPrintModels addFingerprintToPatient(String patientUUID,String firstFingerPrint,String secondeFingerPrint,String thirdFingerPrint, String scannedFinger) throws JSONException {
         PatientFingerPrintModels patient = null;
+        MuzimaFingerprint muzimaFingerprint = new MuzimaFingerprint();
+        muzimaFingerprint = getFingerprintByPatientUUID(patientUUID);
         Patient pat = null;
-        MuzimaFingerprint muzimaFingerprint=new MuzimaFingerprint();
-        muzimaFingerprint.setPatientUUID(patientUUID);
-        muzimaFingerprint.setFirstFingerprint(firstFingerPrint);
-        muzimaFingerprint.setSecondFingerprint(secondeFingerPrint);
-        muzimaFingerprint.setThirdFingerprint(thirdFingerPrint);
-        muzimaFingerprint.setScannedFinger(scannedFinger);
+        if (muzimaFingerprint != null) {
+            muzimaFingerprint.setFirstFingerprint(firstFingerPrint);
+            muzimaFingerprint.setSecondFingerprint(secondeFingerPrint);
+            muzimaFingerprint.setThirdFingerprint(thirdFingerPrint);
+            muzimaFingerprint.setScannedFinger(scannedFinger);
+        }else {
+            muzimaFingerprint = new MuzimaFingerprint();
+            muzimaFingerprint.setPatientUUID(patientUUID);
+            muzimaFingerprint.setFirstFingerprint(firstFingerPrint);
+            muzimaFingerprint.setSecondFingerprint(secondeFingerPrint);
+            muzimaFingerprint.setThirdFingerprint(thirdFingerPrint);
+            muzimaFingerprint.setScannedFinger(scannedFinger);
+        }
         dao.saveMuzimaFingerprint(muzimaFingerprint);
         pat = Context.getPatientService().getPatientByUuid(patientUUID);
         patient = new PatientFingerPrintModels(pat.getUuid(),
