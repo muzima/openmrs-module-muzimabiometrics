@@ -592,13 +592,13 @@
                          <thead>
                              <tr>
                                  <th>Fingerprint</th>
-                                 <th>Scanned Finger <span class="required">*</span></th>
+                                 <th style="display:none;">Scanned Finger <span class="required">*</span></th>
                              </tr>
                          </thead>
                          <tbody>
                              <tr>
                                  <td><img src="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/><input type="hidden" id="fingerprint" name="patient.fingerprint" autocomplete="false"></td>
-                                 <td><select id="scannedFinger" name="patient.scanned_finger" required>
+                                 <td style="display:none;"><select id="scannedFinger" name="patient.scanned_finger">
                                          <option value="">...</option>
                                          <option value="L1">Left thumb</option>
                                          <option value="L2">Left index finger</option>
