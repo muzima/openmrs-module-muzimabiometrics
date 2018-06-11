@@ -121,18 +121,18 @@
                         <tr>
                             <td width="100%">
                                 <div id="downloadDiv" align="center">
-                                    <input id="download" type="submit" onclick="app.identifyFinger()" onclick style="width: auto;" value="Launch fingerprint scanner." class="btn btn-primary btn-block">
+                                    <input id="download" type="submit" onclick="app.identifyFinger()" onclick style="width: auto;" value="Launch fingerprint scanner" class="btn btn-primary btn-block">
                                     <input type="hidden" id="startScanning"/>
                                     <input type="hidden" id="fingerprintScan"/>
                                 </div>
                                 <div id="refreshDiv" align="center">
                                     <input id="refresh" type="button" style="width: auto;"
-                                           value="Re-launch fingerprint scanner."
+                                           value="Re-launch fingerprint scanner"
                                            class="btn btn-info btn-block">
                                 </div>
                                 <div id="spinner" align="center">
                                     <div class="loader"></div>
-                                    <span>please wait while scanner is starting up</span>
+                                    <span>Please wait while scanner is starting up</span>
                                 </div>
                             </td>
                         </tr>
@@ -154,7 +154,7 @@
                 <table id="tblData">
                     <thead>
                     <tr class="forms-header">
-                        <th>Matching Patient List</th>
+                        <th>Matching patient list</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -296,7 +296,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Finger swipe was too short,please scan again.</p>
+                    <p>Finger swipe was too short, please scan again.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -330,7 +330,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Weak finger pressure ,please insert some pressure on to the scanner and retry.</p>
+                    <p>Weak finger pressure, please insert some pressure on to the scanner and retry.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -347,7 +347,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Unable to load fingerprint software,please contact the system admin.</p>
+                    <p>Unable to load fingerprint software, please contact the system admin.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -363,7 +363,7 @@
             <input id="btnCancel" class="btn btn-lg btn-primary" type="button" value="Cancel">
         </div>
         <div id="otherIdentificationOption">
-            <h4>No patient found with this fingerprint, Do you want to register?</h4>
+            <h4>No patient found with this fingerprint, do you want to register?</h4>
             <a href="#" id="btnYes">Yes</a>
             <a href="#" id="btnNo">No</a>
         </div>
@@ -374,7 +374,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="appendMessage">Patient Fingerprint Appended Successfully</h2>
+                        <h2 id="appendMessage">Patient fingerprint appended successfully</h2>
                     </th>
                 </tr>
                 </thead>
@@ -392,7 +392,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="registerMessage">Patient Registered Successfully</h2>
+                        <h2 id="registerMessage">Patient registered successfully</h2>
                     </th>
                 </tr>
                 </thead>
@@ -410,7 +410,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="scanHeaderMessage">Fingerprint not in the system. Please identify by Name or Identifier</h2>
+                        <h2 id="scanHeaderMessage">Fingerprint not in the system. Please identify by name or identifier</h2>
                     </th>
                 </tr>
                 </thead>
@@ -592,13 +592,13 @@
                          <thead>
                              <tr>
                                  <th>Fingerprint</th>
-                                 <th>Scanned Finger <span class="required">*</span></th>
+                                 <th style="display:none;">Scanned Finger <span class="required">*</span></th>
                              </tr>
                          </thead>
                          <tbody>
                              <tr>
                                  <td><img src="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/><input type="hidden" id="fingerprint" name="patient.fingerprint" autocomplete="false"></td>
-                                 <td><select id="scannedFinger" name="patient.scanned_finger" required>
+                                 <td style="display:none;"><select id="scannedFinger" name="patient.scanned_finger">
                                          <option value="">...</option>
                                          <option value="L1">Left thumb</option>
                                          <option value="L2">Left index finger</option>
@@ -632,7 +632,7 @@
     </div>
     <!-- start of person basic demographics form -->
     <div id="basicdemographicform" style="margin-left:0px;">
-        <div>Fingerprint not Identified in the system. Search for patient by Identifier/Name or create a new patient</div>
+        <div style="background-color:#f9f159 !important;"><B>Fingerprint not identified in the system. Search for patient by identifier/name or create a new patient</B></div>
         <div id="" style="margin-left:0px; ">
             <h3 id="form-title">Patient Search</h3>
             <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
@@ -674,7 +674,19 @@
                     </tr>
                     <tr>
                         <td>Birthdate<span class="required">*</span></td>
-                        <td><input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="" ><input type="hidden" id="appendfingerprint"  autocomplete="false">&nbsp;or Age&nbsp;<input type="text" autocomplete="off" id="age" name="age" class="" required><input type="hidden" id="estimatedDOB" name="estimatedDOB" class=""></td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Date: <input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="" ><input type="hidden" id="appendfingerprint"  autocomplete="false"></td>
+                                </tr>
+                                <tr>
+                                    <td>OR</td>
+                                </tr>
+                                <tr>
+                                    <td>Age: Yrs<input type="text" autocomplete="off" id="years" name="years" class="validAge" required>Months: <input type="text" autocomplete="off" id="months" name="months" class="validMonths"><input type="hidden" id="estimatedDOB" name="estimatedDOB" class=""></td>
+                                <tr>
+                            </table>
+                        </td>
                     </tr>
                     <tr>
                         <td>Gender<span class="required">*</span></td>
@@ -805,18 +817,16 @@
         $("#datepicker1").datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
-                var standardBirthDate=new Date(formatedDate);
-                var dateToday=new Date();
-                var age = dateToday.getFullYear() - standardBirthDate.getFullYear();
-                var m = dateToday.getMonth() - standardBirthDate.getMonth();
-                if (m < 0 || (m === 0 && dateToday.getDate() < standardBirthDate.getDate())) {
+                var dateOfBirth = new Date(formatedDate);
+                var dateDiff = new Date(new Date() - dateOfBirth);
+                var age = (dateDiff.toISOString().slice(0, 4) - 1970);
+                var m = dateDiff.getMonth();
+                if (m < 0) {
                     age--;
                 }
-                if(age==0){
-                     $("#age").val("< 1");
-                }else{
-                    $("#age").val(age);
-                }
+                $("#years").val(age);
+                $("#months").val(m);
+
                 $("#estimatedDOB").val("No");
             },
             dateFormat: 'yy-mm-dd',
@@ -831,17 +841,19 @@
         $( "#datepicker" ).datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
-                var standardBirthDate=new Date(formatedDate);
-                var dateToday=new Date();
-                var age = dateToday.getFullYear() - standardBirthDate.getFullYear();
-                var m = dateToday.getMonth() - standardBirthDate.getMonth();
-                if (m < 0 || (m === 0 && dateToday.getDate() < standardBirthDate.getDate())) {
+                var dateOfBirth = new Date(formatedDate);
+                var dateDiff = new Date(new Date() - dateOfBirth);
+                var age = (dateDiff.toISOString().slice(0, 4) - 1970);
+                var m = dateDiff.getMonth();
+                if (m < 0) {
                     age--;
                 }
-                if(age==0){
-                     $("#ageregistration").val("< 1 yr");
+                if(age==0 && m==0){
+                    $("#ageregistration").val("< 1 month");
+                }else if(age==0 && m>0){
+                    $("#ageregistration").val(m+" Months");
                 }else{
-                    $("#ageregistration").val(age+" yrs");
+                    $("#ageregistration").val(age+" Yrs "+m+" Months");
                 }
 
             },
@@ -852,23 +864,45 @@
         });
     });
     $(document).ready(function(){
-    	$("#age").keyup(function() {
-    		var dateToday = new Date();
-    		var todayYear = dateToday.getFullYear();
-    		var inputAge=$(this).val();
-    		if(inputAge<120 && !isNaN(inputAge))
+    	$("#years").keyup(function() {
+    		var date = new Date();
+    		var inputYears=$(this).val();
+    		var inputMonth = $("#months").val();
+    		if(inputYears<120 && !isNaN(inputYears))
     		{
-    			var bornYear=todayYear-inputAge;
-    			$("#datepicker1").val(bornYear+"-01-01");
+    		    if(!isNaN(inputMonth)) date.setMonth(date.getMonth() - (inputMonth-1));
+                date.setFullYear(date.getFullYear() - inputYears);
+                var month=date.getMonth();
+                if (month.toString().length < 2) month = '0'+month;
+                var day = "0"+1;
+                var newdate = [date.getFullYear(), month, day].join('-');
+    			$("#datepicker1").val(newdate);
     			$("#estimatedDOB").val("Yes");
     		}
-    		else
-    		{
-    			$("#age").val("enter a valid age");
-    			$("#datepicker1").val("");
-
-    		}
-
     	});
+    });
+
+    $(document).ready(function(){
+        $("#months").keyup(function() {
+            var date = new Date();
+            var inputMonths=$(this).val();
+            var inputYears=$("#years").val();
+            if(inputMonths<12 && !isNaN(inputMonths))
+            {
+                if(!isNaN(inputYears)) date.setFullYear(date.getFullYear() - inputYears);
+                date.setMonth(date.getMonth() - (inputMonths-1));
+                var year = date.getFullYear()
+                var month = date.getMonth();
+                if(parseInt(month)==0) {
+                    month = 12;
+                    year = year-1;
+                }
+                if(month.toString().length < 2) month = '0'+month;
+                var day = "0"+1;
+                var newdate = [year, month, day].join('-');
+                $("#datepicker1").val(newdate);
+                $("#estimatedDOB").val("Yes");
+            }
+        });
     });
 </script>

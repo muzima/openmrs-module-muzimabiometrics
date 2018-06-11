@@ -528,7 +528,7 @@ $(document).ready(function () {
 
     /* Start - Checking that the entered value is a valid Age */
 
-        $.validator.addMethod("validAge", function (value, element) {  console.lo
+        $.validator.addMethod("validAge", function (value, element) {
                 return value >= 1 && value < 120;
             }, "Invalid Age. Please Enter Value Between 1 and 120."
         );

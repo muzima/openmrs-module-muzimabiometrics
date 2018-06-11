@@ -754,9 +754,9 @@ $(document).ready(function(){
         {
             $("#family_name").attr("placeholder", "This field cannot be empty, please enter the person name");
         }
-        else if($("#age").val() == "")
+        else if($("#years").val() == "")
         {
-            $("#age").attr("placeholder", "This field cannot be empty, please enter the age of person");
+            $("#years").attr("placeholder", "This field cannot be empty, please enter the age of person");
         }
         else{
                 if($("#gender1").is(":checked")==false && $("#gender2").is(":checked")==false)
@@ -765,7 +765,11 @@ $(document).ready(function(){
                 }
                 else
                 {
-                     $("#ageregistration").val($("#age").val());
+                     if(!isNaN($("#months").val())){
+                        $("#ageregistration").val($("#years").val()+" Yrs "+$("#months").val()+" Months");
+                     }else{
+                        $("#ageregistration").val($("#years").val()+" Yrs");
+                     }
                      $("#datepicker").val($("#datepicker1").val());
                      if($("#gender1").is(":checked")==true){
                            $("#sex1").prop("checked", true);
@@ -893,6 +897,17 @@ $(document).ready(function(){
     $.validator.addMethod("lettersOnly", function(value, element) {
       return this.optional(element) || /^[a-z]+$/i.test(value);
     }, "Please enter letters only please");
+
+
+    $.validator.addMethod("validAge", function (value, element) {
+            return value >= 1 && value < 120;
+        }, "Invalid Age. Please Enter Value Between 1 and 120."
+    );
+
+    $.validator.addMethod("validMonths", function (value, element) {
+            return value >= 1 && value < 12;
+        }, "Invalid Age. Please Enter Value Between 1 and 12."
+    );
 
     $.validator.addMethod("numbersOnly", function(value, element) {
       return this.optional(element) || /^\d+$/.test(value);
