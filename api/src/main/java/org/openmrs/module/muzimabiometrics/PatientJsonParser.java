@@ -139,7 +139,7 @@ public class PatientJsonParser {
         patient.setIdentifiers(patientIdentifiers);
         patient.setGender((patientJsonObject.getString("patient.sex")));
 
-        int age = Integer.valueOf(patientJsonObject.getString("patient.age"));
+        //int age = Integer.valueOf(patientJsonObject.getString("patient.age"));
         patient.setBirthdate(new SimpleDateFormat("YYYY-MM-dd").parse(patientJsonObject.getString("patient.birthdate")));
         if(patientJsonObject.has("patient.birthdateEstimatedInput")) {
             patient.setBirthdateEstimated(true);
