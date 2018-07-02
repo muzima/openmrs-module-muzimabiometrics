@@ -13,6 +13,27 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="muzimabiometrics-api" />
     <orderEntry type="library" name="Maven: org.openmrs.module:muzimabiometrics-fingerprint:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:3.5.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: sun.jdk:plugin:1.6.0">
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/jdk1.7.0_80/jre/lib/plugin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: org.codehaus.mojo.webstart:webstart-jnlp-servlet:1.0-6.0-02_ea_b02" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: javax.jnlp:jnlp-api:7.0">
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/jdk1.7.0_80/jre/lib/javaws.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.openmrs.api:openmrs-api:1.8.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-collections:commons-collections:3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-beanutils:commons-beanutils:1.7.0" level="project" />

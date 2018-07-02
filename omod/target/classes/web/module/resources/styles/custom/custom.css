@@ -48,12 +48,12 @@ width: 100%;
 
 table th, table td {
 padding: 5px 10px;
-border: 1px solid #dddddd;
+//border: 1px solid #dddddd;
 }
 
 table thead th {
-border-bottom: 1px solid #dddddd;
-background: #f3f3f3;
+//border-bottom: 1px solid #dddddd;
+//background: #f3f3f3;
 width: auto;
 text-align: left;
 word-break: normal;
@@ -63,7 +63,7 @@ font-family: "OpenSansBold";
 
 table th, table td {
 padding: 5px 10px;
-border: 1px solid #dddddd;
+//border: 1px solid #dddddd;
 }
 
 form select, .form select {

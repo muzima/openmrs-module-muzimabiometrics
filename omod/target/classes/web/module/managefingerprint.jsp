@@ -2,6 +2,8 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
+<openmrs:require privilege="View mUzima FingerPrint" otherwise="/login.htm" />
+
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/styles/animate/animate.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/styles/custom/custom.css"/>
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/styles/font-awesome/css/font-awesome.min.css"/>
@@ -49,81 +51,14 @@
             transform: skewX(-20deg);
         }
     }
+
+   td {
+      font-size: 16px;
+   }
+   th{
+      font-size: 19px;
+   }
 </style>
-<!--start of trial -->
-<br/><br/><br/>
-<nav class="navbar navbar-default" style="background-color:#009D8E !important;">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#codebrainery-toggle-nav" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" style="color:white !important;font-size:2em !important    ;">mUzima Biometrics
-                Module</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="codebrainery-toggle-nav">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <button id="activatehomecontainer" type="button" class="btn btn-success btn-lg"
-                            style="background-color:#4ebaaa !important;"
-                            title="This is the mUzima Fingerprint module welcome screen.">Welcome
-                    </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                </li>
-                <li>
-                    <button id="activatemaincontainersignin" type="button" class="btn btn-success btn-lg"
-                            style="background-color:#4ebaaa !important;"
-                            title="This screen allows users who have appended their fingerprints to their details to login simply by scanning the fingerprint">
-                        Identification
-                    </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                </li>
-                <li>
-                    <button id="activatemaincontainersignup" type="button" class="btn btn-success btn-lg"
-                            style="background-color:#4ebaaa !important;"
-                            title="This screen allows you to signup a new user with fingerprint capability or append an old patient without fingerprint capability with a fingerprint ability.">
-                        Registration
-                    </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                </li>
-                <li>
-                    <button type="button" class="btn btn-success btn-lg" style="background-color:#4ebaaa !important;"
-                            title="allows you to change the url to be loaded by the web view" onclick="app.changeUrl()">
-                        Change URL
-                    </button>
-                </li>
-            </ul>
-        </div>
-
-    </div> <!-- close container div -->
-</nav>
-<!-- close navbar nav -->
-<br/>
-<div id="homecontainer" class="container">
-    <table>
-        <thead>
-        <tr class="forms-header">
-            <th>
-                <h3>Welcome to mUzima Fingerprint</h3>
-            </th>
-        </tr>
-        </thead>
-        <thead>
-        <tr>
-            <th>
-                <p>
-                    This module allows you to register a new patient with a fingerprint scan option or to append an
-                    existing user with the fingerprint capability. It is also used to access patient information whose
-                    fingerprint had already been registered in the system. Navigate through the menu bars above. You can
-                    hover the mouse over a individual menu above if you are not sure what to do in order to get more
-                    information about it. Enjoy!</p>
-            </th>
-        </tr>
-        </thead>
-    </table>
-</div>
 <div id="showdefaultsettings" style="display:hidden;" class="container">
     <table>
         <thead>
@@ -172,43 +107,32 @@
     </div>-->
 
     <!-- sign in screen -->
-    <div id="signinscreen" style="display:hidden;">
+    <div id="signinscreen">
         <div id="find-patient">
             <div class="row forms-list">
                 <div class="col-lg-12">
                     <table id="find-options">
                         <thead>
-                        <tr class="forms-header">
-                            <th colspan="3"><h2 style="font-size:1.3em;">Find Patient by Patient Identifier or Patient
-                                Name or by scanning finger print below</h2></th>
+                        <tr>
+                            <th><div id="defaultFingerDiv" align="center" style="font-size: 1.3em;font-family: Verdana,Arial,Helvetica,sans-serif;"></div></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td> Patient Identifier or Patient Name:<input type="text" id="findPatients"
-                                                                           name="findPatients" value="${identifier}"
-                                                                           onkeypress="activate(this.value, event)">
-                            </td>
-                            <td colspan="2">
-                                <div id="downloadDiv">
-                                    <a style="text-decoration:none;" href="#" onclick="app.identifyFinger()"
-                                       id="download"> <input type="button" value="Click here to identify patient"
-                                                             class="btn btn-primary btn-block"
-                                                             style="background-color:#009D8E !important;"> </a>
+                            <td width="100%">
+                                <div id="downloadDiv" align="center">
+                                    <input id="download" type="submit" onclick="app.identifyFinger()" onclick style="width: auto;" value="Launch fingerprint scanner" class="btn btn-primary btn-block">
                                     <input type="hidden" id="startScanning"/>
                                     <input type="hidden" id="fingerprintScan"/>
                                 </div>
-                                <div id="refreshDiv">
-                                    <!-- <span>Fingerprint processing timed out, please click refresh to continue</span>
-                                    <button type="button" id="refresh" class="btn btn-lg btn-primary">Refresh</button>-->
-                                    <input id="refresh" type="button"
-                                           value="Fingerprint scanner initiation has been completed.Click here to re-initiate if scanner did not start."
-                                           class="btn btn-primary btn-block"
-                                           style="background-color:#009D8E !important;">
+                                <div id="refreshDiv" align="center">
+                                    <input id="refresh" type="button" style="width: auto;"
+                                           value="Re-launch fingerprint scanner"
+                                           class="btn btn-info btn-block">
                                 </div>
-                                <div id="spinner">
+                                <div id="spinner" align="center">
                                     <div class="loader"></div>
-                                    <span>please wait while scanner is starting up</span>
+                                    <span>Please wait while scanner is starting up</span>
                                 </div>
                             </td>
                         </tr>
@@ -230,7 +154,7 @@
                 <table id="tblData">
                     <thead>
                     <tr class="forms-header">
-                        <th>Matching Patient List</th>
+                        <th>Matching patient list</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -253,19 +177,23 @@
 
                     </tbody>
                 </table>
+                <input type="hidden" id="tblDataAppendfingerprint" autocomplete="false">
             </div>
         </div>
     </div>
     <!-- end of body wrapper for non create -->
 
     <!-- start of body wrapper -->
-    <div id="body-wrapperr" style="display:none;">
+    <div id="body-wrapperr" style="display:none; ">
         <div class="row forms-list">
             <div class="col-lg-12">
                 <table id="tblStore">
                     <thead>
                     <tr class="forms-header">
-                        <th>Possible Matching Patient List</th>
+                        <th>Found Similar People</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -273,45 +201,46 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <th colspan='6'>The following persons were found with similar characterictics as entered, click
-                            Append Fingerprint Button next to the person to append the Finger Print to the Existing
-                            Patient. If a tick sign is in the Fingerprint Column, then the patient has already been
-                            registered fully hence no need to create the person
+                        <th colspan='9'>Here is a list of people who seem similar to the one you are about to create.<br/>
+                        If the person you are in the process of creating already exists, select them from the list below. Otherwise click the button below to continue creating a new person.
                         </th>
                     </tr>
                     </thead>
                     <thead>
                     <tr class="forms-list-header">
                         <th style="display:none;"></th>
+                        <th style="display:none;"></th>
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Family Name</th>
                         <th>Identifier(s)</th>
                         <th>Gender</th>
+                        <th style="display:none;">Scanned Finger</th>
                         <th>Fingerprint</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     </tbody>
                     <thead>
-                    <th colspan='6'>Is the person not listed above? click on Create Person button below to register a
-                        new patient
+                    <th colspan='8'>
                     </th>
                     </thead>
                     <thead>
-                    <th colspan='6' style="text-align:center;">
+                    <th colspan='8' style="text-align:center;">
                         <div style="float:left;width:70%;">
-                            <input id="createNewPatient" type="button" value="Create Person"
+                            <input id="createNewPatient" type="button" value="I cannot find the person on the list"
                                    class="btn btn-primary btn-block" style="background-color:#009D8E !important;">
                         </div>
                         <div style="float:right;width:25%;">
-                            <input id="CancelCreateNewPatient" type="button" value="Go Back"
+                            <input id="CancelCreateNewPatient" type="button" value="Back"
                                    class="btn btn-primary btn-block" style="background-color:red !important;">
                         </div>
                     </th>
                     </thead>
                 </table>
+                <input type="hidden" id="tblStoreAppendfingerprint" autocomplete="false">
             </div>
         </div>
     </div>
@@ -367,7 +296,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Finger swipe was too short,please scan again.</p>
+                    <p>Finger swipe was too short, please scan again.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -401,7 +330,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Weak finger pressure ,please insert some pressure on to the scanner and retry.</p>
+                    <p>Weak finger pressure, please insert some pressure on to the scanner and retry.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -418,7 +347,7 @@
                     <h4 class="modal-title">Scanner Error</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Unable to load fingerprint software,please contact the system admin.</p>
+                    <p>Unable to load fingerprint software, please contact the system admin.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -434,7 +363,7 @@
             <input id="btnCancel" class="btn btn-lg btn-primary" type="button" value="Cancel">
         </div>
         <div id="otherIdentificationOption">
-            <h4>No patient found with this fingerprint, Do you want to register?</h4>
+            <h4>No patient found with this fingerprint, do you want to register?</h4>
             <a href="#" id="btnYes">Yes</a>
             <a href="#" id="btnNo">No</a>
         </div>
@@ -445,7 +374,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="appendMessage">Patient Fingerprint Appended Successfully</h2>
+                        <h2 id="appendMessage">Patient fingerprint appended successfully</h2>
                     </th>
                 </tr>
                 </thead>
@@ -463,7 +392,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="registerMessage">Patient Registered Successfully</h2>
+                        <h2 id="registerMessage">Patient registered successfully</h2>
                     </th>
                 </tr>
                 </thead>
@@ -481,7 +410,7 @@
                 <thead>
                 <tr class="forms-header" style="text-align:center;">
                     <th style="text-align:center;font-size:1.3em;">
-                        <h2 id="scanHeaderMessage">Patient Fingerprint Identification Result</h2>
+                        <h2 id="scanHeaderMessage">Fingerprint not in the system. Please identify by name or identifier</h2>
                     </th>
                 </tr>
                 </thead>
@@ -506,6 +435,7 @@
                 </tr>
                 </thead>
             </table>
+
             <table id="scanwaittext" style="display:none;">
                 <thead>
                 <tr class="forms-header">
@@ -556,116 +486,139 @@
     </div>
     <!--end of registration click content -->
     <div id="registrationForm" style="margin-left:0px;">
-        <h3 id="form-title">New Patient Registration Form</h3>
-        <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
-            <fieldset style="width:100%;">
-                <legend>Person Name</legend>
-                <div class="form-group">
-                    <label for="patient.given_name">Given</label>
-                    <input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control lettersOnly" required>
-                </div>
-                <label for="patient.middle_name">Middle Name</label>
-                <input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control lettersOnly" required>
-                <div class="form-group">
-                    <label for="patient.family_name">Family Name</label>
-                    <input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control lettersOnly" required>
-                </div>
-            </fieldset>
-            <fieldset style="width:100%;">
-                <legend>Additional Details</legend>
-                <div class="form-group">
-                    <label for="patient.phone_number">Phone Number</label>
-                    <input autocomplete="off" type="text" name="patient.phone_number" class="form-control phoneNumber" required>
-                </div>
-                <div class="form-group">
-                    <label for="patient.mothers_name">Mothers Name</label>
-                    <input autocomplete="off" type="text" name="patient.mothers_name" class="form-control lettersOnly">
-                </div>
-            </fieldset>
-           <fieldset style="width:100%;">
-           	<legend>ID Number(s)</legend>
-           	<div class="form-group">
-           		<div class="section repeat identifier_type" id="identifier_type" data-name="identifier_type">
-           			<div class="form-group">
-           				<label for="identifier_type">Identifier Type</label>
-           				<select class="form-control identifierType" name="identifier.identifierType" id="IdentifierOptions" required>
-           					<option value="">...</option>
-           				</select>
-           			</div>
-           			<div class="form-group">
-           				<label for="amrs_id">Enter Identifier</label>
-           				<input class="form-control identifier-value" autocomplete="off" required name="identifier.amrs_id" type="text">
-           			</div>
-           			<div class="form-group">
-                       <label for="identifier.location_id">Identifier Location</label>
-                       <select id="LocationOptions" name="identifier.location_id" class="form-control" required>
-                           <option value="">...</option>
-                       </select>
-                    </div>
-           			<div class="form-group">
-           				<label for="preferred">Preferred</label>
-           				<input class="" id="preferred" required name="identifier.preferred" type="radio">
-           			</div>
-           		</div>
-           	</div>
-           </fieldset>
-            <fieldset style="width:100%;">
-                <legend>mUzima Biometrics</legend>
-                <div class="form-group">
-                    <label for="fingerprint">Finger Print</label>
-                    <img src="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/>
-                    <input type="hidden" id="fingerprint" name="patient.fingerprint" autocomplete="false">
-                </div>
-            </fieldset>
-            <fieldset style="width:100%;">
-                <legend>Demographics</legend>
-                <div class="form-group">
-                    <div class="form-inline">
-                        <label for="gender">Gender</label>
-                        <input type="radio" id="sex1" name="patient.sex" value="F" class="form-control"><b>Female</b>
-                        <input type="radio" id="sex2" name="patient.sex" value="M" class="form-control"><b>Male</b>
-                    </div>
-                    <label for="age">Age</label>
-                    <input type="text" autocomplete="off" id="ageregistration" readonly name="patient.age" class="form-control validAge" required>
-                    <br/>
-                    or
-                    <br/>
-                    <label>Birthdate (Format: dd/mm/yyyy)</label>
-                    <input autocomplete="off" id="datepicker" name="patient.birthdate" class="form-control">
-                    <br/>
-                    <div class="form-inline">
-                        <label>Date Estimated</label>
-                        <input type="checkbox" id="patient.birthdateEstimatedInput" name="patient.birthdateEstimatedInput" class="form-control">
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Address</legend>
-                <div class="form-group">
-                    <label for="address1">Address</label>
-                    <input name="personAddress.address1" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="address2">Address 2</label>
-                    <input name="personAddress.address2"  class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="cityorvillage">City/Village</label>
-                    <input name="personAddress.cityVillage"  class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="stateProvince">State/Province</label>
-                    <input name="personAddress.stateProvince"  class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <input name="personAddress.country"  class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="postalCode">Postal Code</label>
-                    <input name="personAddress.postalCode"  class="form-control" type="text">
-                </div>
-            </fieldset>
+        <h3 id="form-title">Create a new patient</h3>
+        <form id="formData" method="post" action="">
+        <table id="parentTable" cellspacing="0" cellpadding="7" border="1" width="98%">
+               <tr id="parentTableRow">
+                    <th valign="top">Person Name</th>
+                    <td>
+                        <table id="personNameTable" cellspacing="2">
+                            <thead>
+                                <tr>
+                                    <th>Given <span class="required">*</span></th>
+                                    <th>Middle</th>
+                                    <th>Family Name <span class="required">*</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input autocomplete="off" type="text" name="patient.given_name" id="patient.given_name" class="form-control lettersOnly" required></td>
+                                    <td><input autocomplete="off" type="text" name="patient.middle_name" id="patient.middle_name" class="form-control lettersOnly"></td>
+                                    <td><input autocomplete="off" type="text" name="patient.family_name" id="patient.family_name" class="form-control lettersOnly" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+               </tr>
+               <tr id="parentTableRow">
+                    <th valign="top">Identifier(s)</th>
+                    <td>
+                        <table id="identifierTable" cellspacing="2">
+                            <thead>
+                                <tr>
+                                    <th width="30%">Identifier Type <span class="required">*</span></th>
+                                    <th width="25%">Value <span class="required">*</span></th>
+                                    <th width="25%">Location <span class="required">*</span></th>
+                                    <th width="10%">Preferred <span class="required">*</span></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="section repeat identifier_type" id="identifier_type" data-name="identifier_type">
+                                    <td><select class="identifierType" name="identifier.identifierType" id="IdentifierOptions" required>
+                                            <option value="">...</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="identifier-value" autocomplete="off" required name="identifier.amrs_id" type="text"></td>
+                                    <td><select id="LocationOptions" name="identifier.location_id" class="" required>
+                                            <option value="">...</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="" id="preferred" required name="identifier.preferred" type="radio"></td><td class="removeButton" valign="middle"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><input class='btn btn-primary add_section pull-left' type='button' value='Add Identifier'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+               </tr>
+               <tr id="parentTableRow">
+                   <th valign="top">Demographics</th>
+                   <td>
+                       <table id="identifierTable" cellspacing="2">
+                           <thead>
+                               <tr>
+                                   <th>Gender <span class="required">*</span></th>
+                                   <th>Age <span class="required">*</span></th>
+                                   <th>Birthdate(format:dd/mm/yyyy) <span class="required">*</span></th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td><input type="radio" id="sex1" name="patient.sex" value="F" class=""> Female&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="sex2" name="patient.sex" value="M" class=""> Male</td>
+                                   <td><input type="text" autocomplete="off" id="ageregistration" readonly name="patient.age" class="" required></td>
+                                   <td><input autocomplete="off" id="datepicker" readonly name="patient.birthdate" class="">&nbsp;&nbsp;Estimated&nbsp;<input type="checkbox" id="patient.birthdateEstimatedInput" name="patient.birthdateEstimatedInput" class=""></td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </td>
+              </tr>
+              <tr id="parentTableRow">
+                   <th valign="top">Address</th>
+                   <td>
+                     <table id="identifierTable" cellspacing="2">
+                         <tbody>
+                             <tr>
+                                 <td>Address</td><td colspan="3"><input name="personAddress.address1" class="" type="text"></td>
+                             </tr>
+                             <tr>
+                                 <td>Address 2</td><td colspan="3"><input name="personAddress.address2" class="" type="text"></td>
+                             </tr>
+                             <tr>
+                                 <td>City/Village</td><td><input name="personAddress.cityVillage" class="" type="text"></td><td>State/Province</td><td><input name="personAddress.stateProvince" class="" type="text"></td>
+                             </tr>
+                             <tr>
+                                  <td>Country</td><td><input name="personAddress.country" class="" type="text"></td><td>Postal Code</td><td><input name="personAddress.postalCode" class="" type="text"></td>
+                              </tr>
+                         </tbody>
+                     </table>
+                   </td>
+              </tr>
+              <tr id="parentTableRow">
+                 <th valign="top">Fingerprint</th>
+                 <td>
+                     <table id="fingerDetailsTable" cellspacing="2"  border="0">
+                         <thead>
+                             <tr>
+                                 <th>Fingerprint</th>
+                                 <th style="display:none;">Scanned Finger <span class="required">*</span></th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td><img src="${pageContext.request.contextPath}/moduleResources/muzimabiometrics/images/done.png"/><input type="hidden" id="fingerprint" name="patient.fingerprint" autocomplete="false"></td>
+                                 <td style="display:none;"><select id="scannedFinger" name="patient.scanned_finger">
+                                         <option value="">...</option>
+                                         <option value="L1">Left thumb</option>
+                                         <option value="L2">Left index finger</option>
+                                         <option value="L3">Left middle finger</option>
+                                         <option value="L4">Left ring finger</option>
+                                         <option value="L5">Left pinky/baby finger</option>
+                                         <option value="R1">Right thumb</option>
+                                         <option value="R2">Right index finger</option>
+                                         <option value="R3">Right middle finger</option>
+                                         <option value="R4">Right ring finger</option>
+                                         <option value="R5">Right pinky/baby finger</option>
+                                      </select>
+                                 </td>
+
+                             </tr>
+                         </tbody>
+                     </table>
+                 </td>
+              </tr>
+            </table>
         </form>
         <br/>
         <div style="float:left;width:70%;">
@@ -679,33 +632,68 @@
     </div>
     <!-- start of person basic demographics form -->
     <div id="basicdemographicform" style="margin-left:0px;">
+        <div style="background-color:#f9f159 !important;"><B>Fingerprint not identified in the system. Search for patient by identifier/name or create a new patient</B></div>
+        <div id="" style="margin-left:0px; ">
+            <h3 id="form-title">Patient Search</h3>
+            <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
+                Patient Identifier or Patient Name: <input value="" id="patientSearch" autocomplete="off" placeholder=" " type="text" onkeypress="activate(this.value, event)">
+
+            </form>
+            <form method="post" action="">
+            <table id="tblSearchResults">
+                <thead id="hiddableTHead" style="display:none;">
+                <tr class="forms-list-header">
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Family Name</th>
+                    <th>Identifier(s)</th>
+                    <th>Gender</th>
+                    <th style="display:none;">Scanned Finger</th>
+                    <th>Fingerprint</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            </form>
+        </div>
+        <h1>OR</h1>
         <h3 id="form-title">Create Patient </h3>
         <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
             <p>To create a new person, enter the person's name and other information below first to double-check that
                 they don't already have a record in the system. </p>
-            <div class="form-group">
-                <label for="family_name">Person Name</label>
-                <input autocomplete="off" type="text" id="family_name" name="family_name" class="form-control"
-                       value="${identifier}" required>
-            </div>
-            <fieldset style="width:100%;">
-                <legend>Date of Birth or Age</legend>
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="text" autocomplete="off" id="age" name="age" class="form-control" required>
-                    <input type="hidden" id="estimatedDOB" name="estimatedDOB" class="form-control">
-                    <br/>
-                    or
-                    <br/>
-                    <label for="datepicker1">Birth Date</label>
-                    <input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="form-control" >
-                </div>
-            </fieldset>
-            <div class="form-inline">
-                <label for="gender">gender</label>
-                <input id="gender1" type="radio" name="sex" value="F" class="form-control"><b>Female</b>
-                <input type="radio" id="gender2" name="sex" value="M" class="form-control"><b>Male</b>
-            </div>
+            <table id="demographicsTable" cellspacing="0" cellpadding="7" width="98%">
+                <tbody>
+                    <tr>
+                        <td>Person Name<span class="required">*</span></td>
+                        <td><input autocomplete="off" type="text" id="family_name" name="family_name" class="" value="${identifier}" style="min-width:400px;" required></td>
+                    </tr>
+                    <tr>
+                        <td>Birthdate<span class="required">*</span></td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Date: <input type="text" autocomplete="off" id="datepicker1" name="datebirth" class="" ><input type="hidden" id="appendfingerprint"  autocomplete="false"></td>
+                                </tr>
+                                <tr>
+                                    <td>OR</td>
+                                </tr>
+                                <tr>
+                                    <td>Age: Yrs<input type="text" autocomplete="off" id="years" name="years" class="validAge" required>Months: <input type="text" autocomplete="off" id="months" name="months" class="validMonths"><input type="hidden" id="estimatedDOB" name="estimatedDOB" class=""></td>
+                                <tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gender<span class="required">*</span></td>
+                        <td><input id="gender1" type="radio" name="sex" value="F" class="">&nbsp;Female&nbsp;<input type="radio" id="gender2" name="sex" value="M" class="">&nbsp;Male&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
         <br/>
         <div style="width:100% !important;">
@@ -825,32 +813,20 @@
 <openmrs:htmlInclude file="/moduleResources/muzimabiometrics/js/custom/muzima.js"/>
 
 <script>
-    /*$( function() {
-        $( "#datepicker" ).datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            maxDate: new Date,
-            changeYear: true
-        });
-    } );*/
-</script>
-<script>
     $(function() {
         $("#datepicker1").datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
-                var standardBirthDate=new Date(formatedDate);
-                var dateToday=new Date();
-                var age = dateToday.getFullYear() - standardBirthDate.getFullYear();
-                var m = dateToday.getMonth() - standardBirthDate.getMonth();
-                if (m < 0 || (m === 0 && dateToday.getDate() < standardBirthDate.getDate())) {
+                var dateOfBirth = new Date(formatedDate);
+                var dateDiff = new Date(new Date() - dateOfBirth);
+                var age = (dateDiff.toISOString().slice(0, 4) - 1970);
+                var m = dateDiff.getMonth();
+                if (m < 0) {
                     age--;
                 }
-                if(age==0){
-                     $("#age").val("< 1");
-                }else{
-                    $("#age").val(age);
-                }
+                $("#years").val(age);
+                $("#months").val(m);
+
                 $("#estimatedDOB").val("No");
             },
             dateFormat: 'yy-mm-dd',
@@ -865,17 +841,19 @@
         $( "#datepicker" ).datepicker({
             onSelect: function(dateText, inst) {
                 var formatedDate = $(this).val();
-                var standardBirthDate=new Date(formatedDate);
-                var dateToday=new Date();
-                var age = dateToday.getFullYear() - standardBirthDate.getFullYear();
-                var m = dateToday.getMonth() - standardBirthDate.getMonth();
-                if (m < 0 || (m === 0 && dateToday.getDate() < standardBirthDate.getDate())) {
+                var dateOfBirth = new Date(formatedDate);
+                var dateDiff = new Date(new Date() - dateOfBirth);
+                var age = (dateDiff.toISOString().slice(0, 4) - 1970);
+                var m = dateDiff.getMonth();
+                if (m < 0) {
                     age--;
                 }
-                if(age==0){
-                     $("#ageregistration").val("< 1 yr");
+                if(age==0 && m==0){
+                    $("#ageregistration").val("< 1 month");
+                }else if(age==0 && m>0){
+                    $("#ageregistration").val(m+" Months");
                 }else{
-                    $("#ageregistration").val(age+" yrs");
+                    $("#ageregistration").val(age+" Yrs "+m+" Months");
                 }
 
             },
@@ -886,23 +864,45 @@
         });
     });
     $(document).ready(function(){
-    	$("#age").keyup(function() {
-    		var dateToday = new Date();
-    		var todayYear = dateToday.getFullYear();
-    		var inputAge=$(this).val();
-    		if(inputAge<120 && !isNaN(inputAge))
+    	$("#years").keyup(function() {
+    		var date = new Date();
+    		var inputYears=$(this).val();
+    		var inputMonth = $("#months").val();
+    		if(inputYears<120 && !isNaN(inputYears))
     		{
-    			var bornYear=todayYear-inputAge;
-    			$("#datepicker1").val(bornYear+"-01-01");
+    		    if(!isNaN(inputMonth)) date.setMonth(date.getMonth() - (inputMonth-1));
+                date.setFullYear(date.getFullYear() - inputYears);
+                var month=date.getMonth();
+                if (month.toString().length < 2) month = '0'+month;
+                var day = "0"+1;
+                var newdate = [date.getFullYear(), month, day].join('-');
+    			$("#datepicker1").val(newdate);
     			$("#estimatedDOB").val("Yes");
     		}
-    		else
-    		{
-    			$("#age").val("enter a valid age");
-    			$("#datepicker1").val("");
-
-    		}
-
     	});
+    });
+
+    $(document).ready(function(){
+        $("#months").keyup(function() {
+            var date = new Date();
+            var inputMonths=$(this).val();
+            var inputYears=$("#years").val();
+            if(inputMonths<12 && !isNaN(inputMonths))
+            {
+                if(!isNaN(inputYears)) date.setFullYear(date.getFullYear() - inputYears);
+                date.setMonth(date.getMonth() - (inputMonths-1));
+                var year = date.getFullYear()
+                var month = date.getMonth();
+                if(parseInt(month)==0) {
+                    month = 12;
+                    year = year-1;
+                }
+                if(month.toString().length < 2) month = '0'+month;
+                var day = "0"+1;
+                var newdate = [year, month, day].join('-');
+                $("#datepicker1").val(newdate);
+                $("#estimatedDOB").val("Yes");
+            }
+        });
     });
 </script>

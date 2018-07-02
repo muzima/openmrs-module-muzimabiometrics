@@ -5,5 +5,7 @@ D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs
 D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\api\impl\MuzimaFingerprintServiceImpl.java
 D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\PatientJsonParser.java
 D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\MuzimaTemporaryFingerprint.java
+D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\model\PatientFingerPrintModels.java
 D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\api\db\hibernate\HibernateMuzimaFingerprintDAO.java
+D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\extension\html\MuzimaBiometricsHeader.java
 D:\muzima-projects\openmrs-module-muzimabiometrics\api\src\main\java\org\openmrs\module\muzimabiometrics\api\MuzimaFingerprintService.java
