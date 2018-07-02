@@ -1,26 +1,17 @@
 package org.openmrs.module.muzimabiometrics;
 
 import org.apache.commons.lang.math.NumberUtils;
+import org.codehaus.jackson.annotate.JsonValue;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openmrs.Patient;
-import org.openmrs.PersonName;
-import org.openmrs.PatientIdentifier;
-import org.openmrs.PatientIdentifierType;
-import org.openmrs.Encounter;
-import org.openmrs.EncounterType;
-import org.openmrs.Location;
-import org.openmrs.User;
+import org.openmrs.*;
 import org.openmrs.api.context.Context;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by vikas on 17/02/15.
@@ -68,7 +59,7 @@ public class PatientJsonParser {
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             jsonObject = jsonObject.getJSONObject("patient");
-            return jsonObject.getString("fingerprint");
+            return jsonObject.getString("patient.fingerprint");
         }
         return "";
     }
@@ -76,39 +67,85 @@ public class PatientJsonParser {
     public Patient CreatePatient(String patientData) throws JSONException, ParseException {
         Patient patient = new Patient();
         JSONArray jsonArray = new JSONArray("["+patientData+"]");
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject = jsonObject.getJSONObject("patient");
+        for(int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObjectMain = jsonArray.getJSONObject(i);
+            JSONObject jsonObject = jsonObjectMain.getJSONObject("patient");
 
             //setting names
             PersonName personName = new PersonName();
-            personName.setFamilyName(jsonObject.getString("family_name"));
-            personName.setGivenName(jsonObject.getString("given_name"));
-            personName.setMiddleName((jsonObject.getString("middle_name")));
+            personName.setFamilyName(jsonObject.getString("patient.family_name"));
+            personName.setGivenName(jsonObject.getString("patient.given_name"));
+            personName.setMiddleName((jsonObject.getString("patient.middle_name")));
             patient.addName(personName);
+
+            if(jsonObjectMain.has("personAddress")) {
+                JSONObject jsonObjectPatientAddress = jsonObjectMain.getJSONObject("personAddress");
+                PersonAddress personAddress = new PersonAddress();
+                personAddress.setAddress1((jsonObjectPatientAddress.getString("personAddress.address1")));
+                personAddress.setAddress2((jsonObjectPatientAddress.getString("personAddress.address2")));
+                personAddress.setCityVillage((jsonObjectPatientAddress.getString("personAddress.cityVillage")));
+                personAddress.setStateProvince((jsonObjectPatientAddress.getString("personAddress.stateProvince")));
+                personAddress.setCountry((jsonObjectPatientAddress.getString("personAddress.country")));
+                personAddress.setPostalCode((jsonObjectPatientAddress.getString("personAddress.postalCode")));
+                patient.addAddress(personAddress);
+            }
 
             //setting identifiers
             Set<PatientIdentifier> patientIdentifiers = new HashSet<PatientIdentifier>();
-            PatientIdentifier patientIdentifier = new PatientIdentifier();
 
-            PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByName("AMRS Universal ID");
-            patientIdentifier.setIdentifierType(identifierType);
-            patientIdentifier.setIdentifier(jsonObject.getString("amrs_id"));
+            JSONObject jsonObjectIdentifier = jsonObjectMain.getJSONObject("identifier");
+            String identifierString = jsonObjectIdentifier.toString();
 
-            String locationString = jsonObject.getString("location_id");
-            Location location = Context.getLocationService().getLocationByUuid(locationString);
+            CharSequence seq = ":[";
+            boolean bool = identifierString.contains(seq);
 
-            patientIdentifier.setLocation(location);
+            if(!bool){
+                PatientIdentifier patientIdentifier = new PatientIdentifier();
+                PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObjectIdentifier.getString("identifier.identifierType"));
+                patientIdentifier.setIdentifierType(identifierType);
+                patientIdentifier.setIdentifier(jsonObjectIdentifier.getString("identifier.amrs_id"));
 
-            patientIdentifier.setPreferred(true);
+                Location location = Context.getLocationService().getLocationByUuid(jsonObjectIdentifier.getString("identifier.location_id"));
+                patientIdentifier.setLocation(location);
+                patientIdentifier.setPreferred(true);
 
-            patientIdentifiers.add(patientIdentifier);
+                patientIdentifiers.add(patientIdentifier);
+
+            }else {
+                JSONArray jsonObjectIdentifierType = jsonObjectIdentifier.getJSONArray("identifier.identifierType");
+                JSONArray jsonObjectIdentifierValue = jsonObjectIdentifier.getJSONArray("identifier.amrs_id");
+                JSONArray jsonObjectIdentifierLocation = jsonObjectIdentifier.getJSONArray("identifier.location_id");
+
+                for (int j = 0; j < jsonObjectIdentifierType.length(); j++) {
+                    PatientIdentifier patientIdentifier = new PatientIdentifier();
+                    PatientIdentifierType identifierType = Context.getPatientService().getPatientIdentifierTypeByUuid(jsonObjectIdentifierType.get(j).toString());
+                    patientIdentifier.setIdentifierType(identifierType);
+                    patientIdentifier.setIdentifier(jsonObjectIdentifierValue.get(j).toString());
+
+                    Location location = Context.getLocationService().getLocationByUuid(jsonObjectIdentifierLocation.get(j).toString());
+
+                    patientIdentifier.setLocation(location);
+
+                    if (j == 1)
+                        patientIdentifier.setPreferred(true);
+                    else
+                        patientIdentifier.setPreferred(false);
+
+                    patientIdentifiers.add(patientIdentifier);
+                }
+            }
+
             patient.setIdentifiers(patientIdentifiers);
+            patient.setGender((jsonObject.getString("patient.sex")));
 
-            patient.setGender((jsonObject.getString("sex")));
-
-            int age = Integer.valueOf(jsonObject.getString("age"));
-            patient.setBirthdateFromAge(age,null);
+            int age = Integer.valueOf(jsonObject.getString("patient.age"));
+            patient.setBirthdate(new SimpleDateFormat("YYYY-MM-dd").parse(jsonObject.getString("patient.birthdate")));
+            if(jsonObject.has("patient.birthdateEstimatedInput")) {
+                patient.setBirthdateEstimated(true);
+            }else{
+                patient.setBirthdateEstimated(false);
+            }
+           // patient.setBirthdateFromAge(age,null);
         }
         //encounter.setPatient(patient);
         return patient;

@@ -29,11 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
-/**
- * The main controller.
- */
-
 @Controller
 public class MuzimafingerPrintManageController {
 	@RequestMapping(value = "module/muzimabiometrics/managefingerprint.form",  method = RequestMethod.GET)

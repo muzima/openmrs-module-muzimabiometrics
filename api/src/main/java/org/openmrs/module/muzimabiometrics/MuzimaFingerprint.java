@@ -10,14 +10,14 @@ import java.util.UUID;
 public class MuzimaFingerprint extends BaseOpenmrsData {
     private Integer id;
     private String patientUUID;
-    private byte[] firstFingerprint;
-    private byte[] secondFingerprint;
-    private byte[] thirdFingerprint;
+    private String firstFingerprint;
+    private String secondFingerprint;
+    private String thirdFingerprint;
 
     public MuzimaFingerprint() {
     }
 
-    public MuzimaFingerprint(String patientUUID, byte[] firstFingerprint, byte[] secondFingerprint, byte[] thirdFingerprint) {
+    public MuzimaFingerprint(String patientUUID,String firstFingerprint, String secondFingerprint, String thirdFingerprint) {
 
         if (getUuid() == null) {
             setUuid(UUID.randomUUID().toString());
@@ -64,27 +64,27 @@ public class MuzimaFingerprint extends BaseOpenmrsData {
         this.patientUUID = patientUUID;
     }
 
-    public byte[] getFirstFingerprint() {
+    public String getFirstFingerprint() {
         return firstFingerprint;
     }
 
-    public void setFirstFingerprint(byte[] firstFingerprint) {
+    public void setFirstFingerprint(String firstFingerprint) {
         this.firstFingerprint = firstFingerprint;
     }
 
-    public byte[] getSecondFingerprint() {
+    public String getSecondFingerprint() {
         return secondFingerprint;
     }
 
-    public void setSecondFingerprint(byte[] secondFingerprint) {
+    public void setSecondFingerprint(String secondFingerprint) {
         this.secondFingerprint = secondFingerprint;
     }
 
-    public byte[] getThirdFingerprint() {
+    public String getThirdFingerprint() {
         return thirdFingerprint;
     }
 
-    public void setThirdFingerprint(byte[] thirdFingerprint) {
+    public void setThirdFingerprint(String thirdFingerprint) {
         this.thirdFingerprint = thirdFingerprint;
     }
 }
