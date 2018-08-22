@@ -209,7 +209,8 @@ function clearTable(){
 function activate(val, e){
     var key=e.keyCode || e.which;
     if(parseInt(key)==13){
-    //do nothing
+          e.preventDefault();
+          return false;
     }
     else{
         $.ajax({
@@ -541,9 +542,9 @@ $(function(){
                 console.log("Internal server Error while getting setting"+JSON.stringify(msg));
             }
     });
-
+var setLocations = function(ws_url){
     $.ajax({
-            url: "../../ws/rest/v1/location",
+            url: ws_url,
             type: "GET",
             async: true,
             success: function(result) {
@@ -552,12 +553,20 @@ $(function(){
                 $.each(result.results, function(val, text) {
                     options.append($("<option />").val(text.uuid).text(text.display));
                 });
+
+                $.each(result.links, function(k,v){
+                    if($(v).rel == "next"){
+                   }
+                });
+
             },
             error: function(msg){
                 alert("Internal server error : while getting location list ");
             }
         }
     );
+    };
+    setLocations("../../ws/rest/v1/location?limit=200");
 
     $.get( "../../ws/rest/v1/user", function(result) {
         var options = $("#ProviderOptions");
@@ -601,6 +610,9 @@ $(function(){
                 $.each(result.results, function(val, text) {
                     if(text.uuid == _identifierTypeUuid){
                         $(identifierValueElement).addClass(text.validator);
+                        if(text.format){
+                            $(identifierValueElement).addClass("checkIfValidRegex");
+                        }
                     }
                 });
             },
@@ -888,11 +900,51 @@ $(document).ready(function(){
                     console.log("server error+++++++++++++++++++"+JSON.stringify(msg));
                 }
             });
-            console.log("exisists value is "+exists);
 
             return exists == 0;
         }, "Identifier already in use by other patient."
     );
+
+    $(".identifier-value").keyup(function(){
+            var _identifierValue = $(this).val();
+            var $element=$(this);
+            var element = $(this);
+
+            $.ajax({
+                url: "../../ws/rest/v1/patientidentifiertype?v=full",
+                type: "GET",
+                async: true,
+                success: function(result) {
+
+                    var identifierTypeElement = $element.closest('.repeat').find('.identifierType');
+                    var msgElement = $element.closest('.repeat').find('.errors');
+                    var _identifierTypeUuid = identifierTypeElement.val();
+                    $.each(result.results, function(val, text) {
+                        if(text.uuid == _identifierTypeUuid){
+                             if(text.format){
+                               var _textFormat = new RegExp(text.format);
+                               var regexResult = _textFormat.test(_identifierValue);
+                               if(_identifierValue==""){
+                                   msgElement.text("");
+                                   msgElement.hide();
+                               }
+                               else if(regexResult){
+                                    msgElement.text("");
+                                    msgElement.hide();
+                               }else{
+                                    msgElement.text("Please enter a valid identifier that matches Regex");
+                                    msgElement.show();
+                               }
+                             }
+                        }
+                    });
+                },
+                error: function(msg, status, error){
+                    console.log("server error +++++++++++++"+JSON.stringify(error));
+                }
+            });
+        });
+
 
     $.validator.addMethod("lettersOnly", function(value, element) {
       return this.optional(element) || /^[a-z]+$/i.test(value);

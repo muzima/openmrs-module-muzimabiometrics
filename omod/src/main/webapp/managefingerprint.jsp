@@ -529,7 +529,9 @@
                                             <option value="">...</option>
                                         </select>
                                     </td>
-                                    <td><input class="identifier-value" autocomplete="off" required name="identifier.amrs_id" type="text"></td>
+                                    <td><input class="identifier-value" autocomplete="off" required name="identifier.amrs_id" type="text" style="display:block">
+                                    <label class="errors" style="display:none;background-color: lightpink;">Please enter a valid identifier that matches Regex</label>
+                                    </td>
                                     <td><select id="LocationOptions" name="identifier.location_id" class="" required>
                                             <option value="">...</option>
                                         </select>
@@ -636,7 +638,7 @@
         <div id="" style="margin-left:0px; ">
             <h3 id="form-title">Patient Search</h3>
             <form id="formData" method="post" action="" style="border: 1px solid #eeeeee;padding:20px;">
-                Patient Identifier or Patient Name: <input value="" id="patientSearch" autocomplete="off" placeholder=" " type="text" onkeypress="activate(this.value, event)">
+                Patient Identifier or Patient Name: <input value="" id="patientSearch" autocomplete="off" placeholder=" " type="text" onkeyup="activate(this.value, event)">
 
             </form>
             <form method="post" action="">
