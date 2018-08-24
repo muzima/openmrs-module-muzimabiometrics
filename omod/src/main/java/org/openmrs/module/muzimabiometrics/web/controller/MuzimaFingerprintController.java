@@ -1,6 +1,6 @@
 package org.openmrs.module.muzimabiometrics.web.controller;
 
-import jlibfprint.JlibFprint;
+//import jlibfprint.JlibFprint;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,7 +56,7 @@ public class MuzimaFingerprintController {
         return jsonArray;
     }
     @RequestMapping(value = "identifyPatientByFingerprint.form", method = RequestMethod.POST)
-    public synchronized void postFingerprintScan(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException, ClassNotFoundException, JlibFprint.EnrollException {
+    public synchronized void postFingerprintScan(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException, ClassNotFoundException {
         service=Context.getService(MuzimaFingerprintService.class);
         JSONArray jsonArray=new JSONArray();
         JSONObject jsonObject=new JSONObject();

@@ -82,13 +82,28 @@ public class PatientJsonParser {
         if(mainJsonObject.has("personAddress")) {
             JSONObject jsonObjectPatientAddress = mainJsonObject.getJSONObject("personAddress");
             PersonAddress personAddress = new PersonAddress();
-            personAddress.setAddress1((jsonObjectPatientAddress.getString("personAddress.address1")));
-            personAddress.setAddress2((jsonObjectPatientAddress.getString("personAddress.address2")));
-            personAddress.setCityVillage((jsonObjectPatientAddress.getString("personAddress.cityVillage")));
-            personAddress.setStateProvince((jsonObjectPatientAddress.getString("personAddress.stateProvince")));
-            personAddress.setCountry((jsonObjectPatientAddress.getString("personAddress.country")));
-            personAddress.setPostalCode((jsonObjectPatientAddress.getString("personAddress.postalCode")));
-            patient.addAddress(personAddress);
+            if(jsonObjectPatientAddress.has("personAddress.address1")) {
+                personAddress.setAddress1((jsonObjectPatientAddress.getString("personAddress.address1")));
+            }
+            if(jsonObjectPatientAddress.has("personAddress.address2")) {
+                personAddress.setAddress2((jsonObjectPatientAddress.getString("personAddress.address2")));
+            }
+            if(jsonObjectPatientAddress.has("personAddress.cityVillage")) {
+                personAddress.setCityVillage((jsonObjectPatientAddress.getString("personAddress.cityVillage")));
+            }
+            if(jsonObjectPatientAddress.has("personAddress.stateProvince")) {
+                personAddress.setStateProvince((jsonObjectPatientAddress.getString("personAddress.stateProvince")));
+            }
+            if(jsonObjectPatientAddress.has("personAddress.country")) {
+                personAddress.setCountry((jsonObjectPatientAddress.getString("personAddress.country")));
+            }
+            if(jsonObjectPatientAddress.has("personAddress.postalCode")) {
+                personAddress.setPostalCode((jsonObjectPatientAddress.getString("personAddress.postalCode")));
+            }
+
+            if(!personAddress.isBlank()) {
+                patient.addAddress(personAddress);
+            }
         }
 
         //setting identifiers
@@ -140,7 +155,7 @@ public class PatientJsonParser {
         patient.setGender((patientJsonObject.getString("patient.sex")));
 
         //int age = Integer.valueOf(patientJsonObject.getString("patient.age"));
-        patient.setBirthdate(new SimpleDateFormat("YYYY-MM-dd").parse(patientJsonObject.getString("patient.birthdate")));
+        patient.setBirthdate(new SimpleDateFormat("yyyy-MM-dd").parse(patientJsonObject.getString("patient.birthdate")));
         if(patientJsonObject.has("patient.birthdateEstimatedInput")) {
             patient.setBirthdateEstimated(true);
         }else{
