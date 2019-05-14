@@ -85,9 +85,10 @@
         </dependency>
 		<!-- End OpenMRS core -->
         <dependency>
-            <groupId>org.apache.axis</groupId>
-            <artifactId>axis</artifactId>
-            <version>1.4</version>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2</artifactId>
+            <version>1.7.9</version>
+	    <type>pom</type>	    
         </dependency>
         <dependency>
             <groupId>javax.xml</groupId>
